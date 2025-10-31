@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>Critical Path</title>
+ <title>Critical Path blog</title>
  <link href="https://criticalpath.dev/atom.xml" rel="self"/>
  <link href="https://criticalpath.dev/"/>
- <updated>2025-10-31T22:57:10+01:00</updated>
+ <updated>2025-10-31T23:33:00+01:00</updated>
  <id>https://criticalpath.dev</id>
  <author>
    <name></name>
