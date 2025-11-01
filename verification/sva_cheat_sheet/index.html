@@ -18,6 +18,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/syntax.css">
+  <link rel="stylesheet" href="/assets/css/copy-code.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
   <!-- Icons -->
@@ -81,12 +82,6 @@
           
         
       
-        
-          
-            
-          
-        
-      
     </nav>
 
     <p>&copy; 2025. All rights reserved.</p>
@@ -101,7 +96,7 @@
     <time class="post-date" datetime="2025-11-01T00:00:00+01:00">
       2025-11-01
     </time>
-    • 1453 words
+    • 1477 words
     • 8 min read
     
       •
@@ -116,31 +111,36 @@
       
     
   </div>
-  <h2 id="constructs-not-recommended-for-formal">Constructs not recommended for formal</h2>
-<p>This is based upon the IEEE 1800-2017 standard (LRM).</p>
+  <h3 id="constructs-not-recommended-for-formal">Constructs not recommended for formal</h3>
 
-<p><code class="language-plaintext highlighter-rouge">throughout</code>
-<code class="language-plaintext highlighter-rouge">or</code>
-<code class="language-plaintext highlighter-rouge">and</code>
-<code class="language-plaintext highlighter-rouge">within</code>
-<code class="language-plaintext highlighter-rouge">expect</code>
-<code class="language-plaintext highlighter-rouge">first_match()</code>
-<code class="language-plaintext highlighter-rouge">if property else property</code>
-<code class="language-plaintext highlighter-rouge">sequence.triggered</code>
-<code class="language-plaintext highlighter-rouge">sequence[-&gt;N]</code>
-<code class="language-plaintext highlighter-rouge">sequence[=N]</code></p>
+<p>The following properties will cause formal tools to either run slower or not converge at all. It’s
+recommended to simplify them - for example, if-else statements inside a property should be split into 
+multiple properties - or to write auxiliary code.</p>
 
-<p>Local Variables
-Immediate Assertions</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">throughout</code></li>
+  <li><code class="language-plaintext highlighter-rouge">or</code></li>
+  <li><code class="language-plaintext highlighter-rouge">and</code></li>
+  <li><code class="language-plaintext highlighter-rouge">within</code></li>
+  <li><code class="language-plaintext highlighter-rouge">expect</code></li>
+  <li><code class="language-plaintext highlighter-rouge">first_match()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">if property else property</code></li>
+  <li><code class="language-plaintext highlighter-rouge">sequence.triggered</code></li>
+  <li><code class="language-plaintext highlighter-rouge">sequence[-&gt;N]</code></li>
+  <li><code class="language-plaintext highlighter-rouge">sequence[=N]</code></li>
+  <li>Local variables</li>
+  <li>Immediate assertions</li>
+</ul>
 
-<h2 id="constructs-to-use-with-caution">Constructs to use with caution</h2>
+<h3 id="constructs-to-use-with-caution">Constructs to use with caution</h3>
+
 <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sequence</span><span class="p">[</span><span class="o">*</span><span class="n">N</span><span class="p">]</span>
 <span class="p">$</span><span class="nb">past</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 </code></pre></div></div>
 <p>In both cases keep <code class="language-plaintext highlighter-rouge">N</code> as small as possible. It’s recommended to model <code class="language-plaintext highlighter-rouge">$past()</code> with Auxiliary Code instead.</p>
 
-<h2 id="declarations">Declarations</h2>
 <h3 id="sequence-declaration">Sequence declaration</h3>
+
 <p>Declares a sequence expression that can be used in property declarations. Local variables are permitted,</p>
 
 <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sequence</span> <span class="n">identifier</span> <span class="p">[</span> <span class="n">argument_list</span> <span class="p">]</span> <span class="p">;</span>
@@ -178,7 +178,7 @@ Immediate Assertions</p>
 <span class="k">endproperty</span>
 </code></pre></div></div>
 
-<h2 id="verification-directives">Verification directives</h2>
+<h3 id="verification-directives">Verification directives</h3>
 <p>A property declaration is merely a definition of behavior. Nothing gets checked until we have given a <em>verification directive</em> to the tool which states what should be done with that behavior. All properties must have a clock defined explicitly or via a default clock declaration.</p>
 
 <h3 id="assert-directive">Assert directive</h3>
@@ -198,6 +198,7 @@ Immediate Assertions</p>
 </code></pre></div></div>
 
 <h3 id="assume-directive">Assume directive</h3>
+
 <p>Directive to the tool to limit the behavior of the design under test (DUT) inputs to the behavior specified. Also known as constraints. Assume directives in the simulation are treated as assert directives.</p>
 
 <p>Syntax:</p>
@@ -211,6 +212,7 @@ Immediate Assertions</p>
 </code></pre></div></div>
 
 <h3 id="cover-directive">Cover directive</h3>
+
 <p>In the formal verification, a cover directive instructs the formal tool to find at least one valid execution trace in which a specified sequence of events or conditions can occur, given the design logic and any active <strong>assumptions</strong>  (constraints).
 Syntax:</p>
 <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">label</span> <span class="o">:</span> <span class="k">cover</span> <span class="k">property</span> <span class="p">(</span><span class="n">prop_expr</span><span class="p">)</span>
@@ -223,7 +225,8 @@ Syntax:</p>
 </code></pre></div></div>
 <p>For <code class="language-plaintext highlighter-rouge">cover property</code> it is recommended for <code class="language-plaintext highlighter-rouge">prop_expr</code> to only be a sequence, i.e. not contain implication operators <code class="language-plaintext highlighter-rouge">|-&gt;</code> or <code class="language-plaintext highlighter-rouge">|=&gt;</code> and the cover directive states <code class="language-plaintext highlighter-rouge">cover sequence</code> instead of <code class="language-plaintext highlighter-rouge">cover property</code></p>
 
-<h2 id="cycle-delays">Cycle delays</h2>
+<h3 id="cycle-delays">Cycle delays</h3>
+
 <p>Specifies the number of clock ticks from the current clock tick until the next specified behavior occurs.</p>
 
 <p>Syntax:</p>
@@ -236,7 +239,8 @@ Example:</p>
 <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P6</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span><span class="p">(</span> <span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span> <span class="p">##[</span><span class="mi">0</span><span class="o">:</span><span class="p">$]</span> <span class="n">C</span> <span class="p">);</span>
 <span class="nl">P7:</span> <span class="k">assert</span> <span class="k">property</span><span class="p">(</span> <span class="n">A</span> <span class="o">|=&gt;</span> <span class="p">##</span><span class="mi">3</span> <span class="n">C</span> <span class="p">);</span>
 </code></pre></div></div>
-<h2 id="implication-operators---">Implication operators (<code class="language-plaintext highlighter-rouge">|-&gt;</code>, <code class="language-plaintext highlighter-rouge">|=&gt;</code>)</h2>
+
+<h3 id="implication-operators---">Implication operators (<code class="language-plaintext highlighter-rouge">|-&gt;</code>, <code class="language-plaintext highlighter-rouge">|=&gt;</code>)</h3>
 
 <p>Implication operators define a relationship between an <strong>enabling condition</strong> and a <strong>fulfilling condition</strong>.
 A property using an implication operator holds true if either:</p>
@@ -246,9 +250,10 @@ A property using an implication operator holds true if either:</p>
 </ol>
 
 <h3 id="overlapping-implication--">Overlapping Implication (<code class="language-plaintext highlighter-rouge">|-&gt;</code>)</h3>
+
 <p>Syntax:</p>
 
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sequence_expr</span> <span class="o">|-&gt;</span> <span class="n">property_expr</span><span class="err">`</span>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sequence_expr</span> <span class="o">|-&gt;</span> <span class="n">property_expr</span>
 </code></pre></div></div>
 
 <p>This property holds true under the following conditions:</p>
@@ -265,6 +270,7 @@ Example:
 </ol>
 
 <h3 id="non-overlapping-implication-">Non-Overlapping Implication (<code class="language-plaintext highlighter-rouge">|=&gt;</code>)</h3>
+
 <p>Syntax:</p>
 <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sequence_expr</span> <span class="o">|=&gt;</span> <span class="n">property_expr</span> 
 </code></pre></div></div>
@@ -278,9 +284,10 @@ Example:
     <p><code class="language-plaintext highlighter-rouge">P9</code> passes if the following sequence is observed:</p>
     <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="p">##</span><span class="mi">1</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span><span class="p">);</span>
 </code></pre></div>    </div>
-    <h3 id="nesting-implication-operators">Nesting implication operators</h3>
   </li>
 </ol>
+
+<h3 id="nesting-implication-operators">Nesting implication operators</h3>
 
 <p>It is <strong>not recommended</strong> to nest implication operators, as it can easily become confusing: For example:</p>
 <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P10</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span> <span class="o">|=&gt;</span> <span class="n">C</span> <span class="p">);</span>
@@ -289,7 +296,9 @@ Example:
 <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P10_EQUIVALENT</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="o">|=&gt;</span> <span class="n">C</span><span class="p">);</span>
 </code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">P10</code> or <code class="language-plaintext highlighter-rouge">P10_EQUIVALENT</code> would <strong>not fail</strong> if the sequence <code class="language-plaintext highlighter-rouge">(A ##1 !B)</code> is observed.</p>
-<h2 id="disabling-properties">Disabling properties</h2>
+
+<h3 id="disabling-properties">Disabling properties</h3>
+
 <p>Syntax:</p>
 <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="n">boolean_expr</span><span class="p">)</span>
 </code></pre></div></div>
@@ -302,6 +311,7 @@ Example:</p>
 </code></pre></div></div>
 
 <h3 id="default-disable">Default Disable</h3>
+
 <p>If the same disable condition applies to many properties, it can be defined once as a <strong>default disable</strong> instead of repeating it for each property.</p>
 <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">default</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="n">boolean_expr</span><span class="p">);</span>
 </code></pre></div></div>
@@ -318,7 +328,7 @@ Example:</p>
 
 <p>Both <code class="language-plaintext highlighter-rouge">default disable iff</code> and explicit <code class="language-plaintext highlighter-rouge">disable iff</code> are asynchronous — they take effect immediately, regardless of the property’s clocking event.</p>
 
-<h2 id="clocking-properties">Clocking Properties</h2>
+<h3 id="clocking-properties">Clocking Properties</h3>
 
 <ul>
   <li>Every SVA property must be <strong>clocked</strong> — unlocked properties are not allowed.</li>
@@ -347,9 +357,9 @@ Example:</p>
   <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk1</span><span class="p">)</span> <span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span><span class="p">;</span>
 <span class="k">endproperty</span>
 
-<span class="n">P14_A</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk2</span><span class="p">)</span> <span class="n">P14</span><span class="p">);</span>
-<span class="n">P14_B</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">P14</span><span class="p">);</span>
-<span class="n">P15_A</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">P15</span><span class="p">);</span>
+<span class="nl">P14_A:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk2</span><span class="p">)</span> <span class="n">P14</span><span class="p">);</span>
+<span class="nl">P14_B:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">P14</span><span class="p">);</span>
+<span class="nl">P15_A:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">P15</span><span class="p">);</span>
 
 <span class="nl">P16:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk3</span><span class="p">)</span> <span class="n">A</span> <span class="o">|-&gt;</span> <span class="n">B</span><span class="p">);</span>
 <span class="nl">P17:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">C</span> <span class="o">|-&gt;</span> <span class="n">D</span><span class="p">);</span>
@@ -363,39 +373,71 @@ Example:</p>
   <li><code class="language-plaintext highlighter-rouge">P17</code> inherits the <strong>default clock</strong>.</li>
 </ul>
 
-<h2 id="builtin-functions">Builtin Functions</h2>
+<h3 id="builtin-functions">Builtin Functions</h3>
 
-<p>| Function           | Description                                                     |
-| —————— | ————————————————————— |
-| <code class="language-plaintext highlighter-rouge">$past(expr, N)</code>   | Value of <code class="language-plaintext highlighter-rouge">expr</code> N cycles ago (defaults to 1 if <code class="language-plaintext highlighter-rouge">N</code> is omitted). |
-| <code class="language-plaintext highlighter-rouge">$rose(expr)</code>      | TRUE when <code class="language-plaintext highlighter-rouge">expr</code> transitions from 0 → 1.                        |
-| <code class="language-plaintext highlighter-rouge">$fell(expr)</code>      | TRUE when <code class="language-plaintext highlighter-rouge">expr</code> transitions from 1 → 0.                        |
-| <code class="language-plaintext highlighter-rouge">$stable(expr)</code>    | TRUE if <code class="language-plaintext highlighter-rouge">expr</code> has not changed since the previous cycle.        |
-| <code class="language-plaintext highlighter-rouge">$onehot(expr)</code>    | TRUE if exactly one bit of <code class="language-plaintext highlighter-rouge">expr</code> is 1.                         |
-| <code class="language-plaintext highlighter-rouge">$onehot0(expr)</code>   | TRUE if zero or one bit of <code class="language-plaintext highlighter-rouge">expr</code> is 1.                         |
-| <code class="language-plaintext highlighter-rouge">$isunknown(expr)</code> | TRUE if any bit of <code class="language-plaintext highlighter-rouge">expr</code> is X or Z.                            |
-| <code class="language-plaintext highlighter-rouge">$countones(expr)</code> | Returns the number of bits in <code class="language-plaintext highlighter-rouge">expr</code> that are 1.                |</p>
-<h2 id="repetition">Repetition</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$past(expr, N)</code></td>
+      <td>Value of <code class="language-plaintext highlighter-rouge">expr</code> N cycles ago (defaults to 1 if <code class="language-plaintext highlighter-rouge">N</code> is omitted).</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$rose(expr)</code></td>
+      <td>TRUE when <code class="language-plaintext highlighter-rouge">expr</code> transitions from 0 → 1.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$fell(expr)</code></td>
+      <td>TRUE when <code class="language-plaintext highlighter-rouge">expr</code> transitions from 1 → 0.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$stable(expr)</code></td>
+      <td>TRUE if <code class="language-plaintext highlighter-rouge">expr</code> has not changed since the previous cycle.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$onehot(expr)</code></td>
+      <td>TRUE if exactly one bit of <code class="language-plaintext highlighter-rouge">expr</code> is 1.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$onehot0(expr)</code></td>
+      <td>TRUE if zero or one bit of <code class="language-plaintext highlighter-rouge">expr</code> is 1.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$isunknown(expr)</code></td>
+      <td>TRUE if any bit of <code class="language-plaintext highlighter-rouge">expr</code> is X or Z.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$countones(expr)</code></td>
+      <td>Returns the number of bits in <code class="language-plaintext highlighter-rouge">expr</code> that are 1.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="repetition">Repetition</h3>
+
 <p>Repetition operators specify <strong>how many times</strong> a sequence element must occur and whether occurrences must be <strong>consecutive</strong> or can be <strong>spread apart</strong>.</p>
 
-<p>```verilog
-[* const_or_range_expression]</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Consecutive repetition** — the expression must be TRUE for a specified number of **consecutive cycles**.
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="o">*</span> <span class="n">const_or_range_expression</span><span class="p">]</span>
+</code></pre></div></div>
+<p><strong>Consecutive repetition</strong> — the expression must be TRUE for a specified number of <strong>consecutive cycles</strong>.</p>
 
-Example:
-```verilog
-(a[*2] ##2 b[*2]) |=&gt; d
+<p>Example:</p>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="o">*</span><span class="mi">2</span><span class="p">]</span> <span class="p">##</span><span class="mi">2</span> <span class="n">b</span><span class="p">[</span><span class="o">*</span><span class="mi">2</span><span class="p">])</span> <span class="o">|=&gt;</span> <span class="n">d</span>
 </code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">a</code> must hold for 2 cycles in a row, then after 2 cycles, <code class="language-plaintext highlighter-rouge">b</code> must hold for 2 cycles in a row.</p>
 
-<p>```verilog
-[-&gt; const_or_range_expression]</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Goto repetition** — looks for the **Nth occurrence** of a sequence element and then continues from there.  
-This operator *skips ahead* until the given count of matches has been reached.
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="o">-&gt;</span> <span class="n">const_or_range_expression</span><span class="p">]</span>
+</code></pre></div></div>
+<p><strong>Goto repetition</strong> — looks for the <strong>Nth occurrence</strong> of a sequence element and then continues from there.
+This operator <em>skips ahead</em> until the given count of matches has been reached.</p>
 
-Example:
-```verilog
-a ##1 b[-&gt;5] ##1 c
+<p>Example:</p>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="p">##</span><span class="mi">1</span> <span class="n">b</span><span class="p">[</span><span class="o">-&gt;</span><span class="mi">5</span><span class="p">]</span> <span class="p">##</span><span class="mi">1</span> <span class="n">c</span>
 </code></pre></div></div>
 <p>Matches when:</p>
 <ul>
@@ -406,15 +448,13 @@ a ##1 b[-&gt;5] ##1 c
 
 <p>So <code class="language-plaintext highlighter-rouge">b</code> may appear several times, but the property only matches when the <strong>5th <code class="language-plaintext highlighter-rouge">b</code></strong> is seen.</p>
 
-<p>```verilog
-[= const_or_range_expression]</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Non-consecutive repetition** — the expression must be TRUE a given number of times,  
-but **not necessarily on consecutive cycles**.  
-Other conditions may appear between repetitions.
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="o">=</span> <span class="n">const_or_range_expression</span><span class="p">]</span>
+</code></pre></div></div>
+<p><strong>Non-consecutive repetition</strong> — the expression must be TRUE a given number of times, but 
+<strong>not necessarily on consecutive cycles</strong>. Other conditions may appear between repetitions.</p>
 
-Example:
-```verilog
-s1 |=&gt; (b [=5] ##1 c)
+<p>Example:</p>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s1</span> <span class="o">|=&gt;</span> <span class="p">(</span><span class="n">b</span> <span class="p">[</span><span class="o">=</span><span class="mi">5</span><span class="p">]</span> <span class="p">##</span><span class="mi">1</span> <span class="n">c</span><span class="p">)</span>
 </code></pre></div></div>
 <p>After <code class="language-plaintext highlighter-rouge">s1</code> completes:</p>
 <ul>
@@ -467,7 +507,7 @@ s1 |=&gt; (b [=5] ##1 c)
       <li>
         <h3>
           <a href="/weather_station/weather_station_part2/">
-            Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 2
+            Weather and air quality station: Part 2
             <small>01 Nov 2025</small>
           </a>
         </h3>
@@ -476,17 +516,8 @@ s1 |=&gt; (b [=5] ##1 c)
       <li>
         <h3>
           <a href="/weather_station/weather_station_part1/">
-            Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 1
+            Weather and air quality station: Part 1
             <small>01 Nov 2025</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/kiwifruit/">
-            Kiwifruit
-            <small>22 Aug 2018</small>
           </a>
         </h3>
       </li>
@@ -496,5 +527,6 @@ s1 |=&gt; (b [=5] ##1 c)
 
     </div>
 
+  <script src="/assets/js/copy-code.js"></script>
   </body>
 </html>

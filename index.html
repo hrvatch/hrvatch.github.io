@@ -18,6 +18,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/syntax.css">
+  <link rel="stylesheet" href="/assets/css/copy-code.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
   <!-- Icons -->
@@ -81,12 +82,6 @@
           
         
       
-        
-          
-            
-          
-        
-      
     </nav>
 
     <p>&copy; 2025. All rights reserved.</p>
@@ -100,7 +95,7 @@
   <article class="post">
     <h1 class="post-title">
       <a href="/weather_station/weather_station_part2/">
-        Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 2
+        Weather and air quality station: Part 2
       </a>
     </h1>
 
@@ -121,20 +116,13 @@
         
       
     </div>
-    <p>Before starting with any kind of development on Raspberry Pi Pico2W I first need to setup 
-the toolchain: SDK, compiler, linker and debugger. In this post I describe the following steps:</p>
-<ul>
-  <li>Downloading and setting up Raspberry Pi Pico2W SDK,</li>
-  <li>preparing and compiliing the GNU cross-compiler to compile RISC-V binaries,</li>
-  <li>Setting up <a href="https://openocd.org/">OpenOCD</a></li>
-</ul>
-
+    In the second part of the series, I explore how to develop my design using RISC-V on the Raspberry Pi Pico 2 W. I take a deep dive into the toolchain setup, including the SDK installation, building a GNU cross compiler, and configuring OpenOCD. I document my findings along the way. The goal for Part 2 is to bring up UART communication and start blinking a few LEDs.
   </article>
   
   <article class="post">
     <h1 class="post-title">
       <a href="/weather_station/weather_station_part1/">
-        Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 1
+        Weather and air quality station: Part 1
       </a>
     </h1>
 
@@ -155,10 +143,7 @@ the toolchain: SDK, compiler, linker and debugger. In this post I describe the f
         
       
     </div>
-    <h1 id="battery-powered-weather--air-quality-station">Battery-Powered Weather &amp; Air Quality Station</h1>
-<p>Raspberry Pi Pico 2 W + Inky Impression 7.3” + Bosch BME690 + Bosch BMV080 + Meteoblue API<br />
-Firmware written in C for the Pico’s RISC-V core</p>
-
+    I haven’t done any embedded design for quite a while, probably a couple of years. Recently, I felt a surge of creative energy and decided to explore what is currently available in the world of microcontrollers, peripherals, debugging tools, and other embedded essentials. And what better way to catch up than by actually building something fun?
   </article>
   
   <article class="post">
@@ -172,7 +157,7 @@ Firmware written in C for the Pico’s RISC-V core</p>
       <time class="post-date" datetime="2025-11-01T00:00:00+01:00">
         2025-11-01
       </time>
-      • 1453 words
+      • 1477 words
       • 8 min read
       
         •
@@ -187,48 +172,7 @@ Firmware written in C for the Pico’s RISC-V core</p>
         
       
     </div>
-    <h2 id="constructs-not-recommended-for-formal">Constructs not recommended for formal</h2>
-<p>This is based upon the IEEE 1800-2017 standard (LRM).</p>
-
-  </article>
-  
-  <article class="post">
-    <h1 class="post-title">
-      <a href="/kiwifruit/">
-        Kiwifruit
-      </a>
-    </h1>
-
-    <div class="post-meta">
-      <time class="post-date" datetime="2018-08-22T00:00:00+02:00">
-        2018-08-22
-      </time>
-      • 95 words
-      • 1 min read
-      
-    </div>
-    <p>Kiwifruit (often abbreviated as kiwi), or Chinese gooseberry is the
-edible berry of several species of woody vines in the genus Actinidia.</p>
-
-  </article>
-  
-  <article class="post">
-    <h1 class="post-title">
-      <a href="/apples/">
-        Apples
-      </a>
-    </h1>
-
-    <div class="post-meta">
-      <time class="post-date" datetime="2018-08-21T00:00:00+02:00">
-        2018-08-21
-      </time>
-      • 65 words
-      • 1 min read
-      
-    </div>
-    <p>An apple is a sweet, edible fruit produced by an apple tree.</p>
-
+    In this post I give a quick overview of the most used SVA constructs for simulation and formal verification, along with usage examples.
   </article>
   
 </div>
@@ -237,17 +181,9 @@ edible berry of several species of woody vines in the genus Actinidia.</p>
   Showing buttons to move to the next and to the previous list of posts (pager buttons).
 -->
 
-<ul class="pager">
-    
-    
-    <li class="next">
-        <a href="/page2/">Older Posts &rarr;</a>
-    </li>
-    
-</ul>
-
 
     </div>
 
+  <script src="/assets/js/copy-code.js"></script>
   </body>
 </html>

@@ -4,7 +4,7 @@
  <title>Critical Path</title>
  <link href="https://criticalpath.dev/atom.xml" rel="self"/>
  <link href="https://criticalpath.dev/"/>
- <updated>2025-11-01T21:52:31+01:00</updated>
+ <updated>2025-11-01T23:11:15+01:00</updated>
  <id>https://criticalpath.dev</id>
  <author>
    <name></name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 2</title>
+   <title>Weather and air quality station: Part 2</title>
    <link href="https://criticalpath.dev/weather_station/weather_station_part2/"/>
    <updated>2025-11-01T00:00:00+01:00</updated>
    <id>https://criticalpath.dev/weather_station/weather_station_part2</id>
@@ -233,7 +233,7 @@ export PICO_BOARD=pico2_w&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 1</title>
+   <title>Weather and air quality station: Part 1</title>
    <link href="https://criticalpath.dev/weather_station/weather_station_part1/"/>
    <updated>2025-11-01T00:00:00+01:00</updated>
    <id>https://criticalpath.dev/weather_station/weather_station_part1</id>
@@ -409,31 +409,36 @@ Firmware written in C for the Pico’s RISC-V core&lt;/p&gt;
    <link href="https://criticalpath.dev/verification/sva_cheat_sheet/"/>
    <updated>2025-11-01T00:00:00+01:00</updated>
    <id>https://criticalpath.dev/verification/sva_cheat_sheet</id>
-   <content type="html">&lt;h2 id=&quot;constructs-not-recommended-for-formal&quot;&gt;Constructs not recommended for formal&lt;/h2&gt;
-&lt;p&gt;This is based upon the IEEE 1800-2017 standard (LRM).&lt;/p&gt;
+   <content type="html">&lt;h3 id=&quot;constructs-not-recommended-for-formal&quot;&gt;Constructs not recommended for formal&lt;/h3&gt;
 
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;throughout&lt;/code&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;or&lt;/code&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;and&lt;/code&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;within&lt;/code&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expect&lt;/code&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;first_match()&lt;/code&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if property else property&lt;/code&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence.triggered&lt;/code&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence[-&amp;gt;N]&lt;/code&gt;
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence[=N]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The following properties will cause formal tools to either run slower or not converge at all. It’s
+recommended to simplify them - for example, if-else statements inside a property should be split into 
+multiple properties - or to write auxiliary code.&lt;/p&gt;
 
-&lt;p&gt;Local Variables
-Immediate Assertions&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;throughout&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;or&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;and&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;within&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expect&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;first_match()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if property else property&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence.triggered&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence[-&amp;gt;N]&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence[=N]&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Local variables&lt;/li&gt;
+  &lt;li&gt;Immediate assertions&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h2 id=&quot;constructs-to-use-with-caution&quot;&gt;Constructs to use with caution&lt;/h2&gt;
+&lt;h3 id=&quot;constructs-to-use-with-caution&quot;&gt;Constructs to use with caution&lt;/h3&gt;
+
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;sequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;past&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;In both cases keep &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt; as small as possible. It’s recommended to model &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$past()&lt;/code&gt; with Auxiliary Code instead.&lt;/p&gt;
 
-&lt;h2 id=&quot;declarations&quot;&gt;Declarations&lt;/h2&gt;
 &lt;h3 id=&quot;sequence-declaration&quot;&gt;Sequence declaration&lt;/h3&gt;
+
 &lt;p&gt;Declares a sequence expression that can be used in property declarations. Local variables are permitted,&lt;/p&gt;
 
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;sequence&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;identifier&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argument_list&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -471,7 +476,7 @@ Immediate Assertions&lt;/p&gt;
 &lt;span class=&quot;k&quot;&gt;endproperty&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;verification-directives&quot;&gt;Verification directives&lt;/h2&gt;
+&lt;h3 id=&quot;verification-directives&quot;&gt;Verification directives&lt;/h3&gt;
 &lt;p&gt;A property declaration is merely a definition of behavior. Nothing gets checked until we have given a &lt;em&gt;verification directive&lt;/em&gt; to the tool which states what should be done with that behavior. All properties must have a clock defined explicitly or via a default clock declaration.&lt;/p&gt;
 
 &lt;h3 id=&quot;assert-directive&quot;&gt;Assert directive&lt;/h3&gt;
@@ -491,6 +496,7 @@ Immediate Assertions&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;assume-directive&quot;&gt;Assume directive&lt;/h3&gt;
+
 &lt;p&gt;Directive to the tool to limit the behavior of the design under test (DUT) inputs to the behavior specified. Also known as constraints. Assume directives in the simulation are treated as assert directives.&lt;/p&gt;
 
 &lt;p&gt;Syntax:&lt;/p&gt;
@@ -504,6 +510,7 @@ Immediate Assertions&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;cover-directive&quot;&gt;Cover directive&lt;/h3&gt;
+
 &lt;p&gt;In the formal verification, a cover directive instructs the formal tool to find at least one valid execution trace in which a specified sequence of events or conditions can occur, given the design logic and any active &lt;strong&gt;assumptions&lt;/strong&gt;  (constraints).
 Syntax:&lt;/p&gt;
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;cover&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prop_expr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -516,7 +523,8 @@ Syntax:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;For &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cover property&lt;/code&gt; it is recommended for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prop_expr&lt;/code&gt; to only be a sequence, i.e. not contain implication operators &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|-&amp;gt;&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|=&amp;gt;&lt;/code&gt; and the cover directive states &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cover sequence&lt;/code&gt; instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cover property&lt;/code&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;cycle-delays&quot;&gt;Cycle delays&lt;/h2&gt;
+&lt;h3 id=&quot;cycle-delays&quot;&gt;Cycle delays&lt;/h3&gt;
+
 &lt;p&gt;Specifies the number of clock ticks from the current clock tick until the next specified behavior occurs.&lt;/p&gt;
 
 &lt;p&gt;Syntax:&lt;/p&gt;
@@ -529,7 +537,8 @@ Example:&lt;/p&gt;
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;P6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;##[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;$]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;nl&quot;&gt;P7:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;implication-operators---&quot;&gt;Implication operators (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|-&amp;gt;&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|=&amp;gt;&lt;/code&gt;)&lt;/h2&gt;
+
+&lt;h3 id=&quot;implication-operators---&quot;&gt;Implication operators (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|-&amp;gt;&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|=&amp;gt;&lt;/code&gt;)&lt;/h3&gt;
 
 &lt;p&gt;Implication operators define a relationship between an &lt;strong&gt;enabling condition&lt;/strong&gt; and a &lt;strong&gt;fulfilling condition&lt;/strong&gt;.
 A property using an implication operator holds true if either:&lt;/p&gt;
@@ -539,9 +548,10 @@ A property using an implication operator holds true if either:&lt;/p&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;overlapping-implication--&quot;&gt;Overlapping Implication (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|-&amp;gt;&lt;/code&gt;)&lt;/h3&gt;
+
 &lt;p&gt;Syntax:&lt;/p&gt;
 
-&lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;sequence_expr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property_expr&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;
+&lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;sequence_expr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property_expr&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;This property holds true under the following conditions:&lt;/p&gt;
@@ -558,6 +568,7 @@ Example:
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;non-overlapping-implication-&quot;&gt;Non-Overlapping Implication (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|=&amp;gt;&lt;/code&gt;)&lt;/h3&gt;
+
 &lt;p&gt;Syntax:&lt;/p&gt;
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;sequence_expr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property_expr&lt;/span&gt; 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -571,9 +582,10 @@ Example:
     &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P9&lt;/code&gt; passes if the following sequence is observed:&lt;/p&gt;
     &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;h3 id=&quot;nesting-implication-operators&quot;&gt;Nesting implication operators&lt;/h3&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;h3 id=&quot;nesting-implication-operators&quot;&gt;Nesting implication operators&lt;/h3&gt;
 
 &lt;p&gt;It is &lt;strong&gt;not recommended&lt;/strong&gt; to nest implication operators, as it can easily become confusing: For example:&lt;/p&gt;
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;P10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -582,7 +594,9 @@ Example:
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;P10_EQUIVALENT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P10&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P10_EQUIVALENT&lt;/code&gt; would &lt;strong&gt;not fail&lt;/strong&gt; if the sequence &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(A ##1 !B)&lt;/code&gt; is observed.&lt;/p&gt;
-&lt;h2 id=&quot;disabling-properties&quot;&gt;Disabling properties&lt;/h2&gt;
+
+&lt;h3 id=&quot;disabling-properties&quot;&gt;Disabling properties&lt;/h3&gt;
+
 &lt;p&gt;Syntax:&lt;/p&gt;
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;disable&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;iff&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boolean_expr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -595,6 +609,7 @@ Example:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;default-disable&quot;&gt;Default Disable&lt;/h3&gt;
+
 &lt;p&gt;If the same disable condition applies to many properties, it can be defined once as a &lt;strong&gt;default disable&lt;/strong&gt; instead of repeating it for each property.&lt;/p&gt;
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;disable&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;iff&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boolean_expr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -611,7 +626,7 @@ Example:&lt;/p&gt;
 
 &lt;p&gt;Both &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;default disable iff&lt;/code&gt; and explicit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;disable iff&lt;/code&gt; are asynchronous — they take effect immediately, regardless of the property’s clocking event.&lt;/p&gt;
 
-&lt;h2 id=&quot;clocking-properties&quot;&gt;Clocking Properties&lt;/h2&gt;
+&lt;h3 id=&quot;clocking-properties&quot;&gt;Clocking Properties&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Every SVA property must be &lt;strong&gt;clocked&lt;/strong&gt; — unlocked properties are not allowed.&lt;/li&gt;
@@ -640,9 +655,9 @@ Example:&lt;/p&gt;
   &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;posedge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clk1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;endproperty&lt;/span&gt;
 
-&lt;span class=&quot;n&quot;&gt;P14_A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;posedge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clk2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;P14&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;P14_B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;P14&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;P15_A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;P15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;P14_A:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;posedge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clk2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;P14&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;P14_B:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;P14&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;P15_A:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;P15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
 &lt;span class=&quot;nl&quot;&gt;P16:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;posedge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clk3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;nl&quot;&gt;P17:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -656,39 +671,71 @@ Example:&lt;/p&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P17&lt;/code&gt; inherits the &lt;strong&gt;default clock&lt;/strong&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;builtin-functions&quot;&gt;Builtin Functions&lt;/h2&gt;
+&lt;h3 id=&quot;builtin-functions&quot;&gt;Builtin Functions&lt;/h3&gt;
 
-&lt;p&gt;| Function           | Description                                                     |
-| —————— | ————————————————————— |
-| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$past(expr, N)&lt;/code&gt;   | Value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; N cycles ago (defaults to 1 if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt; is omitted). |
-| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$rose(expr)&lt;/code&gt;      | TRUE when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; transitions from 0 → 1.                        |
-| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$fell(expr)&lt;/code&gt;      | TRUE when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; transitions from 1 → 0.                        |
-| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$stable(expr)&lt;/code&gt;    | TRUE if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; has not changed since the previous cycle.        |
-| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$onehot(expr)&lt;/code&gt;    | TRUE if exactly one bit of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; is 1.                         |
-| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$onehot0(expr)&lt;/code&gt;   | TRUE if zero or one bit of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; is 1.                         |
-| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$isunknown(expr)&lt;/code&gt; | TRUE if any bit of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; is X or Z.                            |
-| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$countones(expr)&lt;/code&gt; | Returns the number of bits in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; that are 1.                |&lt;/p&gt;
-&lt;h2 id=&quot;repetition&quot;&gt;Repetition&lt;/h2&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Function&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$past(expr, N)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; N cycles ago (defaults to 1 if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt; is omitted).&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$rose(expr)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;TRUE when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; transitions from 0 → 1.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$fell(expr)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;TRUE when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; transitions from 1 → 0.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$stable(expr)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;TRUE if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; has not changed since the previous cycle.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$onehot(expr)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;TRUE if exactly one bit of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; is 1.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$onehot0(expr)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;TRUE if zero or one bit of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; is 1.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$isunknown(expr)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;TRUE if any bit of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; is X or Z.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$countones(expr)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Returns the number of bits in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; that are 1.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;repetition&quot;&gt;Repetition&lt;/h3&gt;
+
 &lt;p&gt;Repetition operators specify &lt;strong&gt;how many times&lt;/strong&gt; a sequence element must occur and whether occurrences must be &lt;strong&gt;consecutive&lt;/strong&gt; or can be &lt;strong&gt;spread apart&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;```verilog
-[* const_or_range_expression]&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;**Consecutive repetition** — the expression must be TRUE for a specified number of **consecutive cycles**.
+&lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;const_or_range_expression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Consecutive repetition&lt;/strong&gt; — the expression must be TRUE for a specified number of &lt;strong&gt;consecutive cycles&lt;/strong&gt;.&lt;/p&gt;
 
-Example:
-```verilog
-(a[*2] ##2 b[*2]) |=&amp;gt; d
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt; must hold for 2 cycles in a row, then after 2 cycles, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;b&lt;/code&gt; must hold for 2 cycles in a row.&lt;/p&gt;
 
-&lt;p&gt;```verilog
-[-&amp;gt; const_or_range_expression]&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;**Goto repetition** — looks for the **Nth occurrence** of a sequence element and then continues from there.  
-This operator *skips ahead* until the given count of matches has been reached.
+&lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;const_or_range_expression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Goto repetition&lt;/strong&gt; — looks for the &lt;strong&gt;Nth occurrence&lt;/strong&gt; of a sequence element and then continues from there.
+This operator &lt;em&gt;skips ahead&lt;/em&gt; until the given count of matches has been reached.&lt;/p&gt;
 
-Example:
-```verilog
-a ##1 b[-&amp;gt;5] ##1 c
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Matches when:&lt;/p&gt;
 &lt;ul&gt;
@@ -699,15 +746,13 @@ a ##1 b[-&amp;gt;5] ##1 c
 
 &lt;p&gt;So &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;b&lt;/code&gt; may appear several times, but the property only matches when the &lt;strong&gt;5th &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;b&lt;/code&gt;&lt;/strong&gt; is seen.&lt;/p&gt;
 
-&lt;p&gt;```verilog
-[= const_or_range_expression]&lt;/p&gt;
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;**Non-consecutive repetition** — the expression must be TRUE a given number of times,  
-but **not necessarily on consecutive cycles**.  
-Other conditions may appear between repetitions.
+&lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;const_or_range_expression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Non-consecutive repetition&lt;/strong&gt; — the expression must be TRUE a given number of times, but 
+&lt;strong&gt;not necessarily on consecutive cycles&lt;/strong&gt;. Other conditions may appear between repetitions.&lt;/p&gt;
 
-Example:
-```verilog
-s1 |=&amp;gt; (b [=5] ##1 c)
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;After &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s1&lt;/code&gt; completes:&lt;/p&gt;
 &lt;ul&gt;
@@ -750,53 +795,6 @@ s1 |=&amp;gt; (b [=5] ##1 c)
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-</content>
- </entry>
- 
- <entry>
-   <title>Kiwifruit</title>
-   <link href="https://criticalpath.dev/kiwifruit/"/>
-   <updated>2018-08-22T00:00:00+02:00</updated>
-   <id>https://criticalpath.dev/kiwifruit</id>
-   <content type="html">&lt;p&gt;Kiwifruit (often abbreviated as kiwi), or Chinese gooseberry is the
-edible berry of several species of woody vines in the genus Actinidia.&lt;/p&gt;
-
-&lt;p&gt;The most common cultivar group of kiwifruit is oval, about the size of
-a large hen’s egg (5–8 cm (2.0–3.1 in) in length and 4.5–5.5 cm
-(1.8–2.2 in) in diameter). It has a fibrous, dull greenish-brown skin
-and bright green or golden flesh with rows of tiny, black, edible
-seeds. The fruit has a soft texture, with a sweet and unique flavor.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Apples</title>
-   <link href="https://criticalpath.dev/apples/"/>
-   <updated>2018-08-21T00:00:00+02:00</updated>
-   <id>https://criticalpath.dev/apples</id>
-   <content type="html">&lt;p&gt;An apple is a sweet, edible fruit produced by an apple tree.&lt;/p&gt;
-
-&lt;p&gt;Apple trees are cultivated worldwide, and are the most widely grown
-species in the genus Malus. The tree originated in Central Asia, where
-its wild ancestor, Malus sieversii, is still found today. Apples have
-been grown for thousands of years in Asia and Europe, and were brought
-to North America by European colonists.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Bananas</title>
-   <link href="https://criticalpath.dev/bananas/"/>
-   <updated>2018-08-20T00:00:00+02:00</updated>
-   <id>https://criticalpath.dev/bananas</id>
-   <content type="html">&lt;p&gt;A banana is an edible fruit – botanically a berry – produced by several
-kinds of large herbaceous flowering plants in the genus Musa.&lt;/p&gt;
-
-&lt;p&gt;In some countries, bananas used for cooking may be called “plantains”,
-distinguishing them from dessert bananas. The fruit is variable in size,
-color, and firmness, but is usually elongated and curved, with soft
-flesh rich in starch covered with a rind, which may be green, yellow,
-red, purple, or brown when ripe.&lt;/p&gt;
 </content>
  </entry>
  
