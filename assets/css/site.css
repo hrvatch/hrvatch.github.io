@@ -466,11 +466,13 @@ a.pagination-item:hover {
 html {
   font-family: "PT Sans", Helvetica, Arial, sans-serif;
 }
+
 @media (min-width: 48em) {
   html {
     font-size: 16px;
   }
 }
+
 @media (min-width: 58em) {
   html {
     font-size: 20px;
@@ -570,6 +572,23 @@ a.sidebar-nav-item:focus {
   .content {
     margin-left: 22rem;
     margin-right: 4rem;
+  }
+}
+
+/* === widen main column on desktop === */
+@media (min-width: 64em) {   /* roughly ≥ 1024 px */
+  .content {
+    max-width: 52rem;        /* old: 38rem */
+    margin-left: 22rem;      /* keep sidebar spacing proportional */
+    margin-right: 4rem;
+  }
+}
+
+@media (min-width: 80em) {   /* ≥ 1280 px */
+  .content {
+    max-width: 60rem;
+    margin-left: 24rem;
+    margin-right: 6rem;
   }
 }
 
