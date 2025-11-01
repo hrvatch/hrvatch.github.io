@@ -4,7 +4,7 @@
  <title>Critical Path blog</title>
  <link href="https://criticalpath.dev/atom.xml" rel="self"/>
  <link href="https://criticalpath.dev/"/>
- <updated>2025-11-01T00:01:18+01:00</updated>
+ <updated>2025-11-01T13:33:08+01:00</updated>
  <id>https://criticalpath.dev</id>
  <author>
    <name></name>
@@ -13,20 +13,774 @@
 
  
  <entry>
-   <title>Hello, silicon world</title>
-   <link href="https://criticalpath.dev/meta/hello-silicon-world/"/>
-   <updated>2025-10-31T00:00:00+01:00</updated>
-   <id>https://criticalpath.dev/meta/hello-silicon-world</id>
-   <content type="html">&lt;p&gt;Welcome to &lt;strong&gt;Critical Path&lt;/strong&gt; — a blog about low-level ASIC design and verification.&lt;/p&gt;
+   <title>Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 2</title>
+   <link href="https://criticalpath.dev/weather-station/weather_station_part2/"/>
+   <updated>2025-11-01T00:00:00+01:00</updated>
+   <id>https://criticalpath.dev/weather-station/weather_station_part2</id>
+   <content type="html">&lt;h2 id=&quot;build-environment&quot;&gt;Build environment&lt;/h2&gt;
+&lt;p&gt;To set-up my build environment for Raspberry Pi Pico2_W, i’ll combine instructions from Raspberry Pi Pico-series C/C++ SDK document and instructions from riscv-gnu-toolchain Github page.&lt;/p&gt;
+
+&lt;p&gt;First I’ll install all dependencies:
+$ sudo pacman -Syu curl python3 libmpc mpfr gmp base-devel texinfo gperf patchutils bc zlib expat libslirp&lt;/p&gt;
+
+&lt;p&gt;Then I want to build a cross compiler that runs on my host machine (e.g. x86-64 Linux PC) but produces executables for a different target architecture (e.g. RISC-V).&lt;/p&gt;
+
+&lt;p&gt;Host = where the compiler runs.
+Target = where the generated program runs.&lt;/p&gt;
+
+&lt;p&gt;There are two flavors of a cross compiler for x86-64 Linux host:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Newlib cross compiler (riscv64-unknown-elf-gcc)
+Target: bare-metal systems (no OS, or minimal runtime).
+Uses Newlib as the C standard library.
+Good for firmware, bootloaders, small MCUs.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Linux cross compiler (riscv64-unknown-linux-gnu-gcc)
+Target: RISC-V systems running Linux.
+Uses glibc (GNU C library), same as native Linux distros.
+Produces programs you can run under a Linux kernel on RISC-V hardware (or emulators like QEMU).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I’ll now proceed with building Newlib cross compiler and the acompanying binuitls. First I’ll create a directory where the sources and the built binaries will be stored. This directory (install path) needs to be writeable.
+$ mkdir -p ~/rp2350/gcc-rp2350-no-zcmp&lt;/p&gt;
+
+&lt;p&gt;Change into ~/rp2350 directory, clone the riscv-gnu-toolchain repository and change into the riscv-gnu-toolchain directory:
+$ cd ~/rp2350
+$ git clone https://github.com/riscv-collab/riscv-gnu-toolchain.git 
+$ cd risc-vgnu-toolchain.git&lt;/p&gt;
+
+&lt;p&gt;Configure the build process to target the RISC-V ISA extensions supported by the RP2350, and to place the built binaries into the ~/rp2350/gcc-rp2350-no-zcmp directory:
+$ ./configure –prefix=~/rp2350/gcc-rp2350-no-zcmp –with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb –with-abi=ilp32 –with-multilib-generator=”rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32–;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32–”&lt;/p&gt;
+
+&lt;p&gt;Build the binaries:
+make -j”$(nproc)”&lt;/p&gt;
+
+&lt;h3 id=&quot;optional-reading&quot;&gt;Optional reading:&lt;/h3&gt;
+&lt;p&gt;When I first built the RISC-V bare-metal toolchain, I’ve blindly copy-pasted ./configure arguments, but I wandered what do they mean? We’ll here is the explanation:&lt;/p&gt;
+
+&lt;h1 id=&quot;risc-v---with-arch-breakdown&quot;&gt;RISC-V &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--with-arch&lt;/code&gt; breakdown&lt;/h1&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;components&quot;&gt;Components&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;rv32ima&lt;/strong&gt; — 32-bit base ISA (&lt;strong&gt;I&lt;/strong&gt;) plus &lt;strong&gt;M&lt;/strong&gt; (mul/div) and &lt;strong&gt;A&lt;/strong&gt; (atomics).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;zicsr&lt;/strong&gt; — Control/status register access (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;csrr*&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;csrw*&lt;/code&gt;, etc.).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;zifencei&lt;/strong&gt; — Instruction-fetch fence (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FENCE.I&lt;/code&gt;) to sync I-cache after code/data writes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;zba&lt;/strong&gt; — Bit-manip “address generation” subset (add/shift patterns that speed indexing).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;zbb&lt;/strong&gt; — Bit-manip “basic” subset (clz/ctz/popcount/min/max/extends/rotates, etc.).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;zbs&lt;/strong&gt; — Bit-manip “single-bit” subset (set/clear/invert/extract by bit index).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;zbkb&lt;/strong&gt; — Bit-manip helpers oriented toward crypto (pack/permute/byte ops); part of scalar-crypto-friendly sets.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;zca&lt;/strong&gt; — Core &lt;strong&gt;compressed&lt;/strong&gt; integer subset (16-bit encodings for common integer ops).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;zcb&lt;/strong&gt; — Extra compressed encodings (requires &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zca&lt;/code&gt;) for further code-size reduction.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;risc-v---with-abiilp32-breakdown&quot;&gt;RISC-V &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--with-abi=ilp32&lt;/code&gt; breakdown&lt;/h1&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--with-abi=ilp32
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;what-it-sets&quot;&gt;What it sets&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Chooses the &lt;strong&gt;default ABI&lt;/strong&gt; for the toolchain (override per compile with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-mabi=...&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ilp32&lt;/strong&gt; = &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;long&lt;/code&gt;, and &lt;strong&gt;pointers are 32-bit&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Soft-float ABI&lt;/strong&gt;: no FP registers used for args/returns; FP math is done in software.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;when-to-use&quot;&gt;When to use&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;RV32 targets without an FPU&lt;/strong&gt; (no &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;F&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;D&lt;/code&gt; extensions), or when you explicitly want a soft-float calling convention. This is our case, since RP2350 doesn’t have any hard floating-point unit.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If the RP2350 had single-precision FPU, I’d use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ilp32f&lt;/code&gt;; if it had double-precision FPU, I’d use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ilp32d&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;practical-effects&quot;&gt;Practical effects&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Defines the &lt;strong&gt;calling convention&lt;/strong&gt; and &lt;strong&gt;type sizes&lt;/strong&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sizeof(long)==4&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sizeof(void*)==4&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Determines which &lt;strong&gt;multilib&lt;/strong&gt; variant is selected/built.&lt;/li&gt;
+  &lt;li&gt;All linked libraries must &lt;strong&gt;match the ABI&lt;/strong&gt; (mixing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ilp32&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ilp32f/d&lt;/code&gt; will cause link/ABI errors).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;what---with-multilib-generator-does-risc-v&quot;&gt;What &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--with-multilib-generator=&quot;…&quot;&lt;/code&gt; does (RISC-V)&lt;/h1&gt;
+
+&lt;div class=&quot;language-text highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;--with-multilib-generator=&quot;rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;purpose&quot;&gt;Purpose&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--with-multilib-generator=&lt;/code&gt; tells the bare-metal RISC-V toolchain build &lt;strong&gt;exactly which multilib variants&lt;/strong&gt; (prebuilt &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libgcc&lt;/code&gt;, newlib, etc.) to produce.&lt;br /&gt;
+The value is a &lt;strong&gt;semicolon-separated list&lt;/strong&gt; of multilib configs.&lt;br /&gt;
+Each config has &lt;strong&gt;four parts&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;arch string&amp;gt;-&amp;lt;ABI&amp;gt;-&amp;lt;reuse rule with arch&amp;gt;-&amp;lt;reuse rule with sub-extension&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(Empty fields mean “no reuse rule here”. This option is supported for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;riscv*--elf&lt;/code&gt; builds.)&lt;/p&gt;
+
+&lt;h2 id=&quot;what-your-string-builds&quot;&gt;What your string builds&lt;/h2&gt;
+
+&lt;p&gt;You’re asking the build to create &lt;strong&gt;two&lt;/strong&gt; multilib variants:&lt;/p&gt;
+
+&lt;p&gt;1) &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb&lt;/code&gt; + &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ilp32&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;32-bit I/M/A base with CSR + fence.i, bit-manip subsets (Zba/Zbb/Zbs), crypto-oriented bit-manip (Zbkb), and compressed subsets (Zca + Zcb).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ABI:&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ilp32&lt;/code&gt; (32-bit int/long/pointers; soft-float).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reuse rules:&lt;/strong&gt; none (the trailing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--&lt;/code&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;2) &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb&lt;/code&gt; + &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ilp32&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;32-bit I/M/A/&lt;strong&gt;C&lt;/strong&gt; base (so compressed via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C&lt;/code&gt;), plus the same Z* subsets except Zca/Zcb.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ABI:&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ilp32&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reuse rules:&lt;/strong&gt; none.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In short: &lt;strong&gt;build two library sets&lt;/strong&gt;—one for an RV32 IMA core with Z* + Zc* compressed subsets, and one for an RV32 IMAC core with Z* (and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C&lt;/code&gt;)—both using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ilp32&lt;/code&gt; ABI.&lt;/p&gt;
+
+&lt;h2 id=&quot;whywhen-to-do-this&quot;&gt;Why/when to do this&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Smaller, faster build&lt;/strong&gt; than the default multilib set—only the libraries you actually need are built.&lt;/li&gt;
+  &lt;li&gt;Lets GCC &lt;strong&gt;auto-select the “best-fit” multilib&lt;/strong&gt; at compile/link time among the ones you built.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;how-to-use--verify&quot;&gt;How to use &amp;amp; verify&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Configure&lt;/strong&gt; (example):&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./configure &lt;span class=&quot;nt&quot;&gt;--prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/opt/riscv &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--with-multilib-generator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--&quot;&lt;/span&gt;
+make &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;nproc&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;See what was built:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;riscv64-unknown-elf-gcc &lt;span class=&quot;nt&quot;&gt;--print-multi-lib&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;(Shows the two multilibs you requested.)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Pick one at compile time&lt;/strong&gt; (GCC will choose automatically if compatible, but you can be explicit):&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Matches variant (1)&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-march&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb &lt;span class=&quot;nt&quot;&gt;-mabi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ilp32
+
+&lt;span class=&quot;c&quot;&gt;# Matches variant (2)&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-march&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb &lt;span class=&quot;nt&quot;&gt;-mabi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ilp32
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you request an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-march/-mabi&lt;/code&gt; combo with &lt;strong&gt;no compatible multilib&lt;/strong&gt;, you can hit link/ABI errors—add another entry to the generator string or adjust your compile flags.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; See the toolchain README section “Build with customized multi-lib configure” for the full format, examples, and notes on reuse rules.&lt;/p&gt;
+
+&lt;p&gt;export PICO_TOOLCHAIN_PATH=/ssd1/workspace/pico2w/build-tools/gcc15-rp2350-no-zcmp
+export PICO_PLATFORM=rp2350-riscv
+export PICO_SDK_PATH=/ssd1/workspace/pico2w/pico-sdk
+export PICO_BOARD=pico2_w&lt;/p&gt;
+
+&lt;p&gt;The next thing we want to do is we want to test if the board is working correctly. In the pico-sdk-examples directory there are couple of examples. I’ll use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;blink&lt;/code&gt; example to see if I can actually program this thing and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hello_world&lt;/code&gt; USB example to see if UART is working correctly. Both of these things will be very useful in debugging.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Hold to BOOTSEL button on the Pico2w while connecting it via USB cable to the PC&lt;/li&gt;
+  &lt;li&gt;Type lsblk -fs, you should see your device listed
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sdb1      vfat   FAT16 RP2350 62D0-C970                                           
+└─sdb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Create a directory and mount it&lt;/li&gt;
+  &lt;li&gt;mdir -p /ssd1/workspace/pico2w/flash&lt;/li&gt;
+  &lt;li&gt;sudo mount /dev/sdb1 /dds1/workspace/pico2w/flash&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;#TODO:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;instruction download sdk&lt;/li&gt;
+  &lt;li&gt;instructions download examples&lt;/li&gt;
+  &lt;li&gt;instruction test with hello_world and blink&lt;/li&gt;
+  &lt;li&gt;add riscv32-unknown-elf* binaries to the $PATH&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let’s now build our bare metal ‘Hello UART’ application. I’ve defined the following goals:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The application will be written in pure RISC-V assembly,&lt;/li&gt;
+  &lt;li&gt;It needs to run on a RISC-V core,&lt;/li&gt;
+  &lt;li&gt;I want the ‘Hello UART’ message printed on the UART every one second,&lt;/li&gt;
+  &lt;li&gt;I should be able to flash the application using the USB bootloader&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;an-overview-how-code-is-executed-on-rp2350&quot;&gt;An overview how code is executed on RP2350&lt;/h1&gt;
+&lt;p&gt;The RP2350 contains a (fixed) bootrom and this bootrom is executed first, not the user application. The boot outcome depends on multiple variables, all described in Chapter 5.2.1 Boot outcomes in [1].  In our case, we want to run our application from the USB bootloader. The USB bootloader will load the application stored in the UF2 [reference] format, and it will write this application to flash. But how does the bootrom know on which core do we want to run this application, RISC-V or ARM? Bootrom needs to locate and viable metadata. This metadata is defined in the Chapter 5.9 Metadata block details in [1]. The Chapter 5.9.5.2 describes Minimum RISC-V IMAGE_DEF. We will use this information&lt;/p&gt;
+
 </content>
  </entry>
  
  <entry>
-   <title>A pragmatic intro to ASIC verification</title>
-   <link href="https://criticalpath.dev/verification/asic-verification-intro/"/>
-   <updated>2025-10-31T00:00:00+01:00</updated>
-   <id>https://criticalpath.dev/verification/asic-verification-intro</id>
-   <content type="html">&lt;p&gt;What actually moves the needle from smoke tests to coverage closure? Let’s map the loop…&lt;/p&gt;
+   <title>Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 1</title>
+   <link href="https://criticalpath.dev/weather-station/weather_station_part1/"/>
+   <updated>2025-11-01T00:00:00+01:00</updated>
+   <id>https://criticalpath.dev/weather-station/weather_station_part1</id>
+   <content type="html">&lt;h1 id=&quot;battery-powered-weather--air-quality-station&quot;&gt;Battery-Powered Weather &amp;amp; Air Quality Station&lt;/h1&gt;
+&lt;p&gt;Raspberry Pi Pico 2 W + Inky Impression 7.3” + Bosch BME690 + Bosch BMV080 + Meteoblue API&lt;br /&gt;
+Firmware written in C for the Pico’s RISC-V core&lt;/p&gt;
+
+&lt;h2 id=&quot;project-overview&quot;&gt;Project Overview&lt;/h2&gt;
+&lt;p&gt;This project builds a standalone weather and air quality monitoring station. The Raspberry Pi Pico 2 W collects measurements from two Bosch sensors (BME690 and BMV080), pulls forecast data from the Meteoblue API over Wi-Fi, and displays results on a 7.3” e-paper display (Inky Impression). The device will be battery powered and enclosed in a plexiglass case to protect components while ensuring airflow.&lt;/p&gt;
+
+&lt;h2 id=&quot;system-architecture&quot;&gt;System Architecture&lt;/h2&gt;
+
+&lt;p&gt;Data flow:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Sensors (BME690 + BMV080)
+  -&amp;gt; Data Processing + Rolling Averages
+    -&amp;gt; Wi-Fi Forecast Fetch (Meteoblue JSON)
+      -&amp;gt; UI Construction (framebuffer)
+        -&amp;gt; E-Paper Display Refresh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Components:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Raspberry Pi Pico 2 W (RISC-V)&lt;/li&gt;
+  &lt;li&gt;BME690: temperature, humidity, pressure, gas (IAQ)&lt;/li&gt;
+  &lt;li&gt;BMV080: particulate matter (PM1, PM2.5, PM10)&lt;/li&gt;
+  &lt;li&gt;Inky Impression 7.3” e-paper over SPI&lt;/li&gt;
+  &lt;li&gt;HTTPS networking using lwIP + mbedTLS&lt;/li&gt;
+  &lt;li&gt;Lightweight JSON parsing in C (ex: jsmn)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Design:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Event-driven firmware with deep sleep between tasks&lt;/li&gt;
+  &lt;li&gt;Forecast caching for offline operation&lt;/li&gt;
+  &lt;li&gt;Minimal UI optimized for e-paper refresh constraints&lt;/li&gt;
+  &lt;li&gt;All core firmware written in C&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;display-and-ui-strategy&quot;&gt;Display and UI Strategy&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Refresh e-paper only on a schedule or when values change&lt;/li&gt;
+  &lt;li&gt;Off-screen framebuffer rendering&lt;/li&gt;
+  &lt;li&gt;UI features:
+    &lt;ul&gt;
+      &lt;li&gt;Temperature and humidity&lt;/li&gt;
+      &lt;li&gt;PM2.5 concentration&lt;/li&gt;
+      &lt;li&gt;Short forecast summary&lt;/li&gt;
+      &lt;li&gt;Battery voltage&lt;/li&gt;
+      &lt;li&gt;Timestamp for last update&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Suggested refresh interval: 20 to 60 minutes&lt;/p&gt;
+
+&lt;h2 id=&quot;power-system&quot;&gt;Power System&lt;/h2&gt;
+
+&lt;p&gt;Battery: 3 AA cells in series&lt;/p&gt;
+
+&lt;p&gt;Electrical notes:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;NiMH: approx. 3.6 V nominal, 4.2 V fresh&lt;/li&gt;
+  &lt;li&gt;Safe to connect directly to Pico VSYS input (1.8 to 5.5 V range)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Series rules:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Voltage increases (3x)&lt;/li&gt;
+  &lt;li&gt;Capacity stays 2000 mAh&lt;/li&gt;
+  &lt;li&gt;Energy increases to approx. 7.2 Wh&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Wiring:&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;3xAA holder (+) -&amp;gt; switch -&amp;gt; optional protection -&amp;gt; VSYS (Pico)
+3xAA holder (-) -------------------------------&amp;gt; GND (Pico)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Battery level can be read via VSYS/3 ADC pin.&lt;/p&gt;
+
+&lt;h2 id=&quot;recommended-duty-cycles&quot;&gt;Recommended Duty Cycles&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;BME690: 2–5 min interval&lt;/li&gt;
+  &lt;li&gt;BMV080: 10–60 min interval&lt;/li&gt;
+  &lt;li&gt;Wi-Fi forecast: 30–60 min interval&lt;/li&gt;
+  &lt;li&gt;E-paper refresh: 20–60 min interval&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;estimated-runtime&quot;&gt;Estimated Runtime&lt;/h2&gt;
+
+&lt;p&gt;Assumptions:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;7.2 Wh battery energy&lt;/li&gt;
+  &lt;li&gt;85% regulator efficiency&lt;/li&gt;
+  &lt;li&gt;Approx. 6.12 Wh usable at 3.3 V&lt;/li&gt;
+  &lt;li&gt;Average 3.3 V load depending on duty cycle&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Mode&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Avg Current&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Runtime Hours&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Runtime Days&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Air Quality Focused (BMV080: 5 min)&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;2.50 mA&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;~742&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;~30.9&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Balanced (BMV080: 10 min)&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1.36 mA&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;~1364&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;~56.8&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Battery Saver (BMV080: 60 min)&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;0.38 mA&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;~4880&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;~203&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Major power contributors:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;BMV080 sensor duty cycle&lt;/li&gt;
+  &lt;li&gt;Wi-Fi bursts&lt;/li&gt;
+  &lt;li&gt;Display refresh cycles&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;enclosure-notes&quot;&gt;Enclosure Notes&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Plexiglass case with airflow channels for sensors&lt;/li&gt;
+  &lt;li&gt;Prevent heat transfer from MCU and display into sensors&lt;/li&gt;
+  &lt;li&gt;Secure e-paper ribbon cable&lt;/li&gt;
+  &lt;li&gt;Provide easy access for battery replacement&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;development-and-testing-plan&quot;&gt;Development and Testing Plan&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Bring up sensors and verify I2C&lt;/li&gt;
+  &lt;li&gt;Implement sensor data processing and UI rendering&lt;/li&gt;
+  &lt;li&gt;Add Wi-Fi and Meteoblue JSON support&lt;/li&gt;
+  &lt;li&gt;Measure power usage and adjust intervals&lt;/li&gt;
+  &lt;li&gt;Assemble enclosure and validate environmental behavior&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Error messaging:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Wi-Fi unavailable (using cached forecast)&lt;/li&gt;
+  &lt;li&gt;Sensor communication error&lt;/li&gt;
+  &lt;li&gt;Low battery (auto-reduce update frequency)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;future-work&quot;&gt;Future Work&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Final wiring/PCB design&lt;/li&gt;
+  &lt;li&gt;Battery gauge improvements&lt;/li&gt;
+  &lt;li&gt;Optional data logging&lt;/li&gt;
+  &lt;li&gt;Potential partial refresh optimization&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>SystemVerilog Assertions cheat sheet</title>
+   <link href="https://criticalpath.dev/verification/sva_cheat_sheet/"/>
+   <updated>2025-11-01T00:00:00+01:00</updated>
+   <id>https://criticalpath.dev/verification/sva_cheat_sheet</id>
+   <content type="html">&lt;h2 id=&quot;constructs-not-recommended-for-formal&quot;&gt;Constructs not recommended for formal&lt;/h2&gt;
+&lt;p&gt;This is based upon the IEEE 1800-2017 standard (LRM).&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;throughout&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;or&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;and&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;within&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expect&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;first_match()&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if property else property&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence.triggered&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence[-&amp;gt;N]&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence[=N]&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Local Variables
+Immediate Assertions&lt;/p&gt;
+
+&lt;h2 id=&quot;constructs-to-use-with-caution&quot;&gt;Constructs to use with caution&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;sequence[*N]
+$past(expr, N)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In both cases keep &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt; as small as possible. It’s recommended to model &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$past()&lt;/code&gt; with Auxiliary Code instead.&lt;/p&gt;
+
+&lt;h2 id=&quot;declarations&quot;&gt;Declarations&lt;/h2&gt;
+&lt;h3 id=&quot;sequence-declaration&quot;&gt;Sequence declaration&lt;/h3&gt;
+&lt;p&gt;Declares a sequence expression that can be used in property declarations. Local variables are permitted,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;sequence identifier [ argument_list ] ;
+	sequence_expr [ ; ]
+endsequence [ : identifier ]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;sequence SEQ1;
+	A ##1 B ##1 C;
+endsequence
+
+sequence SEQ2(LEN, SIG);
+	D ##1 E[*LEN] ##1 SIG;
+endsequence
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Recommended to define, or infer, sequence lock at instantiation and not at declaration. A sequence is a series of Boolean expressions evaluated over time. A sequence of length one cycle is the same as a Boolean expression.&lt;/p&gt;
+
+&lt;h3 id=&quot;property-declaration&quot;&gt;Property declaration&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;property identifier [ argument_list ] ;
+	[ clock_expr ] [ disable_clause ]
+	property_expr ;
+endproperty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;property P1 (R, S, T) ;
+	@(posedge clk) disable iff ( !rst_n )
+	A |=&amp;gt; R ##1 S &amp;amp;&amp;amp; T;
+endproperty
+
+property P1A;
+	REQ |=&amp;gt; s_eventually GNT;
+endproperty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;verification-directives&quot;&gt;Verification directives&lt;/h2&gt;
+&lt;p&gt;A property declaration is merely a definition of behavior. Nothing gets checked until we have given a &lt;em&gt;verification directive&lt;/em&gt; to the tool which states what should be done with that behavior. All properties must have a clock defined explicitly or via a default clock declaration.&lt;/p&gt;
+
+&lt;h3 id=&quot;assert-directive&quot;&gt;Assert directive&lt;/h3&gt;
+&lt;p&gt;Directive to the tool to ensure that the property holds, is true, under all circumstances (safety check).&lt;/p&gt;
+
+&lt;p&gt;Syntax:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;label : assert property (prop_expr)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;P1_INST : assert property (P1(SIG1, SIG2, S3));
+P2 : assert property ( @(posedge clk) A |-&amp;gt; B );
+P3 : assert property ( ERROR_CNT != 10 );
+P1A_INS : assert property (@(posedge clka) (P1A) );
+
+// TODO: Add example where there is a property declaration, and then this property is used in an assertion
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;assume-directive&quot;&gt;Assume directive&lt;/h3&gt;
+&lt;p&gt;Directive to the tool to limit the behavior of the design under test (DUT) inputs to the behavior specified. Also known as constraints. Assume directives in the simulation are treated as assert directives.&lt;/p&gt;
+
+&lt;p&gt;Syntax:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;label : assume property (prop_expr)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;P4 : assume property (req &amp;amp;&amp;amp; !gnt |=&amp;gt; req)
+P5 : assume property ( @(posedge clk3) not(full &amp;amp;&amp;amp; empty) );
+
+// TODO: Add an example where there is a property declaration, and then this property is used in an assumption
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;cover-directive&quot;&gt;Cover directive&lt;/h3&gt;
+&lt;p&gt;In the formal verification, a cover directive instructs the formal tool to find at least one valid execution trace in which a specified sequence of events or conditions can occur, given the design logic and any active &lt;strong&gt;assumptions&lt;/strong&gt;  (constraints).
+Syntax:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;label : cover property (prop_expr)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Examples:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;C1 : cover sequence (full ##[+] empty );
+C2 : cover property ( @(posedge clk) (SEQ1) );
+
+// TODO: Add an example where there is a sequence declaration and then this sequence is used in a cover
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cover property&lt;/code&gt; it is recommended for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prop_expr&lt;/code&gt; to only be a sequence, i.e. not contain implication operators &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|-&amp;gt;&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|=&amp;gt;&lt;/code&gt; and the cover directive states &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cover sequence&lt;/code&gt; instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cover property&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;cycle-delays&quot;&gt;Cycle delays&lt;/h2&gt;
+&lt;p&gt;Specifies the number of clock ticks from the current clock tick until the next specified behavior occurs.&lt;/p&gt;
+
+&lt;p&gt;Syntax:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;##[N:M]
+##N
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;N and M are constants know at elaboration. M can be the symbol $ meaning “infinity”. M &amp;gt;= N. M and N can be 0.
+Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;P6: assert property( A |=&amp;gt; B ##[0:$] C );
+P7: assert property( A |=&amp;gt; ##3 C );
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;implication-operators---&quot;&gt;Implication operators (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|-&amp;gt;&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|=&amp;gt;&lt;/code&gt;)&lt;/h2&gt;
+
+&lt;p&gt;Implication operators define a relationship between an &lt;strong&gt;enabling condition&lt;/strong&gt; and a &lt;strong&gt;fulfilling condition&lt;/strong&gt;.
+A property using an implication operator holds true if either:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;The fulfilling condition occurs as a consequence of the enabling condition, or&lt;/li&gt;
+  &lt;li&gt;The enabling condition &lt;strong&gt;never occurs&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;overlapping-implication--&quot;&gt;Overlapping Implication (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|-&amp;gt;&lt;/code&gt;)&lt;/h3&gt;
+&lt;p&gt;Syntax:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;sequence_expr |-&amp;gt; property_expr`
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This property holds true under the following conditions:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;If &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence_expr&lt;/code&gt; completes then &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;property_expr&lt;/code&gt; &lt;strong&gt;starts in the same cycle&lt;/strong&gt; and eventually completes.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;seqeunce_expr&lt;/code&gt; never completes.
+Example:
+    &lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;P8: assert property (A ##1 B |-&amp;gt; C ##1 D );
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P8&lt;/code&gt; passes if the following sequence is observed:&lt;/p&gt;
+    &lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;(A ##1 (B &amp;amp;&amp;amp; C) ##1 D);
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;non-overlapping-implication-&quot;&gt;Non-Overlapping Implication (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|=&amp;gt;&lt;/code&gt;)&lt;/h3&gt;
+&lt;p&gt;Syntax:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;sequence_expr |=&amp;gt; property_expr 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This property holds true under the following conditions:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;If &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence_expr&lt;/code&gt; completes then &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;property_expr&lt;/code&gt; &lt;strong&gt;starts in the next cycle&lt;/strong&gt; and eventually completes.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence_expr&lt;/code&gt; never completes.
+Example:
+    &lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;P9: assert property ( A ##1 B |=&amp;gt; C ##1 D );
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P9&lt;/code&gt; passes if the following sequence is observed:&lt;/p&gt;
+    &lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;(A ##1 B ##1 C ##1 D);
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;h3 id=&quot;nesting-implication-operators&quot;&gt;Nesting implication operators&lt;/h3&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;It is &lt;strong&gt;not recommended&lt;/strong&gt; to nest implication operators, as it can easily become confusing: For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;P10: assert property (A |=&amp;gt; B |=&amp;gt; C );
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is exactly equivalent to:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;P10_EQUIVALENT : assert property (A ##1 B |=&amp;gt; C);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P10&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P10_EQUIVALENT&lt;/code&gt; would &lt;strong&gt;not fail&lt;/strong&gt; if the sequence &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(A ##1 !B)&lt;/code&gt; is observed.&lt;/p&gt;
+&lt;h2 id=&quot;disabling-properties&quot;&gt;Disabling properties&lt;/h2&gt;
+&lt;p&gt;Syntax:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;disable iff (boolean_expr)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boolean_expr&lt;/code&gt; is &lt;strong&gt;true&lt;/strong&gt;, the property is &lt;strong&gt;temporarily disabled&lt;/strong&gt;, and all active checks or pending evaluations for that property (including overlapping ones) are &lt;strong&gt;canceled&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;For example, if a property checks that a &lt;em&gt;request&lt;/em&gt; must eventually be followed by a &lt;em&gt;grant&lt;/em&gt;, we’d usually want a &lt;strong&gt;reset&lt;/strong&gt; to clear any pending request-to-grant expectations.&lt;br /&gt;
+After reset, new requests start fresh obligations.
+Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;P11: assert property (@(posedge clk) disable iff (!rst_n) req |=&amp;gt; ##[*] gnt);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;default-disable&quot;&gt;Default Disable&lt;/h3&gt;
+&lt;p&gt;If the same disable condition applies to many properties, it can be defined once as a &lt;strong&gt;default disable&lt;/strong&gt; instead of repeating it for each property.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;default disable iff (boolean_expr);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This default disable applies to all properties, in the current scope only, which do not have an explicit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;disable iff&lt;/code&gt; defined:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;default disable iff (CANCEL)
+P12: assert property(@(posedge clk) disable iff (!rst_n) A |=&amp;gt; B);
+P13: assert property(@(posedge clk) C |=&amp;gt; D);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this example:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P12&lt;/code&gt; uses its &lt;strong&gt;own&lt;/strong&gt; disable condition (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;!rst_n&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P13&lt;/code&gt; uses the &lt;strong&gt;default&lt;/strong&gt; disable condition (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CANCEL&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Both &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;default disable iff&lt;/code&gt; and explicit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;disable iff&lt;/code&gt; are asynchronous — they take effect immediately, regardless of the property’s clocking event.&lt;/p&gt;
+
+&lt;h2 id=&quot;clocking-properties&quot;&gt;Clocking Properties&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Every SVA property must be &lt;strong&gt;clocked&lt;/strong&gt; — unlocked properties are not allowed.&lt;/li&gt;
+  &lt;li&gt;The clock can come from one of the following:
+    &lt;ol&gt;
+      &lt;li&gt;An &lt;strong&gt;explicit clocking event&lt;/strong&gt; when the property is declared&lt;/li&gt;
+      &lt;li&gt;An &lt;strong&gt;explicit clocking event&lt;/strong&gt; when the property is instantiated&lt;/li&gt;
+      &lt;li&gt;A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;default clocking&lt;/code&gt; declaration&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;An &lt;strong&gt;explicit clock declaration&lt;/strong&gt; always overrides the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;default clocking&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Sequences without an explicit clock inherit the clock from their &lt;strong&gt;parent property&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;default clocking&lt;/code&gt; applies only within its &lt;strong&gt;current scope&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Only one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;default clocking&lt;/code&gt; declaration is allowed per scope.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;default clocking MYCLK @(posedge clk);
+endclocking
+
+property P14;
+  A |=&amp;gt; B;
+endproperty
+
+property P15;
+  @(posedge clk1) A |=&amp;gt; B;
+endproperty
+
+P14_A : assert property (@(posedge clk2) P14);
+P14_B : assert property (P14);
+P15_A : assert property (P15);
+
+P16: assert property (@(posedge clk3) A |-&amp;gt; B);
+P17: assert property (C |-&amp;gt; D);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P14_A&lt;/code&gt; uses &lt;strong&gt;clk2&lt;/strong&gt;, overriding all others.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P14_B&lt;/code&gt; uses the &lt;strong&gt;default clock&lt;/strong&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;posedge clk&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P15_A&lt;/code&gt; uses the &lt;strong&gt;explicit clock&lt;/strong&gt; defined in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P15&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;clk1&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P16&lt;/code&gt; uses &lt;strong&gt;clk3&lt;/strong&gt; (explicit).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P17&lt;/code&gt; inherits the &lt;strong&gt;default clock&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;builtin-functions&quot;&gt;Builtin Functions&lt;/h2&gt;
+
+&lt;p&gt;| Function           | Description                                                     |
+| —————— | ————————————————————— |
+| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$past(expr, N)&lt;/code&gt;   | Value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; N cycles ago (defaults to 1 if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt; is omitted). |
+| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$rose(expr)&lt;/code&gt;      | TRUE when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; transitions from 0 → 1.                        |
+| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$fell(expr)&lt;/code&gt;      | TRUE when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; transitions from 1 → 0.                        |
+| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$stable(expr)&lt;/code&gt;    | TRUE if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; has not changed since the previous cycle.        |
+| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$onehot(expr)&lt;/code&gt;    | TRUE if exactly one bit of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; is 1.                         |
+| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$onehot0(expr)&lt;/code&gt;   | TRUE if zero or one bit of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; is 1.                         |
+| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$isunknown(expr)&lt;/code&gt; | TRUE if any bit of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; is X or Z.                            |
+| &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$countones(expr)&lt;/code&gt; | Returns the number of bits in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expr&lt;/code&gt; that are 1.                |&lt;/p&gt;
+&lt;h2 id=&quot;repetition&quot;&gt;Repetition&lt;/h2&gt;
+&lt;p&gt;Repetition operators specify &lt;strong&gt;how many times&lt;/strong&gt; a sequence element must occur and whether occurrences must be &lt;strong&gt;consecutive&lt;/strong&gt; or can be &lt;strong&gt;spread apart&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;[* const_or_range_expression]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Consecutive repetition&lt;/strong&gt; — the expression must be TRUE for a specified number of &lt;strong&gt;consecutive cycles&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;(a[*2] ##2 b[*2]) |=&amp;gt; d
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt; must hold for 2 cycles in a row, then after 2 cycles, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;b&lt;/code&gt; must hold for 2 cycles in a row.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;[-&amp;gt; const_or_range_expression]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Goto repetition&lt;/strong&gt; — looks for the &lt;strong&gt;Nth occurrence&lt;/strong&gt; of a sequence element and then continues from there.&lt;br /&gt;
+This operator &lt;em&gt;skips ahead&lt;/em&gt; until the given count of matches has been reached.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;a ##1 b[-&amp;gt;5] ##1 c
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Matches when:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a&lt;/code&gt; occurs&lt;/li&gt;
+  &lt;li&gt;then the &lt;strong&gt;5th occurrence&lt;/strong&gt; of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;b&lt;/code&gt; (not necessarily consecutive)&lt;/li&gt;
+  &lt;li&gt;then &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;c&lt;/code&gt; occurs one cycle later&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;b&lt;/code&gt; may appear several times, but the property only matches when the &lt;strong&gt;5th &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;b&lt;/code&gt;&lt;/strong&gt; is seen.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;[= const_or_range_expression]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Non-consecutive repetition&lt;/strong&gt; — the expression must be TRUE a given number of times,&lt;br /&gt;
+but &lt;strong&gt;not necessarily on consecutive cycles&lt;/strong&gt;.&lt;br /&gt;
+Other conditions may appear between repetitions.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-systemverilog&quot;&gt;s1 |=&amp;gt; (b [=5] ##1 c)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;s1&lt;/code&gt; completes:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;b&lt;/code&gt; must be TRUE &lt;strong&gt;five times in total&lt;/strong&gt;,&lt;/li&gt;
+  &lt;li&gt;these occurrences can be &lt;strong&gt;spread out&lt;/strong&gt; in time,&lt;/li&gt;
+  &lt;li&gt;and after that, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;c&lt;/code&gt; must occur one cycle later.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;shortcuts&quot;&gt;Shortcuts&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Notation&lt;/th&gt;
+      &lt;th&gt;Equivalent Form&lt;/th&gt;
+      &lt;th&gt;Meaning&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;R[*]&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;R[*0:$]&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Repeat zero or more times&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;##[*]&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;##[0:$]&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Delay zero or more cycles&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;R[+]&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;R[*1:$]&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Repeat one or more times&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;##[+]&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;##[1:$]&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Delay one or more cycles&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Kiwifruit</title>
+   <link href="https://criticalpath.dev/kiwifruit/"/>
+   <updated>2018-08-22T00:00:00+02:00</updated>
+   <id>https://criticalpath.dev/kiwifruit</id>
+   <content type="html">&lt;p&gt;Kiwifruit (often abbreviated as kiwi), or Chinese gooseberry is the
+edible berry of several species of woody vines in the genus Actinidia.&lt;/p&gt;
+
+&lt;p&gt;The most common cultivar group of kiwifruit is oval, about the size of
+a large hen’s egg (5–8 cm (2.0–3.1 in) in length and 4.5–5.5 cm
+(1.8–2.2 in) in diameter). It has a fibrous, dull greenish-brown skin
+and bright green or golden flesh with rows of tiny, black, edible
+seeds. The fruit has a soft texture, with a sweet and unique flavor.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Apples</title>
+   <link href="https://criticalpath.dev/apples/"/>
+   <updated>2018-08-21T00:00:00+02:00</updated>
+   <id>https://criticalpath.dev/apples</id>
+   <content type="html">&lt;p&gt;An apple is a sweet, edible fruit produced by an apple tree.&lt;/p&gt;
+
+&lt;p&gt;Apple trees are cultivated worldwide, and are the most widely grown
+species in the genus Malus. The tree originated in Central Asia, where
+its wild ancestor, Malus sieversii, is still found today. Apples have
+been grown for thousands of years in Asia and Europe, and were brought
+to North America by European colonists.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Bananas</title>
+   <link href="https://criticalpath.dev/bananas/"/>
+   <updated>2018-08-20T00:00:00+02:00</updated>
+   <id>https://criticalpath.dev/bananas</id>
+   <content type="html">&lt;p&gt;A banana is an edible fruit – botanically a berry – produced by several
+kinds of large herbaceous flowering plants in the genus Musa.&lt;/p&gt;
+
+&lt;p&gt;In some countries, bananas used for cooking may be called “plantains”,
+distinguishing them from dessert bananas. The fruit is variable in size,
+color, and firmness, but is usually elongated and curved, with soft
+flesh rich in starch covered with a rind, which may be green, yellow,
+red, purple, or brown when ripe.&lt;/p&gt;
 </content>
  </entry>
  

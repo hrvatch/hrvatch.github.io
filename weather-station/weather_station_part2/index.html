@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 2 &middot; Critical Path blog
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-abstract-dark-wooden">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Critical Path blog
+        </a>
+      </h1>
+      <p class="lead">A personal blog that contains stuff of interest to Hrvoje Butina. Deep dives into ASIC design & verification. And some shallow dives into the embedded and low-level development.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/hrvatch">GitHub project</a>
+    </nav>
+
+    <p>&copy; 2025. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 2</h1>
+  <span class="post-date">01 Nov 2025</span>
+  <h2 id="build-environment">Build environment</h2>
+<p>To set-up my build environment for Raspberry Pi Pico2_W, i’ll combine instructions from Raspberry Pi Pico-series C/C++ SDK document and instructions from riscv-gnu-toolchain Github page.</p>
+
+<p>First I’ll install all dependencies:
+$ sudo pacman -Syu curl python3 libmpc mpfr gmp base-devel texinfo gperf patchutils bc zlib expat libslirp</p>
+
+<p>Then I want to build a cross compiler that runs on my host machine (e.g. x86-64 Linux PC) but produces executables for a different target architecture (e.g. RISC-V).</p>
+
+<p>Host = where the compiler runs.
+Target = where the generated program runs.</p>
+
+<p>There are two flavors of a cross compiler for x86-64 Linux host:</p>
+<ol>
+  <li>
+    <p>Newlib cross compiler (riscv64-unknown-elf-gcc)
+Target: bare-metal systems (no OS, or minimal runtime).
+Uses Newlib as the C standard library.
+Good for firmware, bootloaders, small MCUs.</p>
+  </li>
+  <li>
+    <p>Linux cross compiler (riscv64-unknown-linux-gnu-gcc)
+Target: RISC-V systems running Linux.
+Uses glibc (GNU C library), same as native Linux distros.
+Produces programs you can run under a Linux kernel on RISC-V hardware (or emulators like QEMU).</p>
+  </li>
+</ol>
+
+<p>I’ll now proceed with building Newlib cross compiler and the acompanying binuitls. First I’ll create a directory where the sources and the built binaries will be stored. This directory (install path) needs to be writeable.
+$ mkdir -p ~/rp2350/gcc-rp2350-no-zcmp</p>
+
+<p>Change into ~/rp2350 directory, clone the riscv-gnu-toolchain repository and change into the riscv-gnu-toolchain directory:
+$ cd ~/rp2350
+$ git clone https://github.com/riscv-collab/riscv-gnu-toolchain.git 
+$ cd risc-vgnu-toolchain.git</p>
+
+<p>Configure the build process to target the RISC-V ISA extensions supported by the RP2350, and to place the built binaries into the ~/rp2350/gcc-rp2350-no-zcmp directory:
+$ ./configure –prefix=~/rp2350/gcc-rp2350-no-zcmp –with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb –with-abi=ilp32 –with-multilib-generator=”rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32–;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32–”</p>
+
+<p>Build the binaries:
+make -j”$(nproc)”</p>
+
+<h3 id="optional-reading">Optional reading:</h3>
+<p>When I first built the RISC-V bare-metal toolchain, I’ve blindly copy-pasted ./configure arguments, but I wandered what do they mean? We’ll here is the explanation:</p>
+
+<h1 id="risc-v---with-arch-breakdown">RISC-V <code class="language-plaintext highlighter-rouge">--with-arch</code> breakdown</h1>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb
+</code></pre></div></div>
+
+<h2 id="components">Components</h2>
+
+<ul>
+  <li><strong>rv32ima</strong> — 32-bit base ISA (<strong>I</strong>) plus <strong>M</strong> (mul/div) and <strong>A</strong> (atomics).</li>
+  <li><strong>zicsr</strong> — Control/status register access (<code class="language-plaintext highlighter-rouge">csrr*</code>, <code class="language-plaintext highlighter-rouge">csrw*</code>, etc.).</li>
+  <li><strong>zifencei</strong> — Instruction-fetch fence (<code class="language-plaintext highlighter-rouge">FENCE.I</code>) to sync I-cache after code/data writes.</li>
+  <li><strong>zba</strong> — Bit-manip “address generation” subset (add/shift patterns that speed indexing).</li>
+  <li><strong>zbb</strong> — Bit-manip “basic” subset (clz/ctz/popcount/min/max/extends/rotates, etc.).</li>
+  <li><strong>zbs</strong> — Bit-manip “single-bit” subset (set/clear/invert/extract by bit index).</li>
+  <li><strong>zbkb</strong> — Bit-manip helpers oriented toward crypto (pack/permute/byte ops); part of scalar-crypto-friendly sets.</li>
+  <li><strong>zca</strong> — Core <strong>compressed</strong> integer subset (16-bit encodings for common integer ops).</li>
+  <li><strong>zcb</strong> — Extra compressed encodings (requires <code class="language-plaintext highlighter-rouge">zca</code>) for further code-size reduction.</li>
+</ul>
+
+<h1 id="risc-v---with-abiilp32-breakdown">RISC-V <code class="language-plaintext highlighter-rouge">--with-abi=ilp32</code> breakdown</h1>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--with-abi=ilp32
+</code></pre></div></div>
+
+<h2 id="what-it-sets">What it sets</h2>
+<ul>
+  <li>Chooses the <strong>default ABI</strong> for the toolchain (override per compile with <code class="language-plaintext highlighter-rouge">-mabi=...</code>).</li>
+  <li><strong>ilp32</strong> = <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">long</code>, and <strong>pointers are 32-bit</strong>.</li>
+  <li><strong>Soft-float ABI</strong>: no FP registers used for args/returns; FP math is done in software.</li>
+</ul>
+
+<h2 id="when-to-use">When to use</h2>
+<ul>
+  <li><strong>RV32 targets without an FPU</strong> (no <code class="language-plaintext highlighter-rouge">F</code>/<code class="language-plaintext highlighter-rouge">D</code> extensions), or when you explicitly want a soft-float calling convention. This is our case, since RP2350 doesn’t have any hard floating-point unit.</li>
+</ul>
+
+<blockquote>
+  <p>If the RP2350 had single-precision FPU, I’d use <code class="language-plaintext highlighter-rouge">ilp32f</code>; if it had double-precision FPU, I’d use <code class="language-plaintext highlighter-rouge">ilp32d</code>.</p>
+</blockquote>
+
+<h2 id="practical-effects">Practical effects</h2>
+<ul>
+  <li>Defines the <strong>calling convention</strong> and <strong>type sizes</strong> (<code class="language-plaintext highlighter-rouge">sizeof(long)==4</code>, <code class="language-plaintext highlighter-rouge">sizeof(void*)==4</code>).</li>
+  <li>Determines which <strong>multilib</strong> variant is selected/built.</li>
+  <li>All linked libraries must <strong>match the ABI</strong> (mixing <code class="language-plaintext highlighter-rouge">ilp32</code> with <code class="language-plaintext highlighter-rouge">ilp32f/d</code> will cause link/ABI errors).</li>
+</ul>
+
+<h1 id="what---with-multilib-generator-does-risc-v">What <code class="language-plaintext highlighter-rouge">--with-multilib-generator="…"</code> does (RISC-V)</h1>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--with-multilib-generator="rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--"
+</code></pre></div></div>
+
+<h2 id="purpose">Purpose</h2>
+
+<p><code class="language-plaintext highlighter-rouge">--with-multilib-generator=</code> tells the bare-metal RISC-V toolchain build <strong>exactly which multilib variants</strong> (prebuilt <code class="language-plaintext highlighter-rouge">libgcc</code>, newlib, etc.) to produce.<br />
+The value is a <strong>semicolon-separated list</strong> of multilib configs.<br />
+Each config has <strong>four parts</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;arch string&gt;-&lt;ABI&gt;-&lt;reuse rule with arch&gt;-&lt;reuse rule with sub-extension&gt;
+</code></pre></div></div>
+
+<p>(Empty fields mean “no reuse rule here”. This option is supported for <code class="language-plaintext highlighter-rouge">riscv*--elf</code> builds.)</p>
+
+<h2 id="what-your-string-builds">What your string builds</h2>
+
+<p>You’re asking the build to create <strong>two</strong> multilib variants:</p>
+
+<p>1) <strong><code class="language-plaintext highlighter-rouge">rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb</code> + <code class="language-plaintext highlighter-rouge">ilp32</code></strong></p>
+<ul>
+  <li>32-bit I/M/A base with CSR + fence.i, bit-manip subsets (Zba/Zbb/Zbs), crypto-oriented bit-manip (Zbkb), and compressed subsets (Zca + Zcb).</li>
+  <li><strong>ABI:</strong> <code class="language-plaintext highlighter-rouge">ilp32</code> (32-bit int/long/pointers; soft-float).</li>
+  <li><strong>Reuse rules:</strong> none (the trailing <code class="language-plaintext highlighter-rouge">--</code>).</li>
+</ul>
+
+<p>2) <strong><code class="language-plaintext highlighter-rouge">rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb</code> + <code class="language-plaintext highlighter-rouge">ilp32</code></strong></p>
+<ul>
+  <li>32-bit I/M/A/<strong>C</strong> base (so compressed via <code class="language-plaintext highlighter-rouge">C</code>), plus the same Z* subsets except Zca/Zcb.</li>
+  <li><strong>ABI:</strong> <code class="language-plaintext highlighter-rouge">ilp32</code>.</li>
+  <li><strong>Reuse rules:</strong> none.</li>
+</ul>
+
+<p>In short: <strong>build two library sets</strong>—one for an RV32 IMA core with Z* + Zc* compressed subsets, and one for an RV32 IMAC core with Z* (and <code class="language-plaintext highlighter-rouge">C</code>)—both using the <code class="language-plaintext highlighter-rouge">ilp32</code> ABI.</p>
+
+<h2 id="whywhen-to-do-this">Why/when to do this</h2>
+
+<ul>
+  <li><strong>Smaller, faster build</strong> than the default multilib set—only the libraries you actually need are built.</li>
+  <li>Lets GCC <strong>auto-select the “best-fit” multilib</strong> at compile/link time among the ones you built.</li>
+</ul>
+
+<h2 id="how-to-use--verify">How to use &amp; verify</h2>
+
+<p><strong>Configure</strong> (example):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./configure <span class="nt">--prefix</span><span class="o">=</span>/opt/riscv <span class="se">\</span>
+  <span class="nt">--with-multilib-generator</span><span class="o">=</span><span class="s2">"rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--"</span>
+make <span class="nt">-j</span><span class="s2">"</span><span class="si">$(</span><span class="nb">nproc</span><span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p><strong>See what was built:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>riscv64-unknown-elf-gcc <span class="nt">--print-multi-lib</span>
+</code></pre></div></div>
+<p>(Shows the two multilibs you requested.)</p>
+
+<p><strong>Pick one at compile time</strong> (GCC will choose automatically if compatible, but you can be explicit):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Matches variant (1)</span>
+<span class="nt">-march</span><span class="o">=</span>rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb <span class="nt">-mabi</span><span class="o">=</span>ilp32
+
+<span class="c"># Matches variant (2)</span>
+<span class="nt">-march</span><span class="o">=</span>rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb <span class="nt">-mabi</span><span class="o">=</span>ilp32
+</code></pre></div></div>
+
+<blockquote>
+  <p>If you request an <code class="language-plaintext highlighter-rouge">-march/-mabi</code> combo with <strong>no compatible multilib</strong>, you can hit link/ABI errors—add another entry to the generator string or adjust your compile flags.</p>
+</blockquote>
+
+<p><strong>Reference:</strong> See the toolchain README section “Build with customized multi-lib configure” for the full format, examples, and notes on reuse rules.</p>
+
+<p>export PICO_TOOLCHAIN_PATH=/ssd1/workspace/pico2w/build-tools/gcc15-rp2350-no-zcmp
+export PICO_PLATFORM=rp2350-riscv
+export PICO_SDK_PATH=/ssd1/workspace/pico2w/pico-sdk
+export PICO_BOARD=pico2_w</p>
+
+<p>The next thing we want to do is we want to test if the board is working correctly. In the pico-sdk-examples directory there are couple of examples. I’ll use the <code class="language-plaintext highlighter-rouge">blink</code> example to see if I can actually program this thing and the <code class="language-plaintext highlighter-rouge">hello_world</code> USB example to see if UART is working correctly. Both of these things will be very useful in debugging.</p>
+
+<ul>
+  <li>Hold to BOOTSEL button on the Pico2w while connecting it via USB cable to the PC</li>
+  <li>Type lsblk -fs, you should see your device listed
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sdb1      vfat   FAT16 RP2350 62D0-C970                                           
+└─sdb
+</code></pre></div>    </div>
+  </li>
+  <li>Create a directory and mount it</li>
+  <li>mdir -p /ssd1/workspace/pico2w/flash</li>
+  <li>sudo mount /dev/sdb1 /dds1/workspace/pico2w/flash</li>
+</ul>
+
+<p>#TODO:</p>
+<ul>
+  <li>instruction download sdk</li>
+  <li>instructions download examples</li>
+  <li>instruction test with hello_world and blink</li>
+  <li>add riscv32-unknown-elf* binaries to the $PATH</li>
+</ul>
+
+<p>Let’s now build our bare metal ‘Hello UART’ application. I’ve defined the following goals:</p>
+<ul>
+  <li>The application will be written in pure RISC-V assembly,</li>
+  <li>It needs to run on a RISC-V core,</li>
+  <li>I want the ‘Hello UART’ message printed on the UART every one second,</li>
+  <li>I should be able to flash the application using the USB bootloader</li>
+</ul>
+
+<h1 id="an-overview-how-code-is-executed-on-rp2350">An overview how code is executed on RP2350</h1>
+<p>The RP2350 contains a (fixed) bootrom and this bootrom is executed first, not the user application. The boot outcome depends on multiple variables, all described in Chapter 5.2.1 Boot outcomes in [1].  In our case, we want to run our application from the USB bootloader. The USB bootloader will load the application stored in the UF2 [reference] format, and it will write this application to flash. But how does the bootrom know on which core do we want to run this application, RISC-V or ARM? Bootrom needs to locate and viable metadata. This metadata is defined in the Chapter 5.9 Metadata block details in [1]. The Chapter 5.9.5.2 describes Minimum RISC-V IMAGE_DEF. We will use this information</p>
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/weather-station/weather_station_part1/">
+            Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 1
+            <small>01 Nov 2025</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/verification/sva_cheat_sheet/">
+            SystemVerilog Assertions cheat sheet
+            <small>01 Nov 2025</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/kiwifruit/">
+            Kiwifruit
+            <small>22 Aug 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

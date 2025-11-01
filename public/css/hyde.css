@@ -248,3 +248,14 @@ a.sidebar-nav-item:focus {
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
 }
+
+/* Abstract dark wooden */
+.theme-abstract-dark-wooden .sidebar {
+  background-color: #1a0e26;
+}
+.theme-abstract-dark-wooden .content a,
+.theme-abstract-dark-wooden .related-posts li a:hover {
+  color: #8C5C4A;
+}
+
+

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 1 &middot; Critical Path blog
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class="theme-abstract-dark-wooden">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Critical Path blog
+        </a>
+      </h1>
+      <p class="lead">A personal blog that contains stuff of interest to Hrvoje Butina. Deep dives into ASIC design & verification. And some shallow dives into the embedded and low-level development.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Home</a>
+
+      
+
+      
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/hrvatch">GitHub project</a>
+    </nav>
+
+    <p>&copy; 2025. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 1</h1>
+  <span class="post-date">01 Nov 2025</span>
+  <h1 id="battery-powered-weather--air-quality-station">Battery-Powered Weather &amp; Air Quality Station</h1>
+<p>Raspberry Pi Pico 2 W + Inky Impression 7.3” + Bosch BME690 + Bosch BMV080 + Meteoblue API<br />
+Firmware written in C for the Pico’s RISC-V core</p>
+
+<h2 id="project-overview">Project Overview</h2>
+<p>This project builds a standalone weather and air quality monitoring station. The Raspberry Pi Pico 2 W collects measurements from two Bosch sensors (BME690 and BMV080), pulls forecast data from the Meteoblue API over Wi-Fi, and displays results on a 7.3” e-paper display (Inky Impression). The device will be battery powered and enclosed in a plexiglass case to protect components while ensuring airflow.</p>
+
+<h2 id="system-architecture">System Architecture</h2>
+
+<p>Data flow:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sensors (BME690 + BMV080)
+  -&gt; Data Processing + Rolling Averages
+    -&gt; Wi-Fi Forecast Fetch (Meteoblue JSON)
+      -&gt; UI Construction (framebuffer)
+        -&gt; E-Paper Display Refresh
+</code></pre></div></div>
+
+<p>Components:</p>
+<ul>
+  <li>Raspberry Pi Pico 2 W (RISC-V)</li>
+  <li>BME690: temperature, humidity, pressure, gas (IAQ)</li>
+  <li>BMV080: particulate matter (PM1, PM2.5, PM10)</li>
+  <li>Inky Impression 7.3” e-paper over SPI</li>
+  <li>HTTPS networking using lwIP + mbedTLS</li>
+  <li>Lightweight JSON parsing in C (ex: jsmn)</li>
+</ul>
+
+<p>Design:</p>
+<ul>
+  <li>Event-driven firmware with deep sleep between tasks</li>
+  <li>Forecast caching for offline operation</li>
+  <li>Minimal UI optimized for e-paper refresh constraints</li>
+  <li>All core firmware written in C</li>
+</ul>
+
+<h2 id="display-and-ui-strategy">Display and UI Strategy</h2>
+<ul>
+  <li>Refresh e-paper only on a schedule or when values change</li>
+  <li>Off-screen framebuffer rendering</li>
+  <li>UI features:
+    <ul>
+      <li>Temperature and humidity</li>
+      <li>PM2.5 concentration</li>
+      <li>Short forecast summary</li>
+      <li>Battery voltage</li>
+      <li>Timestamp for last update</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Suggested refresh interval: 20 to 60 minutes</p>
+
+<h2 id="power-system">Power System</h2>
+
+<p>Battery: 3 AA cells in series</p>
+
+<p>Electrical notes:</p>
+<ul>
+  <li>NiMH: approx. 3.6 V nominal, 4.2 V fresh</li>
+  <li>Safe to connect directly to Pico VSYS input (1.8 to 5.5 V range)</li>
+</ul>
+
+<p>Series rules:</p>
+<ul>
+  <li>Voltage increases (3x)</li>
+  <li>Capacity stays 2000 mAh</li>
+  <li>Energy increases to approx. 7.2 Wh</li>
+</ul>
+
+<p>Wiring:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3xAA holder (+) -&gt; switch -&gt; optional protection -&gt; VSYS (Pico)
+3xAA holder (-) -------------------------------&gt; GND (Pico)
+</code></pre></div></div>
+
+<p>Battery level can be read via VSYS/3 ADC pin.</p>
+
+<h2 id="recommended-duty-cycles">Recommended Duty Cycles</h2>
+<ul>
+  <li>BME690: 2–5 min interval</li>
+  <li>BMV080: 10–60 min interval</li>
+  <li>Wi-Fi forecast: 30–60 min interval</li>
+  <li>E-paper refresh: 20–60 min interval</li>
+</ul>
+
+<h2 id="estimated-runtime">Estimated Runtime</h2>
+
+<p>Assumptions:</p>
+<ul>
+  <li>7.2 Wh battery energy</li>
+  <li>85% regulator efficiency</li>
+  <li>Approx. 6.12 Wh usable at 3.3 V</li>
+  <li>Average 3.3 V load depending on duty cycle</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mode</th>
+      <th style="text-align: right">Avg Current</th>
+      <th style="text-align: right">Runtime Hours</th>
+      <th style="text-align: right">Runtime Days</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Air Quality Focused (BMV080: 5 min)</td>
+      <td style="text-align: right">2.50 mA</td>
+      <td style="text-align: right">~742</td>
+      <td style="text-align: right">~30.9</td>
+    </tr>
+    <tr>
+      <td>Balanced (BMV080: 10 min)</td>
+      <td style="text-align: right">1.36 mA</td>
+      <td style="text-align: right">~1364</td>
+      <td style="text-align: right">~56.8</td>
+    </tr>
+    <tr>
+      <td>Battery Saver (BMV080: 60 min)</td>
+      <td style="text-align: right">0.38 mA</td>
+      <td style="text-align: right">~4880</td>
+      <td style="text-align: right">~203</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Major power contributors:</p>
+<ul>
+  <li>BMV080 sensor duty cycle</li>
+  <li>Wi-Fi bursts</li>
+  <li>Display refresh cycles</li>
+</ul>
+
+<h2 id="enclosure-notes">Enclosure Notes</h2>
+<ul>
+  <li>Plexiglass case with airflow channels for sensors</li>
+  <li>Prevent heat transfer from MCU and display into sensors</li>
+  <li>Secure e-paper ribbon cable</li>
+  <li>Provide easy access for battery replacement</li>
+</ul>
+
+<h2 id="development-and-testing-plan">Development and Testing Plan</h2>
+<ol>
+  <li>Bring up sensors and verify I2C</li>
+  <li>Implement sensor data processing and UI rendering</li>
+  <li>Add Wi-Fi and Meteoblue JSON support</li>
+  <li>Measure power usage and adjust intervals</li>
+  <li>Assemble enclosure and validate environmental behavior</li>
+</ol>
+
+<p>Error messaging:</p>
+<ul>
+  <li>Wi-Fi unavailable (using cached forecast)</li>
+  <li>Sensor communication error</li>
+  <li>Low battery (auto-reduce update frequency)</li>
+</ul>
+
+<h2 id="future-work">Future Work</h2>
+<ul>
+  <li>Final wiring/PCB design</li>
+  <li>Battery gauge improvements</li>
+  <li>Optional data logging</li>
+  <li>Potential partial refresh optimization</li>
+</ul>
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/weather-station/weather_station_part2/">
+            Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 2
+            <small>01 Nov 2025</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/verification/sva_cheat_sheet/">
+            SystemVerilog Assertions cheat sheet
+            <small>01 Nov 2025</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/kiwifruit/">
+            Kiwifruit
+            <small>22 Aug 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>
