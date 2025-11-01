@@ -16,21 +16,20 @@
   </title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
   <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
-                                 <link rel="shortcut icon" href="/public/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/images/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 </head>
 
 
-  <body class="theme-abstract-dark-wooden">
+  <body>
 
     <div class="sidebar">
   <div class="container sidebar-sticky">
@@ -44,7 +43,7 @@
     </div>
 
     <nav class="sidebar-nav">
-      <a class="sidebar-nav-item active" href="/">Home</a>
+      <a class="sidebar-nav-item" href="/">Home</a>
 
       
 
@@ -52,17 +51,33 @@
       
         
           
-            <a class="sidebar-nav-item" href="/about/">About</a>
+            
+              <a class="sidebar-nav-item" href="/about/">About</a>
+            
           
         
       
         
-      
-        
           
         
       
         
+          
+            
+              <a class="sidebar-nav-item" href="/tags.html">Tags</a>
+            
+          
+        
+      
+        
+          
+            
+          
+        
+      
+        
+          
+            
           
         
       
@@ -78,792 +93,156 @@
     <div class="content container">
       <div class="posts">
   
-  <div class="post">
+  <article class="post">
     <h1 class="post-title">
-      <a href="/weather-station/weather_station_part2/">
+      <a href="/weather%20station/weather_station_part2/">
         Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 2
       </a>
     </h1>
 
-    <span class="post-date">01 Nov 2025</span>
-
-    <h2 id="build-environment">Build environment</h2>
-<p>To set-up my build environment for Raspberry Pi Pico2_W, i’ll combine instructions from Raspberry Pi Pico-series C/C++ SDK document and instructions from riscv-gnu-toolchain Github page.</p>
-
-<p>First I’ll install all dependencies:
-$ sudo pacman -Syu curl python3 libmpc mpfr gmp base-devel texinfo gperf patchutils bc zlib expat libslirp</p>
-
-<p>Then I want to build a cross compiler that runs on my host machine (e.g. x86-64 Linux PC) but produces executables for a different target architecture (e.g. RISC-V).</p>
-
-<p>Host = where the compiler runs.
-Target = where the generated program runs.</p>
-
-<p>There are two flavors of a cross compiler for x86-64 Linux host:</p>
-<ol>
-  <li>
-    <p>Newlib cross compiler (riscv64-unknown-elf-gcc)
-Target: bare-metal systems (no OS, or minimal runtime).
-Uses Newlib as the C standard library.
-Good for firmware, bootloaders, small MCUs.</p>
-  </li>
-  <li>
-    <p>Linux cross compiler (riscv64-unknown-linux-gnu-gcc)
-Target: RISC-V systems running Linux.
-Uses glibc (GNU C library), same as native Linux distros.
-Produces programs you can run under a Linux kernel on RISC-V hardware (or emulators like QEMU).</p>
-  </li>
-</ol>
-
-<p>I’ll now proceed with building Newlib cross compiler and the acompanying binuitls. First I’ll create a directory where the sources and the built binaries will be stored. This directory (install path) needs to be writeable.
-$ mkdir -p ~/rp2350/gcc-rp2350-no-zcmp</p>
-
-<p>Change into ~/rp2350 directory, clone the riscv-gnu-toolchain repository and change into the riscv-gnu-toolchain directory:
-$ cd ~/rp2350
-$ git clone https://github.com/riscv-collab/riscv-gnu-toolchain.git 
-$ cd risc-vgnu-toolchain.git</p>
-
-<p>Configure the build process to target the RISC-V ISA extensions supported by the RP2350, and to place the built binaries into the ~/rp2350/gcc-rp2350-no-zcmp directory:
-$ ./configure –prefix=~/rp2350/gcc-rp2350-no-zcmp –with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb –with-abi=ilp32 –with-multilib-generator=”rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32–;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32–”</p>
-
-<p>Build the binaries:
-make -j”$(nproc)”</p>
-
-<h3 id="optional-reading">Optional reading:</h3>
-<p>When I first built the RISC-V bare-metal toolchain, I’ve blindly copy-pasted ./configure arguments, but I wandered what do they mean? We’ll here is the explanation:</p>
-
-<h1 id="risc-v---with-arch-breakdown">RISC-V <code class="language-plaintext highlighter-rouge">--with-arch</code> breakdown</h1>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb
-</code></pre></div></div>
-
-<h2 id="components">Components</h2>
-
+    <div class="post-meta">
+      <time class="post-date" datetime="2025-11-01T00:00:00+01:00">
+        2025-11-01
+      </time>
+      • 1327 words
+      • 7 min read
+      
+        •
+        
+            <a href="https://criticalpath.dev/tags.html#embedded">#embedded</a>
+        
+            <a href="https://criticalpath.dev/tags.html#raspberry-pi">#raspberry-pi</a>
+        
+            <a href="https://criticalpath.dev/tags.html#weather_station">#weather_station</a>
+        
+      
+    </div>
+    <p>Before starting with any kind of development on Raspberry Pi Pico2W I first need to setup 
+the toolchain: SDK, compiler, linker and debugger. In this post I describe the following steps:</p>
 <ul>
-  <li><strong>rv32ima</strong> — 32-bit base ISA (<strong>I</strong>) plus <strong>M</strong> (mul/div) and <strong>A</strong> (atomics).</li>
-  <li><strong>zicsr</strong> — Control/status register access (<code class="language-plaintext highlighter-rouge">csrr*</code>, <code class="language-plaintext highlighter-rouge">csrw*</code>, etc.).</li>
-  <li><strong>zifencei</strong> — Instruction-fetch fence (<code class="language-plaintext highlighter-rouge">FENCE.I</code>) to sync I-cache after code/data writes.</li>
-  <li><strong>zba</strong> — Bit-manip “address generation” subset (add/shift patterns that speed indexing).</li>
-  <li><strong>zbb</strong> — Bit-manip “basic” subset (clz/ctz/popcount/min/max/extends/rotates, etc.).</li>
-  <li><strong>zbs</strong> — Bit-manip “single-bit” subset (set/clear/invert/extract by bit index).</li>
-  <li><strong>zbkb</strong> — Bit-manip helpers oriented toward crypto (pack/permute/byte ops); part of scalar-crypto-friendly sets.</li>
-  <li><strong>zca</strong> — Core <strong>compressed</strong> integer subset (16-bit encodings for common integer ops).</li>
-  <li><strong>zcb</strong> — Extra compressed encodings (requires <code class="language-plaintext highlighter-rouge">zca</code>) for further code-size reduction.</li>
+  <li>Downloading and setting up Raspberry Pi Pico2W SDK,</li>
+  <li>preparing and compiliing the GNU cross-compiler to compile RISC-V binaries,</li>
+  <li>Setting up <a href="https://openocd.org/">OpenOCD</a></li>
 </ul>
 
-<h1 id="risc-v---with-abiilp32-breakdown">RISC-V <code class="language-plaintext highlighter-rouge">--with-abi=ilp32</code> breakdown</h1>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--with-abi=ilp32
-</code></pre></div></div>
-
-<h2 id="what-it-sets">What it sets</h2>
-<ul>
-  <li>Chooses the <strong>default ABI</strong> for the toolchain (override per compile with <code class="language-plaintext highlighter-rouge">-mabi=...</code>).</li>
-  <li><strong>ilp32</strong> = <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">long</code>, and <strong>pointers are 32-bit</strong>.</li>
-  <li><strong>Soft-float ABI</strong>: no FP registers used for args/returns; FP math is done in software.</li>
-</ul>
-
-<h2 id="when-to-use">When to use</h2>
-<ul>
-  <li><strong>RV32 targets without an FPU</strong> (no <code class="language-plaintext highlighter-rouge">F</code>/<code class="language-plaintext highlighter-rouge">D</code> extensions), or when you explicitly want a soft-float calling convention. This is our case, since RP2350 doesn’t have any hard floating-point unit.</li>
-</ul>
-
-<blockquote>
-  <p>If the RP2350 had single-precision FPU, I’d use <code class="language-plaintext highlighter-rouge">ilp32f</code>; if it had double-precision FPU, I’d use <code class="language-plaintext highlighter-rouge">ilp32d</code>.</p>
-</blockquote>
-
-<h2 id="practical-effects">Practical effects</h2>
-<ul>
-  <li>Defines the <strong>calling convention</strong> and <strong>type sizes</strong> (<code class="language-plaintext highlighter-rouge">sizeof(long)==4</code>, <code class="language-plaintext highlighter-rouge">sizeof(void*)==4</code>).</li>
-  <li>Determines which <strong>multilib</strong> variant is selected/built.</li>
-  <li>All linked libraries must <strong>match the ABI</strong> (mixing <code class="language-plaintext highlighter-rouge">ilp32</code> with <code class="language-plaintext highlighter-rouge">ilp32f/d</code> will cause link/ABI errors).</li>
-</ul>
-
-<h1 id="what---with-multilib-generator-does-risc-v">What <code class="language-plaintext highlighter-rouge">--with-multilib-generator="…"</code> does (RISC-V)</h1>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--with-multilib-generator="rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--"
-</code></pre></div></div>
-
-<h2 id="purpose">Purpose</h2>
-
-<p><code class="language-plaintext highlighter-rouge">--with-multilib-generator=</code> tells the bare-metal RISC-V toolchain build <strong>exactly which multilib variants</strong> (prebuilt <code class="language-plaintext highlighter-rouge">libgcc</code>, newlib, etc.) to produce.<br />
-The value is a <strong>semicolon-separated list</strong> of multilib configs.<br />
-Each config has <strong>four parts</strong>:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;arch string&gt;-&lt;ABI&gt;-&lt;reuse rule with arch&gt;-&lt;reuse rule with sub-extension&gt;
-</code></pre></div></div>
-
-<p>(Empty fields mean “no reuse rule here”. This option is supported for <code class="language-plaintext highlighter-rouge">riscv*--elf</code> builds.)</p>
-
-<h2 id="what-your-string-builds">What your string builds</h2>
-
-<p>You’re asking the build to create <strong>two</strong> multilib variants:</p>
-
-<p>1) <strong><code class="language-plaintext highlighter-rouge">rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb</code> + <code class="language-plaintext highlighter-rouge">ilp32</code></strong></p>
-<ul>
-  <li>32-bit I/M/A base with CSR + fence.i, bit-manip subsets (Zba/Zbb/Zbs), crypto-oriented bit-manip (Zbkb), and compressed subsets (Zca + Zcb).</li>
-  <li><strong>ABI:</strong> <code class="language-plaintext highlighter-rouge">ilp32</code> (32-bit int/long/pointers; soft-float).</li>
-  <li><strong>Reuse rules:</strong> none (the trailing <code class="language-plaintext highlighter-rouge">--</code>).</li>
-</ul>
-
-<p>2) <strong><code class="language-plaintext highlighter-rouge">rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb</code> + <code class="language-plaintext highlighter-rouge">ilp32</code></strong></p>
-<ul>
-  <li>32-bit I/M/A/<strong>C</strong> base (so compressed via <code class="language-plaintext highlighter-rouge">C</code>), plus the same Z* subsets except Zca/Zcb.</li>
-  <li><strong>ABI:</strong> <code class="language-plaintext highlighter-rouge">ilp32</code>.</li>
-  <li><strong>Reuse rules:</strong> none.</li>
-</ul>
-
-<p>In short: <strong>build two library sets</strong>—one for an RV32 IMA core with Z* + Zc* compressed subsets, and one for an RV32 IMAC core with Z* (and <code class="language-plaintext highlighter-rouge">C</code>)—both using the <code class="language-plaintext highlighter-rouge">ilp32</code> ABI.</p>
-
-<h2 id="whywhen-to-do-this">Why/when to do this</h2>
-
-<ul>
-  <li><strong>Smaller, faster build</strong> than the default multilib set—only the libraries you actually need are built.</li>
-  <li>Lets GCC <strong>auto-select the “best-fit” multilib</strong> at compile/link time among the ones you built.</li>
-</ul>
-
-<h2 id="how-to-use--verify">How to use &amp; verify</h2>
-
-<p><strong>Configure</strong> (example):</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./configure <span class="nt">--prefix</span><span class="o">=</span>/opt/riscv <span class="se">\</span>
-  <span class="nt">--with-multilib-generator</span><span class="o">=</span><span class="s2">"rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--"</span>
-make <span class="nt">-j</span><span class="s2">"</span><span class="si">$(</span><span class="nb">nproc</span><span class="si">)</span><span class="s2">"</span>
-</code></pre></div></div>
-
-<p><strong>See what was built:</strong></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>riscv64-unknown-elf-gcc <span class="nt">--print-multi-lib</span>
-</code></pre></div></div>
-<p>(Shows the two multilibs you requested.)</p>
-
-<p><strong>Pick one at compile time</strong> (GCC will choose automatically if compatible, but you can be explicit):</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Matches variant (1)</span>
-<span class="nt">-march</span><span class="o">=</span>rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb <span class="nt">-mabi</span><span class="o">=</span>ilp32
-
-<span class="c"># Matches variant (2)</span>
-<span class="nt">-march</span><span class="o">=</span>rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb <span class="nt">-mabi</span><span class="o">=</span>ilp32
-</code></pre></div></div>
-
-<blockquote>
-  <p>If you request an <code class="language-plaintext highlighter-rouge">-march/-mabi</code> combo with <strong>no compatible multilib</strong>, you can hit link/ABI errors—add another entry to the generator string or adjust your compile flags.</p>
-</blockquote>
-
-<p><strong>Reference:</strong> See the toolchain README section “Build with customized multi-lib configure” for the full format, examples, and notes on reuse rules.</p>
-
-<p>export PICO_TOOLCHAIN_PATH=/ssd1/workspace/pico2w/build-tools/gcc15-rp2350-no-zcmp
-export PICO_PLATFORM=rp2350-riscv
-export PICO_SDK_PATH=/ssd1/workspace/pico2w/pico-sdk
-export PICO_BOARD=pico2_w</p>
-
-<p>The next thing we want to do is we want to test if the board is working correctly. In the pico-sdk-examples directory there are couple of examples. I’ll use the <code class="language-plaintext highlighter-rouge">blink</code> example to see if I can actually program this thing and the <code class="language-plaintext highlighter-rouge">hello_world</code> USB example to see if UART is working correctly. Both of these things will be very useful in debugging.</p>
-
-<ul>
-  <li>Hold to BOOTSEL button on the Pico2w while connecting it via USB cable to the PC</li>
-  <li>Type lsblk -fs, you should see your device listed
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sdb1      vfat   FAT16 RP2350 62D0-C970                                           
-└─sdb
-</code></pre></div>    </div>
-  </li>
-  <li>Create a directory and mount it</li>
-  <li>mdir -p /ssd1/workspace/pico2w/flash</li>
-  <li>sudo mount /dev/sdb1 /dds1/workspace/pico2w/flash</li>
-</ul>
-
-<p>#TODO:</p>
-<ul>
-  <li>instruction download sdk</li>
-  <li>instructions download examples</li>
-  <li>instruction test with hello_world and blink</li>
-  <li>add riscv32-unknown-elf* binaries to the $PATH</li>
-</ul>
-
-<p>Let’s now build our bare metal ‘Hello UART’ application. I’ve defined the following goals:</p>
-<ul>
-  <li>The application will be written in pure RISC-V assembly,</li>
-  <li>It needs to run on a RISC-V core,</li>
-  <li>I want the ‘Hello UART’ message printed on the UART every one second,</li>
-  <li>I should be able to flash the application using the USB bootloader</li>
-</ul>
-
-<h1 id="an-overview-how-code-is-executed-on-rp2350">An overview how code is executed on RP2350</h1>
-<p>The RP2350 contains a (fixed) bootrom and this bootrom is executed first, not the user application. The boot outcome depends on multiple variables, all described in Chapter 5.2.1 Boot outcomes in [1].  In our case, we want to run our application from the USB bootloader. The USB bootloader will load the application stored in the UF2 [reference] format, and it will write this application to flash. But how does the bootrom know on which core do we want to run this application, RISC-V or ARM? Bootrom needs to locate and viable metadata. This metadata is defined in the Chapter 5.9 Metadata block details in [1]. The Chapter 5.9.5.2 describes Minimum RISC-V IMAGE_DEF. We will use this information</p>
-
-
-  </div>
+  </article>
   
-  <div class="post">
+  <article class="post">
     <h1 class="post-title">
-      <a href="/weather-station/weather_station_part1/">
+      <a href="/weather%20station/weather_station_part1/">
         Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 1
       </a>
     </h1>
 
-    <span class="post-date">01 Nov 2025</span>
-
+    <div class="post-meta">
+      <time class="post-date" datetime="2025-11-01T00:00:00+01:00">
+        2025-11-01
+      </time>
+      • 505 words
+      • 3 min read
+      
+        •
+        
+            <a href="https://criticalpath.dev/tags.html#embedded">#embedded</a>
+        
+            <a href="https://criticalpath.dev/tags.html#raspberry-pi">#raspberry-pi</a>
+        
+            <a href="https://criticalpath.dev/tags.html#weather_station">#weather_station</a>
+        
+      
+    </div>
     <h1 id="battery-powered-weather--air-quality-station">Battery-Powered Weather &amp; Air Quality Station</h1>
 <p>Raspberry Pi Pico 2 W + Inky Impression 7.3” + Bosch BME690 + Bosch BMV080 + Meteoblue API<br />
 Firmware written in C for the Pico’s RISC-V core</p>
 
-<h2 id="project-overview">Project Overview</h2>
-<p>This project builds a standalone weather and air quality monitoring station. The Raspberry Pi Pico 2 W collects measurements from two Bosch sensors (BME690 and BMV080), pulls forecast data from the Meteoblue API over Wi-Fi, and displays results on a 7.3” e-paper display (Inky Impression). The device will be battery powered and enclosed in a plexiglass case to protect components while ensuring airflow.</p>
-
-<h2 id="system-architecture">System Architecture</h2>
-
-<p>Data flow:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sensors (BME690 + BMV080)
-  -&gt; Data Processing + Rolling Averages
-    -&gt; Wi-Fi Forecast Fetch (Meteoblue JSON)
-      -&gt; UI Construction (framebuffer)
-        -&gt; E-Paper Display Refresh
-</code></pre></div></div>
-
-<p>Components:</p>
-<ul>
-  <li>Raspberry Pi Pico 2 W (RISC-V)</li>
-  <li>BME690: temperature, humidity, pressure, gas (IAQ)</li>
-  <li>BMV080: particulate matter (PM1, PM2.5, PM10)</li>
-  <li>Inky Impression 7.3” e-paper over SPI</li>
-  <li>HTTPS networking using lwIP + mbedTLS</li>
-  <li>Lightweight JSON parsing in C (ex: jsmn)</li>
-</ul>
-
-<p>Design:</p>
-<ul>
-  <li>Event-driven firmware with deep sleep between tasks</li>
-  <li>Forecast caching for offline operation</li>
-  <li>Minimal UI optimized for e-paper refresh constraints</li>
-  <li>All core firmware written in C</li>
-</ul>
-
-<h2 id="display-and-ui-strategy">Display and UI Strategy</h2>
-<ul>
-  <li>Refresh e-paper only on a schedule or when values change</li>
-  <li>Off-screen framebuffer rendering</li>
-  <li>UI features:
-    <ul>
-      <li>Temperature and humidity</li>
-      <li>PM2.5 concentration</li>
-      <li>Short forecast summary</li>
-      <li>Battery voltage</li>
-      <li>Timestamp for last update</li>
-    </ul>
-  </li>
-</ul>
-
-<p>Suggested refresh interval: 20 to 60 minutes</p>
-
-<h2 id="power-system">Power System</h2>
-
-<p>Battery: 3 AA cells in series</p>
-
-<p>Electrical notes:</p>
-<ul>
-  <li>NiMH: approx. 3.6 V nominal, 4.2 V fresh</li>
-  <li>Safe to connect directly to Pico VSYS input (1.8 to 5.5 V range)</li>
-</ul>
-
-<p>Series rules:</p>
-<ul>
-  <li>Voltage increases (3x)</li>
-  <li>Capacity stays 2000 mAh</li>
-  <li>Energy increases to approx. 7.2 Wh</li>
-</ul>
-
-<p>Wiring:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3xAA holder (+) -&gt; switch -&gt; optional protection -&gt; VSYS (Pico)
-3xAA holder (-) -------------------------------&gt; GND (Pico)
-</code></pre></div></div>
-
-<p>Battery level can be read via VSYS/3 ADC pin.</p>
-
-<h2 id="recommended-duty-cycles">Recommended Duty Cycles</h2>
-<ul>
-  <li>BME690: 2–5 min interval</li>
-  <li>BMV080: 10–60 min interval</li>
-  <li>Wi-Fi forecast: 30–60 min interval</li>
-  <li>E-paper refresh: 20–60 min interval</li>
-</ul>
-
-<h2 id="estimated-runtime">Estimated Runtime</h2>
-
-<p>Assumptions:</p>
-<ul>
-  <li>7.2 Wh battery energy</li>
-  <li>85% regulator efficiency</li>
-  <li>Approx. 6.12 Wh usable at 3.3 V</li>
-  <li>Average 3.3 V load depending on duty cycle</li>
-</ul>
-
-<table>
-  <thead>
-    <tr>
-      <th>Mode</th>
-      <th style="text-align: right">Avg Current</th>
-      <th style="text-align: right">Runtime Hours</th>
-      <th style="text-align: right">Runtime Days</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Air Quality Focused (BMV080: 5 min)</td>
-      <td style="text-align: right">2.50 mA</td>
-      <td style="text-align: right">~742</td>
-      <td style="text-align: right">~30.9</td>
-    </tr>
-    <tr>
-      <td>Balanced (BMV080: 10 min)</td>
-      <td style="text-align: right">1.36 mA</td>
-      <td style="text-align: right">~1364</td>
-      <td style="text-align: right">~56.8</td>
-    </tr>
-    <tr>
-      <td>Battery Saver (BMV080: 60 min)</td>
-      <td style="text-align: right">0.38 mA</td>
-      <td style="text-align: right">~4880</td>
-      <td style="text-align: right">~203</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Major power contributors:</p>
-<ul>
-  <li>BMV080 sensor duty cycle</li>
-  <li>Wi-Fi bursts</li>
-  <li>Display refresh cycles</li>
-</ul>
-
-<h2 id="enclosure-notes">Enclosure Notes</h2>
-<ul>
-  <li>Plexiglass case with airflow channels for sensors</li>
-  <li>Prevent heat transfer from MCU and display into sensors</li>
-  <li>Secure e-paper ribbon cable</li>
-  <li>Provide easy access for battery replacement</li>
-</ul>
-
-<h2 id="development-and-testing-plan">Development and Testing Plan</h2>
-<ol>
-  <li>Bring up sensors and verify I2C</li>
-  <li>Implement sensor data processing and UI rendering</li>
-  <li>Add Wi-Fi and Meteoblue JSON support</li>
-  <li>Measure power usage and adjust intervals</li>
-  <li>Assemble enclosure and validate environmental behavior</li>
-</ol>
-
-<p>Error messaging:</p>
-<ul>
-  <li>Wi-Fi unavailable (using cached forecast)</li>
-  <li>Sensor communication error</li>
-  <li>Low battery (auto-reduce update frequency)</li>
-</ul>
-
-<h2 id="future-work">Future Work</h2>
-<ul>
-  <li>Final wiring/PCB design</li>
-  <li>Battery gauge improvements</li>
-  <li>Optional data logging</li>
-  <li>Potential partial refresh optimization</li>
-</ul>
-
-
-  </div>
+  </article>
   
-  <div class="post">
+  <article class="post">
     <h1 class="post-title">
       <a href="/verification/sva_cheat_sheet/">
         SystemVerilog Assertions cheat sheet
       </a>
     </h1>
 
-    <span class="post-date">01 Nov 2025</span>
-
+    <div class="post-meta">
+      <time class="post-date" datetime="2025-11-01T00:00:00+01:00">
+        2025-11-01
+      </time>
+      • 1453 words
+      • 8 min read
+      
+        •
+        
+            <a href="https://criticalpath.dev/tags.html#SVA">#SVA</a>
+        
+            <a href="https://criticalpath.dev/tags.html#verification">#verification</a>
+        
+            <a href="https://criticalpath.dev/tags.html#simulation">#simulation</a>
+        
+            <a href="https://criticalpath.dev/tags.html#formal">#formal</a>
+        
+      
+    </div>
     <h2 id="constructs-not-recommended-for-formal">Constructs not recommended for formal</h2>
 <p>This is based upon the IEEE 1800-2017 standard (LRM).</p>
 
-<p><code class="language-plaintext highlighter-rouge">throughout</code>
-<code class="language-plaintext highlighter-rouge">or</code>
-<code class="language-plaintext highlighter-rouge">and</code>
-<code class="language-plaintext highlighter-rouge">within</code>
-<code class="language-plaintext highlighter-rouge">expect</code>
-<code class="language-plaintext highlighter-rouge">first_match()</code>
-<code class="language-plaintext highlighter-rouge">if property else property</code>
-<code class="language-plaintext highlighter-rouge">sequence.triggered</code>
-<code class="language-plaintext highlighter-rouge">sequence[-&gt;N]</code>
-<code class="language-plaintext highlighter-rouge">sequence[=N]</code></p>
-
-<p>Local Variables
-Immediate Assertions</p>
-
-<h2 id="constructs-to-use-with-caution">Constructs to use with caution</h2>
-<pre><code class="language-systemverilog">sequence[*N]
-$past(expr, N)
-</code></pre>
-<p>In both cases keep <code class="language-plaintext highlighter-rouge">N</code> as small as possible. It’s recommended to model <code class="language-plaintext highlighter-rouge">$past()</code> with Auxiliary Code instead.</p>
-
-<h2 id="declarations">Declarations</h2>
-<h3 id="sequence-declaration">Sequence declaration</h3>
-<p>Declares a sequence expression that can be used in property declarations. Local variables are permitted,</p>
-
-<pre><code class="language-systemverilog">sequence identifier [ argument_list ] ;
-	sequence_expr [ ; ]
-endsequence [ : identifier ]
-</code></pre>
-
-<p>Example:</p>
-<pre><code class="language-systemverilog">sequence SEQ1;
-	A ##1 B ##1 C;
-endsequence
-
-sequence SEQ2(LEN, SIG);
-	D ##1 E[*LEN] ##1 SIG;
-endsequence
-</code></pre>
-
-<p>Recommended to define, or infer, sequence lock at instantiation and not at declaration. A sequence is a series of Boolean expressions evaluated over time. A sequence of length one cycle is the same as a Boolean expression.</p>
-
-<h3 id="property-declaration">Property declaration</h3>
-<pre><code class="language-systemverilog">property identifier [ argument_list ] ;
-	[ clock_expr ] [ disable_clause ]
-	property_expr ;
-endproperty
-</code></pre>
-
-<p>Example:</p>
-<pre><code class="language-systemverilog">property P1 (R, S, T) ;
-	@(posedge clk) disable iff ( !rst_n )
-	A |=&gt; R ##1 S &amp;&amp; T;
-endproperty
-
-property P1A;
-	REQ |=&gt; s_eventually GNT;
-endproperty
-</code></pre>
-
-<h2 id="verification-directives">Verification directives</h2>
-<p>A property declaration is merely a definition of behavior. Nothing gets checked until we have given a <em>verification directive</em> to the tool which states what should be done with that behavior. All properties must have a clock defined explicitly or via a default clock declaration.</p>
-
-<h3 id="assert-directive">Assert directive</h3>
-<p>Directive to the tool to ensure that the property holds, is true, under all circumstances (safety check).</p>
-
-<p>Syntax:</p>
-<pre><code class="language-systemverilog">label : assert property (prop_expr)
-</code></pre>
-
-<p>Examples:</p>
-<pre><code class="language-systemverilog">P1_INST : assert property (P1(SIG1, SIG2, S3));
-P2 : assert property ( @(posedge clk) A |-&gt; B );
-P3 : assert property ( ERROR_CNT != 10 );
-P1A_INS : assert property (@(posedge clka) (P1A) );
-
-// TODO: Add example where there is a property declaration, and then this property is used in an assertion
-</code></pre>
-
-<h3 id="assume-directive">Assume directive</h3>
-<p>Directive to the tool to limit the behavior of the design under test (DUT) inputs to the behavior specified. Also known as constraints. Assume directives in the simulation are treated as assert directives.</p>
-
-<p>Syntax:</p>
-<pre><code class="language-systemverilog">label : assume property (prop_expr)
-</code></pre>
-<p>Examples:</p>
-<pre><code class="language-systemverilog">P4 : assume property (req &amp;&amp; !gnt |=&gt; req)
-P5 : assume property ( @(posedge clk3) not(full &amp;&amp; empty) );
-
-// TODO: Add an example where there is a property declaration, and then this property is used in an assumption
-</code></pre>
-
-<h3 id="cover-directive">Cover directive</h3>
-<p>In the formal verification, a cover directive instructs the formal tool to find at least one valid execution trace in which a specified sequence of events or conditions can occur, given the design logic and any active <strong>assumptions</strong>  (constraints).
-Syntax:</p>
-<pre><code class="language-systemverilog">label : cover property (prop_expr)
-</code></pre>
-<p>Examples:</p>
-<pre><code class="language-systemverilog">C1 : cover sequence (full ##[+] empty );
-C2 : cover property ( @(posedge clk) (SEQ1) );
-
-// TODO: Add an example where there is a sequence declaration and then this sequence is used in a cover
-</code></pre>
-<p>For <code class="language-plaintext highlighter-rouge">cover property</code> it is recommended for <code class="language-plaintext highlighter-rouge">prop_expr</code> to only be a sequence, i.e. not contain implication operators <code class="language-plaintext highlighter-rouge">|-&gt;</code> or <code class="language-plaintext highlighter-rouge">|=&gt;</code> and the cover directive states <code class="language-plaintext highlighter-rouge">cover sequence</code> instead of <code class="language-plaintext highlighter-rouge">cover property</code></p>
-
-<h2 id="cycle-delays">Cycle delays</h2>
-<p>Specifies the number of clock ticks from the current clock tick until the next specified behavior occurs.</p>
-
-<p>Syntax:</p>
-<pre><code class="language-systemverilog">##[N:M]
-##N
-</code></pre>
-
-<p>N and M are constants know at elaboration. M can be the symbol $ meaning “infinity”. M &gt;= N. M and N can be 0.
-Example:</p>
-<pre><code class="language-systemverilog">P6: assert property( A |=&gt; B ##[0:$] C );
-P7: assert property( A |=&gt; ##3 C );
-</code></pre>
-<h2 id="implication-operators---">Implication operators (<code class="language-plaintext highlighter-rouge">|-&gt;</code>, <code class="language-plaintext highlighter-rouge">|=&gt;</code>)</h2>
-
-<p>Implication operators define a relationship between an <strong>enabling condition</strong> and a <strong>fulfilling condition</strong>.
-A property using an implication operator holds true if either:</p>
-<ol>
-  <li>The fulfilling condition occurs as a consequence of the enabling condition, or</li>
-  <li>The enabling condition <strong>never occurs</strong>.</li>
-</ol>
-
-<h3 id="overlapping-implication--">Overlapping Implication (<code class="language-plaintext highlighter-rouge">|-&gt;</code>)</h3>
-<p>Syntax:</p>
-
-<pre><code class="language-systemverilog">sequence_expr |-&gt; property_expr`
-</code></pre>
-
-<p>This property holds true under the following conditions:</p>
-<ol>
-  <li>If <code class="language-plaintext highlighter-rouge">sequence_expr</code> completes then <code class="language-plaintext highlighter-rouge">property_expr</code> <strong>starts in the same cycle</strong> and eventually completes.</li>
-  <li><code class="language-plaintext highlighter-rouge">seqeunce_expr</code> never completes.
-Example:
-    <pre><code class="language-systemverilog">P8: assert property (A ##1 B |-&gt; C ##1 D );
-</code></pre>
-    <p><code class="language-plaintext highlighter-rouge">P8</code> passes if the following sequence is observed:</p>
-    <pre><code class="language-systemverilog">(A ##1 (B &amp;&amp; C) ##1 D);
-</code></pre>
-  </li>
-</ol>
-
-<h3 id="non-overlapping-implication-">Non-Overlapping Implication (<code class="language-plaintext highlighter-rouge">|=&gt;</code>)</h3>
-<p>Syntax:</p>
-<pre><code class="language-systemverilog">sequence_expr |=&gt; property_expr 
-</code></pre>
-<p>This property holds true under the following conditions:</p>
-<ol>
-  <li>If <code class="language-plaintext highlighter-rouge">sequence_expr</code> completes then <code class="language-plaintext highlighter-rouge">property_expr</code> <strong>starts in the next cycle</strong> and eventually completes.</li>
-  <li><code class="language-plaintext highlighter-rouge">sequence_expr</code> never completes.
-Example:
-    <pre><code class="language-systemverilog">P9: assert property ( A ##1 B |=&gt; C ##1 D );
-</code></pre>
-    <p><code class="language-plaintext highlighter-rouge">P9</code> passes if the following sequence is observed:</p>
-    <pre><code class="language-systemverilog">(A ##1 B ##1 C ##1 D);
-</code></pre>
-    <h3 id="nesting-implication-operators">Nesting implication operators</h3>
-  </li>
-</ol>
-
-<p>It is <strong>not recommended</strong> to nest implication operators, as it can easily become confusing: For example:</p>
-<pre><code class="language-systemverilog">P10: assert property (A |=&gt; B |=&gt; C );
-</code></pre>
-<p>This is exactly equivalent to:</p>
-<pre><code class="language-systemverilog">P10_EQUIVALENT : assert property (A ##1 B |=&gt; C);
-</code></pre>
-<p><code class="language-plaintext highlighter-rouge">P10</code> or <code class="language-plaintext highlighter-rouge">P10_EQUIVALENT</code> would <strong>not fail</strong> if the sequence <code class="language-plaintext highlighter-rouge">(A ##1 !B)</code> is observed.</p>
-<h2 id="disabling-properties">Disabling properties</h2>
-<p>Syntax:</p>
-<pre><code class="language-systemverilog">disable iff (boolean_expr)
-</code></pre>
-<p>When <code class="language-plaintext highlighter-rouge">boolean_expr</code> is <strong>true</strong>, the property is <strong>temporarily disabled</strong>, and all active checks or pending evaluations for that property (including overlapping ones) are <strong>canceled</strong>.</p>
-
-<p>For example, if a property checks that a <em>request</em> must eventually be followed by a <em>grant</em>, we’d usually want a <strong>reset</strong> to clear any pending request-to-grant expectations.<br />
-After reset, new requests start fresh obligations.
-Example:</p>
-<pre><code class="language-systemverilog">P11: assert property (@(posedge clk) disable iff (!rst_n) req |=&gt; ##[*] gnt);
-</code></pre>
-
-<h3 id="default-disable">Default Disable</h3>
-<p>If the same disable condition applies to many properties, it can be defined once as a <strong>default disable</strong> instead of repeating it for each property.</p>
-<pre><code class="language-systemverilog">default disable iff (boolean_expr);
-</code></pre>
-<p>This default disable applies to all properties, in the current scope only, which do not have an explicit <code class="language-plaintext highlighter-rouge">disable iff</code> defined:</p>
-<pre><code class="language-systemverilog">default disable iff (CANCEL)
-P12: assert property(@(posedge clk) disable iff (!rst_n) A |=&gt; B);
-P13: assert property(@(posedge clk) C |=&gt; D);
-</code></pre>
-<p>In this example:</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">P12</code> uses its <strong>own</strong> disable condition (<code class="language-plaintext highlighter-rouge">!rst_n</code>)</li>
-  <li><code class="language-plaintext highlighter-rouge">P13</code> uses the <strong>default</strong> disable condition (<code class="language-plaintext highlighter-rouge">CANCEL</code>)</li>
-</ul>
-
-<p>Both <code class="language-plaintext highlighter-rouge">default disable iff</code> and explicit <code class="language-plaintext highlighter-rouge">disable iff</code> are asynchronous — they take effect immediately, regardless of the property’s clocking event.</p>
-
-<h2 id="clocking-properties">Clocking Properties</h2>
-
-<ul>
-  <li>Every SVA property must be <strong>clocked</strong> — unlocked properties are not allowed.</li>
-  <li>The clock can come from one of the following:
-    <ol>
-      <li>An <strong>explicit clocking event</strong> when the property is declared</li>
-      <li>An <strong>explicit clocking event</strong> when the property is instantiated</li>
-      <li>A <code class="language-plaintext highlighter-rouge">default clocking</code> declaration</li>
-    </ol>
-  </li>
-  <li>An <strong>explicit clock declaration</strong> always overrides the <code class="language-plaintext highlighter-rouge">default clocking</code>.</li>
-  <li>Sequences without an explicit clock inherit the clock from their <strong>parent property</strong>.</li>
-  <li><code class="language-plaintext highlighter-rouge">default clocking</code> applies only within its <strong>current scope</strong>.</li>
-  <li>Only one <code class="language-plaintext highlighter-rouge">default clocking</code> declaration is allowed per scope.</li>
-</ul>
-
-<p>Example:</p>
-<pre><code class="language-systemverilog">default clocking MYCLK @(posedge clk);
-endclocking
-
-property P14;
-  A |=&gt; B;
-endproperty
-
-property P15;
-  @(posedge clk1) A |=&gt; B;
-endproperty
-
-P14_A : assert property (@(posedge clk2) P14);
-P14_B : assert property (P14);
-P15_A : assert property (P15);
-
-P16: assert property (@(posedge clk3) A |-&gt; B);
-P17: assert property (C |-&gt; D);
-</code></pre>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">P14_A</code> uses <strong>clk2</strong>, overriding all others.</li>
-  <li><code class="language-plaintext highlighter-rouge">P14_B</code> uses the <strong>default clock</strong> (<code class="language-plaintext highlighter-rouge">posedge clk</code>).</li>
-  <li><code class="language-plaintext highlighter-rouge">P15_A</code> uses the <strong>explicit clock</strong> defined in <code class="language-plaintext highlighter-rouge">P15</code> (<code class="language-plaintext highlighter-rouge">clk1</code>).</li>
-  <li><code class="language-plaintext highlighter-rouge">P16</code> uses <strong>clk3</strong> (explicit).</li>
-  <li><code class="language-plaintext highlighter-rouge">P17</code> inherits the <strong>default clock</strong>.</li>
-</ul>
-
-<h2 id="builtin-functions">Builtin Functions</h2>
-
-<p>| Function           | Description                                                     |
-| —————— | ————————————————————— |
-| <code class="language-plaintext highlighter-rouge">$past(expr, N)</code>   | Value of <code class="language-plaintext highlighter-rouge">expr</code> N cycles ago (defaults to 1 if <code class="language-plaintext highlighter-rouge">N</code> is omitted). |
-| <code class="language-plaintext highlighter-rouge">$rose(expr)</code>      | TRUE when <code class="language-plaintext highlighter-rouge">expr</code> transitions from 0 → 1.                        |
-| <code class="language-plaintext highlighter-rouge">$fell(expr)</code>      | TRUE when <code class="language-plaintext highlighter-rouge">expr</code> transitions from 1 → 0.                        |
-| <code class="language-plaintext highlighter-rouge">$stable(expr)</code>    | TRUE if <code class="language-plaintext highlighter-rouge">expr</code> has not changed since the previous cycle.        |
-| <code class="language-plaintext highlighter-rouge">$onehot(expr)</code>    | TRUE if exactly one bit of <code class="language-plaintext highlighter-rouge">expr</code> is 1.                         |
-| <code class="language-plaintext highlighter-rouge">$onehot0(expr)</code>   | TRUE if zero or one bit of <code class="language-plaintext highlighter-rouge">expr</code> is 1.                         |
-| <code class="language-plaintext highlighter-rouge">$isunknown(expr)</code> | TRUE if any bit of <code class="language-plaintext highlighter-rouge">expr</code> is X or Z.                            |
-| <code class="language-plaintext highlighter-rouge">$countones(expr)</code> | Returns the number of bits in <code class="language-plaintext highlighter-rouge">expr</code> that are 1.                |</p>
-<h2 id="repetition">Repetition</h2>
-<p>Repetition operators specify <strong>how many times</strong> a sequence element must occur and whether occurrences must be <strong>consecutive</strong> or can be <strong>spread apart</strong>.</p>
-
-<pre><code class="language-systemverilog">[* const_or_range_expression]
-</code></pre>
-<p><strong>Consecutive repetition</strong> — the expression must be TRUE for a specified number of <strong>consecutive cycles</strong>.</p>
-
-<p>Example:</p>
-<pre><code class="language-systemverilog">(a[*2] ##2 b[*2]) |=&gt; d
-</code></pre>
-<p><code class="language-plaintext highlighter-rouge">a</code> must hold for 2 cycles in a row, then after 2 cycles, <code class="language-plaintext highlighter-rouge">b</code> must hold for 2 cycles in a row.</p>
-
-<pre><code class="language-systemverilog">[-&gt; const_or_range_expression]
-</code></pre>
-<p><strong>Goto repetition</strong> — looks for the <strong>Nth occurrence</strong> of a sequence element and then continues from there.<br />
-This operator <em>skips ahead</em> until the given count of matches has been reached.</p>
-
-<p>Example:</p>
-<pre><code class="language-systemverilog">a ##1 b[-&gt;5] ##1 c
-</code></pre>
-<p>Matches when:</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">a</code> occurs</li>
-  <li>then the <strong>5th occurrence</strong> of <code class="language-plaintext highlighter-rouge">b</code> (not necessarily consecutive)</li>
-  <li>then <code class="language-plaintext highlighter-rouge">c</code> occurs one cycle later</li>
-</ul>
-
-<p>So <code class="language-plaintext highlighter-rouge">b</code> may appear several times, but the property only matches when the <strong>5th <code class="language-plaintext highlighter-rouge">b</code></strong> is seen.</p>
-
-<pre><code class="language-systemverilog">[= const_or_range_expression]
-</code></pre>
-<p><strong>Non-consecutive repetition</strong> — the expression must be TRUE a given number of times,<br />
-but <strong>not necessarily on consecutive cycles</strong>.<br />
-Other conditions may appear between repetitions.</p>
-
-<p>Example:</p>
-<pre><code class="language-systemverilog">s1 |=&gt; (b [=5] ##1 c)
-</code></pre>
-<p>After <code class="language-plaintext highlighter-rouge">s1</code> completes:</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">b</code> must be TRUE <strong>five times in total</strong>,</li>
-  <li>these occurrences can be <strong>spread out</strong> in time,</li>
-  <li>and after that, <code class="language-plaintext highlighter-rouge">c</code> must occur one cycle later.</li>
-</ul>
-
-<h3 id="shortcuts">Shortcuts</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Notation</th>
-      <th>Equivalent Form</th>
-      <th>Meaning</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">R[*]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">R[*0:$]</code></td>
-      <td>Repeat zero or more times</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">##[*]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">##[0:$]</code></td>
-      <td>Delay zero or more cycles</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">R[+]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">R[*1:$]</code></td>
-      <td>Repeat one or more times</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">##[+]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">##[1:$]</code></td>
-      <td>Delay one or more cycles</td>
-    </tr>
-  </tbody>
-</table>
-
-
-  </div>
+  </article>
   
-  <div class="post">
+  <article class="post">
     <h1 class="post-title">
       <a href="/kiwifruit/">
         Kiwifruit
       </a>
     </h1>
 
-    <span class="post-date">22 Aug 2018</span>
-
+    <div class="post-meta">
+      <time class="post-date" datetime="2018-08-22T00:00:00+02:00">
+        2018-08-22
+      </time>
+      • 95 words
+      • 1 min read
+      
+    </div>
     <p>Kiwifruit (often abbreviated as kiwi), or Chinese gooseberry is the
 edible berry of several species of woody vines in the genus Actinidia.</p>
 
-<p>The most common cultivar group of kiwifruit is oval, about the size of
-a large hen’s egg (5–8 cm (2.0–3.1 in) in length and 4.5–5.5 cm
-(1.8–2.2 in) in diameter). It has a fibrous, dull greenish-brown skin
-and bright green or golden flesh with rows of tiny, black, edible
-seeds. The fruit has a soft texture, with a sweet and unique flavor.</p>
-
-  </div>
+  </article>
   
-  <div class="post">
+  <article class="post">
     <h1 class="post-title">
       <a href="/apples/">
         Apples
       </a>
     </h1>
 
-    <span class="post-date">21 Aug 2018</span>
-
+    <div class="post-meta">
+      <time class="post-date" datetime="2018-08-21T00:00:00+02:00">
+        2018-08-21
+      </time>
+      • 65 words
+      • 1 min read
+      
+    </div>
     <p>An apple is a sweet, edible fruit produced by an apple tree.</p>
 
-<p>Apple trees are cultivated worldwide, and are the most widely grown
-species in the genus Malus. The tree originated in Central Asia, where
-its wild ancestor, Malus sieversii, is still found today. Apples have
-been grown for thousands of years in Asia and Europe, and were brought
-to North America by European colonists.</p>
-
-  </div>
+  </article>
   
 </div>
 
-<div class="pagination">
-  
-    <a class="pagination-item older" href="/page2">Older</a>
-  
-  
-    <span class="pagination-item newer">Newer</span>
-  
-</div>
+<!-- 
+  Showing buttons to move to the next and to the previous list of posts (pager buttons).
+-->
+
+<ul class="pager">
+    
+    
+    <li class="next">
+        <a href="/page2/">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
+
+
     </div>
 
   </body>

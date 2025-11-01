@@ -16,21 +16,20 @@
   </title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
   <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
-                                 <link rel="shortcut icon" href="/public/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/images/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 </head>
 
 
-  <body class="theme-abstract-dark-wooden">
+  <body>
 
     <div class="sidebar">
   <div class="container sidebar-sticky">
@@ -52,17 +51,33 @@
       
         
           
-            <a class="sidebar-nav-item" href="/about/">About</a>
+            
+              <a class="sidebar-nav-item" href="/about/">About</a>
+            
           
         
       
         
-      
-        
           
         
       
         
+          
+            
+              <a class="sidebar-nav-item" href="/tags.html">Tags</a>
+            
+          
+        
+      
+        
+          
+            
+          
+        
+      
+        
+          
+            
           
         
       
@@ -78,8 +93,37 @@
     <div class="content container">
       <div class="post">
   <h1 class="post-title">Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 2</h1>
-  <span class="post-date">01 Nov 2025</span>
-  <h2 id="build-environment">Build environment</h2>
+  <div class="post-meta">
+    <time class="post-date" datetime="2025-11-01T00:00:00+01:00">
+      2025-11-01
+    </time>
+    • 1327 words
+    • 7 min read
+    
+      •
+      
+          <a href="https://criticalpath.dev/tags.html#embedded">#embedded</a>
+      
+          <a href="https://criticalpath.dev/tags.html#raspberry-pi">#raspberry-pi</a>
+      
+          <a href="https://criticalpath.dev/tags.html#weather_station">#weather_station</a>
+      
+    
+  </div>
+  <p>Before starting with any kind of development on Raspberry Pi Pico2W I first need to setup 
+the toolchain: SDK, compiler, linker and debugger. In this post I describe the following steps:</p>
+<ul>
+  <li>Downloading and setting up Raspberry Pi Pico2W SDK,</li>
+  <li>preparing and compiliing the GNU cross-compiler to compile RISC-V binaries,</li>
+  <li>Setting up <a href="https://openocd.org/">OpenOCD</a></li>
+</ul>
+
+<p>It’s important to note, these steps work well on my machine (x86-64, Arch Linux, btw), some slight
+changes are probably required if there is a need to build on other machine and/or different Linux distro.
+To verify I have everything I need, and everything is setup properly, I’ll develop a simple LED blinky 
+program, and enable UART.</p>
+
+<h2 id="build-environment">Build environment</h2>
 <p>To set-up my build environment for Raspberry Pi Pico2_W, i’ll combine instructions from Raspberry Pi Pico-series C/C++ SDK document and instructions from riscv-gnu-toolchain Github page.</p>
 
 <p>First I’ll install all dependencies:
@@ -287,7 +331,7 @@ export PICO_BOARD=pico2_w</p>
     
       <li>
         <h3>
-          <a href="/weather-station/weather_station_part1/">
+          <a href="/weather%20station/weather_station_part1/">
             Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 1
             <small>01 Nov 2025</small>
           </a>

@@ -16,21 +16,20 @@
   </title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
   <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
-                                 <link rel="shortcut icon" href="/public/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/images/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 </head>
 
 
-  <body class="theme-abstract-dark-wooden">
+  <body>
 
     <div class="sidebar">
   <div class="container sidebar-sticky">
@@ -52,17 +51,33 @@
       
         
           
-            <a class="sidebar-nav-item" href="/about/">About</a>
+            
+              <a class="sidebar-nav-item" href="/about/">About</a>
+            
           
         
       
         
-      
-        
           
         
       
         
+          
+            
+              <a class="sidebar-nav-item" href="/tags.html">Tags</a>
+            
+          
+        
+      
+        
+          
+            
+          
+        
+      
+        
+          
+            
           
         
       
@@ -78,7 +93,25 @@
     <div class="content container">
       <div class="post">
   <h1 class="post-title">SystemVerilog Assertions cheat sheet</h1>
-  <span class="post-date">01 Nov 2025</span>
+  <div class="post-meta">
+    <time class="post-date" datetime="2025-11-01T00:00:00+01:00">
+      2025-11-01
+    </time>
+    • 1453 words
+    • 8 min read
+    
+      •
+      
+          <a href="https://criticalpath.dev/tags.html#SVA">#SVA</a>
+      
+          <a href="https://criticalpath.dev/tags.html#verification">#verification</a>
+      
+          <a href="https://criticalpath.dev/tags.html#simulation">#simulation</a>
+      
+          <a href="https://criticalpath.dev/tags.html#formal">#formal</a>
+      
+    
+  </div>
   <h2 id="constructs-not-recommended-for-formal">Constructs not recommended for formal</h2>
 <p>This is based upon the IEEE 1800-2017 standard (LRM).</p>
 
@@ -97,49 +130,49 @@
 Immediate Assertions</p>
 
 <h2 id="constructs-to-use-with-caution">Constructs to use with caution</h2>
-<pre><code class="language-systemverilog">sequence[*N]
-$past(expr, N)
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sequence</span><span class="p">[</span><span class="o">*</span><span class="n">N</span><span class="p">]</span>
+<span class="p">$</span><span class="nb">past</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+</code></pre></div></div>
 <p>In both cases keep <code class="language-plaintext highlighter-rouge">N</code> as small as possible. It’s recommended to model <code class="language-plaintext highlighter-rouge">$past()</code> with Auxiliary Code instead.</p>
 
 <h2 id="declarations">Declarations</h2>
 <h3 id="sequence-declaration">Sequence declaration</h3>
 <p>Declares a sequence expression that can be used in property declarations. Local variables are permitted,</p>
 
-<pre><code class="language-systemverilog">sequence identifier [ argument_list ] ;
-	sequence_expr [ ; ]
-endsequence [ : identifier ]
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sequence</span> <span class="n">identifier</span> <span class="p">[</span> <span class="n">argument_list</span> <span class="p">]</span> <span class="p">;</span>
+	<span class="n">sequence_expr</span> <span class="p">[</span> <span class="p">;</span> <span class="p">]</span>
+<span class="k">endsequence</span> <span class="p">[</span> <span class="o">:</span> <span class="n">identifier</span> <span class="p">]</span>
+</code></pre></div></div>
 
 <p>Example:</p>
-<pre><code class="language-systemverilog">sequence SEQ1;
-	A ##1 B ##1 C;
-endsequence
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sequence</span> <span class="n">SEQ1</span><span class="p">;</span>
+	<span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="p">##</span><span class="mi">1</span> <span class="n">C</span><span class="p">;</span>
+<span class="k">endsequence</span>
 
-sequence SEQ2(LEN, SIG);
-	D ##1 E[*LEN] ##1 SIG;
-endsequence
-</code></pre>
+<span class="k">sequence</span> <span class="n">SEQ2</span><span class="p">(</span><span class="n">LEN</span><span class="p">,</span> <span class="n">SIG</span><span class="p">);</span>
+	<span class="n">D</span> <span class="p">##</span><span class="mi">1</span> <span class="n">E</span><span class="p">[</span><span class="o">*</span><span class="n">LEN</span><span class="p">]</span> <span class="p">##</span><span class="mi">1</span> <span class="n">SIG</span><span class="p">;</span>
+<span class="k">endsequence</span>
+</code></pre></div></div>
 
 <p>Recommended to define, or infer, sequence lock at instantiation and not at declaration. A sequence is a series of Boolean expressions evaluated over time. A sequence of length one cycle is the same as a Boolean expression.</p>
 
 <h3 id="property-declaration">Property declaration</h3>
-<pre><code class="language-systemverilog">property identifier [ argument_list ] ;
-	[ clock_expr ] [ disable_clause ]
-	property_expr ;
-endproperty
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">property</span> <span class="n">identifier</span> <span class="p">[</span> <span class="n">argument_list</span> <span class="p">]</span> <span class="p">;</span>
+	<span class="p">[</span> <span class="n">clock_expr</span> <span class="p">]</span> <span class="p">[</span> <span class="n">disable_clause</span> <span class="p">]</span>
+	<span class="n">property_expr</span> <span class="p">;</span>
+<span class="k">endproperty</span>
+</code></pre></div></div>
 
 <p>Example:</p>
-<pre><code class="language-systemverilog">property P1 (R, S, T) ;
-	@(posedge clk) disable iff ( !rst_n )
-	A |=&gt; R ##1 S &amp;&amp; T;
-endproperty
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">property</span> <span class="n">P1</span> <span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="p">;</span>
+	<span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span> <span class="o">!</span><span class="n">rst_n</span> <span class="p">)</span>
+	<span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">R</span> <span class="p">##</span><span class="mi">1</span> <span class="n">S</span> <span class="o">&amp;&amp;</span> <span class="n">T</span><span class="p">;</span>
+<span class="k">endproperty</span>
 
-property P1A;
-	REQ |=&gt; s_eventually GNT;
-endproperty
-</code></pre>
+<span class="k">property</span> <span class="n">P1A</span><span class="p">;</span>
+	<span class="n">REQ</span> <span class="o">|=&gt;</span> <span class="n">s_eventually</span> <span class="n">GNT</span><span class="p">;</span>
+<span class="k">endproperty</span>
+</code></pre></div></div>
 
 <h2 id="verification-directives">Verification directives</h2>
 <p>A property declaration is merely a definition of behavior. Nothing gets checked until we have given a <em>verification directive</em> to the tool which states what should be done with that behavior. All properties must have a clock defined explicitly or via a default clock declaration.</p>
@@ -148,57 +181,57 @@ endproperty
 <p>Directive to the tool to ensure that the property holds, is true, under all circumstances (safety check).</p>
 
 <p>Syntax:</p>
-<pre><code class="language-systemverilog">label : assert property (prop_expr)
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">label</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">prop_expr</span><span class="p">)</span>
+</code></pre></div></div>
 
 <p>Examples:</p>
-<pre><code class="language-systemverilog">P1_INST : assert property (P1(SIG1, SIG2, S3));
-P2 : assert property ( @(posedge clk) A |-&gt; B );
-P3 : assert property ( ERROR_CNT != 10 );
-P1A_INS : assert property (@(posedge clka) (P1A) );
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P1_INST</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">P1</span><span class="p">(</span><span class="n">SIG1</span><span class="p">,</span> <span class="n">SIG2</span><span class="p">,</span> <span class="n">S3</span><span class="p">));</span>
+<span class="n">P2</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span> <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="n">A</span> <span class="o">|-&gt;</span> <span class="n">B</span> <span class="p">);</span>
+<span class="n">P3</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span> <span class="n">ERROR_CNT</span> <span class="o">!=</span> <span class="mi">10</span> <span class="p">);</span>
+<span class="n">P1A_INS</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clka</span><span class="p">)</span> <span class="p">(</span><span class="n">P1A</span><span class="p">)</span> <span class="p">);</span>
 
-// TODO: Add example where there is a property declaration, and then this property is used in an assertion
-</code></pre>
+<span class="c1">// TODO: Add example where there is a property declaration, and then this property is used in an assertion</span>
+</code></pre></div></div>
 
 <h3 id="assume-directive">Assume directive</h3>
 <p>Directive to the tool to limit the behavior of the design under test (DUT) inputs to the behavior specified. Also known as constraints. Assume directives in the simulation are treated as assert directives.</p>
 
 <p>Syntax:</p>
-<pre><code class="language-systemverilog">label : assume property (prop_expr)
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">label</span> <span class="o">:</span> <span class="k">assume</span> <span class="k">property</span> <span class="p">(</span><span class="n">prop_expr</span><span class="p">)</span>
+</code></pre></div></div>
 <p>Examples:</p>
-<pre><code class="language-systemverilog">P4 : assume property (req &amp;&amp; !gnt |=&gt; req)
-P5 : assume property ( @(posedge clk3) not(full &amp;&amp; empty) );
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P4</span> <span class="o">:</span> <span class="k">assume</span> <span class="k">property</span> <span class="p">(</span><span class="n">req</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">gnt</span> <span class="o">|=&gt;</span> <span class="n">req</span><span class="p">)</span>
+<span class="n">P5</span> <span class="o">:</span> <span class="k">assume</span> <span class="k">property</span> <span class="p">(</span> <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk3</span><span class="p">)</span> <span class="kt">not</span><span class="p">(</span><span class="n">full</span> <span class="o">&amp;&amp;</span> <span class="n">empty</span><span class="p">)</span> <span class="p">);</span>
 
-// TODO: Add an example where there is a property declaration, and then this property is used in an assumption
-</code></pre>
+<span class="c1">// TODO: Add an example where there is a property declaration, and then this property is used in an assumption</span>
+</code></pre></div></div>
 
 <h3 id="cover-directive">Cover directive</h3>
 <p>In the formal verification, a cover directive instructs the formal tool to find at least one valid execution trace in which a specified sequence of events or conditions can occur, given the design logic and any active <strong>assumptions</strong>  (constraints).
 Syntax:</p>
-<pre><code class="language-systemverilog">label : cover property (prop_expr)
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">label</span> <span class="o">:</span> <span class="k">cover</span> <span class="k">property</span> <span class="p">(</span><span class="n">prop_expr</span><span class="p">)</span>
+</code></pre></div></div>
 <p>Examples:</p>
-<pre><code class="language-systemverilog">C1 : cover sequence (full ##[+] empty );
-C2 : cover property ( @(posedge clk) (SEQ1) );
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C1</span> <span class="o">:</span> <span class="k">cover</span> <span class="k">sequence</span> <span class="p">(</span><span class="n">full</span> <span class="p">##[</span><span class="o">+</span><span class="p">]</span> <span class="n">empty</span> <span class="p">);</span>
+<span class="n">C2</span> <span class="o">:</span> <span class="k">cover</span> <span class="k">property</span> <span class="p">(</span> <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="p">(</span><span class="n">SEQ1</span><span class="p">)</span> <span class="p">);</span>
 
-// TODO: Add an example where there is a sequence declaration and then this sequence is used in a cover
-</code></pre>
+<span class="c1">// TODO: Add an example where there is a sequence declaration and then this sequence is used in a cover</span>
+</code></pre></div></div>
 <p>For <code class="language-plaintext highlighter-rouge">cover property</code> it is recommended for <code class="language-plaintext highlighter-rouge">prop_expr</code> to only be a sequence, i.e. not contain implication operators <code class="language-plaintext highlighter-rouge">|-&gt;</code> or <code class="language-plaintext highlighter-rouge">|=&gt;</code> and the cover directive states <code class="language-plaintext highlighter-rouge">cover sequence</code> instead of <code class="language-plaintext highlighter-rouge">cover property</code></p>
 
 <h2 id="cycle-delays">Cycle delays</h2>
 <p>Specifies the number of clock ticks from the current clock tick until the next specified behavior occurs.</p>
 
 <p>Syntax:</p>
-<pre><code class="language-systemverilog">##[N:M]
-##N
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">##[</span><span class="n">N</span><span class="o">:</span><span class="n">M</span><span class="p">]</span>
+<span class="p">##</span><span class="n">N</span>
+</code></pre></div></div>
 
 <p>N and M are constants know at elaboration. M can be the symbol $ meaning “infinity”. M &gt;= N. M and N can be 0.
 Example:</p>
-<pre><code class="language-systemverilog">P6: assert property( A |=&gt; B ##[0:$] C );
-P7: assert property( A |=&gt; ##3 C );
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P6</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span><span class="p">(</span> <span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span> <span class="p">##[</span><span class="mi">0</span><span class="o">:</span><span class="p">$]</span> <span class="n">C</span> <span class="p">);</span>
+<span class="nl">P7:</span> <span class="k">assert</span> <span class="k">property</span><span class="p">(</span> <span class="n">A</span> <span class="o">|=&gt;</span> <span class="p">##</span><span class="mi">3</span> <span class="n">C</span> <span class="p">);</span>
+</code></pre></div></div>
 <h2 id="implication-operators---">Implication operators (<code class="language-plaintext highlighter-rouge">|-&gt;</code>, <code class="language-plaintext highlighter-rouge">|=&gt;</code>)</h2>
 
 <p>Implication operators define a relationship between an <strong>enabling condition</strong> and a <strong>fulfilling condition</strong>.
@@ -211,68 +244,68 @@ A property using an implication operator holds true if either:</p>
 <h3 id="overlapping-implication--">Overlapping Implication (<code class="language-plaintext highlighter-rouge">|-&gt;</code>)</h3>
 <p>Syntax:</p>
 
-<pre><code class="language-systemverilog">sequence_expr |-&gt; property_expr`
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sequence_expr</span> <span class="o">|-&gt;</span> <span class="n">property_expr</span><span class="err">`</span>
+</code></pre></div></div>
 
 <p>This property holds true under the following conditions:</p>
 <ol>
   <li>If <code class="language-plaintext highlighter-rouge">sequence_expr</code> completes then <code class="language-plaintext highlighter-rouge">property_expr</code> <strong>starts in the same cycle</strong> and eventually completes.</li>
   <li><code class="language-plaintext highlighter-rouge">seqeunce_expr</code> never completes.
 Example:
-    <pre><code class="language-systemverilog">P8: assert property (A ##1 B |-&gt; C ##1 D );
-</code></pre>
+    <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P8</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="o">|-&gt;</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span> <span class="p">);</span>
+</code></pre></div>    </div>
     <p><code class="language-plaintext highlighter-rouge">P8</code> passes if the following sequence is observed:</p>
-    <pre><code class="language-systemverilog">(A ##1 (B &amp;&amp; C) ##1 D);
-</code></pre>
+    <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="p">(</span><span class="n">B</span> <span class="o">&amp;&amp;</span> <span class="n">C</span><span class="p">)</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span><span class="p">);</span>
+</code></pre></div>    </div>
   </li>
 </ol>
 
 <h3 id="non-overlapping-implication-">Non-Overlapping Implication (<code class="language-plaintext highlighter-rouge">|=&gt;</code>)</h3>
 <p>Syntax:</p>
-<pre><code class="language-systemverilog">sequence_expr |=&gt; property_expr 
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sequence_expr</span> <span class="o">|=&gt;</span> <span class="n">property_expr</span> 
+</code></pre></div></div>
 <p>This property holds true under the following conditions:</p>
 <ol>
   <li>If <code class="language-plaintext highlighter-rouge">sequence_expr</code> completes then <code class="language-plaintext highlighter-rouge">property_expr</code> <strong>starts in the next cycle</strong> and eventually completes.</li>
   <li><code class="language-plaintext highlighter-rouge">sequence_expr</code> never completes.
 Example:
-    <pre><code class="language-systemverilog">P9: assert property ( A ##1 B |=&gt; C ##1 D );
-</code></pre>
+    <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P9</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span> <span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="o">|=&gt;</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span> <span class="p">);</span>
+</code></pre></div>    </div>
     <p><code class="language-plaintext highlighter-rouge">P9</code> passes if the following sequence is observed:</p>
-    <pre><code class="language-systemverilog">(A ##1 B ##1 C ##1 D);
-</code></pre>
+    <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="p">##</span><span class="mi">1</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span><span class="p">);</span>
+</code></pre></div>    </div>
     <h3 id="nesting-implication-operators">Nesting implication operators</h3>
   </li>
 </ol>
 
 <p>It is <strong>not recommended</strong> to nest implication operators, as it can easily become confusing: For example:</p>
-<pre><code class="language-systemverilog">P10: assert property (A |=&gt; B |=&gt; C );
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P10</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span> <span class="o">|=&gt;</span> <span class="n">C</span> <span class="p">);</span>
+</code></pre></div></div>
 <p>This is exactly equivalent to:</p>
-<pre><code class="language-systemverilog">P10_EQUIVALENT : assert property (A ##1 B |=&gt; C);
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P10_EQUIVALENT</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="o">|=&gt;</span> <span class="n">C</span><span class="p">);</span>
+</code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">P10</code> or <code class="language-plaintext highlighter-rouge">P10_EQUIVALENT</code> would <strong>not fail</strong> if the sequence <code class="language-plaintext highlighter-rouge">(A ##1 !B)</code> is observed.</p>
 <h2 id="disabling-properties">Disabling properties</h2>
 <p>Syntax:</p>
-<pre><code class="language-systemverilog">disable iff (boolean_expr)
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="n">boolean_expr</span><span class="p">)</span>
+</code></pre></div></div>
 <p>When <code class="language-plaintext highlighter-rouge">boolean_expr</code> is <strong>true</strong>, the property is <strong>temporarily disabled</strong>, and all active checks or pending evaluations for that property (including overlapping ones) are <strong>canceled</strong>.</p>
 
 <p>For example, if a property checks that a <em>request</em> must eventually be followed by a <em>grant</em>, we’d usually want a <strong>reset</strong> to clear any pending request-to-grant expectations.<br />
 After reset, new requests start fresh obligations.
 Example:</p>
-<pre><code class="language-systemverilog">P11: assert property (@(posedge clk) disable iff (!rst_n) req |=&gt; ##[*] gnt);
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P11</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span> <span class="n">req</span> <span class="o">|=&gt;</span> <span class="p">##[</span><span class="o">*</span><span class="p">]</span> <span class="n">gnt</span><span class="p">);</span>
+</code></pre></div></div>
 
 <h3 id="default-disable">Default Disable</h3>
 <p>If the same disable condition applies to many properties, it can be defined once as a <strong>default disable</strong> instead of repeating it for each property.</p>
-<pre><code class="language-systemverilog">default disable iff (boolean_expr);
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">default</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="n">boolean_expr</span><span class="p">);</span>
+</code></pre></div></div>
 <p>This default disable applies to all properties, in the current scope only, which do not have an explicit <code class="language-plaintext highlighter-rouge">disable iff</code> defined:</p>
-<pre><code class="language-systemverilog">default disable iff (CANCEL)
-P12: assert property(@(posedge clk) disable iff (!rst_n) A |=&gt; B);
-P13: assert property(@(posedge clk) C |=&gt; D);
-</code></pre>
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">default</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="n">CANCEL</span><span class="p">)</span>
+<span class="nl">P12:</span> <span class="k">assert</span> <span class="k">property</span><span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span> <span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span><span class="p">);</span>
+<span class="nl">P13:</span> <span class="k">assert</span> <span class="k">property</span><span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="n">C</span> <span class="o">|=&gt;</span> <span class="n">D</span><span class="p">);</span>
+</code></pre></div></div>
 <p>In this example:</p>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">P12</code> uses its <strong>own</strong> disable condition (<code class="language-plaintext highlighter-rouge">!rst_n</code>)</li>
@@ -299,24 +332,24 @@ P13: assert property(@(posedge clk) C |=&gt; D);
 </ul>
 
 <p>Example:</p>
-<pre><code class="language-systemverilog">default clocking MYCLK @(posedge clk);
-endclocking
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">default</span> <span class="k">clocking</span> <span class="n">MYCLK</span> <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">);</span>
+<span class="k">endclocking</span>
 
-property P14;
-  A |=&gt; B;
-endproperty
+<span class="k">property</span> <span class="n">P14</span><span class="p">;</span>
+  <span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span><span class="p">;</span>
+<span class="k">endproperty</span>
 
-property P15;
-  @(posedge clk1) A |=&gt; B;
-endproperty
+<span class="k">property</span> <span class="n">P15</span><span class="p">;</span>
+  <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk1</span><span class="p">)</span> <span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span><span class="p">;</span>
+<span class="k">endproperty</span>
 
-P14_A : assert property (@(posedge clk2) P14);
-P14_B : assert property (P14);
-P15_A : assert property (P15);
+<span class="n">P14_A</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk2</span><span class="p">)</span> <span class="n">P14</span><span class="p">);</span>
+<span class="n">P14_B</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">P14</span><span class="p">);</span>
+<span class="n">P15_A</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">P15</span><span class="p">);</span>
 
-P16: assert property (@(posedge clk3) A |-&gt; B);
-P17: assert property (C |-&gt; D);
-</code></pre>
+<span class="nl">P16:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk3</span><span class="p">)</span> <span class="n">A</span> <span class="o">|-&gt;</span> <span class="n">B</span><span class="p">);</span>
+<span class="nl">P17:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">C</span> <span class="o">|-&gt;</span> <span class="n">D</span><span class="p">);</span>
+</code></pre></div></div>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">P14_A</code> uses <strong>clk2</strong>, overriding all others.</li>
@@ -341,23 +374,25 @@ P17: assert property (C |-&gt; D);
 <h2 id="repetition">Repetition</h2>
 <p>Repetition operators specify <strong>how many times</strong> a sequence element must occur and whether occurrences must be <strong>consecutive</strong> or can be <strong>spread apart</strong>.</p>
 
-<pre><code class="language-systemverilog">[* const_or_range_expression]
-</code></pre>
-<p><strong>Consecutive repetition</strong> — the expression must be TRUE for a specified number of <strong>consecutive cycles</strong>.</p>
+<p>```verilog
+[* const_or_range_expression]</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Consecutive repetition** — the expression must be TRUE for a specified number of **consecutive cycles**.
 
-<p>Example:</p>
-<pre><code class="language-systemverilog">(a[*2] ##2 b[*2]) |=&gt; d
-</code></pre>
+Example:
+```verilog
+(a[*2] ##2 b[*2]) |=&gt; d
+</code></pre></div></div>
 <p><code class="language-plaintext highlighter-rouge">a</code> must hold for 2 cycles in a row, then after 2 cycles, <code class="language-plaintext highlighter-rouge">b</code> must hold for 2 cycles in a row.</p>
 
-<pre><code class="language-systemverilog">[-&gt; const_or_range_expression]
-</code></pre>
-<p><strong>Goto repetition</strong> — looks for the <strong>Nth occurrence</strong> of a sequence element and then continues from there.<br />
-This operator <em>skips ahead</em> until the given count of matches has been reached.</p>
+<p>```verilog
+[-&gt; const_or_range_expression]</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Goto repetition** — looks for the **Nth occurrence** of a sequence element and then continues from there.  
+This operator *skips ahead* until the given count of matches has been reached.
 
-<p>Example:</p>
-<pre><code class="language-systemverilog">a ##1 b[-&gt;5] ##1 c
-</code></pre>
+Example:
+```verilog
+a ##1 b[-&gt;5] ##1 c
+</code></pre></div></div>
 <p>Matches when:</p>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">a</code> occurs</li>
@@ -367,15 +402,16 @@ This operator <em>skips ahead</em> until the given count of matches has been rea
 
 <p>So <code class="language-plaintext highlighter-rouge">b</code> may appear several times, but the property only matches when the <strong>5th <code class="language-plaintext highlighter-rouge">b</code></strong> is seen.</p>
 
-<pre><code class="language-systemverilog">[= const_or_range_expression]
-</code></pre>
-<p><strong>Non-consecutive repetition</strong> — the expression must be TRUE a given number of times,<br />
-but <strong>not necessarily on consecutive cycles</strong>.<br />
-Other conditions may appear between repetitions.</p>
+<p>```verilog
+[= const_or_range_expression]</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**Non-consecutive repetition** — the expression must be TRUE a given number of times,  
+but **not necessarily on consecutive cycles**.  
+Other conditions may appear between repetitions.
 
-<p>Example:</p>
-<pre><code class="language-systemverilog">s1 |=&gt; (b [=5] ##1 c)
-</code></pre>
+Example:
+```verilog
+s1 |=&gt; (b [=5] ##1 c)
+</code></pre></div></div>
 <p>After <code class="language-plaintext highlighter-rouge">s1</code> completes:</p>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">b</code> must be TRUE <strong>five times in total</strong>,</li>
@@ -426,7 +462,7 @@ Other conditions may appear between repetitions.</p>
     
       <li>
         <h3>
-          <a href="/weather-station/weather_station_part2/">
+          <a href="/weather%20station/weather_station_part2/">
             Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 2
             <small>01 Nov 2025</small>
           </a>
@@ -435,7 +471,7 @@ Other conditions may appear between repetitions.</p>
     
       <li>
         <h3>
-          <a href="/weather-station/weather_station_part1/">
+          <a href="/weather%20station/weather_station_part1/">
             Weather and air quality station based on Raspberry Pi Pico2W and E-ink display: Part 1
             <small>01 Nov 2025</small>
           </a>
