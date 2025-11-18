@@ -59,15 +59,15 @@ html {
 }
 
 body {
-  color: #1a0e26;
-  background-color: #fdfdfd;
+  color: #a0a4a5;
+  background-color: #060f11;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
 
 /* No `:visited` state is required by default (browsers will use `a`) */
 a {
-  color: #268bd2;
+  color: #00d992;
   text-decoration: none;
 }
 a strong {
@@ -84,7 +84,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: .5rem;
   font-weight: bold;
   line-height: 1.25;
-  color: #1a0e26;
+  color: #d7d8d9;
   text-rendering: optimizeLegibility;
 }
 h1 {
@@ -110,7 +110,7 @@ p {
 }
 
 strong {
-  color: #1a0e26;
+  color: #d7d8d9;
 }
 
 
@@ -155,8 +155,8 @@ pre {
 code {
   padding: .25em .5em;
   font-size: 85%;
-  color: #bf616a;
-  background-color: #f9f9f9;
+  color: #00d992;
+  background-color: #060f11;
   border-radius: 3px;
 }
 pre {
@@ -340,7 +340,7 @@ tbody tr:nth-child(odd) th {
 .page-title,
 .post-title,
 .post-title a {
-  color: #303030;
+  color: #d7d8d9;
 }
 .page-title,
 .post-title {
@@ -358,7 +358,6 @@ tbody tr:nth-child(odd) th {
 .related {
   padding-top: 2rem;
   padding-bottom: 2rem;
-  border-top: 1px solid #eee;
 }
 .related-posts {
   padding-left: 0;
@@ -369,14 +368,15 @@ tbody tr:nth-child(odd) th {
 }
 .related-posts li small {
   font-size: 75%;
-  color: #999;
+  color: #969b9c;
 }
 .related-posts li a:hover {
-  color: #268bd2;
-  text-decoration: none;
+  color: #00d992;
+  text-decoration-color: #00d992;
 }
 .related-posts li a:hover small {
-  color: inherit;
+  color: #969b9c;
+  text-decoration-color: #969b9c;
 }
 
 
@@ -491,7 +491,7 @@ html {
   text-align: center;
   padding: 2rem 1rem;
   color: rgba(255,255,255,.5);
-  background-color: #202020;
+  background-color: #080f11;
 }
 @media (min-width: 48em) {
   .sidebar {
@@ -506,12 +506,12 @@ html {
 
 /* Sidebar links */
 .sidebar a {
-  color: #fff;
+  color: #00d992;
 }
 
 /* About section */
 .sidebar-about h1 {
-  color: #fff;
+  color: #aabbcc;
   margin-top: 0;
   font-family: "Abril Fatface", serif;
   font-size: 2rem;
@@ -574,24 +574,6 @@ a.sidebar-nav-item:focus {
     margin-right: 4rem;
   }
 }
-
-/* === widen main column on desktop === */
-@media (min-width: 64em) {   /* roughly ≥ 1024 px */
-  .content {
-    max-width: 52rem;        /* old: 38rem */
-    margin-left: 22rem;      /* keep sidebar spacing proportional */
-    margin-right: 4rem;
-  }
-}
-
-@media (min-width: 80em) {   /* ≥ 1280 px */
-  .content {
-    max-width: 60rem;
-    margin-left: 24rem;
-    margin-right: 6rem;
-  }
-}
-
 
 /*
  * Reverse layout

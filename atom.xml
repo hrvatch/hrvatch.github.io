@@ -4,7 +4,7 @@
  <title>Critical Path</title>
  <link href="https://criticalpath.dev/atom.xml" rel="self"/>
  <link href="https://criticalpath.dev/"/>
- <updated>2025-11-01T23:24:52+01:00</updated>
+ <updated>2025-11-18T01:16:38+01:00</updated>
  <id>https://criticalpath.dev</id>
  <author>
    <name></name>
@@ -409,35 +409,7 @@ Firmware written in C for the Pico’s RISC-V core&lt;/p&gt;
    <link href="https://criticalpath.dev/verification/sva_cheat_sheet/"/>
    <updated>2025-11-01T00:00:00+01:00</updated>
    <id>https://criticalpath.dev/verification/sva_cheat_sheet</id>
-   <content type="html">&lt;h3 id=&quot;constructs-not-recommended-for-formal&quot;&gt;Constructs not recommended for formal&lt;/h3&gt;
-
-&lt;p&gt;The following properties will cause formal tools to either run slower or not converge at all. It’s
-recommended to simplify them - for example, if-else statements inside a property should be split into 
-multiple properties - or to write auxiliary code.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;throughout&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;or&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;and&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;within&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expect&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;first_match()&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if property else property&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence.triggered&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence[-&amp;gt;N]&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence[=N]&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Local variables&lt;/li&gt;
-  &lt;li&gt;Immediate assertions&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;constructs-to-use-with-caution&quot;&gt;Constructs to use with caution&lt;/h3&gt;
-
-&lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;sequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;past&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;In both cases keep &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt; as small as possible. It’s recommended to model &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$past()&lt;/code&gt; with Auxiliary Code instead.&lt;/p&gt;
-
-&lt;h3 id=&quot;sequence-declaration&quot;&gt;Sequence declaration&lt;/h3&gt;
+   <content type="html">&lt;h2 id=&quot;sequence-declaration&quot;&gt;Sequence declaration&lt;/h2&gt;
 
 &lt;p&gt;Declares a sequence expression that can be used in property declarations. Local variables are permitted,&lt;/p&gt;
 
@@ -456,9 +428,9 @@ multiple properties - or to write auxiliary code.&lt;/p&gt;
 &lt;span class=&quot;k&quot;&gt;endsequence&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Recommended to define, or infer, sequence lock at instantiation and not at declaration. A sequence is a series of Boolean expressions evaluated over time. A sequence of length one cycle is the same as a Boolean expression.&lt;/p&gt;
+&lt;p&gt;Recommended to define (or infer) sequence clock at instantiation and not at declaration. A sequence is a series of Boolean expressions evaluated over time. A sequence of length one cycle is the same as a Boolean expression.&lt;/p&gt;
 
-&lt;h3 id=&quot;property-declaration&quot;&gt;Property declaration&lt;/h3&gt;
+&lt;h2 id=&quot;property-declaration&quot;&gt;Property declaration&lt;/h2&gt;
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;identifier&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argument_list&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 	&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clock_expr&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;disable_clause&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 	&lt;span class=&quot;n&quot;&gt;property_expr&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -476,7 +448,7 @@ multiple properties - or to write auxiliary code.&lt;/p&gt;
 &lt;span class=&quot;k&quot;&gt;endproperty&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;verification-directives&quot;&gt;Verification directives&lt;/h3&gt;
+&lt;h2 id=&quot;verification-directives&quot;&gt;Verification directives&lt;/h2&gt;
 &lt;p&gt;A property declaration is merely a definition of behavior. Nothing gets checked until we have given a &lt;em&gt;verification directive&lt;/em&gt; to the tool which states what should be done with that behavior. All properties must have a clock defined explicitly or via a default clock declaration.&lt;/p&gt;
 
 &lt;h3 id=&quot;assert-directive&quot;&gt;Assert directive&lt;/h3&gt;
@@ -523,7 +495,7 @@ Syntax:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;For &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cover property&lt;/code&gt; it is recommended for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prop_expr&lt;/code&gt; to only be a sequence, i.e. not contain implication operators &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|-&amp;gt;&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|=&amp;gt;&lt;/code&gt; and the cover directive states &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cover sequence&lt;/code&gt; instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cover property&lt;/code&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;cycle-delays&quot;&gt;Cycle delays&lt;/h3&gt;
+&lt;h2 id=&quot;cycle-delays&quot;&gt;Cycle delays&lt;/h2&gt;
 
 &lt;p&gt;Specifies the number of clock ticks from the current clock tick until the next specified behavior occurs.&lt;/p&gt;
 
@@ -538,7 +510,7 @@ Example:&lt;/p&gt;
 &lt;span class=&quot;nl&quot;&gt;P7:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;implication-operators---&quot;&gt;Implication operators (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|-&amp;gt;&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|=&amp;gt;&lt;/code&gt;)&lt;/h3&gt;
+&lt;h2 id=&quot;implication-operators---&quot;&gt;Implication operators (|-&amp;gt;, |=&amp;gt;)&lt;/h2&gt;
 
 &lt;p&gt;Implication operators define a relationship between an &lt;strong&gt;enabling condition&lt;/strong&gt; and a &lt;strong&gt;fulfilling condition&lt;/strong&gt;.
 A property using an implication operator holds true if either:&lt;/p&gt;
@@ -547,7 +519,7 @@ A property using an implication operator holds true if either:&lt;/p&gt;
   &lt;li&gt;The enabling condition &lt;strong&gt;never occurs&lt;/strong&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;overlapping-implication--&quot;&gt;Overlapping Implication (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|-&amp;gt;&lt;/code&gt;)&lt;/h3&gt;
+&lt;h3 id=&quot;overlapping-implication--&quot;&gt;Overlapping Implication (|-&amp;gt;)&lt;/h3&gt;
 
 &lt;p&gt;Syntax:&lt;/p&gt;
 
@@ -567,7 +539,7 @@ Example:
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;non-overlapping-implication-&quot;&gt;Non-Overlapping Implication (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|=&amp;gt;&lt;/code&gt;)&lt;/h3&gt;
+&lt;h3 id=&quot;non-overlapping-implication-&quot;&gt;Non-Overlapping Implication (|=&amp;gt;)&lt;/h3&gt;
 
 &lt;p&gt;Syntax:&lt;/p&gt;
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;sequence_expr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property_expr&lt;/span&gt; 
@@ -585,7 +557,7 @@ Example:
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;nesting-implication-operators&quot;&gt;Nesting implication operators&lt;/h3&gt;
+&lt;h2 id=&quot;nesting-implication-operators&quot;&gt;Nesting implication operators&lt;/h2&gt;
 
 &lt;p&gt;It is &lt;strong&gt;not recommended&lt;/strong&gt; to nest implication operators, as it can easily become confusing: For example:&lt;/p&gt;
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;P10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -595,7 +567,7 @@ Example:
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P10&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P10_EQUIVALENT&lt;/code&gt; would &lt;strong&gt;not fail&lt;/strong&gt; if the sequence &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(A ##1 !B)&lt;/code&gt; is observed.&lt;/p&gt;
 
-&lt;h3 id=&quot;disabling-properties&quot;&gt;Disabling properties&lt;/h3&gt;
+&lt;h2 id=&quot;disabling-properties&quot;&gt;Disabling properties&lt;/h2&gt;
 
 &lt;p&gt;Syntax:&lt;/p&gt;
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;disable&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;iff&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boolean_expr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -608,7 +580,7 @@ Example:&lt;/p&gt;
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;P11&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;assert&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;posedge&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;disable&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;iff&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rst_n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;req&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;##[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;gnt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;default-disable&quot;&gt;Default Disable&lt;/h3&gt;
+&lt;h2 id=&quot;default-disable&quot;&gt;Default Disable&lt;/h2&gt;
 
 &lt;p&gt;If the same disable condition applies to many properties, it can be defined once as a &lt;strong&gt;default disable&lt;/strong&gt; instead of repeating it for each property.&lt;/p&gt;
 &lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;disable&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;iff&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;boolean_expr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -626,7 +598,7 @@ Example:&lt;/p&gt;
 
 &lt;p&gt;Both &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;default disable iff&lt;/code&gt; and explicit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;disable iff&lt;/code&gt; are asynchronous — they take effect immediately, regardless of the property’s clocking event.&lt;/p&gt;
 
-&lt;h3 id=&quot;clocking-properties&quot;&gt;Clocking Properties&lt;/h3&gt;
+&lt;h2 id=&quot;clocking-properties&quot;&gt;Clocking Properties&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Every SVA property must be &lt;strong&gt;clocked&lt;/strong&gt; — unlocked properties are not allowed.&lt;/li&gt;
@@ -671,7 +643,7 @@ Example:&lt;/p&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P17&lt;/code&gt; inherits the &lt;strong&gt;default clock&lt;/strong&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;builtin-functions&quot;&gt;Builtin Functions&lt;/h3&gt;
+&lt;h2 id=&quot;builtin-functions&quot;&gt;Builtin Functions&lt;/h2&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -716,7 +688,7 @@ Example:&lt;/p&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h3 id=&quot;repetition&quot;&gt;Repetition&lt;/h3&gt;
+&lt;h2 id=&quot;repetition&quot;&gt;Repetition&lt;/h2&gt;
 
 &lt;p&gt;Repetition operators specify &lt;strong&gt;how many times&lt;/strong&gt; a sequence element must occur and whether occurrences must be &lt;strong&gt;consecutive&lt;/strong&gt; or can be &lt;strong&gt;spread apart&lt;/strong&gt;.&lt;/p&gt;
 
@@ -761,7 +733,7 @@ This operator &lt;em&gt;skips ahead&lt;/em&gt; until the given count of matches 
   &lt;li&gt;and after that, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;c&lt;/code&gt; must occur one cycle later.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;shortcuts&quot;&gt;Shortcuts&lt;/h3&gt;
+&lt;h2 id=&quot;shortcuts&quot;&gt;Shortcuts&lt;/h2&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -795,6 +767,33 @@ This operator &lt;em&gt;skips ahead&lt;/em&gt; until the given count of matches 
   &lt;/tbody&gt;
 &lt;/table&gt;
 
+&lt;h2 id=&quot;constructs-not-recommended-for-formal&quot;&gt;Constructs not recommended for formal&lt;/h2&gt;
+
+&lt;p&gt;The following properties will cause formal tools to either run slower or not converge at all. It’s
+recommended to simplify them - for example, if-else statements inside a property should be split into 
+multiple properties - or to write auxiliary code.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;throughout&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;or&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;and&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;within&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;expect&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;first_match()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if property else property&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence.triggered&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence[-&amp;gt;N]&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sequence[=N]&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Local variables&lt;/li&gt;
+  &lt;li&gt;Immediate assertions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;constructs-to-use-with-caution&quot;&gt;Constructs to use with caution&lt;/h2&gt;
+
+&lt;div class=&quot;language-verilog highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;sequence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;past&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;In both cases keep &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N&lt;/code&gt; as small as possible. It’s recommended to model &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$past()&lt;/code&gt; with Auxiliary Code instead.&lt;/p&gt;
 </content>
  </entry>
  
