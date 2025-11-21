@@ -1,61 +1,4 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>SystemVerilog Assertions cheat sheet | Critical Path</title>
-<meta name="generator" content="Jekyll v4.4.1" />
-<meta property="og:title" content="SystemVerilog Assertions cheat sheet" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Sequence declaration" />
-<meta property="og:description" content="Sequence declaration" />
-<link rel="canonical" href="https://criticalpath.dev/verification/sva_cheat_sheet/" />
-<meta property="og:url" content="https://criticalpath.dev/verification/sva_cheat_sheet/" />
-<meta property="og:site_name" content="Critical Path" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-11-01T00:00:00+01:00" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="SystemVerilog Assertions cheat sheet" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-01T00:00:00+01:00","datePublished":"2025-11-01T00:00:00+01:00","description":"Sequence declaration","headline":"SystemVerilog Assertions cheat sheet","mainEntityOfPage":{"@type":"WebPage","@id":"https://criticalpath.dev/verification/sva_cheat_sheet/"},"url":"https://criticalpath.dev/verification/sva_cheat_sheet/"}</script>
-<!-- End Jekyll SEO tag -->
-<link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://criticalpath.dev/feed.xml" title="Critical Path" />
-</head>
-<body><header class="site-header">
-
-  <div class="wrapper">
-    <a class="site-title" rel="author" href="/">Critical Path</a>
-      <nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon"></span>
-        </label>
-
-        <div class="nav-items">
-  <a class="nav-item" href="/projects/">Projects</a>
-  <a class="nav-item" href="/posts/">Posts</a>
-  <a class="nav-item" href="/tags/">Tags</a>
-  <a class="nav-item" href="/about/">About</a>
-</div>
-
-      </nav>
-  </div>
-</header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">SystemVerilog Assertions cheat sheet</h1>
-    <div class="post-meta">
-      <time class="dt-published" datetime="2025-11-01T00:00:00+01:00" itemprop="datePublished">
-        Nov 1, 2025
-      </time>
-    </div>
-  </header>
-
-  <div class="post-content e-content" itemprop="articleBody">
-    <h2 id="sequence-declaration">Sequence declaration</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://criticalpath.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://criticalpath.dev/" rel="alternate" type="text/html" /><updated>2025-11-22T00:55:59+01:00</updated><id>https://criticalpath.dev/feed.xml</id><title type="html">Critical Path</title><subtitle>A personal blog that contains stuff of interest to Hrvoje Butina. Deep dives into ASIC design &amp; verification. And some shallow dives into the embedded and low-level development.</subtitle><entry><title type="html">SystemVerilog Assertions cheat sheet</title><link href="https://criticalpath.dev/verification/sva_cheat_sheet/" rel="alternate" type="text/html" title="SystemVerilog Assertions cheat sheet" /><published>2025-11-01T00:00:00+01:00</published><updated>2025-11-01T00:00:00+01:00</updated><id>https://criticalpath.dev/verification/sva_cheat_sheet</id><content type="html" xml:base="https://criticalpath.dev/verification/sva_cheat_sheet/"><![CDATA[<h2 id="sequence-declaration">Sequence declaration</h2>
 
 <p>Declares a sequence expression that can be used in property declarations. Local variables are permitted,</p>
 
@@ -439,55 +382,376 @@ multiple properties - or to write auxiliary code.</p>
 <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sequence</span><span class="p">[</span><span class="o">*</span><span class="n">N</span><span class="p">]</span>
 <span class="p">$</span><span class="nb">past</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 </code></pre></div></div>
-<p>In both cases keep <code class="language-plaintext highlighter-rouge">N</code> as small as possible. It’s recommended to model <code class="language-plaintext highlighter-rouge">$past()</code> with Auxiliary Code instead.</p>
+<p>In both cases keep <code class="language-plaintext highlighter-rouge">N</code> as small as possible. It’s recommended to model <code class="language-plaintext highlighter-rouge">$past()</code> with Auxiliary Code instead.</p>]]></content><author><name></name></author><category term="Verification" /><category term="SVA" /><category term="verification" /><category term="simulation" /><category term="formal" /><summary type="html"><![CDATA[Sequence declaration]]></summary></entry><entry><title type="html">Weather and air quality station: Part 1</title><link href="https://criticalpath.dev/weather_station/weather_station_part1/" rel="alternate" type="text/html" title="Weather and air quality station: Part 1" /><published>2025-11-01T00:00:00+01:00</published><updated>2025-11-01T00:00:00+01:00</updated><id>https://criticalpath.dev/weather_station/weather_station_part1</id><content type="html" xml:base="https://criticalpath.dev/weather_station/weather_station_part1/"><![CDATA[<h1 id="battery-powered-weather--air-quality-station">Battery-Powered Weather &amp; Air Quality Station</h1>
+<p>Raspberry Pi Pico 2 W + Inky Impression 7.3” + Bosch BME690 + Bosch BMV080 + Meteoblue API<br />
+Firmware written in C for the Pico’s RISC-V core</p>
 
-  </div>
+<h2 id="project-overview">Project Overview</h2>
+<p>This project builds a standalone weather and air quality monitoring station. The Raspberry Pi Pico 2 W collects measurements from two Bosch sensors (BME690 and BMV080), pulls forecast data from the Meteoblue API over Wi-Fi, and displays results on a 7.3” e-paper display (Inky Impression). The device will be battery powered and enclosed in a plexiglass case to protect components while ensuring airflow.</p>
 
-  <a class="u-url" href="/verification/sva_cheat_sheet/" hidden></a>
-</article>
+<h2 id="system-architecture">System Architecture</h2>
 
-      </div>
-    </main><link id="fa-stylesheet" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css">
+<p>Data flow:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sensors (BME690 + BMV080)
+  -&gt; Data Processing + Rolling Averages
+    -&gt; Wi-Fi Forecast Fetch (Meteoblue JSON)
+      -&gt; UI Construction (framebuffer)
+        -&gt; E-Paper Display Refresh
+</code></pre></div></div>
 
-<footer class="site-footer h-card">
-  <data class="u-url" value="/"></data>
+<p>Components:</p>
+<ul>
+  <li>Raspberry Pi Pico 2 W (RISC-V)</li>
+  <li>BME690: temperature, humidity, pressure, gas (IAQ)</li>
+  <li>BMV080: particulate matter (PM1, PM2.5, PM10)</li>
+  <li>Inky Impression 7.3” e-paper over SPI</li>
+  <li>HTTPS networking using lwIP + mbedTLS</li>
+  <li>Lightweight JSON parsing in C (ex: jsmn)</li>
+</ul>
 
-  <div class="wrapper">
-    <div class="social-links"><ul class="social-media-list"><li>
-    <a rel="me" href="https://github.com/hrvatch" target="_blank" title="Hrvoje's Github">
-      <span class="grey fa-brands fa-github fa-lg"></span>
-    </a>
-  </li><li>
-    <a rel="me" href="https://www.linkedin.com/in/hrvoje-butina/" target="_blank" title="Hrvoje's Linkedin profile">
-      <span class="grey fa-brands fa-linkedin fa-lg"></span>
-    </a>
-  </li><li>
-    <a rel="me" href="mailto:criticalpathmailto.squabble546@passmail.net" target="_blank" title="Hrvoje's E-mail">
-      <span class="grey fa-regular fa-envelope fa-lg"></span>
-    </a>
+<p>Design:</p>
+<ul>
+  <li>Event-driven firmware with deep sleep between tasks</li>
+  <li>Forecast caching for offline operation</li>
+  <li>Minimal UI optimized for e-paper refresh constraints</li>
+  <li>All core firmware written in C</li>
+</ul>
+
+<h2 id="display-and-ui-strategy">Display and UI Strategy</h2>
+<ul>
+  <li>Refresh e-paper only on a schedule or when values change</li>
+  <li>Off-screen framebuffer rendering</li>
+  <li>UI features:
+    <ul>
+      <li>Temperature and humidity</li>
+      <li>PM2.5 concentration</li>
+      <li>Short forecast summary</li>
+      <li>Battery voltage</li>
+      <li>Timestamp for last update</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Suggested refresh interval: 20 to 60 minutes</p>
+
+<h2 id="power-system">Power System</h2>
+
+<p>Battery: 3 AA cells in series</p>
+
+<p>Electrical notes:</p>
+<ul>
+  <li>NiMH: approx. 3.6 V nominal, 4.2 V fresh</li>
+  <li>Safe to connect directly to Pico VSYS input (1.8 to 5.5 V range)</li>
+</ul>
+
+<p>Series rules:</p>
+<ul>
+  <li>Voltage increases (3x)</li>
+  <li>Capacity stays 2000 mAh</li>
+  <li>Energy increases to approx. 7.2 Wh</li>
+</ul>
+
+<p>Wiring:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3xAA holder (+) -&gt; switch -&gt; optional protection -&gt; VSYS (Pico)
+3xAA holder (-) -------------------------------&gt; GND (Pico)
+</code></pre></div></div>
+
+<p>Battery level can be read via VSYS/3 ADC pin.</p>
+
+<h2 id="recommended-duty-cycles">Recommended Duty Cycles</h2>
+<ul>
+  <li>BME690: 2–5 min interval</li>
+  <li>BMV080: 10–60 min interval</li>
+  <li>Wi-Fi forecast: 30–60 min interval</li>
+  <li>E-paper refresh: 20–60 min interval</li>
+</ul>
+
+<h2 id="estimated-runtime">Estimated Runtime</h2>
+
+<p>Assumptions:</p>
+<ul>
+  <li>7.2 Wh battery energy</li>
+  <li>85% regulator efficiency</li>
+  <li>Approx. 6.12 Wh usable at 3.3 V</li>
+  <li>Average 3.3 V load depending on duty cycle</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mode</th>
+      <th style="text-align: right">Avg Current</th>
+      <th style="text-align: right">Runtime Hours</th>
+      <th style="text-align: right">Runtime Days</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Air Quality Focused (BMV080: 5 min)</td>
+      <td style="text-align: right">2.50 mA</td>
+      <td style="text-align: right">~742</td>
+      <td style="text-align: right">~30.9</td>
+    </tr>
+    <tr>
+      <td>Balanced (BMV080: 10 min)</td>
+      <td style="text-align: right">1.36 mA</td>
+      <td style="text-align: right">~1364</td>
+      <td style="text-align: right">~56.8</td>
+    </tr>
+    <tr>
+      <td>Battery Saver (BMV080: 60 min)</td>
+      <td style="text-align: right">0.38 mA</td>
+      <td style="text-align: right">~4880</td>
+      <td style="text-align: right">~203</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Major power contributors:</p>
+<ul>
+  <li>BMV080 sensor duty cycle</li>
+  <li>Wi-Fi bursts</li>
+  <li>Display refresh cycles</li>
+</ul>
+
+<h2 id="enclosure-notes">Enclosure Notes</h2>
+<ul>
+  <li>Plexiglass case with airflow channels for sensors</li>
+  <li>Prevent heat transfer from MCU and display into sensors</li>
+  <li>Secure e-paper ribbon cable</li>
+  <li>Provide easy access for battery replacement</li>
+</ul>
+
+<h2 id="development-and-testing-plan">Development and Testing Plan</h2>
+<ol>
+  <li>Bring up sensors and verify I2C</li>
+  <li>Implement sensor data processing and UI rendering</li>
+  <li>Add Wi-Fi and Meteoblue JSON support</li>
+  <li>Measure power usage and adjust intervals</li>
+  <li>Assemble enclosure and validate environmental behavior</li>
+</ol>
+
+<p>Error messaging:</p>
+<ul>
+  <li>Wi-Fi unavailable (using cached forecast)</li>
+  <li>Sensor communication error</li>
+  <li>Low battery (auto-reduce update frequency)</li>
+</ul>
+
+<h2 id="future-work">Future Work</h2>
+<ul>
+  <li>Final wiring/PCB design</li>
+  <li>Battery gauge improvements</li>
+  <li>Optional data logging</li>
+  <li>Potential partial refresh optimization</li>
+</ul>]]></content><author><name></name></author><category term="weather_station" /><category term="embedded" /><category term="raspberry-pi" /><category term="weather_station" /><summary type="html"><![CDATA[Battery-Powered Weather &amp; Air Quality Station Raspberry Pi Pico 2 W + Inky Impression 7.3” + Bosch BME690 + Bosch BMV080 + Meteoblue API Firmware written in C for the Pico’s RISC-V core]]></summary></entry><entry><title type="html">Weather and air quality station: Part 2</title><link href="https://criticalpath.dev/weather_station/weather_station_part2/" rel="alternate" type="text/html" title="Weather and air quality station: Part 2" /><published>2025-11-01T00:00:00+01:00</published><updated>2025-11-01T00:00:00+01:00</updated><id>https://criticalpath.dev/weather_station/weather_station_part2</id><content type="html" xml:base="https://criticalpath.dev/weather_station/weather_station_part2/"><![CDATA[<p>Before starting with any kind of development on Raspberry Pi Pico2W I first need to setup 
+the toolchain: SDK, compiler, linker and debugger. In this post I describe the following steps:</p>
+<ul>
+  <li>Downloading and setting up Raspberry Pi Pico2W SDK,</li>
+  <li>preparing and compiliing the GNU cross-compiler to compile RISC-V binaries,</li>
+  <li>Setting up <a href="https://openocd.org/">OpenOCD</a></li>
+</ul>
+
+<p>It’s important to note, these steps work well on my machine (x86-64, Arch Linux, btw), some slight
+changes are probably required if there is a need to build on other machine and/or different Linux distro.
+To verify I have everything I need, and everything is setup properly, I’ll develop a simple LED blinky 
+program, and enable UART.</p>
+
+<h2 id="build-environment">Build environment</h2>
+<p>To set-up my build environment for Raspberry Pi Pico2_W, i’ll combine instructions from Raspberry Pi Pico-series C/C++ SDK document and instructions from riscv-gnu-toolchain Github page.</p>
+
+<p>First I’ll install all dependencies:
+$ sudo pacman -Syu curl python3 libmpc mpfr gmp base-devel texinfo gperf patchutils bc zlib expat libslirp</p>
+
+<p>Then I want to build a cross compiler that runs on my host machine (e.g. x86-64 Linux PC) but produces executables for a different target architecture (e.g. RISC-V).</p>
+
+<p>Host = where the compiler runs.
+Target = where the generated program runs.</p>
+
+<p>There are two flavors of a cross compiler for x86-64 Linux host:</p>
+<ol>
+  <li>
+    <p>Newlib cross compiler (riscv64-unknown-elf-gcc)
+Target: bare-metal systems (no OS, or minimal runtime).
+Uses Newlib as the C standard library.
+Good for firmware, bootloaders, small MCUs.</p>
   </li>
   <li>
-    <a href="https://criticalpath.dev/feed.xml" target="_blank" title="Subscribe to syndication feed">
-      <svg class="svg-icon grey" viewbox="0 0 16 16">
-        <path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194
-          11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0
-          13.806c0-1.21.983-2.195 2.194-2.195zM10.606
-          16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"
-        />
-      </svg>
-    </a>
+    <p>Linux cross compiler (riscv64-unknown-linux-gnu-gcc)
+Target: RISC-V systems running Linux.
+Uses glibc (GNU C library), same as native Linux distros.
+Produces programs you can run under a Linux kernel on RISC-V hardware (or emulators like QEMU).</p>
   </li>
+</ol>
 
+<p>I’ll now proceed with building Newlib cross compiler and the acompanying binuitls. First I’ll create a directory where the sources and the built binaries will be stored. This directory (install path) needs to be writeable.
+$ mkdir -p ~/rp2350/gcc-rp2350-no-zcmp</p>
+
+<p>Change into ~/rp2350 directory, clone the riscv-gnu-toolchain repository and change into the riscv-gnu-toolchain directory:
+$ cd ~/rp2350
+$ git clone https://github.com/riscv-collab/riscv-gnu-toolchain.git 
+$ cd risc-vgnu-toolchain.git</p>
+
+<p>Configure the build process to target the RISC-V ISA extensions supported by the RP2350, and to place the built binaries into the ~/rp2350/gcc-rp2350-no-zcmp directory:
+$ ./configure –prefix=~/rp2350/gcc-rp2350-no-zcmp –with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb –with-abi=ilp32 –with-multilib-generator=”rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32–;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32–”</p>
+
+<p>Build the binaries:
+make -j”$(nproc)”</p>
+
+<h3 id="optional-reading">Optional reading:</h3>
+<p>When I first built the RISC-V bare-metal toolchain, I’ve blindly copy-pasted ./configure arguments, but I wandered what do they mean? We’ll here is the explanation:</p>
+
+<h1 id="risc-v---with-arch-breakdown">RISC-V <code class="language-plaintext highlighter-rouge">--with-arch</code> breakdown</h1>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb
+</code></pre></div></div>
+
+<h2 id="components">Components</h2>
+
+<ul>
+  <li><strong>rv32ima</strong> — 32-bit base ISA (<strong>I</strong>) plus <strong>M</strong> (mul/div) and <strong>A</strong> (atomics).</li>
+  <li><strong>zicsr</strong> — Control/status register access (<code class="language-plaintext highlighter-rouge">csrr*</code>, <code class="language-plaintext highlighter-rouge">csrw*</code>, etc.).</li>
+  <li><strong>zifencei</strong> — Instruction-fetch fence (<code class="language-plaintext highlighter-rouge">FENCE.I</code>) to sync I-cache after code/data writes.</li>
+  <li><strong>zba</strong> — Bit-manip “address generation” subset (add/shift patterns that speed indexing).</li>
+  <li><strong>zbb</strong> — Bit-manip “basic” subset (clz/ctz/popcount/min/max/extends/rotates, etc.).</li>
+  <li><strong>zbs</strong> — Bit-manip “single-bit” subset (set/clear/invert/extract by bit index).</li>
+  <li><strong>zbkb</strong> — Bit-manip helpers oriented toward crypto (pack/permute/byte ops); part of scalar-crypto-friendly sets.</li>
+  <li><strong>zca</strong> — Core <strong>compressed</strong> integer subset (16-bit encodings for common integer ops).</li>
+  <li><strong>zcb</strong> — Extra compressed encodings (requires <code class="language-plaintext highlighter-rouge">zca</code>) for further code-size reduction.</li>
 </ul>
-</div>
 
-  </div>
+<h1 id="risc-v---with-abiilp32-breakdown">RISC-V <code class="language-plaintext highlighter-rouge">--with-abi=ilp32</code> breakdown</h1>
 
-</footer>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--with-abi=ilp32
+</code></pre></div></div>
 
+<h2 id="what-it-sets">What it sets</h2>
+<ul>
+  <li>Chooses the <strong>default ABI</strong> for the toolchain (override per compile with <code class="language-plaintext highlighter-rouge">-mabi=...</code>).</li>
+  <li><strong>ilp32</strong> = <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">long</code>, and <strong>pointers are 32-bit</strong>.</li>
+  <li><strong>Soft-float ABI</strong>: no FP registers used for args/returns; FP math is done in software.</li>
+</ul>
 
-<script src="/assets/js/copy-code.js"></script>
-<script src="/assets/js/copy-code.js"></script>
-  </body>
+<h2 id="when-to-use">When to use</h2>
+<ul>
+  <li><strong>RV32 targets without an FPU</strong> (no <code class="language-plaintext highlighter-rouge">F</code>/<code class="language-plaintext highlighter-rouge">D</code> extensions), or when you explicitly want a soft-float calling convention. This is our case, since RP2350 doesn’t have any hard floating-point unit.</li>
+</ul>
 
-</html>
+<blockquote>
+  <p>If the RP2350 had single-precision FPU, I’d use <code class="language-plaintext highlighter-rouge">ilp32f</code>; if it had double-precision FPU, I’d use <code class="language-plaintext highlighter-rouge">ilp32d</code>.</p>
+</blockquote>
+
+<h2 id="practical-effects">Practical effects</h2>
+<ul>
+  <li>Defines the <strong>calling convention</strong> and <strong>type sizes</strong> (<code class="language-plaintext highlighter-rouge">sizeof(long)==4</code>, <code class="language-plaintext highlighter-rouge">sizeof(void*)==4</code>).</li>
+  <li>Determines which <strong>multilib</strong> variant is selected/built.</li>
+  <li>All linked libraries must <strong>match the ABI</strong> (mixing <code class="language-plaintext highlighter-rouge">ilp32</code> with <code class="language-plaintext highlighter-rouge">ilp32f/d</code> will cause link/ABI errors).</li>
+</ul>
+
+<h1 id="what---with-multilib-generator-does-risc-v">What <code class="language-plaintext highlighter-rouge">--with-multilib-generator="…"</code> does (RISC-V)</h1>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--with-multilib-generator="rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--"
+</code></pre></div></div>
+
+<h2 id="purpose">Purpose</h2>
+
+<p><code class="language-plaintext highlighter-rouge">--with-multilib-generator=</code> tells the bare-metal RISC-V toolchain build <strong>exactly which multilib variants</strong> (prebuilt <code class="language-plaintext highlighter-rouge">libgcc</code>, newlib, etc.) to produce.<br />
+The value is a <strong>semicolon-separated list</strong> of multilib configs.<br />
+Each config has <strong>four parts</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;arch string&gt;-&lt;ABI&gt;-&lt;reuse rule with arch&gt;-&lt;reuse rule with sub-extension&gt;
+</code></pre></div></div>
+
+<p>(Empty fields mean “no reuse rule here”. This option is supported for <code class="language-plaintext highlighter-rouge">riscv*--elf</code> builds.)</p>
+
+<h2 id="what-your-string-builds">What your string builds</h2>
+
+<p>You’re asking the build to create <strong>two</strong> multilib variants:</p>
+
+<p>1) <strong><code class="language-plaintext highlighter-rouge">rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb</code> + <code class="language-plaintext highlighter-rouge">ilp32</code></strong></p>
+<ul>
+  <li>32-bit I/M/A base with CSR + fence.i, bit-manip subsets (Zba/Zbb/Zbs), crypto-oriented bit-manip (Zbkb), and compressed subsets (Zca + Zcb).</li>
+  <li><strong>ABI:</strong> <code class="language-plaintext highlighter-rouge">ilp32</code> (32-bit int/long/pointers; soft-float).</li>
+  <li><strong>Reuse rules:</strong> none (the trailing <code class="language-plaintext highlighter-rouge">--</code>).</li>
+</ul>
+
+<p>2) <strong><code class="language-plaintext highlighter-rouge">rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb</code> + <code class="language-plaintext highlighter-rouge">ilp32</code></strong></p>
+<ul>
+  <li>32-bit I/M/A/<strong>C</strong> base (so compressed via <code class="language-plaintext highlighter-rouge">C</code>), plus the same Z* subsets except Zca/Zcb.</li>
+  <li><strong>ABI:</strong> <code class="language-plaintext highlighter-rouge">ilp32</code>.</li>
+  <li><strong>Reuse rules:</strong> none.</li>
+</ul>
+
+<p>In short: <strong>build two library sets</strong>—one for an RV32 IMA core with Z* + Zc* compressed subsets, and one for an RV32 IMAC core with Z* (and <code class="language-plaintext highlighter-rouge">C</code>)—both using the <code class="language-plaintext highlighter-rouge">ilp32</code> ABI.</p>
+
+<h2 id="whywhen-to-do-this">Why/when to do this</h2>
+
+<ul>
+  <li><strong>Smaller, faster build</strong> than the default multilib set—only the libraries you actually need are built.</li>
+  <li>Lets GCC <strong>auto-select the “best-fit” multilib</strong> at compile/link time among the ones you built.</li>
+</ul>
+
+<h2 id="how-to-use--verify">How to use &amp; verify</h2>
+
+<p><strong>Configure</strong> (example):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./configure <span class="nt">--prefix</span><span class="o">=</span>/opt/riscv <span class="se">\</span>
+  <span class="nt">--with-multilib-generator</span><span class="o">=</span><span class="s2">"rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--"</span>
+make <span class="nt">-j</span><span class="s2">"</span><span class="si">$(</span><span class="nb">nproc</span><span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p><strong>See what was built:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>riscv64-unknown-elf-gcc <span class="nt">--print-multi-lib</span>
+</code></pre></div></div>
+<p>(Shows the two multilibs you requested.)</p>
+
+<p><strong>Pick one at compile time</strong> (GCC will choose automatically if compatible, but you can be explicit):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Matches variant (1)</span>
+<span class="nt">-march</span><span class="o">=</span>rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb <span class="nt">-mabi</span><span class="o">=</span>ilp32
+
+<span class="c"># Matches variant (2)</span>
+<span class="nt">-march</span><span class="o">=</span>rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb <span class="nt">-mabi</span><span class="o">=</span>ilp32
+</code></pre></div></div>
+
+<blockquote>
+  <p>If you request an <code class="language-plaintext highlighter-rouge">-march/-mabi</code> combo with <strong>no compatible multilib</strong>, you can hit link/ABI errors—add another entry to the generator string or adjust your compile flags.</p>
+</blockquote>
+
+<p><strong>Reference:</strong> See the toolchain README section “Build with customized multi-lib configure” for the full format, examples, and notes on reuse rules.</p>
+
+<p>export PICO_TOOLCHAIN_PATH=/ssd1/workspace/pico2w/build-tools/gcc15-rp2350-no-zcmp
+export PICO_PLATFORM=rp2350-riscv
+export PICO_SDK_PATH=/ssd1/workspace/pico2w/pico-sdk
+export PICO_BOARD=pico2_w</p>
+
+<p>The next thing we want to do is we want to test if the board is working correctly. In the pico-sdk-examples directory there are couple of examples. I’ll use the <code class="language-plaintext highlighter-rouge">blink</code> example to see if I can actually program this thing and the <code class="language-plaintext highlighter-rouge">hello_world</code> USB example to see if UART is working correctly. Both of these things will be very useful in debugging.</p>
+
+<ul>
+  <li>Hold to BOOTSEL button on the Pico2w while connecting it via USB cable to the PC</li>
+  <li>Type lsblk -fs, you should see your device listed
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sdb1      vfat   FAT16 RP2350 62D0-C970                                           
+└─sdb
+</code></pre></div>    </div>
+  </li>
+  <li>Create a directory and mount it</li>
+  <li>mdir -p /ssd1/workspace/pico2w/flash</li>
+  <li>sudo mount /dev/sdb1 /dds1/workspace/pico2w/flash</li>
+</ul>
+
+<p>#TODO:</p>
+<ul>
+  <li>instruction download sdk</li>
+  <li>instructions download examples</li>
+  <li>instruction test with hello_world and blink</li>
+  <li>add riscv32-unknown-elf* binaries to the $PATH</li>
+</ul>
+
+<p>Let’s now build our bare metal ‘Hello UART’ application. I’ve defined the following goals:</p>
+<ul>
+  <li>The application will be written in pure RISC-V assembly,</li>
+  <li>It needs to run on a RISC-V core,</li>
+  <li>I want the ‘Hello UART’ message printed on the UART every one second,</li>
+  <li>I should be able to flash the application using the USB bootloader</li>
+</ul>
+
+<h1 id="an-overview-how-code-is-executed-on-rp2350">An overview how code is executed on RP2350</h1>
+<p>The RP2350 contains a (fixed) bootrom and this bootrom is executed first, not the user application. The boot outcome depends on multiple variables, all described in Chapter 5.2.1 Boot outcomes in [1].  In our case, we want to run our application from the USB bootloader. The USB bootloader will load the application stored in the UF2 [reference] format, and it will write this application to flash. But how does the bootrom know on which core do we want to run this application, RISC-V or ARM? Bootrom needs to locate and viable metadata. This metadata is defined in the Chapter 5.9 Metadata block details in [1]. The Chapter 5.9.5.2 describes Minimum RISC-V IMAGE_DEF. We will use this information</p>]]></content><author><name></name></author><category term="weather_station" /><category term="embedded" /><category term="raspberry-pi" /><category term="weather_station" /><summary type="html"><![CDATA[Before starting with any kind of development on Raspberry Pi Pico2W I first need to setup the toolchain: SDK, compiler, linker and debugger. In this post I describe the following steps: Downloading and setting up Raspberry Pi Pico2W SDK, preparing and compiliing the GNU cross-compiler to compile RISC-V binaries, Setting up OpenOCD]]></summary></entry></feed>
