@@ -780,6 +780,12 @@ pre:hover .copy-button {
   color: var(--minima-site-title-color);
 }
 
+.site-header-about-text {
+  padding: 0;
+  margin: 0;
+  flex: 1 0 auto;
+}
+
 .site-nav {
   float: right;
   border: none;
