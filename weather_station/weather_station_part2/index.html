@@ -26,7 +26,7 @@
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">Critical Path</a>
       <nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" />
+        <input type="checkbox" id="nav-trigger">
         <label for="nav-trigger">
           <span class="menu-icon"></span>
         </label>
@@ -39,6 +39,9 @@
 </div>
 
       </nav>
+  </div>
+  <div class="wrapper">
+    A blog about topics that interest Hrvoje Butina.
   </div>
 </header>
 <main class="page-content" aria-label="Content">
@@ -60,7 +63,8 @@ the toolchain: SDK, compiler, linker and debugger. In this post I describe the f
 <ul>
   <li>Downloading and setting up Raspberry Pi Pico2W SDK,</li>
   <li>preparing and compiliing the GNU cross-compiler to compile RISC-V binaries,</li>
-  <li>Setting up <a href="https://openocd.org/">OpenOCD</a></li>
+  <li>Setting up <a href="https://openocd.org/" target="_blank" rel="noopener noreferrer">OpenOCD</a>
+</li>
 </ul>
 
 <p>It’s important to note, these steps work well on my machine (x86-64, Arch Linux, btw), some slight
@@ -120,15 +124,24 @@ make -j”$(nproc)”</p>
 <h2 id="components">Components</h2>
 
 <ul>
-  <li><strong>rv32ima</strong> — 32-bit base ISA (<strong>I</strong>) plus <strong>M</strong> (mul/div) and <strong>A</strong> (atomics).</li>
-  <li><strong>zicsr</strong> — Control/status register access (<code class="language-plaintext highlighter-rouge">csrr*</code>, <code class="language-plaintext highlighter-rouge">csrw*</code>, etc.).</li>
-  <li><strong>zifencei</strong> — Instruction-fetch fence (<code class="language-plaintext highlighter-rouge">FENCE.I</code>) to sync I-cache after code/data writes.</li>
-  <li><strong>zba</strong> — Bit-manip “address generation” subset (add/shift patterns that speed indexing).</li>
-  <li><strong>zbb</strong> — Bit-manip “basic” subset (clz/ctz/popcount/min/max/extends/rotates, etc.).</li>
-  <li><strong>zbs</strong> — Bit-manip “single-bit” subset (set/clear/invert/extract by bit index).</li>
-  <li><strong>zbkb</strong> — Bit-manip helpers oriented toward crypto (pack/permute/byte ops); part of scalar-crypto-friendly sets.</li>
-  <li><strong>zca</strong> — Core <strong>compressed</strong> integer subset (16-bit encodings for common integer ops).</li>
-  <li><strong>zcb</strong> — Extra compressed encodings (requires <code class="language-plaintext highlighter-rouge">zca</code>) for further code-size reduction.</li>
+  <li>
+<strong>rv32ima</strong> — 32-bit base ISA (<strong>I</strong>) plus <strong>M</strong> (mul/div) and <strong>A</strong> (atomics).</li>
+  <li>
+<strong>zicsr</strong> — Control/status register access (<code class="language-plaintext highlighter-rouge">csrr*</code>, <code class="language-plaintext highlighter-rouge">csrw*</code>, etc.).</li>
+  <li>
+<strong>zifencei</strong> — Instruction-fetch fence (<code class="language-plaintext highlighter-rouge">FENCE.I</code>) to sync I-cache after code/data writes.</li>
+  <li>
+<strong>zba</strong> — Bit-manip “address generation” subset (add/shift patterns that speed indexing).</li>
+  <li>
+<strong>zbb</strong> — Bit-manip “basic” subset (clz/ctz/popcount/min/max/extends/rotates, etc.).</li>
+  <li>
+<strong>zbs</strong> — Bit-manip “single-bit” subset (set/clear/invert/extract by bit index).</li>
+  <li>
+<strong>zbkb</strong> — Bit-manip helpers oriented toward crypto (pack/permute/byte ops); part of scalar-crypto-friendly sets.</li>
+  <li>
+<strong>zca</strong> — Core <strong>compressed</strong> integer subset (16-bit encodings for common integer ops).</li>
+  <li>
+<strong>zcb</strong> — Extra compressed encodings (requires <code class="language-plaintext highlighter-rouge">zca</code>) for further code-size reduction.</li>
 </ul>
 
 <h1 id="risc-v---with-abiilp32-breakdown">RISC-V <code class="language-plaintext highlighter-rouge">--with-abi=ilp32</code> breakdown</h1>
@@ -139,13 +152,16 @@ make -j”$(nproc)”</p>
 <h2 id="what-it-sets">What it sets</h2>
 <ul>
   <li>Chooses the <strong>default ABI</strong> for the toolchain (override per compile with <code class="language-plaintext highlighter-rouge">-mabi=...</code>).</li>
-  <li><strong>ilp32</strong> = <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">long</code>, and <strong>pointers are 32-bit</strong>.</li>
-  <li><strong>Soft-float ABI</strong>: no FP registers used for args/returns; FP math is done in software.</li>
+  <li>
+<strong>ilp32</strong> = <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">long</code>, and <strong>pointers are 32-bit</strong>.</li>
+  <li>
+<strong>Soft-float ABI</strong>: no FP registers used for args/returns; FP math is done in software.</li>
 </ul>
 
 <h2 id="when-to-use">When to use</h2>
 <ul>
-  <li><strong>RV32 targets without an FPU</strong> (no <code class="language-plaintext highlighter-rouge">F</code>/<code class="language-plaintext highlighter-rouge">D</code> extensions), or when you explicitly want a soft-float calling convention. This is our case, since RP2350 doesn’t have any hard floating-point unit.</li>
+  <li>
+<strong>RV32 targets without an FPU</strong> (no <code class="language-plaintext highlighter-rouge">F</code>/<code class="language-plaintext highlighter-rouge">D</code> extensions), or when you explicitly want a soft-float calling convention. This is our case, since RP2350 doesn’t have any hard floating-point unit.</li>
 </ul>
 
 <blockquote>
@@ -166,8 +182,8 @@ make -j”$(nproc)”</p>
 
 <h2 id="purpose">Purpose</h2>
 
-<p><code class="language-plaintext highlighter-rouge">--with-multilib-generator=</code> tells the bare-metal RISC-V toolchain build <strong>exactly which multilib variants</strong> (prebuilt <code class="language-plaintext highlighter-rouge">libgcc</code>, newlib, etc.) to produce.<br />
-The value is a <strong>semicolon-separated list</strong> of multilib configs.<br />
+<p><code class="language-plaintext highlighter-rouge">--with-multilib-generator=</code> tells the bare-metal RISC-V toolchain build <strong>exactly which multilib variants</strong> (prebuilt <code class="language-plaintext highlighter-rouge">libgcc</code>, newlib, etc.) to produce.<br>
+The value is a <strong>semicolon-separated list</strong> of multilib configs.<br>
 Each config has <strong>four parts</strong>:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;arch string&gt;-&lt;ABI&gt;-&lt;reuse rule with arch&gt;-&lt;reuse rule with sub-extension&gt;
@@ -182,15 +198,19 @@ Each config has <strong>four parts</strong>:</p>
 <p>1) <strong><code class="language-plaintext highlighter-rouge">rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb</code> + <code class="language-plaintext highlighter-rouge">ilp32</code></strong></p>
 <ul>
   <li>32-bit I/M/A base with CSR + fence.i, bit-manip subsets (Zba/Zbb/Zbs), crypto-oriented bit-manip (Zbkb), and compressed subsets (Zca + Zcb).</li>
-  <li><strong>ABI:</strong> <code class="language-plaintext highlighter-rouge">ilp32</code> (32-bit int/long/pointers; soft-float).</li>
-  <li><strong>Reuse rules:</strong> none (the trailing <code class="language-plaintext highlighter-rouge">--</code>).</li>
+  <li>
+<strong>ABI:</strong> <code class="language-plaintext highlighter-rouge">ilp32</code> (32-bit int/long/pointers; soft-float).</li>
+  <li>
+<strong>Reuse rules:</strong> none (the trailing <code class="language-plaintext highlighter-rouge">--</code>).</li>
 </ul>
 
 <p>2) <strong><code class="language-plaintext highlighter-rouge">rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb</code> + <code class="language-plaintext highlighter-rouge">ilp32</code></strong></p>
 <ul>
   <li>32-bit I/M/A/<strong>C</strong> base (so compressed via <code class="language-plaintext highlighter-rouge">C</code>), plus the same Z* subsets except Zca/Zcb.</li>
-  <li><strong>ABI:</strong> <code class="language-plaintext highlighter-rouge">ilp32</code>.</li>
-  <li><strong>Reuse rules:</strong> none.</li>
+  <li>
+<strong>ABI:</strong> <code class="language-plaintext highlighter-rouge">ilp32</code>.</li>
+  <li>
+<strong>Reuse rules:</strong> none.</li>
 </ul>
 
 <p>In short: <strong>build two library sets</strong>—one for an RV32 IMA core with Z* + Zc* compressed subsets, and one for an RV32 IMAC core with Z* (and <code class="language-plaintext highlighter-rouge">C</code>)—both using the <code class="language-plaintext highlighter-rouge">ilp32</code> ABI.</p>
@@ -198,7 +218,8 @@ Each config has <strong>four parts</strong>:</p>
 <h2 id="whywhen-to-do-this">Why/when to do this</h2>
 
 <ul>
-  <li><strong>Smaller, faster build</strong> than the default multilib set—only the libraries you actually need are built.</li>
+  <li>
+<strong>Smaller, faster build</strong> than the default multilib set—only the libraries you actually need are built.</li>
   <li>Lets GCC <strong>auto-select the “best-fit” multilib</strong> at compile/link time among the ones you built.</li>
 </ul>
 
@@ -239,7 +260,8 @@ export PICO_BOARD=pico2_w</p>
 <ul>
   <li>Hold to BOOTSEL button on the Pico2w while connecting it via USB cable to the PC</li>
   <li>Type lsblk -fs, you should see your device listed
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sdb1      vfat   FAT16 RP2350 62D0-C970                                           
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>sdb1      vfat   FAT16 RP2350 62D0-C970                                           
 └─sdb
 </code></pre></div>    </div>
   </li>
@@ -271,6 +293,28 @@ export PICO_BOARD=pico2_w</p>
   </div>
 
   <a class="u-url" href="/weather_station/weather_station_part2/" hidden></a>
+
+  
+  
+  
+    <div class="related-posts">
+      <h2>Related Posts</h2>
+      <ul class="related-posts-posts">
+  
+        
+          <li class="list-item">
+            <a class="list-item-title" href="/weather_station/weather_station_part2/">Weather and air quality station: Part 2</a>
+            - <span class="list-item-date">2025-11-01</span>
+          </li>
+        
+          <li class="list-item">
+            <a class="list-item-title" href="/weather_station/weather_station_part1/">Weather and air quality station: Part 1</a>
+            - <span class="list-item-date">2025-11-01</span>
+          </li>
+        
+      </ul>
+    </div>
+  
 </article>
 
       </div>
@@ -280,15 +324,19 @@ export PICO_BOARD=pico2_w</p>
   <data class="u-url" value="/"></data>
 
   <div class="wrapper">
-    <div class="social-links"><ul class="social-media-list"><li>
-    <a rel="me" href="https://github.com/hrvatch" target="_blank" title="Hrvoje's Github">
+    <div class="social-links">
+<ul class="social-media-list">
+<li>
+    <a rel="me noopener noreferrer" href="https://github.com/hrvatch" target="_blank" title="Hrvoje's Github">
       <span class="grey fa-brands fa-github fa-lg"></span>
     </a>
-  </li><li>
-    <a rel="me" href="https://www.linkedin.com/in/hrvoje-butina/" target="_blank" title="Hrvoje's Linkedin profile">
+  </li>
+<li>
+    <a rel="me noopener noreferrer" href="https://www.linkedin.com/in/hrvoje-butina/" target="_blank" title="Hrvoje's Linkedin profile">
       <span class="grey fa-brands fa-linkedin fa-lg"></span>
     </a>
-  </li><li>
+  </li>
+<li>
     <a rel="me" href="mailto:criticalpathmailto.squabble546@passmail.net" target="_blank" title="Hrvoje's E-mail">
       <span class="grey fa-regular fa-envelope fa-lg"></span>
     </a>
@@ -299,8 +347,7 @@ export PICO_BOARD=pico2_w</p>
         <path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194
           11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0
           13.806c0-1.21.983-2.195 2.194-2.195zM10.606
-          16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"
-        />
+          16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"></path>
       </svg>
     </a>
   </li>

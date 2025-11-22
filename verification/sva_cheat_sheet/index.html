@@ -26,7 +26,7 @@
   <div class="wrapper">
     <a class="site-title" rel="author" href="/">Critical Path</a>
       <nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" />
+        <input type="checkbox" id="nav-trigger">
         <label for="nav-trigger">
           <span class="menu-icon"></span>
         </label>
@@ -39,6 +39,9 @@
 </div>
 
       </nav>
+  </div>
+  <div class="wrapper">
+    A blog about topics that interest Hrvoje Butina.
   </div>
 </header>
 <main class="page-content" aria-label="Content">
@@ -175,12 +178,15 @@ A property using an implication operator holds true if either:</p>
 <p>This property holds true under the following conditions:</p>
 <ol>
   <li>If <code class="language-plaintext highlighter-rouge">sequence_expr</code> completes then <code class="language-plaintext highlighter-rouge">property_expr</code> <strong>starts in the same cycle</strong> and eventually completes.</li>
-  <li><code class="language-plaintext highlighter-rouge">seqeunce_expr</code> never completes.
+  <li>
+<code class="language-plaintext highlighter-rouge">seqeunce_expr</code> never completes.
 Example:
-    <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P8</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="o">|-&gt;</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span> <span class="p">);</span>
+    <div class="language-verilog highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="n">P8</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="o">|-&gt;</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span> <span class="p">);</span>
 </code></pre></div>    </div>
     <p><code class="language-plaintext highlighter-rouge">P8</code> passes if the following sequence is observed:</p>
-    <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="p">(</span><span class="n">B</span> <span class="o">&amp;&amp;</span> <span class="n">C</span><span class="p">)</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span><span class="p">);</span>
+    <div class="language-verilog highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="p">(</span><span class="n">B</span> <span class="o">&amp;&amp;</span> <span class="n">C</span><span class="p">)</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span><span class="p">);</span>
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -193,12 +199,15 @@ Example:
 <p>This property holds true under the following conditions:</p>
 <ol>
   <li>If <code class="language-plaintext highlighter-rouge">sequence_expr</code> completes then <code class="language-plaintext highlighter-rouge">property_expr</code> <strong>starts in the next cycle</strong> and eventually completes.</li>
-  <li><code class="language-plaintext highlighter-rouge">sequence_expr</code> never completes.
+  <li>
+<code class="language-plaintext highlighter-rouge">sequence_expr</code> never completes.
 Example:
-    <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P9</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span> <span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="o">|=&gt;</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span> <span class="p">);</span>
+    <div class="language-verilog highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="n">P9</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span> <span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="o">|=&gt;</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span> <span class="p">);</span>
 </code></pre></div>    </div>
     <p><code class="language-plaintext highlighter-rouge">P9</code> passes if the following sequence is observed:</p>
-    <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="p">##</span><span class="mi">1</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span><span class="p">);</span>
+    <div class="language-verilog highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="p">##</span><span class="mi">1</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span><span class="p">);</span>
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -220,7 +229,7 @@ Example:
 </code></pre></div></div>
 <p>When <code class="language-plaintext highlighter-rouge">boolean_expr</code> is <strong>true</strong>, the property is <strong>temporarily disabled</strong>, and all active checks or pending evaluations for that property (including overlapping ones) are <strong>canceled</strong>.</p>
 
-<p>For example, if a property checks that a <em>request</em> must eventually be followed by a <em>grant</em>, we’d usually want a <strong>reset</strong> to clear any pending request-to-grant expectations.<br />
+<p>For example, if a property checks that a <em>request</em> must eventually be followed by a <em>grant</em>, we’d usually want a <strong>reset</strong> to clear any pending request-to-grant expectations.<br>
 After reset, new requests start fresh obligations.
 Example:</p>
 <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P11</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span> <span class="n">req</span> <span class="o">|=&gt;</span> <span class="p">##[</span><span class="o">*</span><span class="p">]</span> <span class="n">gnt</span><span class="p">);</span>
@@ -238,8 +247,10 @@ Example:</p>
 </code></pre></div></div>
 <p>In this example:</p>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">P12</code> uses its <strong>own</strong> disable condition (<code class="language-plaintext highlighter-rouge">!rst_n</code>)</li>
-  <li><code class="language-plaintext highlighter-rouge">P13</code> uses the <strong>default</strong> disable condition (<code class="language-plaintext highlighter-rouge">CANCEL</code>)</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">P12</code> uses its <strong>own</strong> disable condition (<code class="language-plaintext highlighter-rouge">!rst_n</code>)</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">P13</code> uses the <strong>default</strong> disable condition (<code class="language-plaintext highlighter-rouge">CANCEL</code>)</li>
 </ul>
 
 <p>Both <code class="language-plaintext highlighter-rouge">default disable iff</code> and explicit <code class="language-plaintext highlighter-rouge">disable iff</code> are asynchronous — they take effect immediately, regardless of the property’s clocking event.</p>
@@ -257,7 +268,8 @@ Example:</p>
   </li>
   <li>An <strong>explicit clock declaration</strong> always overrides the <code class="language-plaintext highlighter-rouge">default clocking</code>.</li>
   <li>Sequences without an explicit clock inherit the clock from their <strong>parent property</strong>.</li>
-  <li><code class="language-plaintext highlighter-rouge">default clocking</code> applies only within its <strong>current scope</strong>.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">default clocking</code> applies only within its <strong>current scope</strong>.</li>
   <li>Only one <code class="language-plaintext highlighter-rouge">default clocking</code> declaration is allowed per scope.</li>
 </ul>
 
@@ -282,11 +294,16 @@ Example:</p>
 </code></pre></div></div>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">P14_A</code> uses <strong>clk2</strong>, overriding all others.</li>
-  <li><code class="language-plaintext highlighter-rouge">P14_B</code> uses the <strong>default clock</strong> (<code class="language-plaintext highlighter-rouge">posedge clk</code>).</li>
-  <li><code class="language-plaintext highlighter-rouge">P15_A</code> uses the <strong>explicit clock</strong> defined in <code class="language-plaintext highlighter-rouge">P15</code> (<code class="language-plaintext highlighter-rouge">clk1</code>).</li>
-  <li><code class="language-plaintext highlighter-rouge">P16</code> uses <strong>clk3</strong> (explicit).</li>
-  <li><code class="language-plaintext highlighter-rouge">P17</code> inherits the <strong>default clock</strong>.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">P14_A</code> uses <strong>clk2</strong>, overriding all others.</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">P14_B</code> uses the <strong>default clock</strong> (<code class="language-plaintext highlighter-rouge">posedge clk</code>).</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">P15_A</code> uses the <strong>explicit clock</strong> defined in <code class="language-plaintext highlighter-rouge">P15</code> (<code class="language-plaintext highlighter-rouge">clk1</code>).</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">P16</code> uses <strong>clk3</strong> (explicit).</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">P17</code> inherits the <strong>default clock</strong>.</li>
 </ul>
 
 <h2 id="builtin-functions">Builtin Functions</h2>
@@ -357,7 +374,8 @@ This operator <em>skips ahead</em> until the given count of matches has been rea
 </code></pre></div></div>
 <p>Matches when:</p>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">a</code> occurs</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">a</code> occurs</li>
   <li>then the <strong>5th occurrence</strong> of <code class="language-plaintext highlighter-rouge">b</code> (not necessarily consecutive)</li>
   <li>then <code class="language-plaintext highlighter-rouge">c</code> occurs one cycle later</li>
 </ul>
@@ -374,7 +392,8 @@ This operator <em>skips ahead</em> until the given count of matches has been rea
 </code></pre></div></div>
 <p>After <code class="language-plaintext highlighter-rouge">s1</code> completes:</p>
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">b</code> must be TRUE <strong>five times in total</strong>,</li>
+  <li>
+<code class="language-plaintext highlighter-rouge">b</code> must be TRUE <strong>five times in total</strong>,</li>
   <li>these occurrences can be <strong>spread out</strong> in time,</li>
   <li>and after that, <code class="language-plaintext highlighter-rouge">c</code> must occur one cycle later.</li>
 </ul>
@@ -444,6 +463,10 @@ multiple properties - or to write auxiliary code.</p>
   </div>
 
   <a class="u-url" href="/verification/sva_cheat_sheet/" hidden></a>
+
+  
+  
+  
 </article>
 
       </div>
@@ -453,15 +476,19 @@ multiple properties - or to write auxiliary code.</p>
   <data class="u-url" value="/"></data>
 
   <div class="wrapper">
-    <div class="social-links"><ul class="social-media-list"><li>
-    <a rel="me" href="https://github.com/hrvatch" target="_blank" title="Hrvoje's Github">
+    <div class="social-links">
+<ul class="social-media-list">
+<li>
+    <a rel="me noopener noreferrer" href="https://github.com/hrvatch" target="_blank" title="Hrvoje's Github">
       <span class="grey fa-brands fa-github fa-lg"></span>
     </a>
-  </li><li>
-    <a rel="me" href="https://www.linkedin.com/in/hrvoje-butina/" target="_blank" title="Hrvoje's Linkedin profile">
+  </li>
+<li>
+    <a rel="me noopener noreferrer" href="https://www.linkedin.com/in/hrvoje-butina/" target="_blank" title="Hrvoje's Linkedin profile">
       <span class="grey fa-brands fa-linkedin fa-lg"></span>
     </a>
-  </li><li>
+  </li>
+<li>
     <a rel="me" href="mailto:criticalpathmailto.squabble546@passmail.net" target="_blank" title="Hrvoje's E-mail">
       <span class="grey fa-regular fa-envelope fa-lg"></span>
     </a>
@@ -472,8 +499,7 @@ multiple properties - or to write auxiliary code.</p>
         <path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194
           11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0
           13.806c0-1.21.983-2.195 2.194-2.195zM10.606
-          16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"
-        />
+          16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"></path>
       </svg>
     </a>
   </li>

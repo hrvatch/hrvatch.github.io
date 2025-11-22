@@ -9,6 +9,7 @@
   --minima-text-color: rgb(65.25, 65.25, 65.25);
   --minima-background-color: #fdfdfd;
   --minima-code-background-color: #f6f8fa;
+  --minima-inline-code-background-color: #f6f8fa;
   --minima-header-background-color: #fdfdfd;
   --minima-footer-background-color: #fdfdfd;
   --minima-link-base-color: #1e69d8;
@@ -218,25 +219,26 @@
     --minima-brand-color: #64828e;
     --minima-brand-color-light: rgb(112.7066115702, 142.7685950413, 154.7933884298);
     --minima-brand-color-dimmed: rgb(83.1404958678, 108.0826446281, 118.0595041322);
-    --minima-brand-color-dark: rgb(26.2396694215, 34.1115702479, 37.2603305785);
-    --minima-site-title-color: rgb(112.7066115702, 142.7685950413, 154.7933884298);
+    --minima-brand-color-dark: rgb(19.9173553719, 25.8925619835, 28.2826446281);
+    --minima-site-title-color: #00d992;
     --minima-heading-color: #d7d8d9;
     --minima-text-color: rgb(175.7692307692, 177.75, 179.7307692308);
     --minima-background-color: #060f11;
     --minima-code-background-color: #060f11;
+    --minima-inline-code-background-color: rgb(9.9913043478, 24.9782608696, 28.3086956522);
     --minima-header-background-color: #080f11;
     --minima-footer-background-color: #080f11;
     --minima-link-base-color: #00d992;
     --minima-link-visited-color: #00d992;
     --minima-link-hover-color: #00d992;
-    --minima-border-color-01: rgb(26.2396694215, 34.1115702479, 37.2603305785);
+    --minima-border-color-01: rgb(19.9173553719, 25.8925619835, 28.2826446281);
     --minima-border-color-02: rgb(112.7066115702, 142.7685950413, 154.7933884298);
     --minima-border-color-03: #64828e;
     --minima-table-text-color: rgb(175.7692307692, 177.75, 179.7307692308);
     --minima-table-zebra-color: rgb(11.3217391304, 28.3043478261, 32.0782608696);
     --minima-table-header-bg-color: rgb(19.3043478261, 48.2608695652, 54.6956521739);
     --minima-table-header-border: rgb(25.9565217391, 64.8913043478, 73.5434782609);
-    --minima-table-border-color: rgb(26.2396694215, 34.1115702479, 37.2603305785);
+    --minima-table-border-color: rgb(19.9173553719, 25.8925619835, 28.2826446281);
   }
   .highlight .err {
     color: #e3d2d2;
@@ -567,7 +569,6 @@ blockquote i, blockquote em {
 pre,
 code {
   font-family: "Menlo", "Inconsolata", "Consolas", "Roboto Mono", "Ubuntu Mono", "Liberation Mono", "Courier New", monospace;
-  background-color: var(--minima-code-background-color);
 }
 @media screen and (max-width: 600px) {
   pre,
@@ -581,11 +582,17 @@ pre {
   font-size: 15px;
   line-height: 1.4;
   color: var(--minima-heading-color);
+  background-color: var(--minima-code-background-color);
   overflow-x: auto;
 }
 pre > code {
   display: inline-block;
   width: 100%;
+  background-color: transparent;
+}
+
+code {
+  background-color: var(--minima-inline-code-background-color);
 }
 
 div.highlight, figure.highlight {
@@ -619,6 +626,7 @@ code.highlighter-rouge {
   font-size: 14px;
   border: 1px solid var(--minima-border-color-01);
   border-radius: 4px;
+  background-color: var(--minima-inline-code-background-color);
 }
 
 /**
@@ -678,6 +686,7 @@ table {
   border: 1px solid var(--minima-table-border-color);
   overflow: hidden;
   container-type: inline-size;
+  border-radius: 4.5px;
 }
 @media (min-width: 600px) {
   table {
@@ -760,6 +769,7 @@ pre:hover .copy-button {
   margin-bottom: 0;
   float: left;
   font-size: 3em;
+  color: var(--minima-site-title-color);
 }
 @media screen and (max-width: 600px) {
   .site-title {
@@ -895,7 +905,12 @@ pre:hover .copy-button {
   list-style: none;
 }
 .post-list > li {
-  margin-bottom: 30px;
+  margin-bottom: 45px;
+}
+.post-list h3 {
+  border: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .post-meta {
@@ -909,6 +924,14 @@ pre:hover .copy-button {
 .post-link {
   display: block;
   font-size: 1.5rem;
+  margin: 0;
+}
+
+.post-meta-after {
+  display: block;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0.5rem;
 }
 
 /**
@@ -983,6 +1006,11 @@ pre:hover .copy-button {
 }
 .post-content h6 {
   font-size: 1.0625rem;
+}
+
+.related-posts {
+  border-top: 1px solid var(--minima-border-color-01);
+  padding-top: 30px;
 }
 
 .comments-disabled-message {
