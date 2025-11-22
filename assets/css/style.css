@@ -781,9 +781,9 @@ pre:hover .copy-button {
 }
 
 .site-header-about-text {
-  padding: 0;
+  padding-top: 6px;
   margin: 0;
-  flex: 1 0 auto;
+  line-height: 1.5;
 }
 
 .site-nav {
@@ -937,7 +937,7 @@ pre:hover .copy-button {
   display: block;
   margin-top: 0;
   padding-top: 0;
-  padding-bottom: 0.5rem;
+  padding-bottom: 15px;
 }
 
 /**
