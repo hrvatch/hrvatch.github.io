@@ -19,7 +19,11 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-22T00:00:00+01:00","datePublished":"2025-11-22T00:00:00+01:00","description":"Markdown Feature Demo","headline":"Markdown demo","mainEntityOfPage":{"@type":"WebPage","@id":"https://criticalpath.dev/markdown/markdown_demo/"},"url":"https://criticalpath.dev/markdown/markdown_demo/"}</script>
 <!-- End Jekyll SEO tag -->
-<link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://criticalpath.dev/feed.xml" title="Critical Path" />
+<link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css">
+
+  
+  
+  <link type="application/atom+xml" rel="alternate" href="https://criticalpath.dev/feed.xml" title="Critical Path" />
 </head>
 <body><header class="site-header">
 
@@ -741,6 +745,141 @@ a, consequat facilisis augue. Nam quis ex nec dolor tempor dapibus. Ut ac pulvin
 Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
 </code></pre></div></div>
 
+<h2 id="testing-premonition-plugin-features">Testing premonition plugin features</h2>
+
+<h3 id="citation">Citation</h3>
+
+<div class="premonition citation">
+  <i class="premonition pn-quote"></i>
+  <blockquote class="content blockquote" cite="twain">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
+
+
+
+
+    
+    <footer class="blockquote-footer">
+      <cite title="-- Mark Twain">-- Mark Twain</cite>
+    </footer>
+    
+  </blockquote>
+</div>
+
+<h3 id="note-without-title">Note without title</h3>
+
+<div class="premonition note">
+  <i class="premonition pn-note"></i>
+  <div class="content">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="info-with-title">Info with title</h3>
+
+<div class="premonition info">
+  <i class="premonition pn-info"></i>
+  <div class="content">
+    <p class="header">The information header</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="warning-with-title">Warning with title</h3>
+
+<div class="premonition warning">
+  <i class="premonition pn-warn"></i>
+  <div class="content">
+    <p class="header">The information header</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="error-box">Error box</h3>
+
+<div class="premonition error">
+  <i class="premonition pn-error"></i>
+  <div class="content">
+    <p class="header">The information header</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="custom-box-with-a-font-awesome-icon">Custom box with a Font Awesome icon</h3>
+
+<div class="premonition error">
+  <div class="fa pn-error"></div>
+  <div class="content">
+    <p class="header">PREMONITION ERROR: Invalid box type</p>
+    You have specified an invalid box type "custom". You can customize your own box types in `_config.yml`.
+    See documentation for more help.
+  </div>
+</div>
+
+<h3 id="error-box-with-markdown">Error box with Markdown</h3>
+
+<div class="premonition error">
+  <i class="premonition pn-error"></i>
+  <div class="content">
+    <p class="header">The information header</p>
+<p><a href="https://github.com/lazee/premonition" target="_blank" rel="noopener noreferrer">Premonition</a> allows you to add</p>
+
+<ul>
+  <li>Lists</li>
+  <li>like this</li>
+</ul>
+
+<p>Use <em>formatting</em> and add code blocks.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Isn't that sweet?
+</code></pre></div></div>
+<p>Anything you can do in Markdown, you can do here. Expect from embeds Premonition boxes ;)</p>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="reference-links">Reference links</h3>
+
+<div class="premonition info">
+  <i class="premonition pn-info"></i>
+  <div class="content">
+    <p class="header">Linked</p>
+<p>This is a <a href="https://www.example.com/" title="dd" target="_blank" rel="noopener noreferrer">reference link</a>.</p>
+
+
+
+
+  </div>
+</div>
+
 <h2 id="inline-code">Inline Code</h2>
 
 <p>You can also use <code class="language-plaintext highlighter-rouge">inline code</code> within paragraphs. For example, the <code class="language-plaintext highlighter-rouge">printf()</code> function in C, or the <code class="language-plaintext highlighter-rouge">always_ff</code> block in SystemVerilog. Lorem ipsum dolor sit amet, when discussing memory management you might reference <code class="language-plaintext highlighter-rouge">malloc()</code> and <code class="language-plaintext highlighter-rouge">calloc()</code> for allocation, or <code class="language-plaintext highlighter-rouge">memcpy()</code> for copying data between buffers.</p>
@@ -827,7 +966,8 @@ Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac tu
 
 
 <script src="/assets/js/copy-code.js"></script>
-<script src="/assets/js/copy-code.js"></script>
-  </body>
+
+
+</body>
 
 </html>

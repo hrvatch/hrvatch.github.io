@@ -4,13 +4,264 @@
  <title>Critical Path</title>
  <link href="https://criticalpath.dev/atom.xml" rel="self"/>
  <link href="https://criticalpath.dev/"/>
- <updated>2025-11-22T17:12:38+01:00</updated>
+ <updated>2025-12-07T21:10:33+01:00</updated>
  <id>https://criticalpath.dev</id>
  <author>
    <name></name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Using Notion to set things in motion</title>
+   <link href="https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/"/>
+   <updated>2025-12-06T18:17:00+01:00</updated>
+   <id>https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion</id>
+   <content type="html">&lt;p&gt;Ultimately, I decided I want to manage my hobby projects in a Scrum style.&lt;/p&gt;
+
+&lt;p&gt;I can see people screaming: “Are you insane? What drugs are you on? Why do you want to turn your 
+fun activity into something that feels like some annoying and life-draining corporate project?” 
+First of all, I don’t think the Scrum itself is stupid and life draining, it’s the 1000 other 
+things like managers emphasizing and prioritizing writing Jira tickets and doing time estimates 
+while you’re trying to deliver that bug fix on the Friday afternoon. This is not it. Here, you’re 
+your own manager, and Scrum is just a way of keeping track of things. Besides there are 
+numerous benefits, but the most important ones to me:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;I want to keep track of my projects,&lt;/li&gt;
+  &lt;li&gt;I want to keep myself accountable, and actually finish my projects.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;There are some additional benefits that are not obvious at first. Thinking about how to decompose your project into achievable tasks forces you to ACTUALLY think hard about what you’re trying to do, it forces you to do a deep analysis. Once you break it down, you’ll have clear steps on how you’re going to achieve something, and you’ll also have some insight when and how you’re going to complete your project.&lt;/p&gt;
+
+&lt;p&gt;Of course, I don’t think this is feasible for every little thing I do. I quickly found out it’s better to start immediately working on my idea, create something concrete, gather more information and to get a feeling is this something I’d really like to do or this was some passing whim. After I’m sure I find it fun (or useful), I’ll do some “project planning”.&lt;/p&gt;
+
+&lt;div class=&quot;premonition info&quot;&gt;
+  &lt;i class=&quot;premonition pn-info&quot;&gt;&lt;/i&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;header&quot;&gt;Setting SMART goals&lt;/p&gt;&lt;p&gt;Couple of months ago my girlfriend (who is very smart) taught me about setting SMART goals. 
+I keep forgetting what the acronym stands for, but I vividly remember when she first told me about it, 
+it resonated with me. Well, instead of asking her for the 100th time what each letter means, 
+I’ll now write it down:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;S - Specific&lt;/strong&gt;: Clearly define &lt;em&gt;what&lt;/em&gt; you want to achieve, including details like who, what, where and why. (e.g., “I’ll build a RISC-V core”, becomes “I’ll build a basic, single cycle, 32-bit RISC-V core supporting IMAC instruction set to improve my digital design skills, and to become familiar with the RISC-V ecosystem”.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;M - Measurable&lt;/strong&gt;: Include criteria to track progress and know when you’ve succeeded, using numbers, percentages, or other data points.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;A - Achievable&lt;/strong&gt;: Ensure the goal is challenging but realistic, with resources and capabilities to reach it.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;R - Relevant&lt;/strong&gt;: Confirm the goal matters to your broader objectives and is worthwhile.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;T - Time-bound&lt;/strong&gt;: Set a specific deadline or time frame for completion, creating urgency and focus.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;task-breakdown&quot;&gt;Task breakdown&lt;/h3&gt;
+
+&lt;p&gt;The next thing I decided on is the Project and Task breakdown. I decided on the following:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;I want to have the following hierarchy: Projects-&amp;gt;Epics-&amp;gt;Stories-&amp;gt;Tasks.&lt;/li&gt;
+  &lt;li&gt;Each project can have multiple Epics. Each Epic describes a significant feature that I need to develop or some area that I need to study that would take multiple months.&lt;/li&gt;
+  &lt;li&gt;Epics are further decomposed into Stories. Each Story contains a meaningful unit of work that can be done in a month or so.&lt;/li&gt;
+  &lt;li&gt;Stories are decomposed into tasks. Each task would represent a concrete action needed to complete a Story.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here is one hypothetical project example that for the hierarchy I’ve described above. Let’s say I want to design a 
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Floating-point_unit&quot;&gt;floating-point unit&lt;/a&gt;. This would be my Project. Now, there are multiple ways how I would decompose this Project into Epics, but let’s say my approach is the following:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Floating point unit documentation,&lt;/li&gt;
+  &lt;li&gt;Floating point unit design,&lt;/li&gt;
+  &lt;li&gt;Floating point unit validation on a Field Programmable Gate Array (FPGA).&lt;/li&gt;
+  &lt;li&gt;etc.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The 2nd Epic - Floating point unit design - I would further decompose into the following Stories:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Multiplication (F.MUL),&lt;/li&gt;
+  &lt;li&gt;Leading Zero Counter (LZC),&lt;/li&gt;
+  &lt;li&gt;Division (F.DIV),&lt;/li&gt;
+  &lt;li&gt;Square root (F.SQRT),&lt;/li&gt;
+  &lt;li&gt;etc.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The F.MUL story can be decomposed into the following tasks:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Implement mantissa multiplication,&lt;/li&gt;
+  &lt;li&gt;Implement normalization,&lt;/li&gt;
+  &lt;li&gt;Implement exponent calculation,&lt;/li&gt;
+  &lt;li&gt;Implement rounding,&lt;/li&gt;
+  &lt;li&gt;Create a Formal verification environment,&lt;/li&gt;
+  &lt;li&gt;Get a Formal proof of the F.MUL datapath,&lt;/li&gt;
+  &lt;li&gt;etc.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;And here is a visualization of the above:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-mermaid&quot;&gt;flowchart LR
+
+A(Floating point unit)
+A --&amp;gt; E1(Epic: FPU documentation)
+A --&amp;gt; E2(Epic: FPU design)
+A --&amp;gt; E3(Epic: FPU implementation on an FPGA)
+
+subgraph FPU documentation
+E1 --&amp;gt; E1S1(...)
+end
+
+subgraph FPU implementation on an FPGA
+E3 --&amp;gt; E3S1(...)
+end
+
+subgraph &quot;FPU Design&quot;
+E2 --&amp;gt; E2S1(Story: Multiplication F.MUL)
+E2 --&amp;gt; E2S2(Story: Leading Zero Counter LZC)
+E2 --&amp;gt; E2S3(Story: Division F.DIV)
+E2 --&amp;gt; E2S4(Story: Square root F.SQRT)
+E2S2 --&amp;gt; E2S2T1(...)
+E2S3 --&amp;gt; E2S3T1(...)
+E2S4 --&amp;gt; E2S4T1(...)
+subgraph F.MUL
+E2S1 --&amp;gt; E2S1T1(Task: Implement mantissa multiplication)
+E2S1 --&amp;gt; E2S1T2(Task: Implement normalization)
+E2S1 --&amp;gt; E2S1T3(Task: Implement exponent calculation)
+E2S1 --&amp;gt; E2S1T4(Task: Implement rounding)
+E2S1 --&amp;gt; E2S1T5(Task: Create Formal verification environment)
+E2S1 --&amp;gt; E2S1T6(Task: Get a Formal proof of the F.MUL datapath)
+end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;choosing-tool-for-project-and-task-planning&quot;&gt;Choosing tool for project and task planning&lt;/h3&gt;
+
+&lt;p&gt;When it came time to pick tool for project management I wanted a tool that supported the following
+criteria:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;It must be free to use,&lt;/li&gt;
+  &lt;li&gt;It must be a web based tool because I’m working on multiple machines and multiple operating systems,&lt;/li&gt;
+  &lt;li&gt;It should have an establishaed reputation, i.e., there should be an existing user base, I don’t
+want the tool to be cancelled or disappear overnight,&lt;/li&gt;
+  &lt;li&gt;It should support building a hierarchy of Projects-&amp;gt;Epics-&amp;gt;Stories-&amp;gt;Tasks as I’ve outlined previously,&lt;/li&gt;
+  &lt;li&gt;It should allow me to keep track of time for each Task,&lt;/li&gt;
+  &lt;li&gt;It should be possible to have a board (Kanban style) where I could see the task breakdown for 
+the current month (Sprint),&lt;/li&gt;
+  &lt;li&gt;Once I set it it up, it should be easy to use - I should be able to plan tasks for the current month with
+a couple of clicks, adding Tasks, Stories, Epics and Projects should be simple.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are bajilion tools that fit this criteria; I’ve spend couple of days trying some of those. There
+are two tools that I really liked - &lt;a href=&quot;https://www.jetbrains.com/youtrack/teams/management.html&quot;&gt;JetBrains YouTrack&lt;/a&gt;
+and &lt;a href=&quot;https://www.notion.so/&quot;&gt;Notion&lt;/a&gt;. In the end I chose Notion, not because one tool is better
+than the other, it was simply a coin toss choice, and Notion won.&lt;/p&gt;
+
+&lt;div class=&quot;premonition info&quot;&gt;
+  &lt;i class=&quot;premonition pn-info&quot;&gt;&lt;/i&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;header&quot;&gt;Retrospective: Using Notion&lt;/p&gt;&lt;p&gt;In retrospective, Notion was actually not that easy to set-up. It took me roughly 3 days to set up 
+everything. In these 3 days I’ve included research, watching tutorials and all the trial and error 
+before I got what I actually wanted. It might be a  skill issue, but I think the main reason for 
+the non-ease-of-use is it has a very rich featurset. It takes some time to 
+get familiar with the required features, tool flow and the intended way or work.&lt;/p&gt;
+
+&lt;p&gt;I’ll mention two resources that actually got me started:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Anthropic’s Claude AI - It helped alot when I started using Notion. Btw I’m not
+endorsing Claude above any other currently available LLMs, I used it because I had the full
+subscription at the time.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=kOf3QSBV29Y&quot;&gt;The Notion Tutorial - Full Course for Beginners&lt;/a&gt; on YouTube.
+This video helped ALOT. It’s long (roughly 2 hours) but it’s worth watching if you’re serious
+about using Notion. The video author also has lots of other videos on topics surrounding Notion
+and productivity in general. Fully recommend.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;using-notion-to-set-things-in-motion&quot;&gt;Using Notion to set things in motion&lt;/h3&gt;
+
+&lt;p&gt;First I’ll start with the results, and then I’ll provide a step-by-step solution on how to implement
+this yourself in Notion.&lt;/p&gt;
+
+&lt;p&gt;The solution I’ve built focuses around four main databases: one database containing Projects,
+one database containing Epics, one database containing all Stories and one database containing all 
+Tasks. Each project gets its own separate page.&lt;/p&gt;
+
+&lt;p&gt;The Projects database lists all the projects with their status, description, start and end date.&lt;/p&gt;
+
+&lt;figure class=&quot;post-figure&quot;&gt;
+&lt;a class=&quot;glightbox&quot; href=&quot;/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects.webp&quot;&gt;
+  &lt;picture&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-600-11f76890a.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-800-11f76890a.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-600-11f76890a.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-800-11f76890a.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img loading=&quot;lazy&quot; src=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-800-11f76890a.webp&quot; alt=&quot;Notion database containing a list of Projects with the accompanying properties&quot; /&gt;
+  &lt;/picture&gt;
+&lt;/a&gt;
+
+&lt;figcaption&gt;Notion database containing a list of Projects with the accompanying properties&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The Epics database contains all Epics for all Projects. Each Epic is assigned to on or more Projects. 
+Each Epic contains a list of Stories required to finish that particular Epic. The Estimated Hours, 
+Actual Hours, Reamining Hours, and Progress are automatically calculated. Estimated and Actual Hours 
+are sum of the same-named properties of all Stories contained inside an Epic.&lt;/p&gt;
+
+&lt;figure class=&quot;post-figure&quot;&gt;
+&lt;a class=&quot;glightbox&quot; href=&quot;/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics.webp&quot;&gt;
+  &lt;picture&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-600-c07aa2b9a.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-800-c07aa2b9a.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-600-c07aa2b9a.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-800-c07aa2b9a.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img loading=&quot;lazy&quot; src=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-800-c07aa2b9a.webp&quot; alt=&quot;Database containing list of all Epics. Estimated hours and Actual hours are automatically calculated by summing those properties for all the Stories contained in an Epic&quot; /&gt;
+  &lt;/picture&gt;
+&lt;/a&gt;
+
+&lt;figcaption&gt;Database containing list of all Epics. Estimated hours and Actual hours are automatically calculated by summing those properties for all the Stories contained in an Epic&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;The Stories database contains all Stories for all Projects. Each Story is assigned to one (or more)
+Epics. Estimated Hours, Actual Hours, Reamining Hours and Progress are automatically calculated.
+Like in the Epics database, the Estimated Hours and the Actual Hours are are calculated by summing
+the values of the same-names properties for all Tasks contained within a Story.&lt;/p&gt;
+
+&lt;figure class=&quot;post-figure&quot;&gt;
+&lt;a class=&quot;glightbox&quot; href=&quot;/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories.webp&quot;&gt;
+  &lt;picture&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-600-a96a66889.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-800-a96a66889.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-600-a96a66889.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-800-a96a66889.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img loading=&quot;lazy&quot; src=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-800-a96a66889.webp&quot; alt=&quot;Database containing list of all Stories. Estimated hours and Actual hours are automatically calculated by summing the same-named properties for all the Tasks contained inside a Story&quot; /&gt;
+  &lt;/picture&gt;
+&lt;/a&gt;
+
+&lt;figcaption&gt;Database containing list of all Stories. Estimated hours and Actual hours are automatically calculated by summing the same-named properties for all the Tasks contained inside a Story&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;figure class=&quot;post-figure&quot;&gt;
+&lt;a class=&quot;glightbox&quot; href=&quot;/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog.webp&quot;&gt;
+  &lt;picture&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-600-6c320c53c.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-600-6c320c53c.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img loading=&quot;lazy&quot; src=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp&quot; alt=&quot;Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.&quot; /&gt;
+  &lt;/picture&gt;
+&lt;/a&gt;
+
+&lt;figcaption&gt;Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;figure class=&quot;post-figure&quot;&gt;
+&lt;a class=&quot;glightbox&quot; href=&quot;/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban.webp&quot;&gt;
+  &lt;picture&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-600-492a713f0.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-600-492a713f0.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img loading=&quot;lazy&quot; src=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp&quot; alt=&quot;Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.&quot; /&gt;
+  &lt;/picture&gt;
+&lt;/a&gt;
+
+&lt;figcaption&gt;Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Markdown demo</title>
@@ -697,6 +948,136 @@ vulputate non, rutrum id lectus. Proin sed varius nunc. Vestibulum erat ante, va
 a, consequat facilisis augue. Nam quis ex nec dolor tempor dapibus. Ut ac pulvinar est.
 Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;testing-premonition-plugin-features&quot;&gt;Testing premonition plugin features&lt;/h2&gt;
+
+&lt;h3 id=&quot;citation&quot;&gt;Citation&lt;/h3&gt;
+
+&lt;div class=&quot;premonition citation&quot;&gt;
+  &lt;i class=&quot;premonition pn-quote&quot;&gt;&lt;/i&gt;
+  &lt;blockquote class=&quot;content blockquote&quot; cite=&quot;twain&quot;&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.&lt;/p&gt;
+
+
+
+
+    
+    &lt;footer class=&quot;blockquote-footer&quot;&gt;
+      &lt;cite title=&quot;-- Mark Twain&quot;&gt;-- Mark Twain&lt;/cite&gt;
+    &lt;/footer&gt;
+    
+  &lt;/blockquote&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;note-without-title&quot;&gt;Note without title&lt;/h3&gt;
+
+&lt;div class=&quot;premonition note&quot;&gt;
+  &lt;i class=&quot;premonition pn-note&quot;&gt;&lt;/i&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.&lt;/p&gt;
+
+
+
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;info-with-title&quot;&gt;Info with title&lt;/h3&gt;
+
+&lt;div class=&quot;premonition info&quot;&gt;
+  &lt;i class=&quot;premonition pn-info&quot;&gt;&lt;/i&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;header&quot;&gt;The information header&lt;/p&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.&lt;/p&gt;
+
+
+
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;warning-with-title&quot;&gt;Warning with title&lt;/h3&gt;
+
+&lt;div class=&quot;premonition warning&quot;&gt;
+  &lt;i class=&quot;premonition pn-warn&quot;&gt;&lt;/i&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;header&quot;&gt;The information header&lt;/p&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.&lt;/p&gt;
+
+
+
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;error-box&quot;&gt;Error box&lt;/h3&gt;
+
+&lt;div class=&quot;premonition error&quot;&gt;
+  &lt;i class=&quot;premonition pn-error&quot;&gt;&lt;/i&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;header&quot;&gt;The information header&lt;/p&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.&lt;/p&gt;
+
+
+
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;custom-box-with-a-font-awesome-icon&quot;&gt;Custom box with a Font Awesome icon&lt;/h3&gt;
+
+&lt;div class=&quot;premonition error&quot;&gt;
+  &lt;div class=&quot;fa pn-error&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;header&quot;&gt;PREMONITION ERROR: Invalid box type&lt;/p&gt;
+    You have specified an invalid box type &quot;custom&quot;. You can customize your own box types in `_config.yml`.
+    See documentation for more help.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;error-box-with-markdown&quot;&gt;Error box with Markdown&lt;/h3&gt;
+
+&lt;div class=&quot;premonition error&quot;&gt;
+  &lt;i class=&quot;premonition pn-error&quot;&gt;&lt;/i&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;header&quot;&gt;The information header&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/lazee/premonition&quot;&gt;Premonition&lt;/a&gt; allows you to add&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Lists&lt;/li&gt;
+  &lt;li&gt;like this&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Use &lt;em&gt;formatting&lt;/em&gt; and add code blocks.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Isn&apos;t that sweet?
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Anything you can do in Markdown, you can do here. Expect from embeds Premonition boxes ;)&lt;/p&gt;
+
+
+
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;reference-links&quot;&gt;Reference links&lt;/h3&gt;
+
+&lt;div class=&quot;premonition info&quot;&gt;
+  &lt;i class=&quot;premonition pn-info&quot;&gt;&lt;/i&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;p class=&quot;header&quot;&gt;Linked&lt;/p&gt;&lt;p&gt;This is a &lt;a href=&quot;https://www.example.com/&quot; title=&quot;dd&quot;&gt;reference link&lt;/a&gt;.&lt;/p&gt;
+
+
+
+
+  &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;inline-code&quot;&gt;Inline Code&lt;/h2&gt;
 

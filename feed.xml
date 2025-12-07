@@ -1,4 +1,245 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://criticalpath.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://criticalpath.dev/" rel="alternate" type="text/html" /><updated>2025-11-22T17:12:38+01:00</updated><id>https://criticalpath.dev/feed.xml</id><title type="html">Critical Path</title><subtitle>A personal blog that contains stuff of interest to Hrvoje Butina. Deep dives into ASIC design &amp; verification. And some shallow dives into the embedded and low-level development.</subtitle><entry><title type="html">Markdown demo</title><link href="https://criticalpath.dev/markdown/markdown_demo/" rel="alternate" type="text/html" title="Markdown demo" /><published>2025-11-22T00:00:00+01:00</published><updated>2025-11-22T00:00:00+01:00</updated><id>https://criticalpath.dev/markdown/markdown_demo</id><content type="html" xml:base="https://criticalpath.dev/markdown/markdown_demo/"><![CDATA[<h1 id="markdown-feature-demo">Markdown Feature Demo</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://criticalpath.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://criticalpath.dev/" rel="alternate" type="text/html" /><updated>2025-12-07T21:10:33+01:00</updated><id>https://criticalpath.dev/feed.xml</id><title type="html">Critical Path</title><subtitle>A personal blog that contains stuff of interest to Hrvoje Butina. Deep dives into ASIC design &amp; verification. And some shallow dives into the embedded and low-level development.</subtitle><entry><title type="html">Using Notion to set things in motion</title><link href="https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/" rel="alternate" type="text/html" title="Using Notion to set things in motion" /><published>2025-12-06T18:17:00+01:00</published><updated>2025-12-06T18:17:00+01:00</updated><id>https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion</id><content type="html" xml:base="https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/"><![CDATA[<p>Ultimately, I decided I want to manage my hobby projects in a Scrum style.</p>
+
+<p>I can see people screaming: “Are you insane? What drugs are you on? Why do you want to turn your 
+fun activity into something that feels like some annoying and life-draining corporate project?” 
+First of all, I don’t think the Scrum itself is stupid and life draining, it’s the 1000 other 
+things like managers emphasizing and prioritizing writing Jira tickets and doing time estimates 
+while you’re trying to deliver that bug fix on the Friday afternoon. This is not it. Here, you’re 
+your own manager, and Scrum is just a way of keeping track of things. Besides there are 
+numerous benefits, but the most important ones to me:</p>
+<ol>
+  <li>I want to keep track of my projects,</li>
+  <li>I want to keep myself accountable, and actually finish my projects.</li>
+</ol>
+
+<p>There are some additional benefits that are not obvious at first. Thinking about how to decompose your project into achievable tasks forces you to ACTUALLY think hard about what you’re trying to do, it forces you to do a deep analysis. Once you break it down, you’ll have clear steps on how you’re going to achieve something, and you’ll also have some insight when and how you’re going to complete your project.</p>
+
+<p>Of course, I don’t think this is feasible for every little thing I do. I quickly found out it’s better to start immediately working on my idea, create something concrete, gather more information and to get a feeling is this something I’d really like to do or this was some passing whim. After I’m sure I find it fun (or useful), I’ll do some “project planning”.</p>
+
+<div class="premonition info">
+  <i class="premonition pn-info"></i>
+  <div class="content">
+    <p class="header">Setting SMART goals</p><p>Couple of months ago my girlfriend (who is very smart) taught me about setting SMART goals. 
+I keep forgetting what the acronym stands for, but I vividly remember when she first told me about it, 
+it resonated with me. Well, instead of asking her for the 100th time what each letter means, 
+I’ll now write it down:</p>
+
+<ul>
+  <li><strong>S - Specific</strong>: Clearly define <em>what</em> you want to achieve, including details like who, what, where and why. (e.g., “I’ll build a RISC-V core”, becomes “I’ll build a basic, single cycle, 32-bit RISC-V core supporting IMAC instruction set to improve my digital design skills, and to become familiar with the RISC-V ecosystem”.</li>
+  <li><strong>M - Measurable</strong>: Include criteria to track progress and know when you’ve succeeded, using numbers, percentages, or other data points.</li>
+  <li><strong>A - Achievable</strong>: Ensure the goal is challenging but realistic, with resources and capabilities to reach it.</li>
+  <li><strong>R - Relevant</strong>: Confirm the goal matters to your broader objectives and is worthwhile.</li>
+  <li><strong>T - Time-bound</strong>: Set a specific deadline or time frame for completion, creating urgency and focus.</li>
+</ul>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="task-breakdown">Task breakdown</h3>
+
+<p>The next thing I decided on is the Project and Task breakdown. I decided on the following:</p>
+<ul>
+  <li>I want to have the following hierarchy: Projects-&gt;Epics-&gt;Stories-&gt;Tasks.</li>
+  <li>Each project can have multiple Epics. Each Epic describes a significant feature that I need to develop or some area that I need to study that would take multiple months.</li>
+  <li>Epics are further decomposed into Stories. Each Story contains a meaningful unit of work that can be done in a month or so.</li>
+  <li>Stories are decomposed into tasks. Each task would represent a concrete action needed to complete a Story.</li>
+</ul>
+
+<p>Here is one hypothetical project example that for the hierarchy I’ve described above. Let’s say I want to design a 
+<a href="https://en.wikipedia.org/wiki/Floating-point_unit">floating-point unit</a>. This would be my Project. Now, there are multiple ways how I would decompose this Project into Epics, but let’s say my approach is the following:</p>
+<ol>
+  <li>Floating point unit documentation,</li>
+  <li>Floating point unit design,</li>
+  <li>Floating point unit validation on a Field Programmable Gate Array (FPGA).</li>
+  <li>etc.</li>
+</ol>
+
+<p>The 2nd Epic - Floating point unit design - I would further decompose into the following Stories:</p>
+<ol>
+  <li>Multiplication (F.MUL),</li>
+  <li>Leading Zero Counter (LZC),</li>
+  <li>Division (F.DIV),</li>
+  <li>Square root (F.SQRT),</li>
+  <li>etc.</li>
+</ol>
+
+<p>The F.MUL story can be decomposed into the following tasks:</p>
+<ol>
+  <li>Implement mantissa multiplication,</li>
+  <li>Implement normalization,</li>
+  <li>Implement exponent calculation,</li>
+  <li>Implement rounding,</li>
+  <li>Create a Formal verification environment,</li>
+  <li>Get a Formal proof of the F.MUL datapath,</li>
+  <li>etc.</li>
+</ol>
+
+<p>And here is a visualization of the above:</p>
+<pre><code class="language-mermaid">flowchart LR
+
+A(Floating point unit)
+A --&gt; E1(Epic: FPU documentation)
+A --&gt; E2(Epic: FPU design)
+A --&gt; E3(Epic: FPU implementation on an FPGA)
+
+subgraph FPU documentation
+E1 --&gt; E1S1(...)
+end
+
+subgraph FPU implementation on an FPGA
+E3 --&gt; E3S1(...)
+end
+
+subgraph "FPU Design"
+E2 --&gt; E2S1(Story: Multiplication F.MUL)
+E2 --&gt; E2S2(Story: Leading Zero Counter LZC)
+E2 --&gt; E2S3(Story: Division F.DIV)
+E2 --&gt; E2S4(Story: Square root F.SQRT)
+E2S2 --&gt; E2S2T1(...)
+E2S3 --&gt; E2S3T1(...)
+E2S4 --&gt; E2S4T1(...)
+subgraph F.MUL
+E2S1 --&gt; E2S1T1(Task: Implement mantissa multiplication)
+E2S1 --&gt; E2S1T2(Task: Implement normalization)
+E2S1 --&gt; E2S1T3(Task: Implement exponent calculation)
+E2S1 --&gt; E2S1T4(Task: Implement rounding)
+E2S1 --&gt; E2S1T5(Task: Create Formal verification environment)
+E2S1 --&gt; E2S1T6(Task: Get a Formal proof of the F.MUL datapath)
+end
+end
+</code></pre>
+
+<h3 id="choosing-tool-for-project-and-task-planning">Choosing tool for project and task planning</h3>
+
+<p>When it came time to pick tool for project management I wanted a tool that supported the following
+criteria:</p>
+<ul>
+  <li>It must be free to use,</li>
+  <li>It must be a web based tool because I’m working on multiple machines and multiple operating systems,</li>
+  <li>It should have an establishaed reputation, i.e., there should be an existing user base, I don’t
+want the tool to be cancelled or disappear overnight,</li>
+  <li>It should support building a hierarchy of Projects-&gt;Epics-&gt;Stories-&gt;Tasks as I’ve outlined previously,</li>
+  <li>It should allow me to keep track of time for each Task,</li>
+  <li>It should be possible to have a board (Kanban style) where I could see the task breakdown for 
+the current month (Sprint),</li>
+  <li>Once I set it it up, it should be easy to use - I should be able to plan tasks for the current month with
+a couple of clicks, adding Tasks, Stories, Epics and Projects should be simple.</li>
+</ul>
+
+<p>There are bajilion tools that fit this criteria; I’ve spend couple of days trying some of those. There
+are two tools that I really liked - <a href="https://www.jetbrains.com/youtrack/teams/management.html">JetBrains YouTrack</a>
+and <a href="https://www.notion.so/">Notion</a>. In the end I chose Notion, not because one tool is better
+than the other, it was simply a coin toss choice, and Notion won.</p>
+
+<div class="premonition info">
+  <i class="premonition pn-info"></i>
+  <div class="content">
+    <p class="header">Retrospective: Using Notion</p><p>In retrospective, Notion was actually not that easy to set-up. It took me roughly 3 days to set up 
+everything. In these 3 days I’ve included research, watching tutorials and all the trial and error 
+before I got what I actually wanted. It might be a  skill issue, but I think the main reason for 
+the non-ease-of-use is it has a very rich featurset. It takes some time to 
+get familiar with the required features, tool flow and the intended way or work.</p>
+
+<p>I’ll mention two resources that actually got me started:</p>
+<ol>
+  <li>Anthropic’s Claude AI - It helped alot when I started using Notion. Btw I’m not
+endorsing Claude above any other currently available LLMs, I used it because I had the full
+subscription at the time.</li>
+  <li><a href="https://www.youtube.com/watch?v=kOf3QSBV29Y">The Notion Tutorial - Full Course for Beginners</a> on YouTube.
+This video helped ALOT. It’s long (roughly 2 hours) but it’s worth watching if you’re serious
+about using Notion. The video author also has lots of other videos on topics surrounding Notion
+and productivity in general. Fully recommend.</li>
+</ol>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="using-notion-to-set-things-in-motion">Using Notion to set things in motion</h3>
+
+<p>First I’ll start with the results, and then I’ll provide a step-by-step solution on how to implement
+this yourself in Notion.</p>
+
+<p>The solution I’ve built focuses around four main databases: one database containing Projects,
+one database containing Epics, one database containing all Stories and one database containing all 
+Tasks. Each project gets its own separate page.</p>
+
+<p>The Projects database lists all the projects with their status, description, start and end date.</p>
+
+<figure class="post-figure">
+<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects.webp">
+  <picture>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-600-11f76890a.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-800-11f76890a.webp 800w" type="image/webp" />
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-600-11f76890a.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-800-11f76890a.webp 800w" type="image/webp" />
+    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-800-11f76890a.webp" alt="Notion database containing a list of Projects with the accompanying properties" />
+  </picture>
+</a>
+
+<figcaption>Notion database containing a list of Projects with the accompanying properties</figcaption>
+</figure>
+
+<p>The Epics database contains all Epics for all Projects. Each Epic is assigned to on or more Projects. 
+Each Epic contains a list of Stories required to finish that particular Epic. The Estimated Hours, 
+Actual Hours, Reamining Hours, and Progress are automatically calculated. Estimated and Actual Hours 
+are sum of the same-named properties of all Stories contained inside an Epic.</p>
+
+<figure class="post-figure">
+<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics.webp">
+  <picture>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-600-c07aa2b9a.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-800-c07aa2b9a.webp 800w" type="image/webp" />
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-600-c07aa2b9a.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-800-c07aa2b9a.webp 800w" type="image/webp" />
+    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-800-c07aa2b9a.webp" alt="Database containing list of all Epics. Estimated hours and Actual hours are automatically calculated by summing those properties for all the Stories contained in an Epic" />
+  </picture>
+</a>
+
+<figcaption>Database containing list of all Epics. Estimated hours and Actual hours are automatically calculated by summing those properties for all the Stories contained in an Epic</figcaption>
+</figure>
+
+<p>The Stories database contains all Stories for all Projects. Each Story is assigned to one (or more)
+Epics. Estimated Hours, Actual Hours, Reamining Hours and Progress are automatically calculated.
+Like in the Epics database, the Estimated Hours and the Actual Hours are are calculated by summing
+the values of the same-names properties for all Tasks contained within a Story.</p>
+
+<figure class="post-figure">
+<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories.webp">
+  <picture>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-600-a96a66889.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-800-a96a66889.webp 800w" type="image/webp" />
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-600-a96a66889.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-800-a96a66889.webp 800w" type="image/webp" />
+    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-800-a96a66889.webp" alt="Database containing list of all Stories. Estimated hours and Actual hours are automatically calculated by summing the same-named properties for all the Tasks contained inside a Story" />
+  </picture>
+</a>
+
+<figcaption>Database containing list of all Stories. Estimated hours and Actual hours are automatically calculated by summing the same-named properties for all the Tasks contained inside a Story</figcaption>
+</figure>
+
+<figure class="post-figure">
+<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog.webp">
+  <picture>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-600-6c320c53c.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp 800w" type="image/webp" />
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-600-6c320c53c.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp 800w" type="image/webp" />
+    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp" alt="Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month." />
+  </picture>
+</a>
+
+<figcaption>Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.</figcaption>
+</figure>
+
+<figure class="post-figure">
+<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban.webp">
+  <picture>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-600-492a713f0.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp 800w" type="image/webp" />
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-600-492a713f0.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp 800w" type="image/webp" />
+    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp" alt="Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month." />
+  </picture>
+</a>
+
+<figcaption>Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.</figcaption>
+</figure>]]></content><author><name></name></author><category term="Productivity" /><category term="notion" /><category term="goals" /><category term="productivity" /><summary type="html"><![CDATA[In this post I write how I manage my projects - both hobby and commercial and the motivation behind it. I give a quick tour on my Scrum-like project management setup in a tool called [Notion](https://www.notion.so) and I also give step-by-step instructions on how to create similar Notion layout.]]></summary></entry><entry><title type="html">Markdown demo</title><link href="https://criticalpath.dev/markdown/markdown_demo/" rel="alternate" type="text/html" title="Markdown demo" /><published>2025-11-22T00:00:00+01:00</published><updated>2025-11-22T00:00:00+01:00</updated><id>https://criticalpath.dev/markdown/markdown_demo</id><content type="html" xml:base="https://criticalpath.dev/markdown/markdown_demo/"><![CDATA[<h1 id="markdown-feature-demo">Markdown Feature Demo</h1>
 
 <p>This page demonstrates syntax highlighting, tables, blockquotes, and code blocks in Jekyll.</p>
 
@@ -679,6 +920,136 @@ a, consequat facilisis augue. Nam quis ex nec dolor tempor dapibus. Ut ac pulvin
 Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
 </code></pre></div></div>
 
+<h2 id="testing-premonition-plugin-features">Testing premonition plugin features</h2>
+
+<h3 id="citation">Citation</h3>
+
+<div class="premonition citation">
+  <i class="premonition pn-quote"></i>
+  <blockquote class="content blockquote" cite="twain">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
+
+
+
+
+    
+    <footer class="blockquote-footer">
+      <cite title="-- Mark Twain">-- Mark Twain</cite>
+    </footer>
+    
+  </blockquote>
+</div>
+
+<h3 id="note-without-title">Note without title</h3>
+
+<div class="premonition note">
+  <i class="premonition pn-note"></i>
+  <div class="content">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="info-with-title">Info with title</h3>
+
+<div class="premonition info">
+  <i class="premonition pn-info"></i>
+  <div class="content">
+    <p class="header">The information header</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="warning-with-title">Warning with title</h3>
+
+<div class="premonition warning">
+  <i class="premonition pn-warn"></i>
+  <div class="content">
+    <p class="header">The information header</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="error-box">Error box</h3>
+
+<div class="premonition error">
+  <i class="premonition pn-error"></i>
+  <div class="content">
+    <p class="header">The information header</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
+ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
+Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="custom-box-with-a-font-awesome-icon">Custom box with a Font Awesome icon</h3>
+
+<div class="premonition error">
+  <div class="fa pn-error"></div>
+  <div class="content">
+    <p class="header">PREMONITION ERROR: Invalid box type</p>
+    You have specified an invalid box type "custom". You can customize your own box types in `_config.yml`.
+    See documentation for more help.
+  </div>
+</div>
+
+<h3 id="error-box-with-markdown">Error box with Markdown</h3>
+
+<div class="premonition error">
+  <i class="premonition pn-error"></i>
+  <div class="content">
+    <p class="header">The information header</p><p><a href="https://github.com/lazee/premonition">Premonition</a> allows you to add</p>
+
+<ul>
+  <li>Lists</li>
+  <li>like this</li>
+</ul>
+
+<p>Use <em>formatting</em> and add code blocks.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Isn't that sweet?
+</code></pre></div></div>
+<p>Anything you can do in Markdown, you can do here. Expect from embeds Premonition boxes ;)</p>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="reference-links">Reference links</h3>
+
+<div class="premonition info">
+  <i class="premonition pn-info"></i>
+  <div class="content">
+    <p class="header">Linked</p><p>This is a <a href="https://www.example.com/" title="dd">reference link</a>.</p>
+
+
+
+
+  </div>
+</div>
+
 <h2 id="inline-code">Inline Code</h2>
 
 <p>You can also use <code class="language-plaintext highlighter-rouge">inline code</code> within paragraphs. For example, the <code class="language-plaintext highlighter-rouge">printf()</code> function in C, or the <code class="language-plaintext highlighter-rouge">always_ff</code> block in SystemVerilog. Lorem ipsum dolor sit amet, when discussing memory management you might reference <code class="language-plaintext highlighter-rouge">malloc()</code> and <code class="language-plaintext highlighter-rouge">calloc()</code> for allocation, or <code class="language-plaintext highlighter-rouge">memcpy()</code> for copying data between buffers.</p>
@@ -1093,7 +1464,7 @@ multiple properties - or to write auxiliary code.</p>
 <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sequence</span><span class="p">[</span><span class="o">*</span><span class="n">N</span><span class="p">]</span>
 <span class="p">$</span><span class="nb">past</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 </code></pre></div></div>
-<p>In both cases keep <code class="language-plaintext highlighter-rouge">N</code> as small as possible. It’s recommended to model <code class="language-plaintext highlighter-rouge">$past()</code> with Auxiliary Code instead.</p>]]></content><author><name></name></author><category term="Verification" /><category term="SVA" /><category term="verification" /><category term="simulation" /><category term="formal" /><summary type="html"><![CDATA[Sequence declaration]]></summary></entry><entry><title type="html">Weather and air quality station: Part 1</title><link href="https://criticalpath.dev/weather_station/weather_station_part1/" rel="alternate" type="text/html" title="Weather and air quality station: Part 1" /><published>2025-11-01T00:00:00+01:00</published><updated>2025-11-01T00:00:00+01:00</updated><id>https://criticalpath.dev/weather_station/weather_station_part1</id><content type="html" xml:base="https://criticalpath.dev/weather_station/weather_station_part1/"><![CDATA[<h1 id="battery-powered-weather--air-quality-station">Battery-Powered Weather &amp; Air Quality Station</h1>
+<p>In both cases keep <code class="language-plaintext highlighter-rouge">N</code> as small as possible. It’s recommended to model <code class="language-plaintext highlighter-rouge">$past()</code> with Auxiliary Code instead.</p>]]></content><author><name></name></author><category term="Verification" /><category term="SVA" /><category term="verification" /><category term="simulation" /><category term="formal" /><summary type="html"><![CDATA[A quick overview of the most used SVA constructs for simulation and formal verification, along with usage examples.]]></summary></entry><entry><title type="html">Weather and air quality station: Part 1</title><link href="https://criticalpath.dev/weather_station/weather_station_part1/" rel="alternate" type="text/html" title="Weather and air quality station: Part 1" /><published>2025-11-01T00:00:00+01:00</published><updated>2025-11-01T00:00:00+01:00</updated><id>https://criticalpath.dev/weather_station/weather_station_part1</id><content type="html" xml:base="https://criticalpath.dev/weather_station/weather_station_part1/"><![CDATA[<h1 id="battery-powered-weather--air-quality-station">Battery-Powered Weather &amp; Air Quality Station</h1>
 <p>Raspberry Pi Pico 2 W + Inky Impression 7.3” + Bosch BME690 + Bosch BMV080 + Meteoblue API<br />
 Firmware written in C for the Pico’s RISC-V core</p>
 
@@ -1255,7 +1626,7 @@ Firmware written in C for the Pico’s RISC-V core</p>
   <li>Battery gauge improvements</li>
   <li>Optional data logging</li>
   <li>Potential partial refresh optimization</li>
-</ul>]]></content><author><name></name></author><category term="weather_station" /><category term="embedded" /><category term="raspberry-pi" /><category term="weather_station" /><summary type="html"><![CDATA[Battery-Powered Weather &amp; Air Quality Station Raspberry Pi Pico 2 W + Inky Impression 7.3” + Bosch BME690 + Bosch BMV080 + Meteoblue API Firmware written in C for the Pico’s RISC-V core]]></summary></entry><entry><title type="html">Weather and air quality station: Part 2</title><link href="https://criticalpath.dev/weather_station/weather_station_part2/" rel="alternate" type="text/html" title="Weather and air quality station: Part 2" /><published>2025-11-01T00:00:00+01:00</published><updated>2025-11-01T00:00:00+01:00</updated><id>https://criticalpath.dev/weather_station/weather_station_part2</id><content type="html" xml:base="https://criticalpath.dev/weather_station/weather_station_part2/"><![CDATA[<p>Before starting with any kind of development on Raspberry Pi Pico2W I first need to setup 
+</ul>]]></content><author><name></name></author><category term="weather_station" /><category term="embedded" /><category term="raspberry-pi" /><category term="weather_station" /><summary type="html"><![CDATA[Design of a battery powered device with a nice e-ink display used to display time, weather forecast and air quality. In this post I outline a list of key features, a rough development outline, an initial bill of materials and an estimate of power consumption. I also evaluate feasibility to ensure the embedded device can be built within reasonable price and that it can be battery powered.]]></summary></entry><entry><title type="html">Weather and air quality station: Part 2</title><link href="https://criticalpath.dev/weather_station/weather_station_part2/" rel="alternate" type="text/html" title="Weather and air quality station: Part 2" /><published>2025-11-01T00:00:00+01:00</published><updated>2025-11-01T00:00:00+01:00</updated><id>https://criticalpath.dev/weather_station/weather_station_part2</id><content type="html" xml:base="https://criticalpath.dev/weather_station/weather_station_part2/"><![CDATA[<p>Before starting with any kind of development on Raspberry Pi Pico2W I first need to setup 
 the toolchain: SDK, compiler, linker and debugger. In this post I describe the following steps:</p>
 <ul>
   <li>Downloading and setting up Raspberry Pi Pico2W SDK,</li>
@@ -1465,4 +1836,4 @@ export PICO_BOARD=pico2_w</p>
 </ul>
 
 <h1 id="an-overview-how-code-is-executed-on-rp2350">An overview how code is executed on RP2350</h1>
-<p>The RP2350 contains a (fixed) bootrom and this bootrom is executed first, not the user application. The boot outcome depends on multiple variables, all described in Chapter 5.2.1 Boot outcomes in [1].  In our case, we want to run our application from the USB bootloader. The USB bootloader will load the application stored in the UF2 [reference] format, and it will write this application to flash. But how does the bootrom know on which core do we want to run this application, RISC-V or ARM? Bootrom needs to locate and viable metadata. This metadata is defined in the Chapter 5.9 Metadata block details in [1]. The Chapter 5.9.5.2 describes Minimum RISC-V IMAGE_DEF. We will use this information</p>]]></content><author><name></name></author><category term="weather_station" /><category term="embedded" /><category term="raspberry-pi" /><category term="weather_station" /><summary type="html"><![CDATA[Before starting with any kind of development on Raspberry Pi Pico2W I first need to setup the toolchain: SDK, compiler, linker and debugger. In this post I describe the following steps: Downloading and setting up Raspberry Pi Pico2W SDK, preparing and compiliing the GNU cross-compiler to compile RISC-V binaries, Setting up OpenOCD]]></summary></entry></feed>
+<p>The RP2350 contains a (fixed) bootrom and this bootrom is executed first, not the user application. The boot outcome depends on multiple variables, all described in Chapter 5.2.1 Boot outcomes in [1].  In our case, we want to run our application from the USB bootloader. The USB bootloader will load the application stored in the UF2 [reference] format, and it will write this application to flash. But how does the bootrom know on which core do we want to run this application, RISC-V or ARM? Bootrom needs to locate and viable metadata. This metadata is defined in the Chapter 5.9 Metadata block details in [1]. The Chapter 5.9.5.2 describes Minimum RISC-V IMAGE_DEF. We will use this information</p>]]></content><author><name></name></author><category term="weather_station" /><category term="embedded" /><category term="raspberry-pi" /><category term="weather_station" /><summary type="html"><![CDATA[In the second part of the series, I explore how to develop my design using RISC-V on the Raspberry Pi Pico 2 W. I take a deep dive into the toolchain setup, including the SDK installation, building a GNU cross compiler, and configuring OpenOCD. I document my findings along the way. The goal for Part 2 is to bring up UART communication and start blinking a few LEDs.]]></summary></entry></feed>

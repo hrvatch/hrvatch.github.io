@@ -7,8 +7,8 @@
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Weather and air quality station: Part 1" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Battery-Powered Weather &amp; Air Quality Station Raspberry Pi Pico 2 W + Inky Impression 7.3” + Bosch BME690 + Bosch BMV080 + Meteoblue API Firmware written in C for the Pico’s RISC-V core" />
-<meta property="og:description" content="Battery-Powered Weather &amp; Air Quality Station Raspberry Pi Pico 2 W + Inky Impression 7.3” + Bosch BME690 + Bosch BMV080 + Meteoblue API Firmware written in C for the Pico’s RISC-V core" />
+<meta name="description" content="Design of a battery powered device with a nice e-ink display used to display time, weather forecast and air quality. In this post I outline a list of key features, a rough development outline, an initial bill of materials and an estimate of power consumption. I also evaluate feasibility to ensure the embedded device can be built within reasonable price and that it can be battery powered." />
+<meta property="og:description" content="Design of a battery powered device with a nice e-ink display used to display time, weather forecast and air quality. In this post I outline a list of key features, a rough development outline, an initial bill of materials and an estimate of power consumption. I also evaluate feasibility to ensure the embedded device can be built within reasonable price and that it can be battery powered." />
 <link rel="canonical" href="https://criticalpath.dev/weather_station/weather_station_part1/" />
 <meta property="og:url" content="https://criticalpath.dev/weather_station/weather_station_part1/" />
 <meta property="og:site_name" content="Critical Path" />
@@ -17,9 +17,13 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Weather and air quality station: Part 1" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-01T00:00:00+01:00","datePublished":"2025-11-01T00:00:00+01:00","description":"Battery-Powered Weather &amp; Air Quality Station Raspberry Pi Pico 2 W + Inky Impression 7.3” + Bosch BME690 + Bosch BMV080 + Meteoblue API Firmware written in C for the Pico’s RISC-V core","headline":"Weather and air quality station: Part 1","mainEntityOfPage":{"@type":"WebPage","@id":"https://criticalpath.dev/weather_station/weather_station_part1/"},"url":"https://criticalpath.dev/weather_station/weather_station_part1/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-01T00:00:00+01:00","datePublished":"2025-11-01T00:00:00+01:00","description":"Design of a battery powered device with a nice e-ink display used to display time, weather forecast and air quality. In this post I outline a list of key features, a rough development outline, an initial bill of materials and an estimate of power consumption. I also evaluate feasibility to ensure the embedded device can be built within reasonable price and that it can be battery powered.","headline":"Weather and air quality station: Part 1","mainEntityOfPage":{"@type":"WebPage","@id":"https://criticalpath.dev/weather_station/weather_station_part1/"},"url":"https://criticalpath.dev/weather_station/weather_station_part1/"}</script>
 <!-- End Jekyll SEO tag -->
-<link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://criticalpath.dev/feed.xml" title="Critical Path" />
+<link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css">
+
+  
+  
+  <link type="application/atom+xml" rel="alternate" href="https://criticalpath.dev/feed.xml" title="Critical Path" />
 </head>
 <body><header class="site-header">
 
@@ -237,15 +241,14 @@ Firmware written in C for the Pico’s RISC-V core</p>
       <ul class="related-posts-posts">
   
         
-          <li class="list-item">
-            <a class="list-item-title" href="/weather_station/weather_station_part2/">Weather and air quality station: Part 2</a>
-            - <span class="list-item-date">2025-11-01</span>
-          </li>
+          
+            <li class="list-item">
+              <a class="list-item-title" href="/weather_station/weather_station_part2/">Weather and air quality station: Part 2</a>
+              - <span class="list-item-date">2025-11-01</span>
+            </li>
+          
         
-          <li class="list-item">
-            <a class="list-item-title" href="/weather_station/weather_station_part1/">Weather and air quality station: Part 1</a>
-            - <span class="list-item-date">2025-11-01</span>
-          </li>
+          
         
       </ul>
     </div>
@@ -296,7 +299,8 @@ Firmware written in C for the Pico’s RISC-V core</p>
 
 
 <script src="/assets/js/copy-code.js"></script>
-<script src="/assets/js/copy-code.js"></script>
-  </body>
+
+
+</body>
 
 </html>

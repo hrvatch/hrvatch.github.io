@@ -7,8 +7,8 @@
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Weather and air quality station: Part 2" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Before starting with any kind of development on Raspberry Pi Pico2W I first need to setup the toolchain: SDK, compiler, linker and debugger. In this post I describe the following steps: Downloading and setting up Raspberry Pi Pico2W SDK, preparing and compiliing the GNU cross-compiler to compile RISC-V binaries, Setting up OpenOCD" />
-<meta property="og:description" content="Before starting with any kind of development on Raspberry Pi Pico2W I first need to setup the toolchain: SDK, compiler, linker and debugger. In this post I describe the following steps: Downloading and setting up Raspberry Pi Pico2W SDK, preparing and compiliing the GNU cross-compiler to compile RISC-V binaries, Setting up OpenOCD" />
+<meta name="description" content="In the second part of the series, I explore how to develop my design using RISC-V on the Raspberry Pi Pico 2 W. I take a deep dive into the toolchain setup, including the SDK installation, building a GNU cross compiler, and configuring OpenOCD. I document my findings along the way. The goal for Part 2 is to bring up UART communication and start blinking a few LEDs." />
+<meta property="og:description" content="In the second part of the series, I explore how to develop my design using RISC-V on the Raspberry Pi Pico 2 W. I take a deep dive into the toolchain setup, including the SDK installation, building a GNU cross compiler, and configuring OpenOCD. I document my findings along the way. The goal for Part 2 is to bring up UART communication and start blinking a few LEDs." />
 <link rel="canonical" href="https://criticalpath.dev/weather_station/weather_station_part2/" />
 <meta property="og:url" content="https://criticalpath.dev/weather_station/weather_station_part2/" />
 <meta property="og:site_name" content="Critical Path" />
@@ -17,9 +17,13 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Weather and air quality station: Part 2" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-01T00:00:00+01:00","datePublished":"2025-11-01T00:00:00+01:00","description":"Before starting with any kind of development on Raspberry Pi Pico2W I first need to setup the toolchain: SDK, compiler, linker and debugger. In this post I describe the following steps: Downloading and setting up Raspberry Pi Pico2W SDK, preparing and compiliing the GNU cross-compiler to compile RISC-V binaries, Setting up OpenOCD","headline":"Weather and air quality station: Part 2","mainEntityOfPage":{"@type":"WebPage","@id":"https://criticalpath.dev/weather_station/weather_station_part2/"},"url":"https://criticalpath.dev/weather_station/weather_station_part2/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-01T00:00:00+01:00","datePublished":"2025-11-01T00:00:00+01:00","description":"In the second part of the series, I explore how to develop my design using RISC-V on the Raspberry Pi Pico 2 W. I take a deep dive into the toolchain setup, including the SDK installation, building a GNU cross compiler, and configuring OpenOCD. I document my findings along the way. The goal for Part 2 is to bring up UART communication and start blinking a few LEDs.","headline":"Weather and air quality station: Part 2","mainEntityOfPage":{"@type":"WebPage","@id":"https://criticalpath.dev/weather_station/weather_station_part2/"},"url":"https://criticalpath.dev/weather_station/weather_station_part2/"}</script>
 <!-- End Jekyll SEO tag -->
-<link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://criticalpath.dev/feed.xml" title="Critical Path" />
+<link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css">
+
+  
+  
+  <link type="application/atom+xml" rel="alternate" href="https://criticalpath.dev/feed.xml" title="Critical Path" />
 </head>
 <body><header class="site-header">
 
@@ -304,15 +308,14 @@ export PICO_BOARD=pico2_w</p>
       <ul class="related-posts-posts">
   
         
-          <li class="list-item">
-            <a class="list-item-title" href="/weather_station/weather_station_part2/">Weather and air quality station: Part 2</a>
-            - <span class="list-item-date">2025-11-01</span>
-          </li>
+          
         
-          <li class="list-item">
-            <a class="list-item-title" href="/weather_station/weather_station_part1/">Weather and air quality station: Part 1</a>
-            - <span class="list-item-date">2025-11-01</span>
-          </li>
+          
+            <li class="list-item">
+              <a class="list-item-title" href="/weather_station/weather_station_part1/">Weather and air quality station: Part 1</a>
+              - <span class="list-item-date">2025-11-01</span>
+            </li>
+          
         
       </ul>
     </div>
@@ -363,7 +366,8 @@ export PICO_BOARD=pico2_w</p>
 
 
 <script src="/assets/js/copy-code.js"></script>
-<script src="/assets/js/copy-code.js"></script>
-  </body>
+
+
+</body>
 
 </html>
