@@ -40,6 +40,27 @@
   <a class="nav-item" href="/posts/">Posts</a>
   <a class="nav-item" href="/tags/">Tags</a>
   <a class="nav-item" href="/about/">About</a>
+  <a class="page-link search-toggle" href="#" aria-label="Search">
+    <i class="fas fa-search"></i>
+  </a>
+  <!-- Search box (hidden by default) -->
+  <div class="search-overlay" id="search-overlay">
+    <div class="search-container">
+      <button class="search-close" id="search-close" aria-label="Close search">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="header-search">
+  <h2>Search</h2>
+  <form class="header-search-form" action="/search/" method="get">
+    <input type="text" id="search-box" name="query" placeholder="Search posts..." autocomplete="off" autofocus>
+    <button type="submit" aria-label="Search">
+      <i class="fas fa-search"></i>
+    </button>
+  </form>
+</div>
+
+    </div>
+  </div>
 </div>
 
       </nav>
@@ -366,6 +387,7 @@ export PICO_BOARD=pico2_w</p>
 
 
 <script src="/assets/js/copy-code.js"></script>
+<script src="/assets/js/search-toggle.js" defer></script>
 
 
 </body>

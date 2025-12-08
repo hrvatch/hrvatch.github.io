@@ -4,7 +4,7 @@
  <title>Critical Path</title>
  <link href="https://criticalpath.dev/atom.xml" rel="self"/>
  <link href="https://criticalpath.dev/"/>
- <updated>2025-12-07T21:10:33+01:00</updated>
+ <updated>2025-12-08T11:12:53+01:00</updated>
  <id>https://criticalpath.dev</id>
  <author>
    <name></name>
@@ -149,7 +149,7 @@ a couple of clicks, adding Tasks, Stories, Epics and Projects should be simple.&
 &lt;/ul&gt;
 
 &lt;p&gt;There are bajilion tools that fit this criteria; I’ve spend couple of days trying some of those. There
-are two tools that I really liked - &lt;a href=&quot;https://www.jetbrains.com/youtrack/teams/management.html&quot;&gt;JetBrains YouTrack&lt;/a&gt;
+are two tools that I really liked: &lt;a href=&quot;https://www.jetbrains.com/youtrack/teams/management.html&quot;&gt;JetBrains YouTrack&lt;/a&gt;
 and &lt;a href=&quot;https://www.notion.so/&quot;&gt;Notion&lt;/a&gt;. In the end I chose Notion, not because one tool is better
 than the other, it was simply a coin toss choice, and Notion won.&lt;/p&gt;
 
@@ -236,30 +236,86 @@ the values of the same-names properties for all Tasks contained within a Story.&
 &lt;figcaption&gt;Database containing list of all Stories. Estimated hours and Actual hours are automatically calculated by summing the same-named properties for all the Tasks contained inside a Story&lt;/figcaption&gt;
 &lt;/figure&gt;
 
+&lt;p&gt;The Tasks database contains as list of Tasks for &lt;strong&gt;all&lt;/strong&gt; Projects. Each Tasks is described with the
+following properties:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Name of the task,&lt;/li&gt;
+  &lt;li&gt;Task description,&lt;/li&gt;
+  &lt;li&gt;Status (In progress, Ongoing, Done),&lt;/li&gt;
+  &lt;li&gt;Estimated hours - time it takes to finish a task,&lt;/li&gt;
+  &lt;li&gt;Actual Hours - time it took to finish a task,&lt;/li&gt;
+  &lt;li&gt;Over-Under - automatically calculated property, describing if the task was over or under estimated,&lt;/li&gt;
+  &lt;li&gt;Variance - time difference between the Estimated and Actual Hours. Also auto calculated.&lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;figure class=&quot;post-figure&quot;&gt;
 &lt;a class=&quot;glightbox&quot; href=&quot;/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog.webp&quot;&gt;
   &lt;picture&gt;
     &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-600-6c320c53c.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
     &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-600-6c320c53c.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img loading=&quot;lazy&quot; src=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp&quot; alt=&quot;Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.&quot; /&gt;
+    &lt;img loading=&quot;lazy&quot; src=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp&quot; alt=&quot;Tasks database on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.&quot; /&gt;
   &lt;/picture&gt;
 &lt;/a&gt;
 
-&lt;figcaption&gt;Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.&lt;/figcaption&gt;
+&lt;figcaption&gt;Tasks database on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.&lt;/figcaption&gt;
 &lt;/figure&gt;
+
+&lt;p&gt;Tasks that are going to be workd on in the current month are displayed on a board. The &lt;a href=&quot;https://en.wikipedia.org/wiki/Kanban_board&quot;&gt;Kanban board&lt;/a&gt;
+style is, in my opinion, a great tool to visually depict work at various stages of a process.&lt;/p&gt;
 
 &lt;figure class=&quot;post-figure&quot;&gt;
 &lt;a class=&quot;glightbox&quot; href=&quot;/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban.webp&quot;&gt;
   &lt;picture&gt;
     &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-600-492a713f0.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
     &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-600-492a713f0.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img loading=&quot;lazy&quot; src=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp&quot; alt=&quot;Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.&quot; /&gt;
+    &lt;img loading=&quot;lazy&quot; src=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp&quot; alt=&quot;The Kanban board show which tasks are planned to be worked on this month, but are still not in progress, tasks I&apos;m currently working on, and tasks I&apos;ve finished this month.&quot; /&gt;
   &lt;/picture&gt;
 &lt;/a&gt;
 
-&lt;figcaption&gt;Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.&lt;/figcaption&gt;
+&lt;figcaption&gt;The Kanban board show which tasks are planned to be worked on this month, but are still not in progress, tasks I&apos;m currently working on, and tasks I&apos;ve finished this month.&lt;/figcaption&gt;
 &lt;/figure&gt;
 
+&lt;p&gt;As I’ve mentioned before, each project gets a dedicated Project dashboard page. This page essentially
+contains a link to the Epics, Stories and Tasks databases, but it’s set up in a such a way to provide
+a clear overview of the Project.&lt;/p&gt;
+
+&lt;figure class=&quot;post-figure&quot;&gt;
+&lt;a class=&quot;glightbox&quot; href=&quot;/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1.webp&quot;&gt;
+  &lt;picture&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-600-3614c359e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-800-3614c359e.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-600-3614c359e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-800-3614c359e.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img loading=&quot;lazy&quot; src=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-800-3614c359e.webp&quot; /&gt;
+  &lt;/picture&gt;
+&lt;/a&gt;
+
+&lt;figcaption&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Tasks in the Project dashboard are displayed in two different views: Kanban style, and as a list of Project related
+tasks currently in the backlog.&lt;/p&gt;
+
+&lt;figure class=&quot;post-figure&quot;&gt;
+&lt;a class=&quot;glightbox&quot; href=&quot;/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2.webp&quot;&gt;
+  &lt;picture&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-600-b090b071e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-800-b090b071e.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;source sizes=&quot;(max-width: 600px) 100vw, 800px&quot; srcset=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-600-b090b071e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-800-b090b071e.webp 800w&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img loading=&quot;lazy&quot; src=&quot;/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-800-b090b071e.webp&quot; /&gt;
+  &lt;/picture&gt;
+&lt;/a&gt;
+
+&lt;figcaption&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3 id=&quot;steps-to-set-up-a-scrum-based-project-management-system-in-notion&quot;&gt;Steps to set up a Scrum-based project management system in Notion&lt;/h3&gt;
+
+&lt;p&gt;I’ve split the setup into the following steps:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Core database setup,&lt;/li&gt;
+  &lt;li&gt;Create essential views,&lt;/li&gt;
+  &lt;li&gt;Create project dashboard template,&lt;/li&gt;
+  &lt;li&gt;Creating a project,&lt;/li&gt;
+  &lt;li&gt;Sprint (month) planning and execution&lt;/li&gt;
+&lt;/ol&gt;
 </content>
  </entry>
  

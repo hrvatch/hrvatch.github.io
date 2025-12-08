@@ -39,6 +39,34 @@
   <a class="nav-item" href="/posts/">Posts</a>
   <a class="nav-item" href="/tags/">Tags</a>
   <a class="nav-item" href="/about/">About</a>
+  <a class="page-link search-toggle" href="#" aria-label="Search">
+    <i class="fas fa-search"></i>
+  </a>
+  <!-- Search box (hidden by default) -->
+  <div class="search-overlay" id="search-overlay">
+    <div class="search-container">
+      <button class="search-close" id="search-close" aria-label="Close search">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="header-search">
+  <h2>Search</h2>
+  <form class="header-search-form" action="/search/" method="get">
+    <input 
+      type="text" 
+      id="search-box" 
+      name="query" 
+      placeholder="Search posts..."
+      autocomplete="off"
+      autofocus
+    >
+    <button type="submit" aria-label="Search">
+      <i class="fas fa-search"></i>
+    </button>
+  </form>
+</div>
+
+    </div>
+  </div>
 </div>
 
       </nav>
@@ -67,8 +95,8 @@
           </a>
         </h3>
         <div class="post-meta post-meta-after">
-          1575 words
-          • 8 min read
+          1802 words
+          • 10 min read
           
             •
             
@@ -80,7 +108,7 @@
             
           
         </div>
-        <p>In this post I write how I manage my projects - both hobby and commercial and the motivation behind it. I give a quick tour on my Scrum-like project management setup in a tool called <a href="https://www.notion.so">Notion</a> and I also give step-by-step instructions on how to create similar Notion layout.</p>
+        <p>In this post I describe how I manage my projects - both hobby and commercial and the motivation behind it. I give a quick tour of my Scrum-like project management setup in a tool called <a href="https://www.notion.so">Notion</a>, and I also give step-by-step instructions on how to create a similar Notion layout.</p>
 
       </li><li>
         <div class="post-meta post-meta-before">
@@ -243,6 +271,7 @@
 
 
 <script src="/assets/js/copy-code.js"></script>
+<script src="/assets/js/search-toggle.js" defer></script>
 
 
 </body>

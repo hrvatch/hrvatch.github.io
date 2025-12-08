@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://criticalpath.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://criticalpath.dev/" rel="alternate" type="text/html" /><updated>2025-12-07T21:10:33+01:00</updated><id>https://criticalpath.dev/feed.xml</id><title type="html">Critical Path</title><subtitle>A personal blog that contains stuff of interest to Hrvoje Butina. Deep dives into ASIC design &amp; verification. And some shallow dives into the embedded and low-level development.</subtitle><entry><title type="html">Using Notion to set things in motion</title><link href="https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/" rel="alternate" type="text/html" title="Using Notion to set things in motion" /><published>2025-12-06T18:17:00+01:00</published><updated>2025-12-06T18:17:00+01:00</updated><id>https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion</id><content type="html" xml:base="https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/"><![CDATA[<p>Ultimately, I decided I want to manage my hobby projects in a Scrum style.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://criticalpath.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://criticalpath.dev/" rel="alternate" type="text/html" /><updated>2025-12-08T11:12:53+01:00</updated><id>https://criticalpath.dev/feed.xml</id><title type="html">Critical Path</title><subtitle>A personal blog that contains stuff of interest to Hrvoje Butina. Deep dives into ASIC design &amp; verification. And some shallow dives into the embedded and low-level development.</subtitle><entry><title type="html">Using Notion to set things in motion</title><link href="https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/" rel="alternate" type="text/html" title="Using Notion to set things in motion" /><published>2025-12-06T18:17:00+01:00</published><updated>2025-12-06T18:17:00+01:00</updated><id>https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion</id><content type="html" xml:base="https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/"><![CDATA[<p>Ultimately, I decided I want to manage my hobby projects in a Scrum style.</p>
 
 <p>I can see people screaming: “Are you insane? What drugs are you on? Why do you want to turn your 
 fun activity into something that feels like some annoying and life-draining corporate project?” 
@@ -130,7 +130,7 @@ a couple of clicks, adding Tasks, Stories, Epics and Projects should be simple.<
 </ul>
 
 <p>There are bajilion tools that fit this criteria; I’ve spend couple of days trying some of those. There
-are two tools that I really liked - <a href="https://www.jetbrains.com/youtrack/teams/management.html">JetBrains YouTrack</a>
+are two tools that I really liked: <a href="https://www.jetbrains.com/youtrack/teams/management.html">JetBrains YouTrack</a>
 and <a href="https://www.notion.so/">Notion</a>. In the end I chose Notion, not because one tool is better
 than the other, it was simply a coin toss choice, and Notion won.</p>
 
@@ -217,29 +217,86 @@ the values of the same-names properties for all Tasks contained within a Story.<
 <figcaption>Database containing list of all Stories. Estimated hours and Actual hours are automatically calculated by summing the same-named properties for all the Tasks contained inside a Story</figcaption>
 </figure>
 
+<p>The Tasks database contains as list of Tasks for <strong>all</strong> Projects. Each Tasks is described with the
+following properties:</p>
+<ul>
+  <li>Name of the task,</li>
+  <li>Task description,</li>
+  <li>Status (In progress, Ongoing, Done),</li>
+  <li>Estimated hours - time it takes to finish a task,</li>
+  <li>Actual Hours - time it took to finish a task,</li>
+  <li>Over-Under - automatically calculated property, describing if the task was over or under estimated,</li>
+  <li>Variance - time difference between the Estimated and Actual Hours. Also auto calculated.</li>
+</ul>
+
 <figure class="post-figure">
 <a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog.webp">
   <picture>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-600-6c320c53c.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp 800w" type="image/webp" />
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-600-6c320c53c.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp 800w" type="image/webp" />
-    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp" alt="Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month." />
+    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp" alt="Tasks database on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month." />
   </picture>
 </a>
 
-<figcaption>Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.</figcaption>
+<figcaption>Tasks database on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.</figcaption>
 </figure>
+
+<p>Tasks that are going to be workd on in the current month are displayed on a board. The <a href="https://en.wikipedia.org/wiki/Kanban_board">Kanban board</a>
+style is, in my opinion, a great tool to visually depict work at various stages of a process.</p>
 
 <figure class="post-figure">
 <a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban.webp">
   <picture>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-600-492a713f0.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp 800w" type="image/webp" />
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-600-492a713f0.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp 800w" type="image/webp" />
-    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp" alt="Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month." />
+    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp" alt="The Kanban board show which tasks are planned to be worked on this month, but are still not in progress, tasks I'm currently working on, and tasks I've finished this month." />
   </picture>
 </a>
 
-<figcaption>Tasks datbase on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.</figcaption>
-</figure>]]></content><author><name></name></author><category term="Productivity" /><category term="notion" /><category term="goals" /><category term="productivity" /><summary type="html"><![CDATA[In this post I write how I manage my projects - both hobby and commercial and the motivation behind it. I give a quick tour on my Scrum-like project management setup in a tool called [Notion](https://www.notion.so) and I also give step-by-step instructions on how to create similar Notion layout.]]></summary></entry><entry><title type="html">Markdown demo</title><link href="https://criticalpath.dev/markdown/markdown_demo/" rel="alternate" type="text/html" title="Markdown demo" /><published>2025-11-22T00:00:00+01:00</published><updated>2025-11-22T00:00:00+01:00</updated><id>https://criticalpath.dev/markdown/markdown_demo</id><content type="html" xml:base="https://criticalpath.dev/markdown/markdown_demo/"><![CDATA[<h1 id="markdown-feature-demo">Markdown Feature Demo</h1>
+<figcaption>The Kanban board show which tasks are planned to be worked on this month, but are still not in progress, tasks I'm currently working on, and tasks I've finished this month.</figcaption>
+</figure>
+
+<p>As I’ve mentioned before, each project gets a dedicated Project dashboard page. This page essentially
+contains a link to the Epics, Stories and Tasks databases, but it’s set up in a such a way to provide
+a clear overview of the Project.</p>
+
+<figure class="post-figure">
+<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1.webp">
+  <picture>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-600-3614c359e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-800-3614c359e.webp 800w" type="image/webp" />
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-600-3614c359e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-800-3614c359e.webp 800w" type="image/webp" />
+    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-800-3614c359e.webp" />
+  </picture>
+</a>
+
+<figcaption></figcaption>
+</figure>
+
+<p>Tasks in the Project dashboard are displayed in two different views: Kanban style, and as a list of Project related
+tasks currently in the backlog.</p>
+
+<figure class="post-figure">
+<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2.webp">
+  <picture>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-600-b090b071e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-800-b090b071e.webp 800w" type="image/webp" />
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-600-b090b071e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-800-b090b071e.webp 800w" type="image/webp" />
+    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-800-b090b071e.webp" />
+  </picture>
+</a>
+
+<figcaption></figcaption>
+</figure>
+
+<h3 id="steps-to-set-up-a-scrum-based-project-management-system-in-notion">Steps to set up a Scrum-based project management system in Notion</h3>
+
+<p>I’ve split the setup into the following steps:</p>
+<ol>
+  <li>Core database setup,</li>
+  <li>Create essential views,</li>
+  <li>Create project dashboard template,</li>
+  <li>Creating a project,</li>
+  <li>Sprint (month) planning and execution</li>
+</ol>]]></content><author><name></name></author><category term="Productivity" /><category term="notion" /><category term="goals" /><category term="productivity" /><summary type="html"><![CDATA[In this post I describe how I manage my projects - both hobby and commercial and the motivation behind it. I give a quick tour of my Scrum-like project management setup in a tool called [Notion](https://www.notion.so), and I also give step-by-step instructions on how to create a similar Notion layout.]]></summary></entry><entry><title type="html">Markdown demo</title><link href="https://criticalpath.dev/markdown/markdown_demo/" rel="alternate" type="text/html" title="Markdown demo" /><published>2025-11-22T00:00:00+01:00</published><updated>2025-11-22T00:00:00+01:00</updated><id>https://criticalpath.dev/markdown/markdown_demo</id><content type="html" xml:base="https://criticalpath.dev/markdown/markdown_demo/"><![CDATA[<h1 id="markdown-feature-demo">Markdown Feature Demo</h1>
 
 <p>This page demonstrates syntax highlighting, tables, blockquotes, and code blocks in Jekyll.</p>
 
