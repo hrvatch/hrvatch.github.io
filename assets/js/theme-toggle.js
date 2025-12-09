@@ -13,7 +13,6 @@
   // Set theme
   function setTheme(newTheme) {
     html.setAttribute('data-theme', newTheme);
-    updateIcon(newTheme);
     localStorage.setItem('theme', newTheme);
   }
   
