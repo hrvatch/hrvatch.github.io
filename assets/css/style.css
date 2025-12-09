@@ -452,7 +452,7 @@
 }
 
 .theme-toggle:hover i {
-  transform: rotate(30deg);
+  transform: rotate(180deg);
   text-decoration: none;
 }
 
