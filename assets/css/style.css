@@ -1331,6 +1331,64 @@ pre:hover .copy-button {
     right: 10px;
   }
 }
+.projects-page .project-section {
+  margin-bottom: 60px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--minima-border-color-01);
+}
+.projects-page .project-section:last-child {
+  border-bottom: none;
+}
+.projects-page .project-header {
+  margin-bottom: 22.5px;
+}
+.projects-page .project-title {
+  margin-bottom: 11.25px;
+  color: var(--minima-heading-color);
+  display: flex;
+  align-items: center;
+  gap: 11.25px;
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+@media screen and (min-width: 800px) {
+  .projects-page .project-title {
+    font-size: 2rem;
+  }
+}
+.projects-page .project-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.projects-page .project-description {
+  margin: 11.25px 0;
+  color: var(--minima-text-color);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.projects-page .project-count {
+  display: inline-block;
+  padding: 4.5px 13.5px;
+  background: var(--minima-code-background-color);
+  color: var(--minima-brand-color);
+  border-radius: 13.5px;
+  font-size: 15.75px;
+  font-weight: 500;
+}
+.projects-page .year-list {
+  margin-top: 16.875px;
+}
+.projects-page .no-projects-message {
+  text-align: center;
+  padding: 90px 30px;
+}
+.projects-page .no-projects-message p {
+  font-size: 1.5rem;
+  color: var(--minima-brand-color);
+  font-style: italic;
+  margin: 0;
+}
+
 :root {
   --premonition-default-color: #5bc0de;
   --premonition-default-light-color: #e3edf2;

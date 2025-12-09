@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://criticalpath.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://criticalpath.dev/" rel="alternate" type="text/html" /><updated>2025-12-08T11:12:53+01:00</updated><id>https://criticalpath.dev/feed.xml</id><title type="html">Critical Path</title><subtitle>A personal blog that contains stuff of interest to Hrvoje Butina. Deep dives into ASIC design &amp; verification. And some shallow dives into the embedded and low-level development.</subtitle><entry><title type="html">Using Notion to set things in motion</title><link href="https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/" rel="alternate" type="text/html" title="Using Notion to set things in motion" /><published>2025-12-06T18:17:00+01:00</published><updated>2025-12-06T18:17:00+01:00</updated><id>https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion</id><content type="html" xml:base="https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/"><![CDATA[<p>Ultimately, I decided I want to manage my hobby projects in a Scrum style.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://criticalpath.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://criticalpath.dev/" rel="alternate" type="text/html" /><updated>2025-12-09T11:20:20+01:00</updated><id>https://criticalpath.dev/feed.xml</id><title type="html">Critical Path</title><subtitle>A personal blog that contains stuff of interest to Hrvoje Butina. Deep dives into ASIC design &amp; verification. And some shallow dives into the embedded and low-level development.</subtitle><entry><title type="html">Using Notion to set things in motion</title><link href="https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/" rel="alternate" type="text/html" title="Using Notion to set things in motion" /><published>2025-12-06T18:17:00+01:00</published><updated>2025-12-06T18:17:00+01:00</updated><id>https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion</id><content type="html" xml:base="https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/"><![CDATA[<p>Ultimately, I decided I want to manage my hobby projects in a Scrum style.</p>
 
 <p>I can see people screaming: “Are you insane? What drugs are you on? Why do you want to turn your 
 fun activity into something that feels like some annoying and life-draining corporate project?” 
@@ -38,7 +38,7 @@ I’ll now write it down:</p>
   </div>
 </div>
 
-<h3 id="task-breakdown">Task breakdown</h3>
+<h2 id="task-breakdown">Task breakdown</h2>
 
 <p>The next thing I decided on is the Project and Task breakdown. I decided on the following:</p>
 <ul>
@@ -112,7 +112,7 @@ end
 end
 </code></pre>
 
-<h3 id="choosing-tool-for-project-and-task-planning">Choosing tool for project and task planning</h3>
+<h2 id="choosing-tool-for-project-and-task-planning">Choosing tool for project and task planning</h2>
 
 <p>When it came time to pick tool for project management I wanted a tool that supported the following
 criteria:</p>
@@ -129,7 +129,7 @@ the current month (Sprint),</li>
 a couple of clicks, adding Tasks, Stories, Epics and Projects should be simple.</li>
 </ul>
 
-<p>There are bajilion tools that fit this criteria; I’ve spend couple of days trying some of those. There
+<p>There are bajillion tools that fit these criteria; I’ve spent a couple of days trying some of those. There
 are two tools that I really liked: <a href="https://www.jetbrains.com/youtrack/teams/management.html">JetBrains YouTrack</a>
 and <a href="https://www.notion.so/">Notion</a>. In the end I chose Notion, not because one tool is better
 than the other, it was simply a coin toss choice, and Notion won.</p>
@@ -145,7 +145,7 @@ get familiar with the required features, tool flow and the intended way or work.
 
 <p>I’ll mention two resources that actually got me started:</p>
 <ol>
-  <li>Anthropic’s Claude AI - It helped alot when I started using Notion. Btw I’m not
+  <li>Anthropic’s Claude AI - It helped a lot when I started using Notion. Btw I’m not
 endorsing Claude above any other currently available LLMs, I used it because I had the full
 subscription at the time.</li>
   <li><a href="https://www.youtube.com/watch?v=kOf3QSBV29Y">The Notion Tutorial - Full Course for Beginners</a> on YouTube.
@@ -185,7 +185,7 @@ Tasks. Each project gets its own separate page.</p>
 
 <p>The Epics database contains all Epics for all Projects. Each Epic is assigned to on or more Projects. 
 Each Epic contains a list of Stories required to finish that particular Epic. The Estimated Hours, 
-Actual Hours, Reamining Hours, and Progress are automatically calculated. Estimated and Actual Hours 
+Actual Hours, Remaining Hours, and Progress are automatically calculated. Estimated and Actual Hours 
 are sum of the same-named properties of all Stories contained inside an Epic.</p>
 
 <figure class="post-figure">
@@ -201,7 +201,7 @@ are sum of the same-named properties of all Stories contained inside an Epic.</p
 </figure>
 
 <p>The Stories database contains all Stories for all Projects. Each Story is assigned to one (or more)
-Epics. Estimated Hours, Actual Hours, Reamining Hours and Progress are automatically calculated.
+Epics. Estimated Hours, Actual Hours, Remaining Hours and Progress are automatically calculated.
 Like in the Epics database, the Estimated Hours and the Actual Hours are are calculated by summing
 the values of the same-names properties for all Tasks contained within a Story.</p>
 
@@ -217,7 +217,7 @@ the values of the same-names properties for all Tasks contained within a Story.<
 <figcaption>Database containing list of all Stories. Estimated hours and Actual hours are automatically calculated by summing the same-named properties for all the Tasks contained inside a Story</figcaption>
 </figure>
 
-<p>The Tasks database contains as list of Tasks for <strong>all</strong> Projects. Each Tasks is described with the
+<p>The Tasks database contains as list of Tasks for <strong>all</strong> Projects. Each Task is described with the
 following properties:</p>
 <ul>
   <li>Name of the task,</li>
@@ -241,7 +241,7 @@ following properties:</p>
 <figcaption>Tasks database on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.</figcaption>
 </figure>
 
-<p>Tasks that are going to be workd on in the current month are displayed on a board. The <a href="https://en.wikipedia.org/wiki/Kanban_board">Kanban board</a>
+<p>Tasks that are going to be worked on in the current month are displayed on a board. The <a href="https://en.wikipedia.org/wiki/Kanban_board">Kanban board</a>
 style is, in my opinion, a great tool to visually depict work at various stages of a process.</p>
 
 <figure class="post-figure">
@@ -257,7 +257,7 @@ style is, in my opinion, a great tool to visually depict work at various stages 
 </figure>
 
 <p>As I’ve mentioned before, each project gets a dedicated Project dashboard page. This page essentially
-contains a link to the Epics, Stories and Tasks databases, but it’s set up in a such a way to provide
+contains a link to the Epics, Stories and Tasks databases, but it’s set up in such a way to provide
 a clear overview of the Project.</p>
 
 <figure class="post-figure">
@@ -265,11 +265,11 @@ a clear overview of the Project.</p>
   <picture>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-600-3614c359e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-800-3614c359e.webp 800w" type="image/webp" />
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-600-3614c359e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-800-3614c359e.webp 800w" type="image/webp" />
-    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-800-3614c359e.webp" />
+    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-800-3614c359e.webp" alt="Project dashboard pae showing list of Epics, Stories an Tasks related to the Project. Tasks are show in the Kanban board style." />
   </picture>
 </a>
 
-<figcaption></figcaption>
+<figcaption>Project dashboard pae showing list of Epics, Stories an Tasks related to the Project. Tasks are show in the Kanban board style.</figcaption>
 </figure>
 
 <p>Tasks in the Project dashboard are displayed in two different views: Kanban style, and as a list of Project related
@@ -280,14 +280,14 @@ tasks currently in the backlog.</p>
   <picture>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-600-b090b071e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-800-b090b071e.webp 800w" type="image/webp" />
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-600-b090b071e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-800-b090b071e.webp 800w" type="image/webp" />
-    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-800-b090b071e.webp" />
+    <img loading="lazy" src="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-800-b090b071e.webp" alt="List of tasks in the backlog for the selected Project." />
   </picture>
 </a>
 
-<figcaption></figcaption>
+<figcaption>List of tasks in the backlog for the selected Project.</figcaption>
 </figure>
 
-<h3 id="steps-to-set-up-a-scrum-based-project-management-system-in-notion">Steps to set up a Scrum-based project management system in Notion</h3>
+<h2 id="steps-to-set-up-a-scrum-based-project-management-system-in-notion">Steps to set up a Scrum-based project management system in Notion</h2>
 
 <p>I’ve split the setup into the following steps:</p>
 <ol>
@@ -296,1601 +296,541 @@ tasks currently in the backlog.</p>
   <li>Create project dashboard template,</li>
   <li>Creating a project,</li>
   <li>Sprint (month) planning and execution</li>
-</ol>]]></content><author><name></name></author><category term="Productivity" /><category term="notion" /><category term="goals" /><category term="productivity" /><summary type="html"><![CDATA[In this post I describe how I manage my projects - both hobby and commercial and the motivation behind it. I give a quick tour of my Scrum-like project management setup in a tool called [Notion](https://www.notion.so), and I also give step-by-step instructions on how to create a similar Notion layout.]]></summary></entry><entry><title type="html">Markdown demo</title><link href="https://criticalpath.dev/markdown/markdown_demo/" rel="alternate" type="text/html" title="Markdown demo" /><published>2025-11-22T00:00:00+01:00</published><updated>2025-11-22T00:00:00+01:00</updated><id>https://criticalpath.dev/markdown/markdown_demo</id><content type="html" xml:base="https://criticalpath.dev/markdown/markdown_demo/"><![CDATA[<h1 id="markdown-feature-demo">Markdown Feature Demo</h1>
-
-<p>This page demonstrates syntax highlighting, tables, blockquotes, and code blocks in Jekyll.</p>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. When working with hardware description languages, you’ll frequently encounter constructs like <code class="language-plaintext highlighter-rouge">always_ff</code> and <code class="language-plaintext highlighter-rouge">always_comb</code> blocks, while in software development, functions like <code class="language-plaintext highlighter-rouge">malloc()</code> and <code class="language-plaintext highlighter-rouge">free()</code> are fundamental to memory management. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-
-<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. The <code class="language-plaintext highlighter-rouge">std::vector</code> container in C++ provides dynamic array functionality, similar to Python’s list type or the <code class="language-plaintext highlighter-rouge">ArrayList</code> in Java. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-<h2 id="blockquotes">Blockquotes</h2>
-
-<blockquote>
-  <p>This is a simple blockquote. It can contain <strong>bold text</strong>, <em>italic text</em>, and even <code class="language-plaintext highlighter-rouge">inline code</code>.</p>
-</blockquote>
-
-<blockquote>
-  <h3 id="blockquote-with-heading">Blockquote with heading</h3>
-
-  <p>Blockquotes can contain multiple paragraphs and other markdown elements. When debugging hardware designs, you might use <code class="language-plaintext highlighter-rouge">$display()</code> statements in Verilog or <code class="language-plaintext highlighter-rouge">assert</code> macros in SystemVerilog for verification purposes.</p>
-
-  <ul>
-    <li>List item one</li>
-    <li>List item two</li>
-  </ul>
-</blockquote>
-
-<h2 id="typography-and-text-readability">Typography and Text Readability</h2>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. In programming, concepts like <code class="language-plaintext highlighter-rouge">dependency injection</code> and <code class="language-plaintext highlighter-rouge">inversion of control</code> are fundamental design patterns that promote loose coupling. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.</p>
-
-<p>Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. When implementing concurrent systems, understanding primitives like <code class="language-plaintext highlighter-rouge">mutex</code>, <code class="language-plaintext highlighter-rouge">semaphore</code>, and <code class="language-plaintext highlighter-rouge">condition_variable</code> becomes essential. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
-
-<p>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi. In version control systems like Git, commands such as <code class="language-plaintext highlighter-rouge">git rebase -i</code> and <code class="language-plaintext highlighter-rouge">git cherry-pick</code> allow for sophisticated history manipulation, while <code class="language-plaintext highlighter-rouge">git bisect</code> helps identify problematic commits through binary search. Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</p>
-
-<p>Sed adipiscing ornare risus. Morbi est est, blandit sit amet, sagittis vel, euismod vel, velit. Pellentesque egestas sem. Suspendisse commodo ullamcorper magna. The <code class="language-plaintext highlighter-rouge">strcmp()</code> function in C returns zero for equal strings, while Python’s <code class="language-plaintext highlighter-rouge">==</code> operator provides more intuitive boolean comparisons. Ut aliquam sollicitudin leo. Cras iaculis ultricies nulla. Donec quis dui at dolor tempor interdum.</p>
-
-<h2 id="tables">Tables</h2>
-
-<h3 id="simple-table">Simple Table</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Language</th>
-      <th>Type</th>
-      <th>First Appeared</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>SystemVerilog</td>
-      <td>HDL</td>
-      <td>2002</td>
-    </tr>
-    <tr>
-      <td>C++</td>
-      <td>Compiled</td>
-      <td>1985</td>
-    </tr>
-    <tr>
-      <td>Python</td>
-      <td>Interpreted</td>
-      <td>1991</td>
-    </tr>
-    <tr>
-      <td>Matlab</td>
-      <td>Numerical</td>
-      <td>1984</td>
-    </tr>
-    <tr>
-      <td>Bash</td>
-      <td>Shell</td>
-      <td>1989</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="alignment-table">Alignment Table</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Left Aligned</th>
-      <th style="text-align: center">Center Aligned</th>
-      <th style="text-align: right">Right Aligned</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Left</td>
-      <td style="text-align: center">Center</td>
-      <td style="text-align: right">Right</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Text</td>
-      <td style="text-align: center">Text</td>
-      <td style="text-align: right">Text</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">More</td>
-      <td style="text-align: center">Data</td>
-      <td style="text-align: right">Here</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="code-syntax-highlighting">Code Syntax Highlighting</h2>
-
-<p>The following sections demonstrate syntax highlighting across multiple programming languages. Each example showcases realistic code patterns you might encounter in production environments. Notice how keywords like <code class="language-plaintext highlighter-rouge">function</code>, <code class="language-plaintext highlighter-rouge">class</code>, and <code class="language-plaintext highlighter-rouge">module</code> are highlighted differently depending on the language context.</p>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In software development, understanding the difference between <code class="language-plaintext highlighter-rouge">pass-by-value</code> and <code class="language-plaintext highlighter-rouge">pass-by-reference</code> is crucial, especially when working with languages like C++ where both <code class="language-plaintext highlighter-rouge">&amp;</code> references and <code class="language-plaintext highlighter-rouge">*</code> pointers provide different semantics. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-<h3 id="1-systemverilog">1. SystemVerilog</h3>
-
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">module</span> <span class="n">counter</span> <span class="p">#(</span>
-    <span class="k">parameter</span> <span class="n">WIDTH</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="p">)</span> <span class="p">(</span>
-    <span class="kt">input</span>  <span class="kt">logic</span>             <span class="n">clk</span><span class="p">,</span>
-    <span class="kt">input</span>  <span class="kt">logic</span>             <span class="n">rst_n</span><span class="p">,</span>
-    <span class="kt">input</span>  <span class="kt">logic</span>             <span class="n">enable</span><span class="p">,</span>
-    <span class="kt">output</span> <span class="kt">logic</span> <span class="p">[</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span> <span class="n">count</span>
-<span class="p">);</span>
-
-    <span class="k">always_ff</span> <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span> <span class="kt">or</span> <span class="kt">negedge</span> <span class="n">rst_n</span><span class="p">)</span> <span class="k">begin</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span>
-            <span class="n">count</span> <span class="o">&lt;=</span> <span class="mb">'0</span><span class="p">;</span>
-        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">enable</span><span class="p">)</span>
-            <span class="n">count</span> <span class="o">&lt;=</span> <span class="n">count</span> <span class="o">+</span> <span class="mb">1'b1</span><span class="p">;</span>
-    <span class="k">end</span>
-
-    <span class="c1">// Assertion for overflow detection</span>
-    <span class="k">property</span> <span class="n">no_overflow</span><span class="p">;</span>
-        <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span>
-        <span class="n">enable</span> <span class="o">|-&gt;</span> <span class="n">count</span> <span class="o">!=</span> <span class="mb">'1</span><span class="p">;</span>
-    <span class="k">endproperty</span>
-
-    <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">no_overflow</span><span class="p">);</span>
-
-<span class="k">endmodule</span>
-</code></pre></div></div>
-
-<h3 id="2-c">2. C++</h3>
-
-<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
-#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
-</span>
-<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
-<span class="k">class</span> <span class="nc">CircularBuffer</span> <span class="p">{</span>
-<span class="nl">private:</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">buffer</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">head</span><span class="p">,</span> <span class="n">tail</span><span class="p">,</span> <span class="n">capacity</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">full</span><span class="p">;</span>
-
-<span class="nl">public:</span>
-    <span class="n">CircularBuffer</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">)</span> <span class="o">:</span> <span class="n">buffer</span><span class="p">(</span><span class="n">size</span><span class="p">),</span> <span class="n">head</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">tail</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> 
-                                   <span class="n">capacity</span><span class="p">(</span><span class="n">size</span><span class="p">),</span> <span class="n">full</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span> <span class="p">{}</span>
-
-    <span class="kt">void</span> <span class="nf">push</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">item</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">buffer</span><span class="p">[</span><span class="n">head</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">full</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">tail</span> <span class="o">=</span> <span class="p">(</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">capacity</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">head</span> <span class="o">=</span> <span class="p">(</span><span class="n">head</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">capacity</span><span class="p">;</span>
-        <span class="n">full</span> <span class="o">=</span> <span class="n">head</span> <span class="o">==</span> <span class="n">tail</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="n">T</span> <span class="nf">pop</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-            <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">"Buffer is empty"</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">auto</span> <span class="n">val</span> <span class="o">=</span> <span class="n">buffer</span><span class="p">[</span><span class="n">tail</span><span class="p">];</span>
-        <span class="n">full</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-        <span class="n">tail</span> <span class="o">=</span> <span class="p">(</span><span class="n">tail</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">capacity</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">val</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kt">bool</span> <span class="nf">empty</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(</span><span class="o">!</span><span class="n">full</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">head</span> <span class="o">==</span> <span class="n">tail</span><span class="p">));</span> <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">CircularBuffer</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cb</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">cb</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Template metaprogramming in C++ allows compile-time computations using constructs like <code class="language-plaintext highlighter-rouge">typename</code> and <code class="language-plaintext highlighter-rouge">decltype</code>, while modern features like <code class="language-plaintext highlighter-rouge">auto</code> type deduction and <code class="language-plaintext highlighter-rouge">constexpr</code> have made the language more approachable. Mauris accumsan nulla vel diam, sed fringilla turpis dolor non lectus.</p>
-
-<h3 id="3-matlab">3. MATLAB</h3>
-
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span><span class="p">]</span> <span class="o">=</span> <span class="n">power_method</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">num_iterations</span><span class="p">)</span>
-    <span class="c1">% Power Method for finding dominant eigenvalue</span>
-    <span class="c1">% Input: A - square matrix, num_iterations - number of iterations</span>
-    <span class="c1">% Output: dominant eigenvalue and corresponding eigenvector</span>
-    
-    <span class="p">[</span><span class="n">n</span><span class="p">,</span> <span class="o">~</span><span class="p">]</span> <span class="o">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
-    <span class="n">b_k</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>  <span class="c1">% Random initial vector</span>
-    <span class="n">b_k</span> <span class="o">=</span> <span class="n">b_k</span> <span class="p">/</span> <span class="nb">norm</span><span class="p">(</span><span class="n">b_k</span><span class="p">);</span>  <span class="c1">% Normalize</span>
-    
-    <span class="k">for</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">num_iterations</span>
-        <span class="c1">% Calculate matrix-by-vector product Ab</span>
-        <span class="n">b_k1</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">b_k</span><span class="p">;</span>
-        
-        <span class="c1">% Calculate norm</span>
-        <span class="n">b_k1_norm</span> <span class="o">=</span> <span class="nb">norm</span><span class="p">(</span><span class="n">b_k1</span><span class="p">);</span>
-        
-        <span class="c1">% Re-normalize the vector</span>
-        <span class="n">b_k</span> <span class="o">=</span> <span class="n">b_k1</span> <span class="p">/</span> <span class="n">b_k1_norm</span><span class="p">;</span>
-    <span class="k">end</span>
-    
-    <span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">b_k</span><span class="o">'</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">b_k</span><span class="p">;</span>
-    <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">b_k</span><span class="p">;</span>
-    
-    <span class="c1">% Plot convergence</span>
-    <span class="nb">figure</span><span class="p">;</span>
-    <span class="nb">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">num_iterations</span><span class="p">,</span> <span class="n">eigenvalues</span><span class="p">,</span> <span class="s1">'LineWidth'</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
-    <span class="nb">xlabel</span><span class="p">(</span><span class="s1">'Iteration'</span><span class="p">);</span>
-    <span class="nb">ylabel</span><span class="p">(</span><span class="s1">'Eigenvalue Estimate'</span><span class="p">);</span>
-    <span class="nb">title</span><span class="p">(</span><span class="s1">'Power Method Convergence'</span><span class="p">);</span>
-    <span class="nb">grid</span> <span class="n">on</span><span class="p">;</span>
-<span class="k">end</span>
-</code></pre></div></div>
-
-<h3 id="4-bash">4. Bash</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-
-<span class="c"># Script to backup and compress log files</span>
-<span class="nv">LOG_DIR</span><span class="o">=</span><span class="s2">"/var/log/myapp"</span>
-<span class="nv">BACKUP_DIR</span><span class="o">=</span><span class="s2">"/backup/logs"</span>
-<span class="nv">DATE</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span> +%Y%m%d_%H%M%S<span class="si">)</span>
-<span class="nv">RETENTION_DAYS</span><span class="o">=</span>30
-
-<span class="c"># Function to check if directory exists</span>
-check_directory<span class="o">()</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-d</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
-        </span><span class="nb">echo</span> <span class="s2">"Error: Directory </span><span class="nv">$1</span><span class="s2"> does not exist"</span>
-        <span class="nb">exit </span>1
-    <span class="k">fi</span>
-<span class="o">}</span>
-
-<span class="c"># Function to compress and backup logs</span>
-backup_logs<span class="o">()</span> <span class="o">{</span>
-    <span class="nb">local </span><span class="nv">source_dir</span><span class="o">=</span><span class="nv">$1</span>
-    <span class="nb">local </span><span class="nv">dest_dir</span><span class="o">=</span><span class="nv">$2</span>
-    <span class="nb">local </span><span class="nv">timestamp</span><span class="o">=</span><span class="nv">$3</span>
-    
-    <span class="nb">echo</span> <span class="s2">"Starting backup at </span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2">"</span>
-    
-    <span class="c"># Create backup directory if it doesn't exist</span>
-    <span class="nb">mkdir</span> <span class="nt">-p</span> <span class="s2">"</span><span class="nv">$dest_dir</span><span class="s2">"</span>
-    
-    <span class="c"># Find and compress log files older than 1 day</span>
-    find <span class="s2">"</span><span class="nv">$source_dir</span><span class="s2">"</span> <span class="nt">-name</span> <span class="s2">"*.log"</span> <span class="nt">-type</span> f <span class="nt">-mtime</span> +1 | <span class="k">while </span><span class="nb">read</span> <span class="nt">-r</span> logfile<span class="p">;</span> <span class="k">do
-        </span><span class="nv">filename</span><span class="o">=</span><span class="si">$(</span><span class="nb">basename</span> <span class="s2">"</span><span class="nv">$logfile</span><span class="s2">"</span><span class="si">)</span>
-        <span class="nb">tar</span> <span class="nt">-czf</span> <span class="s2">"</span><span class="k">${</span><span class="nv">dest_dir</span><span class="k">}</span><span class="s2">/</span><span class="k">${</span><span class="nv">filename</span><span class="p">%.log</span><span class="k">}</span><span class="s2">_</span><span class="k">${</span><span class="nv">timestamp</span><span class="k">}</span><span class="s2">.tar.gz"</span> <span class="s2">"</span><span class="nv">$logfile</span><span class="s2">"</span>
-        <span class="nb">echo</span> <span class="s2">"Backed up: </span><span class="nv">$filename</span><span class="s2">"</span>
-    <span class="k">done</span>
-    
-    <span class="c"># Remove old backups</span>
-    find <span class="s2">"</span><span class="nv">$dest_dir</span><span class="s2">"</span> <span class="nt">-name</span> <span class="s2">"*.tar.gz"</span> <span class="nt">-type</span> f <span class="nt">-mtime</span> +<span class="nv">$RETENTION_DAYS</span> <span class="nt">-delete</span>
-    
-    <span class="nb">echo</span> <span class="s2">"Backup completed at </span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2">"</span>
-<span class="o">}</span>
-
-<span class="c"># Main execution</span>
-check_directory <span class="s2">"</span><span class="nv">$LOG_DIR</span><span class="s2">"</span>
-backup_logs <span class="s2">"</span><span class="nv">$LOG_DIR</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$BACKUP_DIR</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$DATE</span><span class="s2">"</span>
-</code></pre></div></div>
-
-<p>Shell scripting relies heavily on utilities like <code class="language-plaintext highlighter-rouge">grep</code>, <code class="language-plaintext highlighter-rouge">sed</code>, and <code class="language-plaintext highlighter-rouge">awk</code> for text processing. The <code class="language-plaintext highlighter-rouge">find</code> command with its <code class="language-plaintext highlighter-rouge">-exec</code> flag provides powerful file system traversal capabilities. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-
-<h3 id="5-python">5. Python</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
-<span class="kn">from</span> <span class="n">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-
-<span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">NeuralLayer</span><span class="p">:</span>
-    <span class="n">weights</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">ndarray</span>
-    <span class="n">biases</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">ndarray</span>
-    <span class="n">activation</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sh">'</span><span class="s">relu</span><span class="sh">'</span>
-    
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="sh">"""</span><span class="s">Forward pass through the layer</span><span class="sh">"""</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">weights</span><span class="p">)</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">biases</span>
-        
-        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">activation</span> <span class="o">==</span> <span class="sh">'</span><span class="s">relu</span><span class="sh">'</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">self</span><span class="p">.</span><span class="n">activation</span> <span class="o">==</span> <span class="sh">'</span><span class="s">sigmoid</span><span class="sh">'</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="n">self</span><span class="p">.</span><span class="n">activation</span> <span class="o">==</span> <span class="sh">'</span><span class="s">tanh</span><span class="sh">'</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="nf">tanh</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">z</span>
-
-<span class="k">class</span> <span class="nc">SimpleNeuralNetwork</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">layer_sizes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
-        <span class="n">self</span><span class="p">.</span><span class="n">layers</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">layer_sizes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="n">layer_sizes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">layer_sizes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mf">0.01</span>
-            <span class="n">biases</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">layer_sizes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
-            <span class="n">activation</span> <span class="o">=</span> <span class="sh">'</span><span class="s">relu</span><span class="sh">'</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nf">len</span><span class="p">(</span><span class="n">layer_sizes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="k">else</span> <span class="sh">'</span><span class="s">sigmoid</span><span class="sh">'</span>
-            <span class="n">self</span><span class="p">.</span><span class="n">layers</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nc">NeuralLayer</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">biases</span><span class="p">,</span> <span class="n">activation</span><span class="p">))</span>
-    
-    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="sh">"""</span><span class="s">Forward propagation through all layers</span><span class="sh">"""</span>
-        <span class="n">activation</span> <span class="o">=</span> <span class="n">X</span>
-        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">layers</span><span class="p">:</span>
-            <span class="n">activation</span> <span class="o">=</span> <span class="n">layer</span><span class="p">.</span><span class="nf">forward</span><span class="p">(</span><span class="n">activation</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">activation</span>
-
-<span class="c1"># Example usage
-</span><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
-    <span class="n">nn</span> <span class="o">=</span> <span class="nc">SimpleNeuralNetwork</span><span class="p">([</span><span class="mi">784</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="nf">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
-    <span class="n">output</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="nf">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Output shape: </span><span class="si">{</span><span class="n">output</span><span class="p">.</span><span class="n">shape</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>Python’s rich ecosystem includes powerful libraries for scientific computing. The <code class="language-plaintext highlighter-rouge">numpy.ndarray</code> type provides efficient multi-dimensional arrays, while decorators like <code class="language-plaintext highlighter-rouge">@property</code> and <code class="language-plaintext highlighter-rouge">@classmethod</code> enable elegant object-oriented designs. Lorem ipsum dolor sit amet, with type hints using <code class="language-plaintext highlighter-rouge">List[int]</code> and <code class="language-plaintext highlighter-rouge">Dict[str, Any]</code> improving code clarity. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
-
-<h3 id="6-javascript">6. JavaScript</h3>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">EventEmitter</span> <span class="p">{</span>
-    <span class="nf">constructor</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">events</span> <span class="o">=</span> <span class="p">{};</span>
-    <span class="p">}</span>
-
-    <span class="nf">on</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">listener</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">event</span><span class="p">])</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">event</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
-        <span class="p">}</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">event</span><span class="p">].</span><span class="nf">push</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
-        <span class="k">return </span><span class="p">()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nf">off</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">listener</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="nf">off</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">listenerToRemove</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">event</span><span class="p">])</span> <span class="k">return</span><span class="p">;</span>
-        
-        <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">event</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">event</span><span class="p">].</span><span class="nf">filter</span><span class="p">(</span>
-            <span class="nx">listener</span> <span class="o">=&gt;</span> <span class="nx">listener</span> <span class="o">!==</span> <span class="nx">listenerToRemove</span>
-        <span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="nf">emit</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">event</span><span class="p">])</span> <span class="k">return</span><span class="p">;</span>
-        
-        <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">[</span><span class="nx">event</span><span class="p">].</span><span class="nf">forEach</span><span class="p">(</span><span class="nx">listener</span> <span class="o">=&gt;</span> <span class="p">{</span>
-            <span class="nf">listener</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
-        <span class="p">});</span>
-    <span class="p">}</span>
-
-    <span class="nf">once</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">listener</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">const</span> <span class="nx">onceWrapper</span> <span class="o">=</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-            <span class="nf">listener</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span>
-            <span class="k">this</span><span class="p">.</span><span class="nf">off</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">onceWrapper</span><span class="p">);</span>
-        <span class="p">};</span>
-        <span class="k">this</span><span class="p">.</span><span class="nf">on</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">onceWrapper</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// Usage example</span>
-<span class="kd">const</span> <span class="nx">emitter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">EventEmitter</span><span class="p">();</span>
-<span class="kd">const</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nf">on</span><span class="p">(</span><span class="dl">'</span><span class="s1">data</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Received:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
-<span class="p">});</span>
-
-<span class="nx">emitter</span><span class="p">.</span><span class="nf">emit</span><span class="p">(</span><span class="dl">'</span><span class="s1">data</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="mi">42</span> <span class="p">});</span>
-<span class="nf">unsubscribe</span><span class="p">();</span>
-</code></pre></div></div>
-
-<p>Modern JavaScript has evolved significantly with ES6+ features. Arrow functions using <code class="language-plaintext highlighter-rouge">=&gt;</code> syntax provide concise callbacks, while <code class="language-plaintext highlighter-rouge">async/await</code> makes asynchronous code more readable than traditional <code class="language-plaintext highlighter-rouge">Promise.then()</code> chains. The spread operator <code class="language-plaintext highlighter-rouge">...</code> and destructuring assignments have become idiomatic patterns. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-<h3 id="7-java">7. Java</h3>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.util.concurrent.*</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ThreadSafeCache</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span> <span class="no">V</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ConcurrentHashMap</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span> <span class="nc">CacheEntry</span><span class="o">&lt;</span><span class="no">V</span><span class="o">&gt;&gt;</span> <span class="n">cache</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">ttlMillis</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">ScheduledExecutorService</span> <span class="n">cleanupExecutor</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">CacheEntry</span><span class="o">&lt;</span><span class="no">V</span><span class="o">&gt;</span> <span class="o">{</span>
-        <span class="kd">final</span> <span class="no">V</span> <span class="n">value</span><span class="o">;</span>
-        <span class="kd">final</span> <span class="kt">long</span> <span class="n">expiryTime</span><span class="o">;</span>
-
-        <span class="nc">CacheEntry</span><span class="o">(</span><span class="no">V</span> <span class="n">value</span><span class="o">,</span> <span class="kt">long</span> <span class="n">ttlMillis</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">expiryTime</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">+</span> <span class="n">ttlMillis</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="kt">boolean</span> <span class="nf">isExpired</span><span class="o">()</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">expiryTime</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nf">ThreadSafeCache</span><span class="o">(</span><span class="kt">long</span> <span class="n">ttlMillis</span><span class="o">,</span> <span class="kt">long</span> <span class="n">cleanupIntervalMillis</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">cache</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ConcurrentHashMap</span><span class="o">&lt;&gt;();</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">ttlMillis</span> <span class="o">=</span> <span class="n">ttlMillis</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">cleanupExecutor</span> <span class="o">=</span> <span class="nc">Executors</span><span class="o">.</span><span class="na">newSingleThreadScheduledExecutor</span><span class="o">();</span>
-        
-        <span class="c1">// Schedule periodic cleanup</span>
-        <span class="n">cleanupExecutor</span><span class="o">.</span><span class="na">scheduleAtFixedRate</span><span class="o">(</span>
-            <span class="k">this</span><span class="o">::</span><span class="n">cleanup</span><span class="o">,</span>
-            <span class="n">cleanupIntervalMillis</span><span class="o">,</span>
-            <span class="n">cleanupIntervalMillis</span><span class="o">,</span>
-            <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">MILLISECONDS</span>
-        <span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">put</span><span class="o">(</span><span class="no">K</span> <span class="n">key</span><span class="o">,</span> <span class="no">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">cache</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="k">new</span> <span class="nc">CacheEntry</span><span class="o">&lt;&gt;(</span><span class="n">value</span><span class="o">,</span> <span class="n">ttlMillis</span><span class="o">));</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="nc">Optional</span><span class="o">&lt;</span><span class="no">V</span><span class="o">&gt;</span> <span class="nf">get</span><span class="o">(</span><span class="no">K</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-        <span class="nc">CacheEntry</span><span class="o">&lt;</span><span class="no">V</span><span class="o">&gt;</span> <span class="n">entry</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">entry</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">entry</span><span class="o">.</span><span class="na">isExpired</span><span class="o">())</span> <span class="o">{</span>
-            <span class="n">cache</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
-            <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">empty</span><span class="o">();</span>
-        <span class="o">}</span>
-        <span class="k">return</span> <span class="nc">Optional</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">entry</span><span class="o">.</span><span class="na">value</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">cleanup</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">cache</span><span class="o">.</span><span class="na">entrySet</span><span class="o">().</span><span class="na">removeIf</span><span class="o">(</span><span class="n">entry</span> <span class="o">-&gt;</span> <span class="n">entry</span><span class="o">.</span><span class="na">getValue</span><span class="o">().</span><span class="na">isExpired</span><span class="o">());</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">shutdown</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">cleanupExecutor</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<h3 id="8-ruby">8. Ruby</h3>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">module</span> <span class="nn">Cacheable</span>
-  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">included</span><span class="p">(</span><span class="n">base</span><span class="p">)</span>
-    <span class="n">base</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="no">ClassMethods</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="k">module</span> <span class="nn">ClassMethods</span>
-    <span class="k">def</span> <span class="nf">cache_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="ss">ttl: </span><span class="mi">3600</span><span class="p">)</span>
-      <span class="n">original_method</span> <span class="o">=</span> <span class="nb">instance_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span>
-      
-      <span class="n">define_method</span><span class="p">(</span><span class="n">method_name</span><span class="p">)</span> <span class="k">do</span> <span class="o">|*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="o">|</span>
-        <span class="n">cache_key</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">method_name</span><span class="si">}</span><span class="s2">_</span><span class="si">#{</span><span class="n">args</span><span class="si">}</span><span class="s2">_</span><span class="si">#{</span><span class="n">kwargs</span><span class="si">}</span><span class="s2">"</span>
-        
-        <span class="k">if</span> <span class="vi">@cache</span> <span class="o">&amp;&amp;</span> <span class="vi">@cache</span><span class="p">[</span><span class="n">cache_key</span><span class="p">]</span> <span class="o">&amp;&amp;</span> 
-           <span class="no">Time</span><span class="p">.</span><span class="nf">now</span> <span class="o">-</span> <span class="vi">@cache</span><span class="p">[</span><span class="n">cache_key</span><span class="p">][</span><span class="ss">:timestamp</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ttl</span>
-          <span class="k">return</span> <span class="vi">@cache</span><span class="p">[</span><span class="n">cache_key</span><span class="p">][</span><span class="ss">:value</span><span class="p">]</span>
-        <span class="k">end</span>
-        
-        <span class="n">result</span> <span class="o">=</span> <span class="n">original_method</span><span class="p">.</span><span class="nf">bind</span><span class="p">(</span><span class="nb">self</span><span class="p">).</span><span class="nf">call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        
-        <span class="vi">@cache</span> <span class="o">||=</span> <span class="p">{}</span>
-        <span class="vi">@cache</span><span class="p">[</span><span class="n">cache_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-          <span class="ss">value: </span><span class="n">result</span><span class="p">,</span>
-          <span class="ss">timestamp: </span><span class="no">Time</span><span class="p">.</span><span class="nf">now</span>
-        <span class="p">}</span>
-        
-        <span class="n">result</span>
-      <span class="k">end</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-
-<span class="k">class</span> <span class="nc">APIClient</span>
-  <span class="kp">include</span> <span class="no">Cacheable</span>
-  
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">base_url</span><span class="p">)</span>
-    <span class="vi">@base_url</span> <span class="o">=</span> <span class="n">base_url</span>
-    <span class="vi">@cache</span> <span class="o">=</span> <span class="p">{}</span>
-  <span class="k">end</span>
-  
-  <span class="k">def</span> <span class="nf">fetch_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
-    <span class="c1"># Simulate API call</span>
-    <span class="nb">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
-    <span class="p">{</span> <span class="ss">id: </span><span class="n">user_id</span><span class="p">,</span> <span class="ss">name: </span><span class="s2">"User </span><span class="si">#{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">"</span> <span class="p">}</span>
-  <span class="k">end</span>
-  
-  <span class="n">cache_method</span> <span class="ss">:fetch_user</span><span class="p">,</span> <span class="ss">ttl: </span><span class="mi">300</span>
-<span class="k">end</span>
-
-<span class="c1"># Usage</span>
-<span class="n">client</span> <span class="o">=</span> <span class="no">APIClient</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"https://api.example.com"</span><span class="p">)</span>
-<span class="n">user</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">fetch_user</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>  <span class="c1"># Makes actual call</span>
-<span class="n">cached_user</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">fetch_user</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>  <span class="c1"># Returns cached result</span>
-</code></pre></div></div>
-
-<h3 id="9-html">9. HTML</h3>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Responsive Card Component<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"styles.css"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;article</span> <span class="na">class=</span><span class="s">"card"</span> <span class="na">data-category=</span><span class="s">"technology"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"card__header"</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"image.jpg"</span> <span class="na">alt=</span><span class="s">"Card image"</span> <span class="na">class=</span><span class="s">"card__image"</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"card__badge"</span><span class="nt">&gt;</span>Featured<span class="nt">&lt;/span&gt;</span>
-            <span class="nt">&lt;/header&gt;</span>
-            
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card__body"</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"card__title"</span><span class="nt">&gt;</span>
-                    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"card__link"</span><span class="nt">&gt;</span>Article Title<span class="nt">&lt;/a&gt;</span>
-                <span class="nt">&lt;/h2&gt;</span>
-                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"card__description"</span><span class="nt">&gt;</span>
-                    This is a description of the card content. It provides
-                    a brief overview of what the article is about.
-                <span class="nt">&lt;/p&gt;</span>
-                
-                <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"card__tags"</span><span class="nt">&gt;</span>
-                    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"tag"</span><span class="nt">&gt;</span>JavaScript<span class="nt">&lt;/li&gt;</span>
-                    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"tag"</span><span class="nt">&gt;</span>Web Development<span class="nt">&lt;/li&gt;</span>
-                    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"tag"</span><span class="nt">&gt;</span>Tutorial<span class="nt">&lt;/li&gt;</span>
-                <span class="nt">&lt;/ul&gt;</span>
-            <span class="nt">&lt;/div&gt;</span>
-            
-            <span class="nt">&lt;footer</span> <span class="na">class=</span><span class="s">"card__footer"</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;time</span> <span class="na">datetime=</span><span class="s">"2024-11-22"</span> <span class="na">class=</span><span class="s">"card__date"</span><span class="nt">&gt;</span>
-                    November 22, 2024
-                <span class="nt">&lt;/time&gt;</span>
-                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"card__author"</span><span class="nt">&gt;</span>By John Doe<span class="nt">&lt;/span&gt;</span>
-            <span class="nt">&lt;/footer&gt;</span>
-        <span class="nt">&lt;/article&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div></div>
-
-<p>Semantic HTML5 elements like <code class="language-plaintext highlighter-rouge">&lt;article&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code>, and <code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code> provide meaningful structure to web pages. Accessibility attributes such as <code class="language-plaintext highlighter-rouge">aria-label</code> and <code class="language-plaintext highlighter-rouge">role</code> ensure content is usable by assistive technologies. The <code class="language-plaintext highlighter-rouge">data-*</code> attributes allow custom data storage directly in HTML elements. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-
-<h3 id="10-css">10. CSS</h3>
-
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* Modern CSS with Custom Properties and Grid */</span>
-<span class="nd">:root</span> <span class="p">{</span>
-    <span class="py">--primary-color</span><span class="p">:</span> <span class="nx">#3b82f6</span><span class="p">;</span>
-    <span class="py">--secondary-color</span><span class="p">:</span> <span class="nx">#8b5cf6</span><span class="p">;</span>
-    <span class="py">--text-color</span><span class="p">:</span> <span class="nx">#1f2937</span><span class="p">;</span>
-    <span class="py">--bg-color</span><span class="p">:</span> <span class="nx">#f9fafb</span><span class="p">;</span>
-    <span class="py">--card-shadow</span><span class="p">:</span> <span class="m">0</span> <span class="m">4px</span> <span class="m">6px</span> <span class="m">-1px</span> <span class="nf">rgba</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0.1</span><span class="p">);</span>
-    <span class="py">--transition-speed</span><span class="p">:</span> <span class="m">0.3s</span><span class="p">;</span>
-    <span class="py">--border-radius</span><span class="p">:</span> <span class="m">0.5rem</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="o">*</span> <span class="p">{</span>
-    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
-    <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
-    <span class="nl">box-sizing</span><span class="p">:</span> <span class="nb">border-box</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="nt">body</span> <span class="p">{</span>
-    <span class="nl">font-family</span><span class="p">:</span> <span class="o">-</span><span class="n">apple-system</span><span class="p">,</span> <span class="n">BlinkMacSystemFont</span><span class="p">,</span> <span class="s2">'Segoe UI'</span><span class="p">,</span> <span class="n">Roboto</span><span class="p">,</span> 
-                 <span class="n">Oxygen</span><span class="p">,</span> <span class="n">Ubuntu</span><span class="p">,</span> <span class="n">Cantarell</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
-    <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="l">--text-color</span><span class="p">);</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="l">--bg-color</span><span class="p">);</span>
-    <span class="nl">line-height</span><span class="p">:</span> <span class="m">1.6</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="nc">.container</span> <span class="p">{</span>
-    <span class="nl">max-width</span><span class="p">:</span> <span class="m">1200px</span><span class="p">;</span>
-    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
-    <span class="nl">padding</span><span class="p">:</span> <span class="m">2rem</span><span class="p">;</span>
-    <span class="nl">display</span><span class="p">:</span> <span class="nb">grid</span><span class="p">;</span>
-    <span class="nl">grid-template-columns</span><span class="p">:</span> <span class="nf">repeat</span><span class="p">(</span><span class="nb">auto-fit</span><span class="p">,</span> <span class="nf">minmax</span><span class="p">(</span><span class="m">300px</span><span class="p">,</span> <span class="m">1fr</span><span class="p">));</span>
-    <span class="nl">gap</span><span class="p">:</span> <span class="m">2rem</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="nc">.card</span> <span class="p">{</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="nx">white</span><span class="p">;</span>
-    <span class="nl">border-radius</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="l">--border-radius</span><span class="p">);</span>
-    <span class="nl">box-shadow</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="l">--card-shadow</span><span class="p">);</span>
-    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
-    <span class="nl">transition</span><span class="p">:</span> <span class="n">transform</span> <span class="nf">var</span><span class="p">(</span><span class="l">--transition-speed</span><span class="p">),</span>
-                <span class="n">box-shadow</span> <span class="nf">var</span><span class="p">(</span><span class="l">--transition-speed</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="nc">.card</span><span class="nd">:hover</span> <span class="p">{</span>
-    <span class="nl">transform</span><span class="p">:</span> <span class="nf">translateY</span><span class="p">(</span><span class="m">-4px</span><span class="p">);</span>
-    <span class="nl">box-shadow</span><span class="p">:</span> <span class="m">0</span> <span class="m">10px</span> <span class="m">15px</span> <span class="m">-3px</span> <span class="nf">rgba</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">0.1</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="nc">.card__header</span> <span class="p">{</span>
-    <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">200px</span><span class="p">;</span>
-    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="nc">.card__image</span> <span class="p">{</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
-    <span class="nl">object-fit</span><span class="p">:</span> <span class="nb">cover</span><span class="p">;</span>
-    <span class="nl">transition</span><span class="p">:</span> <span class="n">transform</span> <span class="nf">var</span><span class="p">(</span><span class="l">--transition-speed</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="nc">.card</span><span class="nd">:hover</span> <span class="nc">.card__image</span> <span class="p">{</span>
-    <span class="nl">transform</span><span class="p">:</span> <span class="nf">scale</span><span class="p">(</span><span class="m">1.05</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="nc">.card__badge</span> <span class="p">{</span>
-    <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
-    <span class="nl">top</span><span class="p">:</span> <span class="m">1rem</span><span class="p">;</span>
-    <span class="nl">right</span><span class="p">:</span> <span class="m">1rem</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="l">--primary-color</span><span class="p">);</span>
-    <span class="nl">color</span><span class="p">:</span> <span class="nx">white</span><span class="p">;</span>
-    <span class="nl">padding</span><span class="p">:</span> <span class="m">0.25rem</span> <span class="m">0.75rem</span><span class="p">;</span>
-    <span class="nl">border-radius</span><span class="p">:</span> <span class="m">9999px</span><span class="p">;</span>
-    <span class="nl">font-size</span><span class="p">:</span> <span class="m">0.875rem</span><span class="p">;</span>
-    <span class="nl">font-weight</span><span class="p">:</span> <span class="m">600</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">@media</span> <span class="p">(</span><span class="n">max-width</span><span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nc">.container</span> <span class="p">{</span>
-        <span class="nl">grid-template-columns</span><span class="p">:</span> <span class="m">1fr</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="11-sql">11. SQL</h3>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- Complex query with CTEs, window functions, and aggregations</span>
-<span class="k">WITH</span> <span class="n">monthly_sales</span> <span class="k">AS</span> <span class="p">(</span>
-    <span class="k">SELECT</span> 
-        <span class="n">DATE_TRUNC</span><span class="p">(</span><span class="s1">'month'</span><span class="p">,</span> <span class="n">order_date</span><span class="p">)</span> <span class="k">AS</span> <span class="k">month</span><span class="p">,</span>
-        <span class="n">product_id</span><span class="p">,</span>
-        <span class="k">SUM</span><span class="p">(</span><span class="n">quantity</span> <span class="o">*</span> <span class="n">unit_price</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total_sales</span><span class="p">,</span>
-        <span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">order_id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">order_count</span>
-    <span class="k">FROM</span> <span class="n">orders</span>
-    <span class="k">WHERE</span> <span class="n">order_date</span> <span class="o">&gt;=</span> <span class="k">CURRENT_DATE</span> <span class="o">-</span> <span class="n">INTERVAL</span> <span class="s1">'12 months'</span>
-    <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">DATE_TRUNC</span><span class="p">(</span><span class="s1">'month'</span><span class="p">,</span> <span class="n">order_date</span><span class="p">),</span> <span class="n">product_id</span>
-<span class="p">),</span>
-<span class="n">ranked_products</span> <span class="k">AS</span> <span class="p">(</span>
-    <span class="k">SELECT</span> 
-        <span class="n">ms</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
-        <span class="n">p</span><span class="p">.</span><span class="n">product_name</span><span class="p">,</span>
-        <span class="n">p</span><span class="p">.</span><span class="n">category</span><span class="p">,</span>
-        <span class="n">RANK</span><span class="p">()</span> <span class="n">OVER</span> <span class="p">(</span>
-            <span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">ms</span><span class="p">.</span><span class="k">month</span> 
-            <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">ms</span><span class="p">.</span><span class="n">total_sales</span> <span class="k">DESC</span>
-        <span class="p">)</span> <span class="k">AS</span> <span class="n">sales_rank</span><span class="p">,</span>
-        <span class="k">AVG</span><span class="p">(</span><span class="n">ms</span><span class="p">.</span><span class="n">total_sales</span><span class="p">)</span> <span class="n">OVER</span> <span class="p">(</span>
-            <span class="k">PARTITION</span> <span class="k">BY</span> <span class="n">ms</span><span class="p">.</span><span class="n">product_id</span>
-        <span class="p">)</span> <span class="k">AS</span> <span class="n">avg_monthly_sales</span>
-    <span class="k">FROM</span> <span class="n">monthly_sales</span> <span class="n">ms</span>
-    <span class="k">JOIN</span> <span class="n">products</span> <span class="n">p</span> <span class="k">ON</span> <span class="n">ms</span><span class="p">.</span><span class="n">product_id</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">product_id</span>
-<span class="p">)</span>
-<span class="k">SELECT</span> 
-    <span class="k">month</span><span class="p">,</span>
-    <span class="n">product_name</span><span class="p">,</span>
-    <span class="n">category</span><span class="p">,</span>
-    <span class="n">total_sales</span><span class="p">,</span>
-    <span class="n">order_count</span><span class="p">,</span>
-    <span class="n">sales_rank</span><span class="p">,</span>
-    <span class="n">ROUND</span><span class="p">(</span><span class="n">total_sales</span> <span class="o">/</span> <span class="n">avg_monthly_sales</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">AS</span> <span class="n">performance_index</span>
-<span class="k">FROM</span> <span class="n">ranked_products</span>
-<span class="k">WHERE</span> <span class="n">sales_rank</span> <span class="o">&lt;=</span> <span class="mi">10</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">month</span> <span class="k">DESC</span><span class="p">,</span> <span class="n">sales_rank</span> <span class="k">ASC</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>Code block without syntax highliting</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ut risus vel neque sagittis 
-pellentesque. Pellentesque bibendum nisl tellus, nec luctus nibh sollicitudin non.
-Donec quis sollicitudin velit. Curabitur ante ante, vulputate sed metus at, cursus eleifend urna. 
-Curabitur dapibus molestie bibendum. Ut eget pharetra nisi. Sed a viverra diam. Lorem ipsum dolor
-sit amet, consectetur adipiscing elit. Pellentesque ac lacus in magna ornare pretium a sit amet 
-urna. Nunc et arcu commodo, semper diam eget, imperdiet velit. Aliquam eros dui, pharetra et
-vulputate non, rutrum id lectus. Proin sed varius nunc. Vestibulum erat ante, varius vitae nisl 
-a, consequat facilisis augue. Nam quis ex nec dolor tempor dapibus. Ut ac pulvinar est.
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-</code></pre></div></div>
-
-<h2 id="testing-premonition-plugin-features">Testing premonition plugin features</h2>
-
-<h3 id="citation">Citation</h3>
-
-<div class="premonition citation">
-  <i class="premonition pn-quote"></i>
-  <blockquote class="content blockquote" cite="twain">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
-ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
-Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
-
-
-
-
-    
-    <footer class="blockquote-footer">
-      <cite title="-- Mark Twain">-- Mark Twain</cite>
-    </footer>
-    
-  </blockquote>
-</div>
-
-<h3 id="note-without-title">Note without title</h3>
-
-<div class="premonition note">
-  <i class="premonition pn-note"></i>
-  <div class="content">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
-ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
-Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
-
-
-
-
-  </div>
-</div>
-
-<h3 id="info-with-title">Info with title</h3>
-
-<div class="premonition info">
-  <i class="premonition pn-info"></i>
-  <div class="content">
-    <p class="header">The information header</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
-ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
-Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
-
-
-
-
-  </div>
-</div>
-
-<h3 id="warning-with-title">Warning with title</h3>
-
-<div class="premonition warning">
-  <i class="premonition pn-warn"></i>
-  <div class="content">
-    <p class="header">The information header</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
-ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
-Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
-
-
-
-
-  </div>
-</div>
-
-<h3 id="error-box">Error box</h3>
-
-<div class="premonition error">
-  <i class="premonition pn-error"></i>
-  <div class="content">
-    <p class="header">The information header</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean interdum, ligula in
-ultrices sodales, ante enim scelerisque diam, nec molestie lorem nulla sit amet dolor.
-Aenean id augue ante. Duis ut mi faucibus, pellentesque sem quis, gravida nisi. Nam cursus.</p>
-
-
-
-
-  </div>
-</div>
-
-<h3 id="custom-box-with-a-font-awesome-icon">Custom box with a Font Awesome icon</h3>
-
-<div class="premonition error">
-  <div class="fa pn-error"></div>
-  <div class="content">
-    <p class="header">PREMONITION ERROR: Invalid box type</p>
-    You have specified an invalid box type "custom". You can customize your own box types in `_config.yml`.
-    See documentation for more help.
-  </div>
-</div>
-
-<h3 id="error-box-with-markdown">Error box with Markdown</h3>
-
-<div class="premonition error">
-  <i class="premonition pn-error"></i>
-  <div class="content">
-    <p class="header">The information header</p><p><a href="https://github.com/lazee/premonition">Premonition</a> allows you to add</p>
-
-<ul>
-  <li>Lists</li>
-  <li>like this</li>
-</ul>
-
-<p>Use <em>formatting</em> and add code blocks.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Isn't that sweet?
-</code></pre></div></div>
-<p>Anything you can do in Markdown, you can do here. Expect from embeds Premonition boxes ;)</p>
-
-
-
-
-  </div>
-</div>
-
-<h3 id="reference-links">Reference links</h3>
-
-<div class="premonition info">
-  <i class="premonition pn-info"></i>
-  <div class="content">
-    <p class="header">Linked</p><p>This is a <a href="https://www.example.com/" title="dd">reference link</a>.</p>
-
-
-
-
-  </div>
-</div>
-
-<h2 id="inline-code">Inline Code</h2>
-
-<p>You can also use <code class="language-plaintext highlighter-rouge">inline code</code> within paragraphs. For example, the <code class="language-plaintext highlighter-rouge">printf()</code> function in C, or the <code class="language-plaintext highlighter-rouge">always_ff</code> block in SystemVerilog. Lorem ipsum dolor sit amet, when discussing memory management you might reference <code class="language-plaintext highlighter-rouge">malloc()</code> and <code class="language-plaintext highlighter-rouge">calloc()</code> for allocation, or <code class="language-plaintext highlighter-rouge">memcpy()</code> for copying data between buffers.</p>
-
-<p>In web development, CSS selectors like <code class="language-plaintext highlighter-rouge">.class-name</code> and <code class="language-plaintext highlighter-rouge">#id-selector</code> target elements, while pseudo-classes such as <code class="language-plaintext highlighter-rouge">:hover</code> and <code class="language-plaintext highlighter-rouge">:nth-child()</code> provide dynamic styling. JavaScript methods like <code class="language-plaintext highlighter-rouge">addEventListener()</code> and <code class="language-plaintext highlighter-rouge">querySelector()</code> form the basis of DOM manipulation. Vestibulum ante ipsum primis in faucibus.</p>
-
-<p>Hardware designers frequently work with operators: the reduction OR <code class="language-plaintext highlighter-rouge">|</code> operator in Verilog, bitwise shifts using <code class="language-plaintext highlighter-rouge">&lt;&lt;</code> and <code class="language-plaintext highlighter-rouge">&gt;&gt;</code>, and the concatenation operator <code class="language-plaintext highlighter-rouge">{}</code> for building wider signals. The non-blocking assignment <code class="language-plaintext highlighter-rouge">&lt;=</code> differs fundamentally from the blocking assignment <code class="language-plaintext highlighter-rouge">=</code> in terms of simulation semantics.</p>
-
-<p>Database queries utilize functions like <code class="language-plaintext highlighter-rouge">COUNT()</code>, <code class="language-plaintext highlighter-rouge">AVG()</code>, and <code class="language-plaintext highlighter-rouge">GROUP_CONCAT()</code>, while clauses such as <code class="language-plaintext highlighter-rouge">WHERE</code>, <code class="language-plaintext highlighter-rouge">HAVING</code>, and <code class="language-plaintext highlighter-rouge">ORDER BY</code> structure the query logic. The <code class="language-plaintext highlighter-rouge">JOIN</code> operations (<code class="language-plaintext highlighter-rouge">INNER JOIN</code>, <code class="language-plaintext highlighter-rouge">LEFT JOIN</code>, <code class="language-plaintext highlighter-rouge">RIGHT JOIN</code>) combine data from multiple tables. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-<h2 id="mixed-content-example">Mixed Content Example</h2>
-
-<p>Here’s a paragraph that contains <strong>bold text</strong>, <em>italic text</em>, and a <a href="https://jekyllrb.com/">link to Jekyll</a>.</p>
-
-<blockquote>
-  <p>And here’s a blockquote that references some code:</p>
-
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">hello_world</span><span class="p">():</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Hello, World!</span><span class="sh">"</span><span class="p">)</span>
-</code></pre></div>  </div>
-</blockquote>
-
-<hr />
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>This demo file showcases all the major markdown features supported by Jekyll, including syntax highlighting for multiple programming languages, tables with different alignments, blockquotes with nested content, and inline code formatting.</p>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Testing your Jekyll theme’s typography involves checking how <code class="language-plaintext highlighter-rouge">monospace fonts</code> render inline within body text, ensuring proper contrast and readability. Configuration options in <code class="language-plaintext highlighter-rouge">_config.yml</code> control site-wide behavior, while front matter variables like <code class="language-plaintext highlighter-rouge">layout</code>, <code class="language-plaintext highlighter-rouge">title</code>, and <code class="language-plaintext highlighter-rouge">categories</code> customize individual pages. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-<p>The combination of Markdown’s simplicity with Jekyll’s power provides an excellent platform for technical writing. Whether documenting API endpoints with <code class="language-plaintext highlighter-rouge">GET /api/users/{id}</code> notation, explaining command-line tools like <code class="language-plaintext highlighter-rouge">bundle exec jekyll serve</code>, or discussing programming concepts, the syntax highlighting and formatting capabilities ensure your content remains both readable and professional.</p>]]></content><author><name></name></author><category term="markdown" /><category term="markdown" /><category term="demo" /><summary type="html"><![CDATA[Markdown Feature Demo]]></summary></entry><entry><title type="html">SystemVerilog Assertions cheat sheet</title><link href="https://criticalpath.dev/verification/sva_cheat_sheet/" rel="alternate" type="text/html" title="SystemVerilog Assertions cheat sheet" /><published>2025-11-01T00:00:00+01:00</published><updated>2025-11-01T00:00:00+01:00</updated><id>https://criticalpath.dev/verification/sva_cheat_sheet</id><content type="html" xml:base="https://criticalpath.dev/verification/sva_cheat_sheet/"><![CDATA[<h2 id="sequence-declaration">Sequence declaration</h2>
-
-<p>Declares a sequence expression that can be used in property declarations. Local variables are permitted,</p>
-
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sequence</span> <span class="n">identifier</span> <span class="p">[</span> <span class="n">argument_list</span> <span class="p">]</span> <span class="p">;</span>
-	<span class="n">sequence_expr</span> <span class="p">[</span> <span class="p">;</span> <span class="p">]</span>
-<span class="k">endsequence</span> <span class="p">[</span> <span class="o">:</span> <span class="n">identifier</span> <span class="p">]</span>
-</code></pre></div></div>
-
-<p>Example:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sequence</span> <span class="n">SEQ1</span><span class="p">;</span>
-	<span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="p">##</span><span class="mi">1</span> <span class="n">C</span><span class="p">;</span>
-<span class="k">endsequence</span>
-
-<span class="k">sequence</span> <span class="n">SEQ2</span><span class="p">(</span><span class="n">LEN</span><span class="p">,</span> <span class="n">SIG</span><span class="p">);</span>
-	<span class="n">D</span> <span class="p">##</span><span class="mi">1</span> <span class="n">E</span><span class="p">[</span><span class="o">*</span><span class="n">LEN</span><span class="p">]</span> <span class="p">##</span><span class="mi">1</span> <span class="n">SIG</span><span class="p">;</span>
-<span class="k">endsequence</span>
-</code></pre></div></div>
-
-<p>Recommended to define (or infer) sequence clock at instantiation and not at declaration. A sequence is a series of Boolean expressions evaluated over time. A sequence of length one cycle is the same as a Boolean expression.</p>
-
-<h2 id="property-declaration">Property declaration</h2>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">property</span> <span class="n">identifier</span> <span class="p">[</span> <span class="n">argument_list</span> <span class="p">]</span> <span class="p">;</span>
-	<span class="p">[</span> <span class="n">clock_expr</span> <span class="p">]</span> <span class="p">[</span> <span class="n">disable_clause</span> <span class="p">]</span>
-	<span class="n">property_expr</span> <span class="p">;</span>
-<span class="k">endproperty</span>
-</code></pre></div></div>
-
-<p>Example:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">property</span> <span class="n">P1</span> <span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="p">;</span>
-	<span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span> <span class="o">!</span><span class="n">rst_n</span> <span class="p">)</span>
-	<span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">R</span> <span class="p">##</span><span class="mi">1</span> <span class="n">S</span> <span class="o">&amp;&amp;</span> <span class="n">T</span><span class="p">;</span>
-<span class="k">endproperty</span>
-
-<span class="k">property</span> <span class="n">P1A</span><span class="p">;</span>
-	<span class="n">REQ</span> <span class="o">|=&gt;</span> <span class="n">s_eventually</span> <span class="n">GNT</span><span class="p">;</span>
-<span class="k">endproperty</span>
-</code></pre></div></div>
-
-<h2 id="verification-directives">Verification directives</h2>
-<p>A property declaration is merely a definition of behavior. Nothing gets checked until we have given a <em>verification directive</em> to the tool which states what should be done with that behavior. All properties must have a clock defined explicitly or via a default clock declaration.</p>
-
-<h3 id="assert-directive">Assert directive</h3>
-<p>Directive to the tool to ensure that the property holds, is true, under all circumstances (safety check).</p>
-
-<p>Syntax:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">label</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">prop_expr</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>Examples:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P1_INST</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">P1</span><span class="p">(</span><span class="n">SIG1</span><span class="p">,</span> <span class="n">SIG2</span><span class="p">,</span> <span class="n">S3</span><span class="p">));</span>
-<span class="n">P2</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span> <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="n">A</span> <span class="o">|-&gt;</span> <span class="n">B</span> <span class="p">);</span>
-<span class="n">P3</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span> <span class="n">ERROR_CNT</span> <span class="o">!=</span> <span class="mi">10</span> <span class="p">);</span>
-<span class="n">P1A_INS</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clka</span><span class="p">)</span> <span class="p">(</span><span class="n">P1A</span><span class="p">)</span> <span class="p">);</span>
-
-<span class="c1">// TODO: Add example where there is a property declaration, and then this property is used in an assertion</span>
-</code></pre></div></div>
-
-<h3 id="assume-directive">Assume directive</h3>
-
-<p>Directive to the tool to limit the behavior of the design under test (DUT) inputs to the behavior specified. Also known as constraints. Assume directives in the simulation are treated as assert directives.</p>
-
-<p>Syntax:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">label</span> <span class="o">:</span> <span class="k">assume</span> <span class="k">property</span> <span class="p">(</span><span class="n">prop_expr</span><span class="p">)</span>
-</code></pre></div></div>
-<p>Examples:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P4</span> <span class="o">:</span> <span class="k">assume</span> <span class="k">property</span> <span class="p">(</span><span class="n">req</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">gnt</span> <span class="o">|=&gt;</span> <span class="n">req</span><span class="p">)</span>
-<span class="n">P5</span> <span class="o">:</span> <span class="k">assume</span> <span class="k">property</span> <span class="p">(</span> <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk3</span><span class="p">)</span> <span class="kt">not</span><span class="p">(</span><span class="n">full</span> <span class="o">&amp;&amp;</span> <span class="n">empty</span><span class="p">)</span> <span class="p">);</span>
-
-<span class="c1">// TODO: Add an example where there is a property declaration, and then this property is used in an assumption</span>
-</code></pre></div></div>
-
-<h3 id="cover-directive">Cover directive</h3>
-
-<p>In the formal verification, a cover directive instructs the formal tool to find at least one valid execution trace in which a specified sequence of events or conditions can occur, given the design logic and any active <strong>assumptions</strong>  (constraints).
-Syntax:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">label</span> <span class="o">:</span> <span class="k">cover</span> <span class="k">property</span> <span class="p">(</span><span class="n">prop_expr</span><span class="p">)</span>
-</code></pre></div></div>
-<p>Examples:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C1</span> <span class="o">:</span> <span class="k">cover</span> <span class="k">sequence</span> <span class="p">(</span><span class="n">full</span> <span class="p">##[</span><span class="o">+</span><span class="p">]</span> <span class="n">empty</span> <span class="p">);</span>
-<span class="n">C2</span> <span class="o">:</span> <span class="k">cover</span> <span class="k">property</span> <span class="p">(</span> <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="p">(</span><span class="n">SEQ1</span><span class="p">)</span> <span class="p">);</span>
-
-<span class="c1">// TODO: Add an example where there is a sequence declaration and then this sequence is used in a cover</span>
-</code></pre></div></div>
-<p>For <code class="language-plaintext highlighter-rouge">cover property</code> it is recommended for <code class="language-plaintext highlighter-rouge">prop_expr</code> to only be a sequence, i.e. not contain implication operators <code class="language-plaintext highlighter-rouge">|-&gt;</code> or <code class="language-plaintext highlighter-rouge">|=&gt;</code> and the cover directive states <code class="language-plaintext highlighter-rouge">cover sequence</code> instead of <code class="language-plaintext highlighter-rouge">cover property</code></p>
-
-<h2 id="cycle-delays">Cycle delays</h2>
-
-<p>Specifies the number of clock ticks from the current clock tick until the next specified behavior occurs.</p>
-
-<p>Syntax:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">##[</span><span class="n">N</span><span class="o">:</span><span class="n">M</span><span class="p">]</span>
-<span class="p">##</span><span class="n">N</span>
-</code></pre></div></div>
-
-<p>N and M are constants know at elaboration. M can be the symbol $ meaning “infinity”. M &gt;= N. M and N can be 0.
-Example:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P6</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span><span class="p">(</span> <span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span> <span class="p">##[</span><span class="mi">0</span><span class="o">:</span><span class="p">$]</span> <span class="n">C</span> <span class="p">);</span>
-<span class="nl">P7:</span> <span class="k">assert</span> <span class="k">property</span><span class="p">(</span> <span class="n">A</span> <span class="o">|=&gt;</span> <span class="p">##</span><span class="mi">3</span> <span class="n">C</span> <span class="p">);</span>
-</code></pre></div></div>
-
-<h2 id="implication-operators---">Implication operators (|-&gt;, |=&gt;)</h2>
-
-<p>Implication operators define a relationship between an <strong>enabling condition</strong> and a <strong>fulfilling condition</strong>.
-A property using an implication operator holds true if either:</p>
-<ol>
-  <li>The fulfilling condition occurs as a consequence of the enabling condition, or</li>
-  <li>The enabling condition <strong>never occurs</strong>.</li>
 </ol>
 
-<h3 id="overlapping-implication--">Overlapping Implication (|-&gt;)</h3>
+<p>After you create a Notion account, you’ll be met with a default workspace. My suggestion is to
+remove the ‘New page’, ‘Welcome to Notion!’ and ‘To Do List’. Add everything under the ‘Private’
+section.</p>
 
-<p>Syntax:</p>
+<h3 id="part-1-core-database-setup">Part 1: Core Database Setup</h3>
 
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sequence_expr</span> <span class="o">|-&gt;</span> <span class="n">property_expr</span>
-</code></pre></div></div>
+<h4 id="step-1-create-projects-registry">Step 1: Create Projects Registry</h4>
 
-<p>This property holds true under the following conditions:</p>
 <ol>
-  <li>If <code class="language-plaintext highlighter-rouge">sequence_expr</code> completes then <code class="language-plaintext highlighter-rouge">property_expr</code> <strong>starts in the same cycle</strong> and eventually completes.</li>
-  <li><code class="language-plaintext highlighter-rouge">seqeunce_expr</code> never completes.
-Example:
-    <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P8</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="o">|-&gt;</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span> <span class="p">);</span>
-</code></pre></div>    </div>
-    <p><code class="language-plaintext highlighter-rouge">P8</code> passes if the following sequence is observed:</p>
-    <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="p">(</span><span class="n">B</span> <span class="o">&amp;&amp;</span> <span class="n">C</span><span class="p">)</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span><span class="p">);</span>
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<h3 id="non-overlapping-implication-">Non-Overlapping Implication (|=&gt;)</h3>
-
-<p>Syntax:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sequence_expr</span> <span class="o">|=&gt;</span> <span class="n">property_expr</span> 
-</code></pre></div></div>
-<p>This property holds true under the following conditions:</p>
-<ol>
-  <li>If <code class="language-plaintext highlighter-rouge">sequence_expr</code> completes then <code class="language-plaintext highlighter-rouge">property_expr</code> <strong>starts in the next cycle</strong> and eventually completes.</li>
-  <li><code class="language-plaintext highlighter-rouge">sequence_expr</code> never completes.
-Example:
-    <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P9</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span> <span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="o">|=&gt;</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span> <span class="p">);</span>
-</code></pre></div>    </div>
-    <p><code class="language-plaintext highlighter-rouge">P9</code> passes if the following sequence is observed:</p>
-    <div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="p">##</span><span class="mi">1</span> <span class="n">C</span> <span class="p">##</span><span class="mi">1</span> <span class="n">D</span><span class="p">);</span>
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<h2 id="nesting-implication-operators">Nesting implication operators</h2>
-
-<p>It is <strong>not recommended</strong> to nest implication operators, as it can easily become confusing: For example:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P10</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span> <span class="o">|=&gt;</span> <span class="n">C</span> <span class="p">);</span>
-</code></pre></div></div>
-<p>This is exactly equivalent to:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P10_EQUIVALENT</span> <span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">A</span> <span class="p">##</span><span class="mi">1</span> <span class="n">B</span> <span class="o">|=&gt;</span> <span class="n">C</span><span class="p">);</span>
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">P10</code> or <code class="language-plaintext highlighter-rouge">P10_EQUIVALENT</code> would <strong>not fail</strong> if the sequence <code class="language-plaintext highlighter-rouge">(A ##1 !B)</code> is observed.</p>
-
-<h2 id="disabling-properties">Disabling properties</h2>
-
-<p>Syntax:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="n">boolean_expr</span><span class="p">)</span>
-</code></pre></div></div>
-<p>When <code class="language-plaintext highlighter-rouge">boolean_expr</code> is <strong>true</strong>, the property is <strong>temporarily disabled</strong>, and all active checks or pending evaluations for that property (including overlapping ones) are <strong>canceled</strong>.</p>
-
-<p>For example, if a property checks that a <em>request</em> must eventually be followed by a <em>grant</em>, we’d usually want a <strong>reset</strong> to clear any pending request-to-grant expectations.<br />
-After reset, new requests start fresh obligations.
-Example:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">P11</span><span class="o">:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span> <span class="n">req</span> <span class="o">|=&gt;</span> <span class="p">##[</span><span class="o">*</span><span class="p">]</span> <span class="n">gnt</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h2 id="default-disable">Default Disable</h2>
-
-<p>If the same disable condition applies to many properties, it can be defined once as a <strong>default disable</strong> instead of repeating it for each property.</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">default</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="n">boolean_expr</span><span class="p">);</span>
-</code></pre></div></div>
-<p>This default disable applies to all properties, in the current scope only, which do not have an explicit <code class="language-plaintext highlighter-rouge">disable iff</code> defined:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">default</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="n">CANCEL</span><span class="p">)</span>
-<span class="nl">P12:</span> <span class="k">assert</span> <span class="k">property</span><span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="kt">disable</span> <span class="k">iff</span> <span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span> <span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span><span class="p">);</span>
-<span class="nl">P13:</span> <span class="k">assert</span> <span class="k">property</span><span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">)</span> <span class="n">C</span> <span class="o">|=&gt;</span> <span class="n">D</span><span class="p">);</span>
-</code></pre></div></div>
-<p>In this example:</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">P12</code> uses its <strong>own</strong> disable condition (<code class="language-plaintext highlighter-rouge">!rst_n</code>)</li>
-  <li><code class="language-plaintext highlighter-rouge">P13</code> uses the <strong>default</strong> disable condition (<code class="language-plaintext highlighter-rouge">CANCEL</code>)</li>
-</ul>
-
-<p>Both <code class="language-plaintext highlighter-rouge">default disable iff</code> and explicit <code class="language-plaintext highlighter-rouge">disable iff</code> are asynchronous — they take effect immediately, regardless of the property’s clocking event.</p>
-
-<h2 id="clocking-properties">Clocking Properties</h2>
-
-<ul>
-  <li>Every SVA property must be <strong>clocked</strong> — unlocked properties are not allowed.</li>
-  <li>The clock can come from one of the following:
-    <ol>
-      <li>An <strong>explicit clocking event</strong> when the property is declared</li>
-      <li>An <strong>explicit clocking event</strong> when the property is instantiated</li>
-      <li>A <code class="language-plaintext highlighter-rouge">default clocking</code> declaration</li>
-    </ol>
-  </li>
-  <li>An <strong>explicit clock declaration</strong> always overrides the <code class="language-plaintext highlighter-rouge">default clocking</code>.</li>
-  <li>Sequences without an explicit clock inherit the clock from their <strong>parent property</strong>.</li>
-  <li><code class="language-plaintext highlighter-rouge">default clocking</code> applies only within its <strong>current scope</strong>.</li>
-  <li>Only one <code class="language-plaintext highlighter-rouge">default clocking</code> declaration is allowed per scope.</li>
-</ul>
-
-<p>Example:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">default</span> <span class="k">clocking</span> <span class="n">MYCLK</span> <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk</span><span class="p">);</span>
-<span class="k">endclocking</span>
-
-<span class="k">property</span> <span class="n">P14</span><span class="p">;</span>
-  <span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span><span class="p">;</span>
-<span class="k">endproperty</span>
-
-<span class="k">property</span> <span class="n">P15</span><span class="p">;</span>
-  <span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk1</span><span class="p">)</span> <span class="n">A</span> <span class="o">|=&gt;</span> <span class="n">B</span><span class="p">;</span>
-<span class="k">endproperty</span>
-
-<span class="nl">P14_A:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk2</span><span class="p">)</span> <span class="n">P14</span><span class="p">);</span>
-<span class="nl">P14_B:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">P14</span><span class="p">);</span>
-<span class="nl">P15_A:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">P15</span><span class="p">);</span>
-
-<span class="nl">P16:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="kt">posedge</span> <span class="n">clk3</span><span class="p">)</span> <span class="n">A</span> <span class="o">|-&gt;</span> <span class="n">B</span><span class="p">);</span>
-<span class="nl">P17:</span> <span class="k">assert</span> <span class="k">property</span> <span class="p">(</span><span class="n">C</span> <span class="o">|-&gt;</span> <span class="n">D</span><span class="p">);</span>
-</code></pre></div></div>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">P14_A</code> uses <strong>clk2</strong>, overriding all others.</li>
-  <li><code class="language-plaintext highlighter-rouge">P14_B</code> uses the <strong>default clock</strong> (<code class="language-plaintext highlighter-rouge">posedge clk</code>).</li>
-  <li><code class="language-plaintext highlighter-rouge">P15_A</code> uses the <strong>explicit clock</strong> defined in <code class="language-plaintext highlighter-rouge">P15</code> (<code class="language-plaintext highlighter-rouge">clk1</code>).</li>
-  <li><code class="language-plaintext highlighter-rouge">P16</code> uses <strong>clk3</strong> (explicit).</li>
-  <li><code class="language-plaintext highlighter-rouge">P17</code> inherits the <strong>default clock</strong>.</li>
-</ul>
-
-<h2 id="builtin-functions">Builtin Functions</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Function</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">$past(expr, N)</code></td>
-      <td>Value of <code class="language-plaintext highlighter-rouge">expr</code> N cycles ago (defaults to 1 if <code class="language-plaintext highlighter-rouge">N</code> is omitted).</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">$rose(expr)</code></td>
-      <td>TRUE when <code class="language-plaintext highlighter-rouge">expr</code> transitions from 0 → 1.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">$fell(expr)</code></td>
-      <td>TRUE when <code class="language-plaintext highlighter-rouge">expr</code> transitions from 1 → 0.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">$stable(expr)</code></td>
-      <td>TRUE if <code class="language-plaintext highlighter-rouge">expr</code> has not changed since the previous cycle.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">$onehot(expr)</code></td>
-      <td>TRUE if exactly one bit of <code class="language-plaintext highlighter-rouge">expr</code> is 1.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">$onehot0(expr)</code></td>
-      <td>TRUE if zero or one bit of <code class="language-plaintext highlighter-rouge">expr</code> is 1.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">$isunknown(expr)</code></td>
-      <td>TRUE if any bit of <code class="language-plaintext highlighter-rouge">expr</code> is X or Z.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">$countones(expr)</code></td>
-      <td>Returns the number of bits in <code class="language-plaintext highlighter-rouge">expr</code> that are 1.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="repetition">Repetition</h2>
-
-<p>Repetition operators specify <strong>how many times</strong> a sequence element must occur and whether occurrences must be <strong>consecutive</strong> or can be <strong>spread apart</strong>.</p>
-
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="o">*</span> <span class="n">const_or_range_expression</span><span class="p">]</span>
-</code></pre></div></div>
-<p><strong>Consecutive repetition</strong> — the expression must be TRUE for a specified number of <strong>consecutive cycles</strong>.</p>
-
-<p>Example:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="o">*</span><span class="mi">2</span><span class="p">]</span> <span class="p">##</span><span class="mi">2</span> <span class="n">b</span><span class="p">[</span><span class="o">*</span><span class="mi">2</span><span class="p">])</span> <span class="o">|=&gt;</span> <span class="n">d</span>
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">a</code> must hold for 2 cycles in a row, then after 2 cycles, <code class="language-plaintext highlighter-rouge">b</code> must hold for 2 cycles in a row.</p>
-
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="o">-&gt;</span> <span class="n">const_or_range_expression</span><span class="p">]</span>
-</code></pre></div></div>
-<p><strong>Goto repetition</strong> — looks for the <strong>Nth occurrence</strong> of a sequence element and then continues from there.
-This operator <em>skips ahead</em> until the given count of matches has been reached.</p>
-
-<p>Example:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="p">##</span><span class="mi">1</span> <span class="n">b</span><span class="p">[</span><span class="o">-&gt;</span><span class="mi">5</span><span class="p">]</span> <span class="p">##</span><span class="mi">1</span> <span class="n">c</span>
-</code></pre></div></div>
-<p>Matches when:</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">a</code> occurs</li>
-  <li>then the <strong>5th occurrence</strong> of <code class="language-plaintext highlighter-rouge">b</code> (not necessarily consecutive)</li>
-  <li>then <code class="language-plaintext highlighter-rouge">c</code> occurs one cycle later</li>
-</ul>
-
-<p>So <code class="language-plaintext highlighter-rouge">b</code> may appear several times, but the property only matches when the <strong>5th <code class="language-plaintext highlighter-rouge">b</code></strong> is seen.</p>
-
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="o">=</span> <span class="n">const_or_range_expression</span><span class="p">]</span>
-</code></pre></div></div>
-<p><strong>Non-consecutive repetition</strong> — the expression must be TRUE a given number of times, but 
-<strong>not necessarily on consecutive cycles</strong>. Other conditions may appear between repetitions.</p>
-
-<p>Example:</p>
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s1</span> <span class="o">|=&gt;</span> <span class="p">(</span><span class="n">b</span> <span class="p">[</span><span class="o">=</span><span class="mi">5</span><span class="p">]</span> <span class="p">##</span><span class="mi">1</span> <span class="n">c</span><span class="p">)</span>
-</code></pre></div></div>
-<p>After <code class="language-plaintext highlighter-rouge">s1</code> completes:</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">b</code> must be TRUE <strong>five times in total</strong>,</li>
-  <li>these occurrences can be <strong>spread out</strong> in time,</li>
-  <li>and after that, <code class="language-plaintext highlighter-rouge">c</code> must occur one cycle later.</li>
-</ul>
-
-<h2 id="shortcuts">Shortcuts</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>Notation</th>
-      <th>Equivalent Form</th>
-      <th>Meaning</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">R[*]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">R[*0:$]</code></td>
-      <td>Repeat zero or more times</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">##[*]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">##[0:$]</code></td>
-      <td>Delay zero or more cycles</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">R[+]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">R[*1:$]</code></td>
-      <td>Repeat one or more times</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">##[+]</code></td>
-      <td><code class="language-plaintext highlighter-rouge">##[1:$]</code></td>
-      <td>Delay one or more cycles</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="constructs-not-recommended-for-formal">Constructs not recommended for formal</h2>
-
-<p>The following properties will cause formal tools to either run slower or not converge at all. It’s
-recommended to simplify them - for example, if-else statements inside a property should be split into 
-multiple properties - or to write auxiliary code.</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">throughout</code></li>
-  <li><code class="language-plaintext highlighter-rouge">or</code></li>
-  <li><code class="language-plaintext highlighter-rouge">and</code></li>
-  <li><code class="language-plaintext highlighter-rouge">within</code></li>
-  <li><code class="language-plaintext highlighter-rouge">expect</code></li>
-  <li><code class="language-plaintext highlighter-rouge">first_match()</code></li>
-  <li><code class="language-plaintext highlighter-rouge">if property else property</code></li>
-  <li><code class="language-plaintext highlighter-rouge">sequence.triggered</code></li>
-  <li><code class="language-plaintext highlighter-rouge">sequence[-&gt;N]</code></li>
-  <li><code class="language-plaintext highlighter-rouge">sequence[=N]</code></li>
-  <li>Local variables</li>
-  <li>Immediate assertions</li>
-</ul>
-
-<h2 id="constructs-to-use-with-caution">Constructs to use with caution</h2>
-
-<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sequence</span><span class="p">[</span><span class="o">*</span><span class="n">N</span><span class="p">]</span>
-<span class="p">$</span><span class="nb">past</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-</code></pre></div></div>
-<p>In both cases keep <code class="language-plaintext highlighter-rouge">N</code> as small as possible. It’s recommended to model <code class="language-plaintext highlighter-rouge">$past()</code> with Auxiliary Code instead.</p>]]></content><author><name></name></author><category term="Verification" /><category term="SVA" /><category term="verification" /><category term="simulation" /><category term="formal" /><summary type="html"><![CDATA[A quick overview of the most used SVA constructs for simulation and formal verification, along with usage examples.]]></summary></entry><entry><title type="html">Weather and air quality station: Part 1</title><link href="https://criticalpath.dev/weather_station/weather_station_part1/" rel="alternate" type="text/html" title="Weather and air quality station: Part 1" /><published>2025-11-01T00:00:00+01:00</published><updated>2025-11-01T00:00:00+01:00</updated><id>https://criticalpath.dev/weather_station/weather_station_part1</id><content type="html" xml:base="https://criticalpath.dev/weather_station/weather_station_part1/"><![CDATA[<h1 id="battery-powered-weather--air-quality-station">Battery-Powered Weather &amp; Air Quality Station</h1>
-<p>Raspberry Pi Pico 2 W + Inky Impression 7.3” + Bosch BME690 + Bosch BMV080 + Meteoblue API<br />
-Firmware written in C for the Pico’s RISC-V core</p>
-
-<h2 id="project-overview">Project Overview</h2>
-<p>This project builds a standalone weather and air quality monitoring station. The Raspberry Pi Pico 2 W collects measurements from two Bosch sensors (BME690 and BMV080), pulls forecast data from the Meteoblue API over Wi-Fi, and displays results on a 7.3” e-paper display (Inky Impression). The device will be battery powered and enclosed in a plexiglass case to protect components while ensuring airflow.</p>
-
-<h2 id="system-architecture">System Architecture</h2>
-
-<p>Data flow:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sensors (BME690 + BMV080)
-  -&gt; Data Processing + Rolling Averages
-    -&gt; Wi-Fi Forecast Fetch (Meteoblue JSON)
-      -&gt; UI Construction (framebuffer)
-        -&gt; E-Paper Display Refresh
-</code></pre></div></div>
-
-<p>Components:</p>
-<ul>
-  <li>Raspberry Pi Pico 2 W (RISC-V)</li>
-  <li>BME690: temperature, humidity, pressure, gas (IAQ)</li>
-  <li>BMV080: particulate matter (PM1, PM2.5, PM10)</li>
-  <li>Inky Impression 7.3” e-paper over SPI</li>
-  <li>HTTPS networking using lwIP + mbedTLS</li>
-  <li>Lightweight JSON parsing in C (ex: jsmn)</li>
-</ul>
-
-<p>Design:</p>
-<ul>
-  <li>Event-driven firmware with deep sleep between tasks</li>
-  <li>Forecast caching for offline operation</li>
-  <li>Minimal UI optimized for e-paper refresh constraints</li>
-  <li>All core firmware written in C</li>
-</ul>
-
-<h2 id="display-and-ui-strategy">Display and UI Strategy</h2>
-<ul>
-  <li>Refresh e-paper only on a schedule or when values change</li>
-  <li>Off-screen framebuffer rendering</li>
-  <li>UI features:
+  <li>Create a new page in Notion called “<strong>Project Management Hub</strong>”</li>
+  <li>Type <code class="language-plaintext highlighter-rouge">/database</code> and select “Database - Full page”</li>
+  <li>Name it “<strong>Projects</strong>”</li>
+  <li>Add properties:
     <ul>
-      <li>Temperature and humidity</li>
-      <li>PM2.5 concentration</li>
-      <li>Short forecast summary</li>
-      <li>Battery voltage</li>
-      <li>Timestamp for last update</li>
+      <li><strong>Name</strong> (Title) - Project name</li>
+      <li><strong>Status</strong> (Select) - Options: Planning, Active, On Hold, Completed</li>
+      <li><strong>Description</strong> (Text) - Project description</li>
+      <li><strong>Start Date</strong> (Date)</li>
+      <li><strong>Target End Date</strong> (Date)</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-2-create-epics-database">Step 2: Create Epics Database</h4>
+
+<ol>
+  <li>On the Project Management Hub page, create another database</li>
+  <li>Type <code class="language-plaintext highlighter-rouge">/database</code> and select “Database - Full page”</li>
+  <li>Name it “<strong>Epics</strong>”</li>
+  <li>Add properties:
+    <ul>
+      <li><strong>Name</strong> (Title) - Epic name</li>
+      <li><strong>Projects</strong> (Relation) - Link to Projects Registry - Enable Two-way relation (Epics will appear in Projects database,
+and we’ll be able to use properties from the Epics database in Projects database)</li>
+      <li><strong>Description</strong> (Text) - Epic description</li>
+      <li><strong>Status</strong> (Formula) - From Stories (configure after Stories created)</li>
+      <li><strong>Estimated Hours</strong> (Formula) - From Stories (configure after Stories database is created)</li>
+      <li><strong>Actual Hours</strong> (Formula) - From Stories (configure after Stories created)</li>
+    </ul>
+  </li>
+</ol>
+
+<div class="premonition info">
+  <i class="premonition pn-info"></i>
+  <div class="content">
+    <p class="header">Notion: Rollup of rollups</p><p>The Estimated Hours and Actual Hours should (in my opinion) be automatically calculated by
+summing up values of same-named properties from all the Stories associated with a particular Epic. Unfortunately,
+Notion doesn’t support Rollups of Rollups, but fortunately there is a workaround for this. We
+can use formulas to calculate Estimated Hours and Actual Hours. I got this solution from the
+following YouTube video: <a href="https://www.youtube.com/watch?v=rGOsRNnh6fg">How to Create a Nested Rollup in Notion (rollup of a rollup) 2024 Tutorial with free template</a></p>
+
+
+
+
+  </div>
+</div>
+
+<h4 id="step-3-create-stories-database">Step 3: Create Stories Database</h4>
+
+<ol>
+  <li>Create another database on the Project Management Hub page</li>
+  <li>Type <code class="language-plaintext highlighter-rouge">/database</code> and select “Database - Full page”</li>
+  <li>Name it “<strong>Stories</strong>”</li>
+  <li>Add properties:
+    <ul>
+      <li><strong>Name</strong> (Title) - Story name</li>
+      <li><strong>Projects</strong> (Relation) - Link to Projects database - Enable Two-way relation</li>
+      <li><strong>Epic</strong> (Relation) - Link to Epics database - Enable Two-way relation</li>
+      <li><strong>Description</strong> (Text) - Story description</li>
+      <li><strong>Status</strong> (Formula) - From Tasks (configure after Tasks database is created)</li>
+      <li><strong>Estimated Hours</strong> (Rollup) - Story time estimate (configure after Tasks created)</li>
+      <li><strong>Actual Hours</strong> (Rollup) - From Tasks (configure after Tasks created)</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-4-create-tasks-database">Step 4: Create Tasks Database</h4>
+
+<ol>
+  <li>Create another database on the Project Management Hub page</li>
+  <li>Type <code class="language-plaintext highlighter-rouge">/database</code> and select “Database - Full page”</li>
+  <li>Name it “<strong>Tasks</strong>”</li>
+  <li>Add properties:
+    <ul>
+      <li><strong>Name</strong> (Title) - Task name</li>
+      <li><strong>Project</strong> (Relation) - Link to Projects database - Enable Two-way relation</li>
+      <li><strong>Story</strong> (Relation) - Link to Stories database - Enable Two-way relation</li>
+      <li><strong>Epic</strong> (Rollup) - From Story -&gt; Epic. Configure: Relation: Story, Property: Epic, Show original</li>
+      <li><strong>Description</strong> (Text) - Task description</li>
+      <li><strong>Status</strong> (Status) - Options: Not started, In progress, Done</li>
+      <li><strong>Month</strong> (Select) - Options: Backlog, January 2026, February 2026, March 2026, etc. Add your
+own relevant months.</li>
+      <li><strong>Estimated Hours</strong> (Number) - Time estimate</li>
+      <li><strong>Actual Hours</strong> (Number) - Time logged</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-5-configure-rollup-properties">Step 5: Configure Rollup Properties</h4>
+
+<p><strong>In Stories:</strong></p>
+<ul>
+  <li>Click <strong>Actual Hours</strong> -&gt; Configure rollup</li>
+  <li>Relation: Tasks, Property: Actual Hours, Calculate: Sum</li>
+  <li>Click <strong>Estimated Hours</strong> -&gt; Configure rollup</li>
+  <li>Relation: Tasks, Property: Estimated Hours, Calculate: Sum</li>
+  <li>Click <strong>Status</strong> -&gt; Edit Property -&gt; Edit Formula. Formula:
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">length</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Tasks</span><span class="dl">"</span><span class="p">).</span><span class="nf">filter</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Month</span><span class="dl">"</span><span class="p">).</span><span class="nf">lower</span><span class="p">()</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">backlog</span><span class="dl">"</span><span class="p">))</span> <span class="o">==</span> <span class="nf">length</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Tasks</span><span class="dl">"</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Month</span><span class="dl">"</span><span class="p">)))</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Backlog</span><span class="dl">"</span><span class="p">.</span><span class="nf">style</span><span class="p">(</span><span class="dl">"</span><span class="s2">red</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">red_background</span><span class="dl">"</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Tasks</span><span class="dl">"</span><span class="p">).</span><span class="nf">filter</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Status</span><span class="dl">"</span><span class="p">).</span><span class="nf">lower</span><span class="p">()</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">done</span><span class="dl">"</span><span class="p">))</span> <span class="o">==</span> <span class="nf">length</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Tasks</span><span class="dl">"</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Status</span><span class="dl">"</span><span class="p">)))</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Completed</span><span class="dl">"</span><span class="p">.</span><span class="nf">style</span><span class="p">(</span><span class="dl">"</span><span class="s2">green</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">green_background</span><span class="dl">"</span><span class="p">)</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">In progress</span><span class="dl">"</span><span class="p">.</span><span class="nf">style</span><span class="p">(</span><span class="dl">"</span><span class="s2">blue</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">blue_background</span><span class="dl">"</span><span class="p">))</span>
+</code></pre></div>    </div>
+    <p>This will set the property automatically:</p>
+    <ul>
+      <li>If all Tasks for the selected Story are in Backlog -&gt; Status = Backlog</li>
+      <li>If all Tasks for the selected property are Done -&gt; Status = Done</li>
+      <li>Otherwise -&gt; Status = In progress</li>
     </ul>
   </li>
 </ul>
 
-<p>Suggested refresh interval: 20 to 60 minutes</p>
-
-<h2 id="power-system">Power System</h2>
-
-<p>Battery: 3 AA cells in series</p>
-
-<p>Electrical notes:</p>
+<p><strong>In Epics:</strong></p>
 <ul>
-  <li>NiMH: approx. 3.6 V nominal, 4.2 V fresh</li>
-  <li>Safe to connect directly to Pico VSYS input (1.8 to 5.5 V range)</li>
-</ul>
-
-<p>Series rules:</p>
-<ul>
-  <li>Voltage increases (3x)</li>
-  <li>Capacity stays 2000 mAh</li>
-  <li>Energy increases to approx. 7.2 Wh</li>
-</ul>
-
-<p>Wiring:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3xAA holder (+) -&gt; switch -&gt; optional protection -&gt; VSYS (Pico)
-3xAA holder (-) -------------------------------&gt; GND (Pico)
-</code></pre></div></div>
-
-<p>Battery level can be read via VSYS/3 ADC pin.</p>
-
-<h2 id="recommended-duty-cycles">Recommended Duty Cycles</h2>
-<ul>
-  <li>BME690: 2–5 min interval</li>
-  <li>BMV080: 10–60 min interval</li>
-  <li>Wi-Fi forecast: 30–60 min interval</li>
-  <li>E-paper refresh: 20–60 min interval</li>
-</ul>
-
-<h2 id="estimated-runtime">Estimated Runtime</h2>
-
-<p>Assumptions:</p>
-<ul>
-  <li>7.2 Wh battery energy</li>
-  <li>85% regulator efficiency</li>
-  <li>Approx. 6.12 Wh usable at 3.3 V</li>
-  <li>Average 3.3 V load depending on duty cycle</li>
-</ul>
-
-<table>
-  <thead>
-    <tr>
-      <th>Mode</th>
-      <th style="text-align: right">Avg Current</th>
-      <th style="text-align: right">Runtime Hours</th>
-      <th style="text-align: right">Runtime Days</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Air Quality Focused (BMV080: 5 min)</td>
-      <td style="text-align: right">2.50 mA</td>
-      <td style="text-align: right">~742</td>
-      <td style="text-align: right">~30.9</td>
-    </tr>
-    <tr>
-      <td>Balanced (BMV080: 10 min)</td>
-      <td style="text-align: right">1.36 mA</td>
-      <td style="text-align: right">~1364</td>
-      <td style="text-align: right">~56.8</td>
-    </tr>
-    <tr>
-      <td>Battery Saver (BMV080: 60 min)</td>
-      <td style="text-align: right">0.38 mA</td>
-      <td style="text-align: right">~4880</td>
-      <td style="text-align: right">~203</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Major power contributors:</p>
-<ul>
-  <li>BMV080 sensor duty cycle</li>
-  <li>Wi-Fi bursts</li>
-  <li>Display refresh cycles</li>
-</ul>
-
-<h2 id="enclosure-notes">Enclosure Notes</h2>
-<ul>
-  <li>Plexiglass case with airflow channels for sensors</li>
-  <li>Prevent heat transfer from MCU and display into sensors</li>
-  <li>Secure e-paper ribbon cable</li>
-  <li>Provide easy access for battery replacement</li>
-</ul>
-
-<h2 id="development-and-testing-plan">Development and Testing Plan</h2>
-<ol>
-  <li>Bring up sensors and verify I2C</li>
-  <li>Implement sensor data processing and UI rendering</li>
-  <li>Add Wi-Fi and Meteoblue JSON support</li>
-  <li>Measure power usage and adjust intervals</li>
-  <li>Assemble enclosure and validate environmental behavior</li>
-</ol>
-
-<p>Error messaging:</p>
-<ul>
-  <li>Wi-Fi unavailable (using cached forecast)</li>
-  <li>Sensor communication error</li>
-  <li>Low battery (auto-reduce update frequency)</li>
-</ul>
-
-<h2 id="future-work">Future Work</h2>
-<ul>
-  <li>Final wiring/PCB design</li>
-  <li>Battery gauge improvements</li>
-  <li>Optional data logging</li>
-  <li>Potential partial refresh optimization</li>
-</ul>]]></content><author><name></name></author><category term="weather_station" /><category term="embedded" /><category term="raspberry-pi" /><category term="weather_station" /><summary type="html"><![CDATA[Design of a battery powered device with a nice e-ink display used to display time, weather forecast and air quality. In this post I outline a list of key features, a rough development outline, an initial bill of materials and an estimate of power consumption. I also evaluate feasibility to ensure the embedded device can be built within reasonable price and that it can be battery powered.]]></summary></entry><entry><title type="html">Weather and air quality station: Part 2</title><link href="https://criticalpath.dev/weather_station/weather_station_part2/" rel="alternate" type="text/html" title="Weather and air quality station: Part 2" /><published>2025-11-01T00:00:00+01:00</published><updated>2025-11-01T00:00:00+01:00</updated><id>https://criticalpath.dev/weather_station/weather_station_part2</id><content type="html" xml:base="https://criticalpath.dev/weather_station/weather_station_part2/"><![CDATA[<p>Before starting with any kind of development on Raspberry Pi Pico2W I first need to setup 
-the toolchain: SDK, compiler, linker and debugger. In this post I describe the following steps:</p>
-<ul>
-  <li>Downloading and setting up Raspberry Pi Pico2W SDK,</li>
-  <li>preparing and compiliing the GNU cross-compiler to compile RISC-V binaries,</li>
-  <li>Setting up <a href="https://openocd.org/">OpenOCD</a></li>
-</ul>
-
-<p>It’s important to note, these steps work well on my machine (x86-64, Arch Linux, btw), some slight
-changes are probably required if there is a need to build on other machine and/or different Linux distro.
-To verify I have everything I need, and everything is setup properly, I’ll develop a simple LED blinky 
-program, and enable UART.</p>
-
-<h2 id="build-environment">Build environment</h2>
-<p>To set-up my build environment for Raspberry Pi Pico2_W, i’ll combine instructions from Raspberry Pi Pico-series C/C++ SDK document and instructions from riscv-gnu-toolchain Github page.</p>
-
-<p>First I’ll install all dependencies:
-$ sudo pacman -Syu curl python3 libmpc mpfr gmp base-devel texinfo gperf patchutils bc zlib expat libslirp</p>
-
-<p>Then I want to build a cross compiler that runs on my host machine (e.g. x86-64 Linux PC) but produces executables for a different target architecture (e.g. RISC-V).</p>
-
-<p>Host = where the compiler runs.
-Target = where the generated program runs.</p>
-
-<p>There are two flavors of a cross compiler for x86-64 Linux host:</p>
-<ol>
-  <li>
-    <p>Newlib cross compiler (riscv64-unknown-elf-gcc)
-Target: bare-metal systems (no OS, or minimal runtime).
-Uses Newlib as the C standard library.
-Good for firmware, bootloaders, small MCUs.</p>
-  </li>
-  <li>
-    <p>Linux cross compiler (riscv64-unknown-linux-gnu-gcc)
-Target: RISC-V systems running Linux.
-Uses glibc (GNU C library), same as native Linux distros.
-Produces programs you can run under a Linux kernel on RISC-V hardware (or emulators like QEMU).</p>
-  </li>
-</ol>
-
-<p>I’ll now proceed with building Newlib cross compiler and the acompanying binuitls. First I’ll create a directory where the sources and the built binaries will be stored. This directory (install path) needs to be writeable.
-$ mkdir -p ~/rp2350/gcc-rp2350-no-zcmp</p>
-
-<p>Change into ~/rp2350 directory, clone the riscv-gnu-toolchain repository and change into the riscv-gnu-toolchain directory:
-$ cd ~/rp2350
-$ git clone https://github.com/riscv-collab/riscv-gnu-toolchain.git 
-$ cd risc-vgnu-toolchain.git</p>
-
-<p>Configure the build process to target the RISC-V ISA extensions supported by the RP2350, and to place the built binaries into the ~/rp2350/gcc-rp2350-no-zcmp directory:
-$ ./configure –prefix=~/rp2350/gcc-rp2350-no-zcmp –with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb –with-abi=ilp32 –with-multilib-generator=”rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32–;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32–”</p>
-
-<p>Build the binaries:
-make -j”$(nproc)”</p>
-
-<h3 id="optional-reading">Optional reading:</h3>
-<p>When I first built the RISC-V bare-metal toolchain, I’ve blindly copy-pasted ./configure arguments, but I wandered what do they mean? We’ll here is the explanation:</p>
-
-<h1 id="risc-v---with-arch-breakdown">RISC-V <code class="language-plaintext highlighter-rouge">--with-arch</code> breakdown</h1>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--with-arch=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb
-</code></pre></div></div>
-
-<h2 id="components">Components</h2>
-
-<ul>
-  <li><strong>rv32ima</strong> — 32-bit base ISA (<strong>I</strong>) plus <strong>M</strong> (mul/div) and <strong>A</strong> (atomics).</li>
-  <li><strong>zicsr</strong> — Control/status register access (<code class="language-plaintext highlighter-rouge">csrr*</code>, <code class="language-plaintext highlighter-rouge">csrw*</code>, etc.).</li>
-  <li><strong>zifencei</strong> — Instruction-fetch fence (<code class="language-plaintext highlighter-rouge">FENCE.I</code>) to sync I-cache after code/data writes.</li>
-  <li><strong>zba</strong> — Bit-manip “address generation” subset (add/shift patterns that speed indexing).</li>
-  <li><strong>zbb</strong> — Bit-manip “basic” subset (clz/ctz/popcount/min/max/extends/rotates, etc.).</li>
-  <li><strong>zbs</strong> — Bit-manip “single-bit” subset (set/clear/invert/extract by bit index).</li>
-  <li><strong>zbkb</strong> — Bit-manip helpers oriented toward crypto (pack/permute/byte ops); part of scalar-crypto-friendly sets.</li>
-  <li><strong>zca</strong> — Core <strong>compressed</strong> integer subset (16-bit encodings for common integer ops).</li>
-  <li><strong>zcb</strong> — Extra compressed encodings (requires <code class="language-plaintext highlighter-rouge">zca</code>) for further code-size reduction.</li>
-</ul>
-
-<h1 id="risc-v---with-abiilp32-breakdown">RISC-V <code class="language-plaintext highlighter-rouge">--with-abi=ilp32</code> breakdown</h1>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--with-abi=ilp32
-</code></pre></div></div>
-
-<h2 id="what-it-sets">What it sets</h2>
-<ul>
-  <li>Chooses the <strong>default ABI</strong> for the toolchain (override per compile with <code class="language-plaintext highlighter-rouge">-mabi=...</code>).</li>
-  <li><strong>ilp32</strong> = <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">long</code>, and <strong>pointers are 32-bit</strong>.</li>
-  <li><strong>Soft-float ABI</strong>: no FP registers used for args/returns; FP math is done in software.</li>
-</ul>
-
-<h2 id="when-to-use">When to use</h2>
-<ul>
-  <li><strong>RV32 targets without an FPU</strong> (no <code class="language-plaintext highlighter-rouge">F</code>/<code class="language-plaintext highlighter-rouge">D</code> extensions), or when you explicitly want a soft-float calling convention. This is our case, since RP2350 doesn’t have any hard floating-point unit.</li>
-</ul>
-
-<blockquote>
-  <p>If the RP2350 had single-precision FPU, I’d use <code class="language-plaintext highlighter-rouge">ilp32f</code>; if it had double-precision FPU, I’d use <code class="language-plaintext highlighter-rouge">ilp32d</code>.</p>
-</blockquote>
-
-<h2 id="practical-effects">Practical effects</h2>
-<ul>
-  <li>Defines the <strong>calling convention</strong> and <strong>type sizes</strong> (<code class="language-plaintext highlighter-rouge">sizeof(long)==4</code>, <code class="language-plaintext highlighter-rouge">sizeof(void*)==4</code>).</li>
-  <li>Determines which <strong>multilib</strong> variant is selected/built.</li>
-  <li>All linked libraries must <strong>match the ABI</strong> (mixing <code class="language-plaintext highlighter-rouge">ilp32</code> with <code class="language-plaintext highlighter-rouge">ilp32f/d</code> will cause link/ABI errors).</li>
-</ul>
-
-<h1 id="what---with-multilib-generator-does-risc-v">What <code class="language-plaintext highlighter-rouge">--with-multilib-generator="…"</code> does (RISC-V)</h1>
-
-<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--with-multilib-generator="rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--"
-</code></pre></div></div>
-
-<h2 id="purpose">Purpose</h2>
-
-<p><code class="language-plaintext highlighter-rouge">--with-multilib-generator=</code> tells the bare-metal RISC-V toolchain build <strong>exactly which multilib variants</strong> (prebuilt <code class="language-plaintext highlighter-rouge">libgcc</code>, newlib, etc.) to produce.<br />
-The value is a <strong>semicolon-separated list</strong> of multilib configs.<br />
-Each config has <strong>four parts</strong>:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;arch string&gt;-&lt;ABI&gt;-&lt;reuse rule with arch&gt;-&lt;reuse rule with sub-extension&gt;
-</code></pre></div></div>
-
-<p>(Empty fields mean “no reuse rule here”. This option is supported for <code class="language-plaintext highlighter-rouge">riscv*--elf</code> builds.)</p>
-
-<h2 id="what-your-string-builds">What your string builds</h2>
-
-<p>You’re asking the build to create <strong>two</strong> multilib variants:</p>
-
-<p>1) <strong><code class="language-plaintext highlighter-rouge">rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb</code> + <code class="language-plaintext highlighter-rouge">ilp32</code></strong></p>
-<ul>
-  <li>32-bit I/M/A base with CSR + fence.i, bit-manip subsets (Zba/Zbb/Zbs), crypto-oriented bit-manip (Zbkb), and compressed subsets (Zca + Zcb).</li>
-  <li><strong>ABI:</strong> <code class="language-plaintext highlighter-rouge">ilp32</code> (32-bit int/long/pointers; soft-float).</li>
-  <li><strong>Reuse rules:</strong> none (the trailing <code class="language-plaintext highlighter-rouge">--</code>).</li>
-</ul>
-
-<p>2) <strong><code class="language-plaintext highlighter-rouge">rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb</code> + <code class="language-plaintext highlighter-rouge">ilp32</code></strong></p>
-<ul>
-  <li>32-bit I/M/A/<strong>C</strong> base (so compressed via <code class="language-plaintext highlighter-rouge">C</code>), plus the same Z* subsets except Zca/Zcb.</li>
-  <li><strong>ABI:</strong> <code class="language-plaintext highlighter-rouge">ilp32</code>.</li>
-  <li><strong>Reuse rules:</strong> none.</li>
-</ul>
-
-<p>In short: <strong>build two library sets</strong>—one for an RV32 IMA core with Z* + Zc* compressed subsets, and one for an RV32 IMAC core with Z* (and <code class="language-plaintext highlighter-rouge">C</code>)—both using the <code class="language-plaintext highlighter-rouge">ilp32</code> ABI.</p>
-
-<h2 id="whywhen-to-do-this">Why/when to do this</h2>
-
-<ul>
-  <li><strong>Smaller, faster build</strong> than the default multilib set—only the libraries you actually need are built.</li>
-  <li>Lets GCC <strong>auto-select the “best-fit” multilib</strong> at compile/link time among the ones you built.</li>
-</ul>
-
-<h2 id="how-to-use--verify">How to use &amp; verify</h2>
-
-<p><strong>Configure</strong> (example):</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./configure <span class="nt">--prefix</span><span class="o">=</span>/opt/riscv <span class="se">\</span>
-  <span class="nt">--with-multilib-generator</span><span class="o">=</span><span class="s2">"rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb-ilp32--;rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb-ilp32--"</span>
-make <span class="nt">-j</span><span class="s2">"</span><span class="si">$(</span><span class="nb">nproc</span><span class="si">)</span><span class="s2">"</span>
-</code></pre></div></div>
-
-<p><strong>See what was built:</strong></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>riscv64-unknown-elf-gcc <span class="nt">--print-multi-lib</span>
-</code></pre></div></div>
-<p>(Shows the two multilibs you requested.)</p>
-
-<p><strong>Pick one at compile time</strong> (GCC will choose automatically if compatible, but you can be explicit):</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Matches variant (1)</span>
-<span class="nt">-march</span><span class="o">=</span>rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb <span class="nt">-mabi</span><span class="o">=</span>ilp32
-
-<span class="c"># Matches variant (2)</span>
-<span class="nt">-march</span><span class="o">=</span>rv32imac_zicsr_zifencei_zba_zbb_zbs_zbkb <span class="nt">-mabi</span><span class="o">=</span>ilp32
-</code></pre></div></div>
-
-<blockquote>
-  <p>If you request an <code class="language-plaintext highlighter-rouge">-march/-mabi</code> combo with <strong>no compatible multilib</strong>, you can hit link/ABI errors—add another entry to the generator string or adjust your compile flags.</p>
-</blockquote>
-
-<p><strong>Reference:</strong> See the toolchain README section “Build with customized multi-lib configure” for the full format, examples, and notes on reuse rules.</p>
-
-<p>export PICO_TOOLCHAIN_PATH=/ssd1/workspace/pico2w/build-tools/gcc15-rp2350-no-zcmp
-export PICO_PLATFORM=rp2350-riscv
-export PICO_SDK_PATH=/ssd1/workspace/pico2w/pico-sdk
-export PICO_BOARD=pico2_w</p>
-
-<p>The next thing we want to do is we want to test if the board is working correctly. In the pico-sdk-examples directory there are couple of examples. I’ll use the <code class="language-plaintext highlighter-rouge">blink</code> example to see if I can actually program this thing and the <code class="language-plaintext highlighter-rouge">hello_world</code> USB example to see if UART is working correctly. Both of these things will be very useful in debugging.</p>
-
-<ul>
-  <li>Hold to BOOTSEL button on the Pico2w while connecting it via USB cable to the PC</li>
-  <li>Type lsblk -fs, you should see your device listed
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sdb1      vfat   FAT16 RP2350 62D0-C970                                           
-└─sdb
+  <li>Click <strong>Estimated Hours</strong> -&gt; Edit Property -&gt; Edit Formula</li>
+  <li>Formula:
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">sum</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Stories</span><span class="dl">"</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Estimated Hours</span><span class="dl">"</span><span class="p">)))</span>
 </code></pre></div>    </div>
   </li>
-  <li>Create a directory and mount it</li>
-  <li>mdir -p /ssd1/workspace/pico2w/flash</li>
-  <li>sudo mount /dev/sdb1 /dds1/workspace/pico2w/flash</li>
+  <li>Click <strong>Actual Hours</strong> -&gt; Edit Property -&gt; Edit Formula
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">sum</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Stories</span><span class="dl">"</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Actual Hours</span><span class="dl">"</span><span class="p">)))</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Click <strong>Status</strong> -&gt; Edit Property -&gt; Edit Formula. Formula:
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">length</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Stories</span><span class="dl">"</span><span class="p">).</span><span class="nf">filter</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Status</span><span class="dl">"</span><span class="p">).</span><span class="nf">lower</span><span class="p">()</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">backlog</span><span class="dl">"</span><span class="p">))</span> <span class="o">==</span> <span class="nf">length</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Stories</span><span class="dl">"</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Status</span><span class="dl">"</span><span class="p">)))</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Backlog</span><span class="dl">"</span><span class="p">.</span><span class="nf">style</span><span class="p">(</span><span class="dl">"</span><span class="s2">red</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">red_background</span><span class="dl">"</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Stories</span><span class="dl">"</span><span class="p">).</span><span class="nf">filter</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Status</span><span class="dl">"</span><span class="p">).</span><span class="nf">lower</span><span class="p">()</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">completed</span><span class="dl">"</span><span class="p">))</span> <span class="o">==</span> <span class="nf">length</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Stories</span><span class="dl">"</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Status</span><span class="dl">"</span><span class="p">)))</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Completed</span><span class="dl">"</span><span class="p">.</span><span class="nf">style</span><span class="p">(</span><span class="dl">"</span><span class="s2">green</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">green_background</span><span class="dl">"</span><span class="p">)</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">In progress</span><span class="dl">"</span><span class="p">.</span><span class="nf">style</span><span class="p">(</span><span class="dl">"</span><span class="s2">blue</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">blue_background</span><span class="dl">"</span><span class="p">))</span>
+</code></pre></div>    </div>
+    <p>This will set the property automatically:</p>
+    <ul>
+      <li>If all Stories for the selected Epic are in Backlog -&gt; Status = Backlog</li>
+      <li>If all Stories for the selected property are Completed -&gt; Status = Completed</li>
+      <li>Otherwise -&gt; Status = In progress</li>
+    </ul>
+  </li>
 </ul>
 
-<p>#TODO:</p>
+<h4 id="step-6-add-calculated-properties">Step 6: Add Calculated Properties</h4>
+
+<p><strong>In Epics, add:</strong></p>
 <ul>
-  <li>instruction download sdk</li>
-  <li>instructions download examples</li>
-  <li>instruction test with hello_world and blink</li>
-  <li>add riscv32-unknown-elf* binaries to the $PATH</li>
+  <li><strong>Remaining Hours</strong> (Formula):
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Estimated Hours</span><span class="dl">"</span><span class="p">)</span> <span class="o">-</span> <span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Actual Hours</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Progress %</strong> (Formula):
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">round</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Actual Hours</span><span class="dl">"</span><span class="p">)</span> <span class="o">/</span> <span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Estimated Hours</span><span class="dl">"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Click <strong>Progress %</strong> -&gt; Edit property -&gt; Show as: Bar</li>
 </ul>
 
-<p>Let’s now build our bare metal ‘Hello UART’ application. I’ve defined the following goals:</p>
+<p><strong>In Stories, add:</strong></p>
 <ul>
-  <li>The application will be written in pure RISC-V assembly,</li>
-  <li>It needs to run on a RISC-V core,</li>
-  <li>I want the ‘Hello UART’ message printed on the UART every one second,</li>
-  <li>I should be able to flash the application using the USB bootloader</li>
+  <li><strong>Remaining Hours</strong> (Formula):
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Estimated Hours</span><span class="dl">"</span><span class="p">)</span> <span class="o">-</span> <span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Actual Hours</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Progress %</strong> (Formula):
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">round</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Actual Hours</span><span class="dl">"</span><span class="p">)</span> <span class="o">/</span> <span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Estimated Hours</span><span class="dl">"</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Click <strong>Progress %</strong> -&gt; Edit property -&gt; Show as: Bar</li>
 </ul>
 
-<h1 id="an-overview-how-code-is-executed-on-rp2350">An overview how code is executed on RP2350</h1>
-<p>The RP2350 contains a (fixed) bootrom and this bootrom is executed first, not the user application. The boot outcome depends on multiple variables, all described in Chapter 5.2.1 Boot outcomes in [1].  In our case, we want to run our application from the USB bootloader. The USB bootloader will load the application stored in the UF2 [reference] format, and it will write this application to flash. But how does the bootrom know on which core do we want to run this application, RISC-V or ARM? Bootrom needs to locate and viable metadata. This metadata is defined in the Chapter 5.9 Metadata block details in [1]. The Chapter 5.9.5.2 describes Minimum RISC-V IMAGE_DEF. We will use this information</p>]]></content><author><name></name></author><category term="weather_station" /><category term="embedded" /><category term="raspberry-pi" /><category term="weather_station" /><summary type="html"><![CDATA[In the second part of the series, I explore how to develop my design using RISC-V on the Raspberry Pi Pico 2 W. I take a deep dive into the toolchain setup, including the SDK installation, building a GNU cross compiler, and configuring OpenOCD. I document my findings along the way. The goal for Part 2 is to bring up UART communication and start blinking a few LEDs.]]></summary></entry></feed>
+<p><strong>In Tasks, add:</strong></p>
+<ul>
+  <li><strong>Variance</strong> (Formula):
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Actual Hours</span><span class="dl">"</span><span class="p">)</span> <span class="o">-</span> <span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Estimated Hours</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Over/Under</strong> (Formula):
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Actual Hours</span><span class="dl">"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Estimated Hours</span><span class="dl">"</span><span class="p">),</span> <span class="dl">"</span><span class="s2">Over</span><span class="dl">"</span><span class="p">.</span><span class="nf">style</span><span class="p">(</span><span class="dl">"</span><span class="s2">red</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">background_red</span><span class="dl">"</span><span class="p">),</span> <span class="k">if</span><span class="p">(</span><span class="nf">prop</span><span class="p">(</span><span class="dl">"</span><span class="s2">Actual Hours</span><span class="dl">"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="dl">""</span><span class="p">,</span> <span class="dl">"</span><span class="s2">✓ Under</span><span class="dl">"</span><span class="p">.</span><span class="nf">style</span><span class="p">(</span><span class="dl">"</span><span class="s2">green</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">background_green</span><span class="dl">"</span><span class="p">)))</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="part-2-create-essential-views">Part 2: Create Essential Views</h3>
+
+<h4 id="views-for-epics">Views for Epics</h4>
+
+<ol>
+  <li><strong>Full view</strong> (Table)
+    <ul>
+      <li>Rename view to: Full view</li>
+      <li>Group by: Projects</li>
+    </ul>
+  </li>
+  <li><strong>Default view</strong> (Table)
+    <ul>
+      <li>Show: Name, Projects, Status, Estimated Hours, Actual Hours, Progress %</li>
+      <li>Group by: Project</li>
+    </ul>
+  </li>
+  <li><strong>By Status</strong> (Board)
+    <ul>
+      <li>Group by: Status</li>
+      <li>Filter by Project as needed</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="views-for-stories">Views for Stories</h4>
+
+<ol>
+  <li><strong>Full view</strong> (Table)
+    <ul>
+      <li>Rename view to: Full view</li>
+      <li>Group by Project</li>
+      <li>Sort by: Epic</li>
+    </ul>
+  </li>
+  <li><strong>Default view</strong> (Table)
+    <ul>
+      <li>Show: Name, Project, Epic, Status, Estimated Hours, Actual Hours, Progress %</li>
+      <li>Group by: Project</li>
+      <li>Sort by: Epic</li>
+    </ul>
+  </li>
+  <li><strong>By Epic</strong> (Table)
+    <ul>
+      <li>Group by: Epic</li>
+      <li>Show time tracking columns</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="views-for-tasks">Views for Tasks</h4>
+
+<ol>
+  <li><strong>Current Month</strong> (Board) - PRIMARY VIEW
+    <ul>
+      <li>Group by: Status</li>
+      <li>Filter: Month -&gt; Is -&gt; January 2026</li>
+      <li>Filter: Status -&gt; Is not -&gt; Backlog</li>
+      <li>Properties: Name, Project, Epic, Estimated Hours, Actual Hours</li>
+      <li>Sort: Project</li>
+      <li>This shows ALL current work across ALL projects!</li>
+    </ul>
+  </li>
+  <li><strong>All Backlogs</strong> (Table)
+    <ul>
+      <li>Filter: Month -&gt; Is -&gt; Backlog</li>
+      <li>Group by: Projects</li>
+      <li>Sort by: Projects, Story</li>
+    </ul>
+  </li>
+  <li><strong>By Project</strong> (Table)
+    <ul>
+      <li>Group by: Projects</li>
+      <li>Sort by: Status, Projects</li>
+    </ul>
+  </li>
+  <li><strong>Time Tracking</strong> (Table)
+    <ul>
+      <li>Show: Name, Projects, Epic, Story, Estimated Hours, Actual Hours, Variance, Over/Under</li>
+      <li>Group by: Projects</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="part-3-create-project-dashboard-template">Part 3: Create Project Dashboard Template</h3>
+
+<h4 id="step-1-create-template-page">Step 1: Create Template Page</h4>
+
+<ol>
+  <li>In Project Management Hub, create a new page: “<strong>PROJECT DASHBOARD TEMPLATE</strong>”</li>
+  <li>Add header:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># [Project Name]
+
+⚠️ TEMPLATE - Duplicate for each new project
+
+**Summary**: [Project summary]
+</code></pre></div></div>
+
+<h3 id="set-2-add-linked-database---projects">Set 2: Add Linked Database - Projects</h3>
+<ol>
+  <li>Type <code class="language-plaintext highlighter-rouge">/linked database</code></li>
+  <li>Select “Projects”</li>
+  <li>Create new view: Project Name</li>
+  <li>Filter: Project -&gt; Name -&gt; [leave empty - will set per project]</li>
+</ol>
+
+<h3 id="step-3-add-linked-database---epics">Step 3: Add Linked Database - Epics</h3>
+
+<ol>
+  <li>Type <code class="language-plaintext highlighter-rouge">/linked database</code></li>
+  <li>Select “Epics”</li>
+  <li>Create new view: “Project Epics”</li>
+  <li>Filter: Project -&gt; [leave empty - will set per project]</li>
+  <li>Show: Name, Status, Estimated Hours, Actual Hours, Remaining Hours, Progress %</li>
+  <li>Group by: Status</li>
+</ol>
+
+<h3 id="step-4-add-linked-database---stories">Step 4: Add Linked Database - Stories</h3>
+
+<ol>
+  <li>Type <code class="language-plaintext highlighter-rouge">/linked database</code></li>
+  <li>Select “Stories”</li>
+  <li>Create new view: “Project Stories”</li>
+  <li>Filter: Project -&gt; [leave empty]</li>
+  <li>Show: Name, Epic, Status, Estimated Hours, Actual Hours, Remaining Hours, Progress %</li>
+  <li>Group by: Epic</li>
+</ol>
+
+<h3 id="step-5-add-linked-database---current-sprint-tasks">Step 5: Add Linked Database - Current Sprint Tasks</h3>
+
+<ol>
+  <li>Type <code class="language-plaintext highlighter-rouge">/linked database</code></li>
+  <li>Select “Tasks”</li>
+  <li>Create new view: “Project Current Month”</li>
+  <li>View type: Board</li>
+  <li>Filters:
+    <ul>
+      <li>Project -&gt; [leave empty]</li>
+      <li>Month -&gt; Is -&gt; January 2026</li>
+    </ul>
+  </li>
+  <li>Group by: Status</li>
+  <li>Show: Name, Epic, Estimated Hours, Actual Hours</li>
+</ol>
+
+<h3 id="step-6-add-linked-database---backlog">Step 6: Add Linked Database - Backlog</h3>
+
+<ol>
+  <li>Type <code class="language-plaintext highlighter-rouge">/linked database</code></li>
+  <li>Select “Tasks”</li>
+  <li>Create new view: “Project Backlog”</li>
+  <li>View type: Table</li>
+  <li>Filters:
+    <ul>
+      <li>Project -&gt; [leave empty]</li>
+      <li>Month -&gt; Is -&gt; Backlog</li>
+    </ul>
+  </li>
+  <li>Sort by: Story</li>
+  <li>Group by: Story</li>
+</ol>
+
+<p>Template is complete!</p>
+
+<h2 id="part-4-create-your-first-project">Part 4: Create Your First Project</h2>
+
+<p>Let’s create first project to demo the template.</p>
+
+<h3 id="step-1-register-the-project">Step 1: Register the Project</h3>
+
+<ol>
+  <li>Go to <strong>Projects Registry</strong> database</li>
+  <li>Click “New”</li>
+  <li>Fill in:
+    <ul>
+      <li><strong>Name</strong>: RISC-V SoC</li>
+      <li><strong>Status</strong>: Active</li>
+      <li><strong>Description</strong>: Complete RISC-V System-on-Chip implementation</li>
+      <li><strong>Start Date</strong>: [Your date]</li>
+      <li><strong>Target End Date</strong>: [Your target date]</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="step-2-create-project-dashboard">Step 2: Create Project Dashboard</h3>
+
+<ol>
+  <li>Go to <strong>PROJECT DASHBOARD TEMPLATE</strong></li>
+  <li>Click “…” menu → Duplicate</li>
+  <li>Rename to “<strong>RISC-V SoC Dashboard</strong>”</li>
+  <li>Update summary</li>
+  <li>Update all linked database filters:
+    <ul>
+      <li>In each view, edit filter: Project -&gt; Is -&gt; RISC-V SoC</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="step-3-create-epics">Step 3: Create Epics</h3>
+
+<ol>
+  <li>Go to <strong>Epics</strong> database</li>
+  <li>Create three entries:</li>
+</ol>
+
+<p><strong>Epic 1:</strong></p>
+<ul>
+  <li><strong>Name</strong>: RISC-V Core</li>
+  <li><strong>Project</strong>: RISC-V SoC</li>
+  <li><strong>Description</strong>: Design and implementation of the RISC-V processor core</li>
+</ul>
+
+<p><strong>Epic 2:</strong></p>
+<ul>
+  <li><strong>Name</strong>: AXI Interconnect</li>
+  <li><strong>Project</strong>: RISC-V SoC</li>
+  <li><strong>Description</strong>: Implementation of AXI bus interconnect for system communication</li>
+</ul>
+
+<p><strong>Epic 3:</strong></p>
+<ul>
+  <li><strong>Name</strong>: AXI Slave Generator</li>
+  <li><strong>Project</strong>: RISC-V SoC</li>
+  <li><strong>Description</strong>: Tool for generating AXI slave peripherals</li>
+</ul>
+
+<h3 id="step-4-create-stories">Step 4: Create Stories</h3>
+
+<ol>
+  <li>Go to <strong>Stories</strong> database</li>
+  <li>Create two entries:</li>
+</ol>
+
+<p><strong>Story 1:</strong></p>
+<ul>
+  <li><strong>Name</strong>: Watch Onur Mutlu’s Lectures on Digital Design and Computer Architecture</li>
+  <li><strong>Project</strong>: RISC-V SoC</li>
+  <li><strong>Epic</strong>: RISC-V Core</li>
+  <li><strong>Description</strong>: Complete lecture series to understand fundamentals</li>
+</ul>
+
+<p><strong>Story 2:</strong></p>
+<ul>
+  <li><strong>Name</strong>: Read Harris &amp; Harris: Digital Design &amp; Computer Architecture RISC-V Edition</li>
+  <li><strong>Project</strong>: RISC-V SoC</li>
+  <li><strong>Epic</strong>: RISC-V Core</li>
+  <li><strong>Description</strong>: Study the textbook chapters on RISC-V architecture</li>
+</ul>
+
+<h3 id="step-5-create-tasks">Step 5: Create Tasks</h3>
+
+<ol>
+  <li>Go to <strong>Tasks</strong> database</li>
+  <li>Create tasks for the Harris &amp; Harris story:</li>
+</ol>
+
+<p><strong>Task 1:</strong></p>
+<ul>
+  <li><strong>Name</strong>: Chapter 1 - From Zero to One</li>
+  <li><strong>Project</strong>: RISC-V SoC</li>
+  <li><strong>Story</strong>: Read Harris &amp; Harris: Digital Design &amp; Computer Architecture RISC-V Edition</li>
+  <li><strong>Description</strong>: Introduction to digital systems</li>
+  <li><strong>Status</strong>: Not started</li>
+  <li><strong>Month</strong>: Backlog</li>
+  <li><strong>Estimated Hours</strong>: 3</li>
+</ul>
+
+<p><strong>Task 2:</strong></p>
+<ul>
+  <li><strong>Name</strong>: Chapter 2 - Combinational Logic Design</li>
+  <li><strong>Project</strong>: RISC-V SoC</li>
+  <li><strong>Story</strong>: Read Harris &amp; Harris: Digital Design &amp; Computer Architecture RISC-V Edition</li>
+  <li><strong>Status</strong>: Not started</li>
+  <li><strong>Month</strong>: Backlog</li>
+  <li><strong>Estimated Hours</strong>: 4</li>
+</ul>
+
+<p><strong>Task 3:</strong></p>
+<ul>
+  <li><strong>Name</strong>: Chapter 3 - Sequential Logic Design</li>
+  <li><strong>Project</strong>: RISC-V SoC</li>
+  <li><strong>Story</strong>: Read Harris &amp; Harris: Digital Design &amp; Computer Architecture RISC-V Edition</li>
+  <li><strong>Status</strong>: Not started</li>
+  <li><strong>Month</strong>: Backlog</li>
+  <li><strong>Estimated Hours</strong>: 4</li>
+</ul>
+
+<p>Continue creating tasks for remaining chapters…</p>
+
+<p><strong>Note</strong>: The Epic column auto-populates via rollup from Story → Epic.</p>
+
+<h2 id="part-5-sprint-planning-and-execution">Part 5: Sprint Planning and Execution</h2>
+
+<h3 id="planning-your-first-sprint">Planning Your First Sprint</h3>
+
+<ol>
+  <li>Go to <strong>Tasks</strong> database</li>
+  <li>View “All Backlogs”</li>
+  <li>Filter or sort by Project: RISC-V SoC</li>
+  <li>Select tasks for January 2026 (aim for monthly capacity)</li>
+  <li>For each selected task:
+    <ul>
+      <li>Change <strong>Month</strong>: Backlog-&gt; January 2026</li>
+      <li>Change <strong>Status</strong>: Backlog -&gt; To Do</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="using-the-unified-kanban">Using the Unified Kanban</h3>
+
+<ol>
+  <li>Go to <strong>Tasks</strong> database</li>
+  <li>View “Current Month”</li>
+  <li>See all January 2026 tasks from all projects</li>
+  <li>Drag tasks between columns:
+    <ul>
+      <li><strong>Not started</strong> → <strong>In progress</strong> (when starting)</li>
+      <li><strong>In progress</strong> → <strong>Done</strong> (when complete)</li>
+    </ul>
+  </li>
+  <li>Tasks are grouped by Status, sorted by Project</li>
+</ol>
+
+<h3 id="daily-workflow">Daily Workflow</h3>
+
+<p><strong>Morning:</strong></p>
+<ol>
+  <li>Open “Current Month” Kanban</li>
+  <li>Review all active tasks across projects</li>
+  <li>Move 1-3 tasks to “In progress”</li>
+</ol>
+
+<p><strong>During work:</strong></p>
+<ol>
+  <li>Focus on ongoing tasks</li>
+  <li>Track time manually or with timer</li>
+</ol>
+
+<p><strong>End of day:</strong></p>
+<ol>
+  <li>Update <strong>Actual Hours</strong> on tasks worked</li>
+  <li>Move completed tasks to “Done”</li>
+  <li>Move unstarted tasks back to “Not started” if needed</li>
+</ol>
+
+<h3 id="ending-a-month-sprint">Ending a Month (Sprint)</h3>
+
+<ol>
+  <li>Go to “Current Month”</li>
+  <li>Select all tasks in “Not started” and “In progress”</li>
+  <li>Bulk edit: Month -&gt; February 2026</li>
+  <li>Update Kanban filter: Month -&gt; Is -&gt; February 2026</li>
+</ol>]]></content><author><name></name></author><category term="Productivity" /><category term="notion" /><category term="goals" /><category term="productivity" /><summary type="html"><![CDATA[In this post I describe how I manage my projects - both hobby and commercial and the motivation behind it. I give a quick tour of my Scrum-like project management setup in a tool called [Notion](https://www.notion.so), and I also give step-by-step instructions on how to create a similar Notion layout.]]></summary></entry></feed>
