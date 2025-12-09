@@ -18,7 +18,15 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage","description":"A personal blog that contains stuff of interest to Hrvoje Butina. Deep dives into ASIC design &amp; verification. And some shallow dives into the embedded and low-level development.","headline":"Tags","url":"https://criticalpath.dev/tags/"}</script>
 <!-- End Jekyll SEO tag -->
-<link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css">
+<!-- CRITICAL: Apply theme immediately to prevent flash -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('theme') || 
+                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  <link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css">
 
   
   
@@ -39,6 +47,9 @@
   <a class="nav-item" href="/posts/">Posts</a>
   <a class="nav-item" href="/tags/">Tags</a>
   <a class="nav-item" href="/about/">About</a>
+  <a class="page-link theme-toggle" href="#" aria-label="Toggle theme" id="theme-toggle">
+    <i class="fas fa-sun"></i> <!-- Will switch between sun/moon -->
+  </a>
   <a class="page-link search-toggle" href="#" aria-label="Search">
     <i class="fas fa-search"></i>
   </a>
@@ -183,6 +194,7 @@
 
 <script src="/assets/js/copy-code.js"></script>
 <script src="/assets/js/search-toggle.js" defer></script>
+<script src="/assets/js/theme-toggle.js" defer></script>
 
 
 </body>

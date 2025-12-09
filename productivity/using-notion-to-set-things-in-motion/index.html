@@ -19,7 +19,15 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-12-06T18:17:00+01:00","datePublished":"2025-12-06T18:17:00+01:00","description":"In this post I describe how I manage my projects - both hobby and commercial and the motivation behind it. I give a quick tour of my Scrum-like project management setup in a tool called Notion, and I also give step-by-step instructions on how to create a similar Notion layout.","headline":"Using Notion to set things in motion","mainEntityOfPage":{"@type":"WebPage","@id":"https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/"},"url":"https://criticalpath.dev/productivity/using-notion-to-set-things-in-motion/"}</script>
 <!-- End Jekyll SEO tag -->
-<link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css">
+<!-- CRITICAL: Apply theme immediately to prevent flash -->
+  <script>
+    (function() {
+      const theme = localStorage.getItem('theme') || 
+                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  <link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css">
 
   
   <!-- GLightbox CSS -->
@@ -27,33 +35,81 @@
   
   
   
-    <script type="module">
-      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-      
-      // Function to initialize with the correct theme
-      function initializeMermaid() {
-        const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = isDarkMode ? 'dark' : 'neutral';
-      
-        mermaid.initialize({ 
-          startOnLoad: true,
-          theme: theme
-        });
-      
-        mermaid.run({
-          querySelector: '.language-mermaid',
-        });
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    
+    // Store original mermaid code for re-rendering
+    const mermaidSources = new Map();
+    
+    // Function to get current theme
+    function getCurrentTheme() {
+      const manualTheme = document.documentElement.getAttribute('data-theme');
+      if (manualTheme) {
+        return manualTheme === 'dark' ? 'dark' : 'neutral';
       }
+      const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return isDarkMode ? 'dark' : 'neutral';
+    }
+    
+    // Function to initialize and render mermaid
+    async function renderMermaid() {
+      const theme = getCurrentTheme();
       
-      // Initialize on load
-      initializeMermaid();
-      
-      // Listen for theme changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        // Re-initialize and re-render all diagrams
-        location.reload(); // Simple approach: reload the page
+      mermaid.initialize({ 
+        startOnLoad: false,
+        theme: theme
       });
-    </script>
+      
+      // Find all mermaid code blocks
+      const mermaidBlocks = document.querySelectorAll('.language-mermaid');
+      
+      mermaidBlocks.forEach((block, index) => {
+        // Store original source if not already stored
+        if (!mermaidSources.has(index)) {
+          mermaidSources.set(index, block.textContent);
+        }
+        
+        // Clear existing rendered content
+        const parent = block.parentElement;
+        if (parent.querySelector('svg')) {
+          parent.querySelector('svg').remove();
+        }
+        
+        // Restore original code
+        block.textContent = mermaidSources.get(index);
+        block.removeAttribute('data-processed');
+      });
+      
+      // Re-render all diagrams
+      await mermaid.run({
+        querySelector: '.language-mermaid',
+      });
+    }
+    
+    // Initial render
+    renderMermaid();
+    
+    // Listen for theme changes via MutationObserver
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+          renderMermaid();
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
+    
+    // Listen for system preference changes (when no manual theme)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!document.documentElement.getAttribute('data-theme')) {
+        renderMermaid();
+      }
+    });
+  </script>
   <link type="application/atom+xml" rel="alternate" href="https://criticalpath.dev/feed.xml" title="Critical Path" />
 </head>
 <body><header class="site-header">
@@ -71,6 +127,9 @@
   <a class="nav-item" href="/posts/">Posts</a>
   <a class="nav-item" href="/tags/">Tags</a>
   <a class="nav-item" href="/about/">About</a>
+  <a class="page-link theme-toggle" href="#" aria-label="Toggle theme" id="theme-toggle">
+    <i class="fas fa-sun"></i> <!-- Will switch between sun/moon -->
+  </a>
   <a class="page-link search-toggle" href="#" aria-label="Search">
     <i class="fas fa-search"></i>
   </a>
@@ -1118,6 +1177,7 @@ own relevant months.</li>
 
 <script src="/assets/js/copy-code.js"></script>
 <script src="/assets/js/search-toggle.js" defer></script>
+<script src="/assets/js/theme-toggle.js" defer></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
