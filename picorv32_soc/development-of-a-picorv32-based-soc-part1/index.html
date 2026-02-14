@@ -104,8 +104,33 @@
     </div>
   </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <p>Recently I got an idea to create my own System-on-Chip (SoC). The main purpose of this SoC is to
+  <div>
+    <div id="table-of-contents" class="post-content e-content" itemprop="articleBody">
+      <h2 class="toc">Table of contents</h2>
+      <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#choice-of-hardware-and-eda-tools">Choice of hardware and EDA tools</a></li>
+<li class="toc-entry toc-h2"><a href="#architecture">Architecture</a></li>
+<li class="toc-entry toc-h2"><a href="#development-of-axi4-lite-sram-module">Development of AXI4-Lite SRAM module</a></li>
+<li class="toc-entry toc-h2"><a href="#development-of-axi4-lite-countertimer">Development of AXI4-Lite Counter/Timer</a></li>
+<li class="toc-entry toc-h2"><a href="#development-of-axi4-lite-uart">Development of AXI4-Lite UART</a></li>
+<li class="toc-entry toc-h2"><a href="#development-of-a-gpio">Development of a GPIO</a></li>
+<li class="toc-entry toc-h2"><a href="#common-clock-and-reset-ccr-module">Common clock and reset (CCR) module</a></li>
+<li class="toc-entry toc-h2"><a href="#integration">Integration</a></li>
+<li class="toc-entry toc-h2">
+<a href="#top-level-simulation">Top-level simulation</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#building-rv32imc-gnu-toolchain">Building RV32IMC GNU Toolchain</a></li>
+<li class="toc-entry toc-h3"><a href="#generating-compilation-artefacts">Generating compilation artefacts</a></li>
+<li class="toc-entry toc-h3"><a href="#bootloader-startups-and-hello_world-program-for-the-top-level-simulation">Bootloader, startup.S and hello_world program for the top-level simulation</a></li>
+<li class="toc-entry toc-h3"><a href="#loading-program-into-the-ram-in-the-simulation">Loading program into the RAM in the simulation</a></li>
+<li class="toc-entry toc-h3"><a href="#top-level-testbench">Top level testbench</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#summary">Summary</a></li>
+</ul>
+    </div>
+    <div id="markdown-content" class="post-content e-content" itemprop="articleBody">
+      <p>Recently I got an idea to create my own System-on-Chip (SoC). The main purpose of this SoC is to
 validate a small IP in a real system: plugging it into the SoC, synthesizing it for an FPGA, writing
 a driver for it, and validating it in a real environment. As my motivation for doing a write-up on
 this project, maybe this design (and this post) will motivate someone to undertake a similar
@@ -923,6 +948,7 @@ development of the UART bootloader, reuse of the hello_world program, and valida
 Video FPGA board — including resource utilization numbers, achieved maximum frequency, and a video
 showing the whole thing in action.</p>
 
+    </div>
   </div>
 
   <a class="u-url" href="/picorv32_soc/development-of-a-picorv32-based-soc-part1/" hidden></a>
