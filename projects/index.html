@@ -21,9 +21,15 @@
 <!-- CRITICAL: Apply theme immediately to prevent flash -->
   <script>
     (function() {
-      const theme = localStorage.getItem('theme') || 
-                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        // User has manually set a preference
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } else {
+        // Follow system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      }
     })();
   </script>
   <link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css">
@@ -97,9 +103,42 @@
   
   
   
-    <div class="no-projects-message">
-      <p>No projects yet :'(</p>
-    </div>
+    
+    
+      
+      
+      
+      
+    
+      
+      
+      
+      
+        <div class="project-section">
+          <div class="project-header">
+            <h2 class="project-title">
+              
+                <span class="project-icon"></span>
+              
+              Building a custom RISC-V based SoC on an FPGA
+            </h2>
+            
+              <p class="project-description">A two-part series describing development of a SoC based on PicoRV32 RISC-V core, and a set of commonly used peripherals: SRAM, Bootrom, Timers/Counters, UART, and a simple GPIO. Part 1 mostly focuses on the architectural decisions, hardware design and hardware verification. Part 2 describes backend work (Synthesis, Place and Route, Bitstream Generation) and software development.</p>
+            
+            <span class="project-count">1 post</span>
+          </div>
+          
+          <ul class="year-list">
+            
+              <li class="list-item">
+                <a class="list-item-title" href="/picorv32_soc/development-of-a-picorv32-based-soc-part1/">Building a custom RISC-V based SoC on FPGA - Part 1</a>
+                - <span class="list-item-date">2026-01-31</span>
+              </li>
+            
+          </ul>
+        </div>
+      
+    
   
 </div>
 

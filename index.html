@@ -21,9 +21,15 @@
 <!-- CRITICAL: Apply theme immediately to prevent flash -->
   <script>
     (function() {
-      const theme = localStorage.getItem('theme') || 
-                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        // User has manually set a preference
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } else {
+        // Follow system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      }
     })();
   </script>
   <link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css">
@@ -96,6 +102,36 @@
   <ul class="post-list"><li>
         <div class="post-meta post-meta-before">
           <svg transform="scale(1 -1)" width="16" height="8" viewBox="0 0 16 8" class="-scale-y-100 text-[--base-neutral-400]" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 2H0V7V8H1H16V7H1V2Z" fill="currentColor"></path></svg>
+          <time class="post-date" datetime="Jan 31, 2026">
+            Jan 31, 2026
+          </time>
+        </div>
+        <h3>
+          <a class="post-link" href="/picorv32_soc/development-of-a-picorv32-based-soc-part1/">
+            Building a custom RISC-V based SoC on FPGA - Part 1
+          </a>
+        </h3>
+        <div class="post-meta post-meta-after">
+          5371 words
+          • 22 min read
+          
+            •
+            
+                <a class="post-tags" href="https://criticalpath.dev/tags/#PicoRV32">#PicoRV32</a>
+            
+                <a class="post-tags" href="https://criticalpath.dev/tags/#System-on-Chip">#System-on-Chip</a>
+            
+                <a class="post-tags" href="https://criticalpath.dev/tags/#FPGA">#FPGA</a>
+            
+                <a class="post-tags" href="https://criticalpath.dev/tags/#RISC-V">#RISC-V</a>
+            
+          
+        </div>
+        <p>I built a custom RISC-V based SoC on FPGA as a base for the purpose of validating new IP designs in a real system. This is part one of two, covering architectural choices, digital design, and verification.</p>
+
+      </li><li>
+        <div class="post-meta post-meta-before">
+          <svg transform="scale(1 -1)" width="16" height="8" viewBox="0 0 16 8" class="-scale-y-100 text-[--base-neutral-400]" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M1 2H0V7V8H1H16V7H1V2Z" fill="currentColor"></path></svg>
           <time class="post-date" datetime="Dec 6, 2025">
             Dec 6, 2025
           </time>
@@ -107,7 +143,7 @@
         </h3>
         <div class="post-meta post-meta-after">
           3549 words
-          • 18 min read
+          • 15 min read
           
             •
             

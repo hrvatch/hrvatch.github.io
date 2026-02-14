@@ -22,9 +22,15 @@
 <!-- CRITICAL: Apply theme immediately to prevent flash -->
   <script>
     (function() {
-      const theme = localStorage.getItem('theme') || 
-                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        // User has manually set a preference
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } else {
+        // Follow system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      }
     })();
   </script>
   <link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css">
@@ -357,7 +363,8 @@ Tasks. Each project gets its own separate page.</p>
 <p>The Projects database lists all the projects with their status, description, start and end date.</p>
 
 <figure class="post-figure">
-<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects.webp">
+  
+    <a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects.webp">
   <picture>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-600-11f76890a.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-800-11f76890a.webp 800w" type="image/webp"></source>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-600-11f76890a.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/projects-800-11f76890a.webp 800w" type="image/webp"></source>
@@ -365,7 +372,8 @@ Tasks. Each project gets its own separate page.</p>
   </picture>
 </a>
 
-<figcaption>Notion database containing a list of Projects with the accompanying properties</figcaption>
+  
+  <figcaption>Notion database containing a list of Projects with the accompanying properties</figcaption>
 </figure>
 
 <p>The Epics database contains all Epics for all Projects. Each Epic is assigned to on or more Projects. 
@@ -374,7 +382,8 @@ Actual Hours, Remaining Hours, and Progress are automatically calculated. Estima
 are sum of the same-named properties of all Stories contained inside an Epic.</p>
 
 <figure class="post-figure">
-<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics.webp">
+  
+    <a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics.webp">
   <picture>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-600-c07aa2b9a.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-800-c07aa2b9a.webp 800w" type="image/webp"></source>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-600-c07aa2b9a.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/epics-800-c07aa2b9a.webp 800w" type="image/webp"></source>
@@ -382,7 +391,8 @@ are sum of the same-named properties of all Stories contained inside an Epic.</p
   </picture>
 </a>
 
-<figcaption>Database containing list of all Epics. Estimated hours and Actual hours are automatically calculated by summing those properties for all the Stories contained in an Epic</figcaption>
+  
+  <figcaption>Database containing list of all Epics. Estimated hours and Actual hours are automatically calculated by summing those properties for all the Stories contained in an Epic</figcaption>
 </figure>
 
 <p>The Stories database contains all Stories for all Projects. Each Story is assigned to one (or more)
@@ -391,7 +401,8 @@ Like in the Epics database, the Estimated Hours and the Actual Hours are are cal
 the values of the same-names properties for all Tasks contained within a Story.</p>
 
 <figure class="post-figure">
-<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories.webp">
+  
+    <a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories.webp">
   <picture>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-600-a96a66889.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-800-a96a66889.webp 800w" type="image/webp"></source>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-600-a96a66889.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/stories-800-a96a66889.webp 800w" type="image/webp"></source>
@@ -399,7 +410,8 @@ the values of the same-names properties for all Tasks contained within a Story.<
   </picture>
 </a>
 
-<figcaption>Database containing list of all Stories. Estimated hours and Actual hours are automatically calculated by summing the same-named properties for all the Tasks contained inside a Story</figcaption>
+  
+  <figcaption>Database containing list of all Stories. Estimated hours and Actual hours are automatically calculated by summing the same-named properties for all the Tasks contained inside a Story</figcaption>
 </figure>
 
 <p>The Tasks database contains as list of Tasks for <strong>all</strong> Projects. Each Task is described with the
@@ -415,7 +427,8 @@ following properties:</p>
 </ul>
 
 <figure class="post-figure">
-<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog.webp">
+  
+    <a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog.webp">
   <picture>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-600-6c320c53c.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp 800w" type="image/webp"></source>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-600-6c320c53c.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_backlog-800-6c320c53c.webp 800w" type="image/webp"></source>
@@ -423,14 +436,16 @@ following properties:</p>
   </picture>
 </a>
 
-<figcaption>Tasks database on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.</figcaption>
+  
+  <figcaption>Tasks database on the Backlog view. The Backlog view is used to see all the tasks that are not being worked on this month.</figcaption>
 </figure>
 
 <p>Tasks that are going to be worked on in the current month are displayed on a board. The <a href="https://en.wikipedia.org/wiki/Kanban_board" target="_blank" rel="noopener noreferrer">Kanban board</a>
 style is, in my opinion, a great tool to visually depict work at various stages of a process.</p>
 
 <figure class="post-figure">
-<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban.webp">
+  
+    <a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban.webp">
   <picture>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-600-492a713f0.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp 800w" type="image/webp"></source>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-600-492a713f0.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/tasks_kanban-800-492a713f0.webp 800w" type="image/webp"></source>
@@ -438,7 +453,8 @@ style is, in my opinion, a great tool to visually depict work at various stages 
   </picture>
 </a>
 
-<figcaption>The Kanban board show which tasks are planned to be worked on this month, but are still not in progress, tasks I'm currently working on, and tasks I've finished this month.</figcaption>
+  
+  <figcaption>The Kanban board show which tasks are planned to be worked on this month, but are still not in progress, tasks I'm currently working on, and tasks I've finished this month.</figcaption>
 </figure>
 
 <p>As I’ve mentioned before, each project gets a dedicated Project dashboard page. This page essentially
@@ -446,7 +462,8 @@ contains a link to the Epics, Stories and Tasks databases, but it’s set up in 
 a clear overview of the Project.</p>
 
 <figure class="post-figure">
-<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1.webp">
+  
+    <a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1.webp">
   <picture>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-600-3614c359e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-800-3614c359e.webp 800w" type="image/webp"></source>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-600-3614c359e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_1-800-3614c359e.webp 800w" type="image/webp"></source>
@@ -454,14 +471,16 @@ a clear overview of the Project.</p>
   </picture>
 </a>
 
-<figcaption>Project dashboard pae showing list of Epics, Stories an Tasks related to the Project. Tasks are show in the Kanban board style.</figcaption>
+  
+  <figcaption>Project dashboard pae showing list of Epics, Stories an Tasks related to the Project. Tasks are show in the Kanban board style.</figcaption>
 </figure>
 
 <p>Tasks in the Project dashboard are displayed in two different views: Kanban style, and as a list of Project related
 tasks currently in the backlog.</p>
 
 <figure class="post-figure">
-<a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2.webp">
+  
+    <a class="glightbox" href="/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2.webp">
   <picture>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-600-b090b071e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-800-b090b071e.webp 800w" type="image/webp"></source>
     <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-600-b090b071e.webp 600w, /generated/assets/images/2025-12-06-using-notion-to-set-things-in-motion/project_dashboard_2-800-b090b071e.webp 800w" type="image/webp"></source>
@@ -469,7 +488,8 @@ tasks currently in the backlog.</p>
   </picture>
 </a>
 
-<figcaption>List of tasks in the backlog for the selected Project.</figcaption>
+  
+  <figcaption>List of tasks in the backlog for the selected Project.</figcaption>
 </figure>
 
 <h2 id="steps-to-set-up-a-scrum-based-project-management-system-in-notion">Steps to set up a Scrum-based project management system in Notion</h2>
@@ -1184,7 +1204,7 @@ own relevant months.</li>
 <script defer>
   document.addEventListener('DOMContentLoaded', function() {
     const lightbox = GLightbox({
-      selector: 'a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"], a[href$=".webp"]'
+      selector: 'a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"], a[href$=".webp"], a[href$=".svg"]'
     });
   });
 </script>

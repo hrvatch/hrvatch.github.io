@@ -1,5 +1,6 @@
 @charset "UTF-8";
 :root {
+  color-scheme: light;
   --minima-brand-color: #818181;
   --minima-brand-color-light: #e7e7e7;
   --minima-brand-color-dimmed: rgb(100.95, 100.95, 100.95);
@@ -26,8 +27,7 @@
 }
 
 .highlight .err {
-  color: #e3d2d2;
-  background-color: #a61717;
+  color: #d97706;
 }
 .highlight .c {
   color: #9c9996;
@@ -216,6 +216,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
     --minima-brand-color: #64828e;
     --minima-brand-color-light: rgb(112.7066115702, 142.7685950413, 154.7933884298);
     --minima-brand-color-dimmed: rgb(83.1404958678, 108.0826446281, 118.0595041322);
@@ -241,8 +242,7 @@
     --minima-table-border-color: rgb(19.9173553719, 25.8925619835, 28.2826446281);
   }
   .highlight .err {
-    color: #e3d2d2;
-    background-color: #8c2121;
+    color: #fb923c;
   }
   .highlight .c {
     color: #8a8a8a;
@@ -457,6 +457,7 @@
 }
 
 html[data-theme=light] {
+  color-scheme: light;
   --minima-brand-color: #818181;
   --minima-brand-color-light: #e7e7e7;
   --minima-brand-color-dimmed: rgb(100.95, 100.95, 100.95);
@@ -482,8 +483,7 @@ html[data-theme=light] {
   --minima-table-border-color: #e7e7e7;
 }
 html[data-theme=light] .highlight .err {
-  color: #e3d2d2;
-  background-color: #a61717;
+  color: #d97706;
 }
 html[data-theme=light] .highlight .c {
   color: #9c9996;
@@ -669,8 +669,12 @@ html[data-theme=light] .highlight .lineno, html[data-theme=light] .highlight .gl
 html[data-theme=light] .highlight .hll {
   background-color: #ffffcc;
 }
+html[data-theme=light] .highlight .err {
+  color: #d97706;
+}
 
 html[data-theme=dark] {
+  color-scheme: dark;
   --minima-brand-color: #64828e;
   --minima-brand-color-light: rgb(112.7066115702, 142.7685950413, 154.7933884298);
   --minima-brand-color-dimmed: rgb(83.1404958678, 108.0826446281, 118.0595041322);
@@ -696,8 +700,7 @@ html[data-theme=dark] {
   --minima-table-border-color: rgb(19.9173553719, 25.8925619835, 28.2826446281);
 }
 html[data-theme=dark] .highlight .err {
-  color: #e3d2d2;
-  background-color: #8c2121;
+  color: #fb923c;
 }
 html[data-theme=dark] .highlight .c {
   color: #8a8a8a;
@@ -882,6 +885,9 @@ html[data-theme=dark] .highlight .lineno, html[data-theme=dark] .highlight .gl {
 }
 html[data-theme=dark] .highlight .hll {
   background-color: #373730;
+}
+html[data-theme=dark] .highlight .err {
+  color: #fb923c;
 }
 
 html {

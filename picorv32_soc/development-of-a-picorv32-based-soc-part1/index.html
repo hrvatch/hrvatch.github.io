@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Building a custom RISC-V based SoC on FPGA - Part 1 | Critical Path</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Building a custom RISC-V based SoC on FPGA - Part 1" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I built a custom RISC-V based SoC on FPGA as a base for the purpose of validating new IP designs in a real system. This is part one of two, covering architectural choices, digital design, and verification." />
+<meta property="og:description" content="I built a custom RISC-V based SoC on FPGA as a base for the purpose of validating new IP designs in a real system. This is part one of two, covering architectural choices, digital design, and verification." />
+<link rel="canonical" href="https://criticalpath.dev/picorv32_soc/development-of-a-picorv32-based-soc-part1/" />
+<meta property="og:url" content="https://criticalpath.dev/picorv32_soc/development-of-a-picorv32-based-soc-part1/" />
+<meta property="og:site_name" content="Critical Path" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-01-31T10:37:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Building a custom RISC-V based SoC on FPGA - Part 1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-01-31T10:37:00+01:00","datePublished":"2026-01-31T10:37:00+01:00","description":"I built a custom RISC-V based SoC on FPGA as a base for the purpose of validating new IP designs in a real system. This is part one of two, covering architectural choices, digital design, and verification.","headline":"Building a custom RISC-V based SoC on FPGA - Part 1","mainEntityOfPage":{"@type":"WebPage","@id":"https://criticalpath.dev/picorv32_soc/development-of-a-picorv32-based-soc-part1/"},"url":"https://criticalpath.dev/picorv32_soc/development-of-a-picorv32-based-soc-part1/"}</script>
+<!-- End Jekyll SEO tag -->
+<!-- CRITICAL: Apply theme immediately to prevent flash -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        // User has manually set a preference
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } else {
+        // Follow system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      }
+    })();
+  </script>
+  <link id="main-stylesheet" rel="stylesheet" href="/assets/css/style.css">
+
+  
+  <!-- GLightbox CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+  
+  
+  <link type="application/atom+xml" rel="alternate" href="https://criticalpath.dev/feed.xml" title="Critical Path" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">Critical Path</a>
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger">
+        <label for="nav-trigger">
+          <span class="menu-icon"></span>
+        </label>
+
+        <div class="nav-items">
+  <a class="nav-item" href="/projects/">Projects</a>
+  <a class="nav-item" href="/posts/">Posts</a>
+  <a class="nav-item" href="/tags/">Tags</a>
+  <a class="nav-item" href="/about/">About</a>
+  <a class="page-link theme-toggle" href="#" aria-label="Toggle theme" id="theme-toggle">
+    <i class="fas fa-circle-half-stroke"></i> <!-- Will switch between sun/moon -->
+  </a>
+  <a class="page-link search-toggle" href="#" aria-label="Search">
+    <i class="fas fa-search"></i>
+  </a>
+  <!-- Search box (hidden by default) -->
+  <div class="search-overlay" id="search-overlay">
+    <div class="search-container">
+      <button class="search-close" id="search-close" aria-label="Close search">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="header-search">
+  <h2>Search</h2>
+  <form class="header-search-form" action="/search/" method="get">
+    <input type="text" id="search-box" name="query" placeholder="Search posts..." autocomplete="off" autofocus>
+    <button type="submit" aria-label="Search">
+      <i class="fas fa-search"></i>
+    </button>
+  </form>
+</div>
+
+    </div>
+  </div>
+</div>
+
+      </nav>
+  </div>
+  <div class="wrapper">
+    <div class="site-header-about-text">
+      A blog about topics that interest Hrvoje Butina.
+    </div>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Building a custom RISC-V based SoC on FPGA - Part 1</h1>
+    <div class="post-meta">
+      <time class="dt-published" datetime="2026-01-31T10:37:00+01:00" itemprop="datePublished">
+        Jan 31, 2026
+      </time>
+    </div>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Recently I got an idea to create my own System-on-Chip (SoC). The main purpose of this SoC is to
+validate a small IP in a real system: plugging it into the SoC, synthesizing it for an FPGA, writing
+a driver for it, and validating it in a real environment. As my motivation for doing a write-up on
+this project, maybe this design (and this post) will motivate someone to undertake a similar
+project.</p>
+
+<p>My initial goal was to build an SoC similar to what is presented in this paper: <a href="https://dl.acm.org/doi/pdf/10.1145/3787500" target="_blank" rel="noopener noreferrer">The simply-V 
+Framework: an Extensible RISC-V Reconfigurable Soft-SoC for Open Research and Fast Prototyping</a>. I quickly found out a couple of things:</p>
+<ol>
+  <li>I’m not that familiar with RISC-V ISA.</li>
+  <li>I’m not familiar with the RISC-V ecosystem. What do I mean by that? In the paper mentioned above
+authors are using RISC-V Debug Module, PLIC, etc. I’m not familiar with those components, it 
+will take me some time to become familiar with all of them.</li>
+  <li>The main reason - I’m a bit rusty from not doing digital design for a couple of years now 
+(my primary focus was ASIC verification) and I wanted to build as much of the design
+myself to ‘lube’ my digital design skills.</li>
+  <li>I don’t know enough about embedded Linux development.</li>
+</ol>
+
+<p>To summarize: the scope of the paper is too big for me at the moment.</p>
+
+<p>My ultimate goal is to do the SoC capable of booting Linux but at the moment I’ll need a couple of
+simpler stepping stones before I reach that goal.</p>
+
+<p>The first of many such steps is the PicoRV32 based SoC.</p>
+
+<h2 id="choice-of-hardware-and-eda-tools">Choice of hardware and EDA tools</h2>
+
+<p>Through the years I’ve procured a couple of FPGA development boards - either at a low cost, or
+through my work in the <a href="www.fer.hr">Faculty of Electrical Engineering and Computing</a>. I have the
+following boards at my disposal:</p>
+<ol>
+  <li>
+<a href="https://digilent.com/reference/programmable-logic/zedboard/start" target="_blank" rel="noopener noreferrer">Digilent Zedboard</a> - a
+Zynq-7000 Development board. I bought this board while I was still a student, got it
+with academic discount. Paid something like ~200€ at the time for it. I’ve used this one a lot. 
+Couple of years ago I’ve built a software defined radio (SDR) based on Analog Devices AD9364 
+(FMC expansion card) and ZedBoard as a carrier board.</li>
+  <li>
+<a href="https://www.96boards.org/product/ultra96/" target="_blank" rel="noopener noreferrer">Avnet ULTRA96-G REV 1</a> - it’s an older board which 
+got an update over the years. I’ve got this one dirt cheap, I think something like 50$ and I’ve 
+never used it which is a complete shame. I see now there are newer versions of this board, but 
+the old one is still good.</li>
+  <li>
+<a href="https://digilent.com/reference/programmable-logic/nexys-video/start" target="_blank" rel="noopener noreferrer">Digilent Nexys Video</a> -
+I’ve seen this board sitting in the University storage room, and since no-one was using it at
+a time I was able to borrow it, under the promise I’d develop something on it, some stuff
+that could be of use to the students. Well, now I have the chance to keep my promise!</li>
+</ol>
+
+<p>I’ve settled on using the Nexys Video dev board. It’s feature rich, has enough resources to
+implement a decently large design, and most importantly I can use free Vivado license to synthesize
+the design for this board. It’s a perfect board to implement design of the size (and speed) I’m
+aiming at.</p>
+
+<p>As for the software and simulators, initially I thought of using a complete free and open source
+solutions. I was thinking of using <a href="https://altair.com/dsim" target="_blank" rel="noopener noreferrer">Altair DSim</a> since it’s free for
+personal use, but I never got it to work with a free license. The simulator that is integrated
+inside a Vivado also got a boost over the years. I tried playing with it, and I’m not a big fan. The
+Vivado interface is clunky and I got glitches when running it on my machine - <a href="https://knowyourmeme.com/memes/btw-i-use-arch" target="_blank" rel="noopener noreferrer">BTW I use Arch
+Linux</a>.</p>
+
+<p>For now I think I’ll still use commercial EDA tools. Through the university I have access to Cadence
+toolchain, namely to the Xcelium and JasperGold Formal tools. Since I’m not building anything
+commercial (everything I build and post on this blog is either going to be published in some kind of
+paper or it’s built for research purposes) I’ve decided to use the commercial tools for now; but
+I’ll most definitely switch to free/open source solutions sometime in the future.</p>
+
+<p>Eventually, I want to check out <a href="https://www.veripool.org/verilator/" target="_blank" rel="noopener noreferrer">Verilator</a> and the
+<a href="https://symbiyosys.readthedocs.io/en/latest/" target="_blank" rel="noopener noreferrer">SymbiYosys</a> is of a particular interest to me.</p>
+
+<h2 id="architecture">Architecture</h2>
+
+<p>Before I start with the SoC I have to make a couple of architectural choices. The first and the most
+important is the type of bus I’m going to use to connect everything. Since I have a fair amount of
+experience with the AXI bus, I’ve decided to use it. The design I’m going to make is not a big
+design and I don’t need some advanced AXI features, therefore I’ve settled on an AXI4-Lite bus.</p>
+
+<p>There is one more reason why I chose AXI bus - the availability of the interconnect. Initially
+I wanted to use Xilinx interconnect (since I’m developing for a Xilinx FPGA), but I decided to use
+the least amount possible of Xilinx components. There is no particular strong reason why I did it. I
+kinda dislike the block diagram approach and working in GUIs in general, if I use Xilinx IPs I’ll
+most definitely be backed into this corner at some point. To be fair, the Vivado block diagram flow is
+quick if you’re using Xilinx components, but if you’re not (and you’re not in the business of
+building your own IP suitable for Vivado use), then it becomes a big inconvenience.</p>
+
+<p>If I had to name one good reason, it would be to reuse this design on an FPGAs of other vendors
+besides the Xilinx.</p>
+
+<p>ETH Zürich provides a huge number of well designed and tapeout verified components and IPs through
+the PULP platform. I’ve decided to use AXI4-Lite interconnect from the PULP platform <a href="https://github.com/pulp-platform/axi" target="_blank" rel="noopener noreferrer">Github
+repository</a>. Repository also includes a
+small testbench and an example on how to instantiate and use this interconnect.</p>
+
+<div class="premonition info">
+  <i class="premonition pn-info"></i>
+  <div class="content">
+    <p class="header">About PULP Platform</p>
+<p>The PULP Platform is an open-source, energy-efficient computing architecture developed by 
+ETH Zürich and the University of Bologna since 2013. I won’t list all the aims of the project,
+you can check that out <a href="https://pulp-platform.org/projectinfo.htm" target="_blank" rel="noopener noreferrer">here</a>. To me, personally,
+the most interesting thing is the open-source availability of the verified hardware components.
+And the list of components - to say the least - is impressive. Check their <a href="https://github.com/pulp-platform" target="_blank" rel="noopener noreferrer">Github page</a>
+for more details.
+And I also need to mention this - one of the coolest things I’ve seen in the repository is the SoC
+developed and taped out in an Open-Source EDA flow. I recommend readers to check this out: <a href="https://pulp-platform.org/docs/hotchips2025/hotchips_2025_basilisk_poster_revd.pdf" target="_blank" rel="noopener noreferrer">34 mm2 End-to-End Open-Source 64-bit Linux-Capable RISC-V SoC in 130nm BiCMOS</a>.</p>
+
+
+
+
+  </div>
+</div>
+
+<p>The next choice I’ve had to make is which RISC-V core to use. I had a few requirements:</p>
+<ul>
+  <li>Simple to use and integrate</li>
+  <li>Good documentation</li>
+  <li>Support for RISC-V IMC instruction set. Why M and C? It’s quite possible that I’ll use
+multiplication in the software that I develop. As for the C instruction set, I don’t want to use
+DRAM or store my program on an SD Card. Everything should fit inside a small SRAM</li>
+  <li>Must be either formally verified or verified in a constrained random manner against a Spike (or
+some other) model</li>
+  <li>I should be able to connect the core to the AXI4-Lite interconnect via some kind of bridge, or
+ideally there should be a built in solution to do this</li>
+  <li>The RISC-V core should be able to handle simple interrupts</li>
+</ul>
+
+<p>The <a href="https://github.com/YosysHQ/picorv32" target="_blank" rel="noopener noreferrer">PicoRV32</a> RISC-V core satisfies all of the above. It’s a neat 
+small RISC-V core, with good documentation and it’s very simple to integrate. Actually it’s so good,
+that if I was to use a simple RISC-V core in a project I was going to tapeout, this would be my
+choice.</p>
+
+<p>As far as the rest of the components, I need a timer capability, capability to use switches, LEDs and
+buttons (some kind of simple GPIO), most definitely UART for communication and debugging and I also
+need SRAM to store the bootloader and the program being ran.</p>
+
+<p>I’ve decided to <a href="https://en.wikipedia.org/wiki/Reinventing_the_wheel" target="_blank" rel="noopener noreferrer">build all of those components
+myself</a>.</p>
+
+<p>The final architecture should look something like this:</p>
+
+<figure class="post-figure">
+  
+    <a href="/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/shock_soc.svg" class="glightbox">
+      <img src="/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/shock_soc.svg" alt="PicoRV32 based SoC block diagram">
+    </a>
+  
+  <figcaption>PicoRV32 based SoC block diagram</figcaption>
+</figure>
+
+<p>Ah and I forgot, I want everything to work on at least 100 MHz.</p>
+
+<h2 id="development-of-axi4-lite-sram-module">Development of AXI4-Lite SRAM module</h2>
+
+<p>This module is used to access static RAM via AXI4-Lite interface. This is where my programs and the
+bootloader will be stored. I had a couple of requirements for this module:</p>
+<ol>
+  <li>Module should support back-to-back accesses on each clock cycle via AXI4-Lite interface.</li>
+  <li>The block should be parametrizable with the SRAM bit width and the SRAM depth.</li>
+  <li>The block should support byte access.</li>
+</ol>
+
+<p>I won’t go into much detail how I’ve designed this. Sufficient to say, there are enough resources on
+designing your own AXI4-Slave. The most useful resource I’ve found on the internet was on the ZipCPU
+blog: <a href="https://zipcpu.com/blog/2019/05/29/demoaxi.html" target="_blank" rel="noopener noreferrer">Building the perfect AXI4 slave</a>.
+The most challenging thing I’ve had to deal with was throughput and the long backpressure path
+from the slave’s <code class="language-plaintext highlighter-rouge">AxREADY/xREADY</code> signals. For example, the <code class="language-plaintext highlighter-rouge">ARREADY</code> goes from the
+AXI4-Lite SRAM module to the interconnect, interconnect <code class="language-plaintext highlighter-rouge">ARREADY</code> goes to the PicoRV32. 
+This long combinatorial path resulted in not being able to close the timing for the
+design. I’ve dealt with these issues of throughput and long combinatorial path by using so called <em>Skid buffers</em>.
+I’ve used the idea from this article <a href="https://zipcpu.com/blog/2019/05/22/skidbuffer.html" target="_blank" rel="noopener noreferrer">Building a Skid Buffer for AXI
+processing</a>. 
+Although the idea is fairly simple, I was actually surprised how much trouble
+I’ve had implementing it. The good thing is I’ve had a formal testbench ready to verify correctness of
+the AXI4-Lite protocol, and that made development of the AXI4-Lite interface <strong>a lot</strong> easier.</p>
+
+<p>I encourage the reader to go through the ZipCPU blog post, the concept of <em>Skid buffers</em> (or
+<em>register slices</em>) is very important in digital design.</p>
+
+<p>I’ve synthesized this module in Vivado and found out one interesting thing. Vivado infers
+Block RAM to be used for the SRAM. On my device (Artix 7 XC7A200T, Speed grade -1), BRAM should
+theoretically work at max frequency of ~450 MHz. But when I checked the timing report after synthesis,
+I found out the theoretical maximum frequency was roughly 200 MHz. The <a href="https://docs.amd.com/v/u/en-US/ug473_7Series_Memory_Resources" target="_blank" rel="noopener noreferrer">Xilinx UG473, Additional
+Block RAM Features in 7 Series
+Devices</a> states that if you want to
+achieve max frequency, an additional register must be placed on the output, therefore I did that.
+This increases latency by 1 extra clock cycle, on top of 1 clock cycle of latency BRAM already has,
+but it increased the theoretical maximum frequency to roughly 350 MHz.</p>
+
+<figure class="post-figure">
+  
+    <a class="glightbox" href="/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/consecutive_reads.png">
+  <picture>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/consecutive_reads-600-867dcf8bb.webp 600w, /generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/consecutive_reads-800-867dcf8bb.webp 800w" type="image/webp"></source>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/consecutive_reads-600-b36a18583.png 600w, /generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/consecutive_reads-800-b36a18583.png 800w" type="image/png"></source>
+    <img loading="lazy" src="/generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/consecutive_reads-800-b36a18583.png" alt="AXI4-Lite Consecutive reads from the AXI4-Lite slave. The slave supports maximum read throughput. A 3 clock cycles of latency can be seen from read request to read response.">
+  </picture>
+</a>
+
+  
+  <figcaption>AXI4-Lite Consecutive reads from the AXI4-Lite slave. The slave supports maximum read throughput. A 3 clock cycles of latency can be seen from read request to read response.</figcaption>
+</figure>
+
+<figure class="post-figure">
+  
+    <a class="glightbox" href="/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/consecutive_writes.png">
+  <picture>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/consecutive_writes-600-e0548a8d1.webp 600w, /generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/consecutive_writes-800-e0548a8d1.webp 800w" type="image/webp"></source>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/consecutive_writes-600-318584dff.png 600w, /generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/consecutive_writes-800-318584dff.png 800w" type="image/png"></source>
+    <img loading="lazy" src="/generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/consecutive_writes-800-318584dff.png" alt="Consecutive writes to the AXI4-Lite slave. Slave supports maximum write throughput.">
+  </picture>
+</a>
+
+  
+  <figcaption>Consecutive writes to the AXI4-Lite slave. Slave supports maximum write throughput.</figcaption>
+</figure>
+
+<p>The AXI4-Lite protocol was verified in JasperGold FPV. The data integrity was verified by using
+formal scoreboarding techniques. Decent explanation of Formal Scoreboarding can be found here (note:
+it requires registration): <a href="https://verificationacademy.com/topics/formal-verification/the-formal-101-series_learn-formal-the-easy-way/exhaustive-scoreboarding-and-data-integrity-verification-made-easy/" target="_blank" rel="noopener noreferrer">Formal 101: Exhaustive Scoreboarding and Data Integrity
+Verification Made Easy</a>.
+I would be interested to see if I could do the entire verification in SymbiYosys.</p>
+
+<p>More details about the AXI4-SRAM module and the module sources are available in the following Github repository
+<a href="https://github.com/hrvatch/axi4_lite_scratchpad" target="_blank" rel="noopener noreferrer">AXI4-Lite Scratchpad</a>.</p>
+
+<h2 id="development-of-axi4-lite-countertimer">Development of AXI4-Lite Counter/Timer</h2>
+
+<p>For the timers, I wanted something simple. I came up with the following design:</p>
+
+<figure class="post-figure">
+  
+    <a href="/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/counter.svg" class="glightbox">
+      <img src="/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/counter.svg" alt="IRQ will be triggered every ((1+PRESCALER VALUE)/Fclk)*(THRESHOLD VALUE) seconds; Fclk = clock
+frequency in Hz">
+    </a>
+  
+  <figcaption>IRQ will be triggered every ((1+PRESCALER VALUE)/Fclk)*(THRESHOLD VALUE) seconds; Fclk = clock
+frequency in Hz</figcaption>
+</figure>
+
+<p>Although this is a counter, technically it’s a timer, because it counts clock cycles. The counter
+integrates 32-bit prescaler that first divides the input frequency. I could’ve used less than
+32-bits, but since the bus is 32-bits wide, and since I have enough resources on my dev board, I’ve
+settled on a 32-bit prescaler.</p>
+
+<p>The counter supports setting compare (threshold) value. Each time a threshold value is reached,
+a threshold sticky bit is set. The threshold bit is also connected to the interrupt line, therefore
+when the counter reaches the threshold value an interrupt is asserted. Reading from the status register
+clears this threshold sticky bit.</p>
+
+<p>For the AXI4-Lite interface part, I’ve used what I’ve already written and debugged for SRAM, simply
+cleaned it up a bit.</p>
+
+<p>The design and a small driver are located in the <a href="https://github.com/hrvatch/axi4_lite_timer" target="_blank" rel="noopener noreferrer">AXI4-Lite Timer</a>
+repository.</p>
+
+<h2 id="development-of-axi4-lite-uart">Development of AXI4-Lite UART</h2>
+
+<p>For the UART, I’ve initially wanted to build a 16550 compatible UART block. In the end I’ve decided
+not to do that. There is only one major reason: I’ll be using only the UART TX/RX lines, don’t care
+for the flow control. But I’ll be using some of the good features of the 16550 UART.</p>
+
+<p>I decided on the following features:</p>
+<ul>
+  <li>Default should be 115200 baud, 8 data bits, 1 stop bit, no parity, should work out of the box.</li>
+  <li>I want it to support baud rates up to (and including) 921600 bits per second.</li>
+  <li>I want it to be on-the-fly configurable.</li>
+  <li>It shouldn’t be a burden on the CPU, it needs to use TX/RX FIFOs and it needs to support
+interrupts.</li>
+  <li>I need FIFO full/empty signals in the status registers, but also I want to have configurable
+threshold.</li>
+</ul>
+
+<p>First, the AXI4-Lite part. I’ve decided to reuse what I’ve had before i.e. AXI4-Lite interface with
+debugged handshaking, and I’ve added a couple more registers. For the FIFOs, I settled on the 16-deep
+FIFOs. In case a FIFO depth of 16 bytes proves to be too small, I can increase it in the future, but
+for now I think the size is good enough.</p>
+
+<p>The weakest point of the AXI4-Lite UART is the simplicity of the testbench. I’m only verifying
+features in a direct test manner. In the ideal universe I would’ve done a fair bit of constrained
+random/metric driven verification, and should’ve built a UVM testbench, but I was too excited to see
+the design in action as soon as possible. Since this is not a commercial design but my own hobby
+project, I’ve settled on a simple testbench and validation on an FPGA board.</p>
+
+<p>The design and a small driver are located in the <a href="https://github.com/hrvatch/axi4_lite_uart" target="_blank" rel="noopener noreferrer">AXI4-Lite
+UART</a>.</p>
+
+<div class="premonition info">
+  <i class="premonition pn-info"></i>
+  <div class="content">
+    <p class="header">Edit from the future</p>
+<p>This design has been synthesized and tested on an FPGA development board. I’ve
+tested communication between the board and my PC with all the supported baud rates, 7 and 8 data
+bits, all parity values and all options of the stop bits and it works well.</p>
+
+<p>If I get the chance to mentor students again in the future, the verification incompleteness of the
+AXI4-Lite UART could be used as a strength. I could give this to a student working on his/her
+bachelor thesis to learn the UVM and verify this design.</p>
+
+
+
+
+  </div>
+</div>
+
+<h2 id="development-of-a-gpio">Development of a GPIO</h2>
+
+<p>The goal for the future is to build a fully working GPIO, but for now I’ll settle only on handling
+LEDs. The fully capable GPIO module will have to wait a bit. The reason why I build this ‘LED
+handler’ is I wanted to have some kind of built-in debugging feature once I start validating my
+design on the board.</p>
+
+<p>In the end, I’ve settled on a single AXI4-Lite accessible register, which is connected to the LEDs.
+Verified in Formal, worked well. This design can be found
+<a href="https://github.com/hrvatch/axi_led" target="_blank" rel="noopener noreferrer">here</a>.</p>
+
+<h2 id="common-clock-and-reset-ccr-module">Common clock and reset (CCR) module</h2>
+
+<p>The purpose of the CCR module is to handle everything related to the clock and reset capability of
+the SoC. The CCR module is a wrapper around the vendor PLL (in this case it’s Xilinx MMCM) and the
+logic required to use the dedicated pushbutton on the development board as a reset button. A block
+diagram of the CCR module is shown in the figure below.</p>
+
+<figure class="post-figure">
+  
+    <a href="/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/CCR.svg" class="glightbox">
+      <img src="/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/CCR.svg" alt="Block diagram of a Common Clock and Reset module.">
+    </a>
+  
+  <figcaption>Block diagram of a Common Clock and Reset module.</figcaption>
+</figure>
+
+<p>I want the entire design to be under reset until the PLL locks, or if the user pushes a ‘Reset’
+button. Since the design is small enough, the CCR module is good as-is. If it grows too large,
+I have a strong suspicion I would run into clock/reset fanout issues. This is something to
+keep in mind for the future.</p>
+
+<p>If someone wants to reuse this entire design on a different vendor FPGA, I think only this module
+needs to be updated.</p>
+
+<h2 id="integration">Integration</h2>
+
+<p>The next thing I need to decide on is the memory map. I’ve decided to use 16-bit wide addresses (no
+need for 32-bits, and this reduces the size of address decoder), and decided on the following memory
+map:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Address Range</th>
+      <th>Size</th>
+      <th>Peripheral</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">0x1000 - 0x1FFF</code></td>
+      <td>4KB</td>
+      <td>Timer/Counter</td>
+      <td>Programmable timer with IRQ</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">0x2000 - 0x2FFF</code></td>
+      <td>4KB</td>
+      <td>GPIO (LEDs)</td>
+      <td>LED control interface</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">0x3000 - 0x3FFF</code></td>
+      <td>4KB</td>
+      <td>UART</td>
+      <td>Serial communication</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">0x4000 - 0x7FFF</code></td>
+      <td>16KB</td>
+      <td>SRAM</td>
+      <td>Main program memory</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">0x8000 - 0x8FFF</code></td>
+      <td>4KB</td>
+      <td>Bootloader ROM</td>
+      <td>UART bootloader</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The PicoRV32 is issuing 32-bit addresses, but I’m truncating this in the PicoRV32 to AXI4-Lite
+interconnect connection, by connecting only the 16 LSBs.</p>
+
+<p>The component connection was fairly simple. I’ve used the following configuration for the AXI4-Lite
+interconnect:</p>
+
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">parameter</span> <span class="n">axi_pkg</span><span class="o">::</span><span class="n">xbar_cfg_t</span> <span class="n">AXI_XBAR_CFG_p</span> <span class="o">=</span> <span class="err">'</span><span class="o">{</span>
+  <span class="nl">NoSlvPorts:</span>   <span class="n">AXI_MASTER_NBR_p</span><span class="p">,</span>
+  <span class="nl">NoMstPorts:</span>   <span class="n">AXI_SLAVE_NBR_p</span><span class="p">,</span> 
+  <span class="nl">MaxMstTrans:</span>  <span class="mi">2</span><span class="p">,</span>
+  <span class="nl">MaxSlvTrans:</span>  <span class="mi">2</span><span class="p">,</span>
+  <span class="nl">FallThrough:</span>  <span class="mb">1'b0</span><span class="p">,</span>
+  <span class="nl">LatencyMode:</span>  <span class="n">axi_pkg</span><span class="o">::</span><span class="n">CUT_ALL_AX</span><span class="p">,</span>
+  <span class="nl">AxiAddrWidth:</span> <span class="n">AXI_ADDR_BW_p</span><span class="p">,</span>
+  <span class="nl">AxiDataWidth:</span> <span class="n">AXI_DATA_BW_p</span><span class="p">,</span>
+  <span class="nl">NoAddrRules:</span>  <span class="n">AXI_SLAVE_NBR_p</span><span class="p">,</span>
+  <span class="nl">default:</span> <span class="mb">'0</span>
+<span class="o">}</span><span class="p">;</span>
+</code></pre></div></div>
+<p>I must admit I don’t fully understand the <code class="language-plaintext highlighter-rouge">MaxMstTrans</code> and <code class="language-plaintext highlighter-rouge">MaxSlvTrans</code> parameters. My assumption
+is those control the number of outstanding transactions, i.e. the <code class="language-plaintext highlighter-rouge">MaxMstTrans</code> controls the number
+of maximum outstanding transactions coming from the Master (PicoRV32), and <code class="language-plaintext highlighter-rouge">MaxSlvTrans</code> probably
+controls the number of outstanding transactions a slave can handle.</p>
+
+<p>Since the AXI4-Lite slaves I’ve built can accept two outstanding transactions, one currently handled
+and one waiting because of the skid buffer, this is the number I chose i.e. <code class="language-plaintext highlighter-rouge">MaxSlvTrans = 2</code>. For
+the master side I’ve chosen <code class="language-plaintext highlighter-rouge">MaxMstTrans = 2</code> also. But again, since PicoRV32 doesn’t pipeline
+memory requests (it waits for the response before issuing the next) I think this shouldn’t matter at
+all.</p>
+
+<p>I’ve verified if the design works correctly for the values of <code class="language-plaintext highlighter-rouge">MaxMstTrans</code> and <code class="language-plaintext highlighter-rouge">MaxSlvTrans</code> I’ve
+used and I didn’t see any issues at all.</p>
+
+<p>For the <code class="language-plaintext highlighter-rouge">LatencyMode</code> I’ve chosen <code class="language-plaintext highlighter-rouge">axi_pkg::CUT_ALL_AX</code>. This is recommended latency mode in the
+PULP documentation. Essentially, what this option does is it further breaks the combinatorial path of
+the <code class="language-plaintext highlighter-rouge">AxREADY/xREADY</code> signals.</p>
+
+<p>The address width is chosen to be the smallest possible, my intuition tells me this affects the width
+of the address decoder and therefore potential maximum frequency as a consequence.</p>
+
+<p>As for PicoRV32, the documentation on their Github is excellent. I’ve created a package with all the
+relevant parameters used in the instantiation.</p>
+
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">ENABLE_COUNTERS_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">ENABLE_COUNTERS64_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>         
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">ENABLE_REGS_16_31_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">ENABLE_REGS_DUALPORT_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">TWO_STAGE_SHIFT_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">BARREL_SHIFTER_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">TWO_CYCLE_COMPARE_p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">TWO_CYCLE_ALU_p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">COMPRESSED_ISA_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">CATCH_MISALIGN_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">CATCH_ILLINSN_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">ENABLE_PCPI_p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">ENABLE_MUL_p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">ENABLE_FAST_MUL_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">ENABLE_DIV_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">ENABLE_IRQ_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">ENABLE_IRQ_QREGS_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">ENABLE_IRQ_TIMER_p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">ENABLE_TRACE_p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="n">REGS_INIT_ZERO_p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span> <span class="n">MASKED_IRQ_p</span> <span class="o">=</span> <span class="mi">32</span><span class="err">'</span><span class="n">h</span> <span class="mi">0000_0000</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span> <span class="n">LATCHED_IRQ_p</span> <span class="o">=</span> <span class="mi">32</span><span class="err">'</span><span class="n">h</span> <span class="n">ffff_fff3</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span> <span class="n">PROGADDR_RESET_p</span> <span class="o">=</span> <span class="mi">32</span><span class="err">'</span><span class="n">h</span> <span class="mi">0000_8000</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span> <span class="n">PROGADDR_IRQ_p</span> <span class="o">=</span> <span class="mi">32</span><span class="err">'</span><span class="n">h</span> <span class="mi">0000_4010</span><span class="p">;</span>
+  <span class="k">parameter</span> <span class="kt">bit</span> <span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span> <span class="n">STACKADDR_p</span> <span class="o">=</span> <span class="mi">32</span><span class="err">'</span><span class="n">h</span> <span class="n">ffff_ffff</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The PicoRV32 was configured to start executing from the address 0x8000 (Bootloader). I’ve connected
+Timer IRQ to the PicoRV32 IRQ[2] and UART to the PicoRV32 IRQ[3]. The reason why I didn’t use the
+IRQ[0] and IRQ[1] for Timer and UART is the PicoRV32 documentation states the <code class="language-plaintext highlighter-rouge">ecall</code> and <code class="language-plaintext highlighter-rouge">ebreak</code>
+instructions (exceptions) will trigger an interrupt on IRQ[0] and IRQ[1] respectively.
+I’ve enabled internal counters, might come in handy if I ever have to do some performance profiling.
+I’ve enabled barrel shifter, multiply and division. No need for trace.</p>
+
+<p>I’ve used SRAM (Scratchpad) that I’ve developed for both the Bootloader ROM and for the SRAM. For
+the Bootloader, I’ve left the AXI4-Write signals unconnected.</p>
+
+<p>The PicoRV32 design files include PicoRV32-to-AXI4-Lite bridge and the PicoRV32 variant that
+natively uses AXI4-Lite interface. I’m using the latter version, therefore I don’t need to
+instantiate/build any bridges, it’s easy to integrate and it works out of the box.</p>
+
+<h2 id="top-level-simulation">Top-level simulation</h2>
+
+<p>On the top level I wanted to check if the components are connected correctly, and whether they work
+after being integrated in a larger design. I want to do something simple, no major automated checks,
+I want to be able to confirm components work correctly after integration by checking the waveforms.</p>
+
+<p>I’ve decided to do some firmware-assisted verification i.e., I’ll build a simple bootloader and
+a <code class="language-plaintext highlighter-rouge">hello_world</code> program that will use LEDs and UART, compile them, and load them in the simulation into
+the Bootloader/SRAM. There are two reasons why I want to do it this way:</p>
+<ol>
+  <li>I can check the waveforms and the internals of the design in the simulation. Since I don’t have a
+huge multi-million gate design, simulation will be very quick and I can easily debug both the
+hardware and the software in the simulation.</li>
+  <li>I’ll be able to reuse most of the firmware when I validate design on an FPGA development board.</li>
+</ol>
+
+<p>The compilation/build process should produce the following artefacts:</p>
+<ul>
+  <li>A compiled and linked binary stripped of all unnecessary debug symbols and sections. This file will
+be used once the design is deployed on an FPGA board. The bootloader will load this binary via the
+UART and execute the program.</li>
+  <li>A .lst file that will contain the RISC-V assembly. I can use this file to verify that the
+compilation is successful and that generated ASM is okay,</li>
+  <li>A file containing hexadecimal representation of a stripped binary file. This file will be loaded
+in the simulator.</li>
+</ul>
+
+<div class="premonition note">
+  <i class="premonition pn-note"></i>
+  <div class="content">
+    <p class="header">VLSI tips</p>
+<p>Ease of debugging and component/code reuse are some of the most important concepts in digital design and
+digital verification</p>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="building-rv32imc-gnu-toolchain">Building RV32IMC GNU Toolchain</h3>
+
+<p>To be able to do that I need a GNU toolchain that can be run on a Linux x86-64 host, and I’m
+targeting (duh) PicoRV32 - in my case, that is RV32IMC. I’m certain there is a prebuilt GNU toolchain
+somewhere in the outskirts of the Interwebz, I haven’t been able to find what I need, thus I decided
+to build the GNU toolchain from the sources.</p>
+
+<p>Since I’m using Arch, these are the steps that work for me:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install dependencies</span>
+<span class="nb">sudo </span>pacman <span class="nt">-S</span> base-devel git python cmake ninja gawk <span class="se">\</span>
+    libmpc mpfr gmp zlib expat glib2
+
+<span class="c"># Clone the repository</span>
+git clone https://github.com/riscv/riscv-gnu-toolchain.git
+<span class="nb">cd </span>riscv-gnu-toolchain
+
+<span class="c"># Configure for bare-metal RV32IMC</span>
+<span class="c"># --prefix: installation directory</span>
+<span class="c"># --with-arch: target architecture</span>
+<span class="c"># --with-abi: application binary interface (ilp32 = int/long/pointer are 32-bit)</span>
+./configure <span class="nt">--prefix</span><span class="o">=</span><span class="nv">$HOME</span>/riscv <span class="se">\</span>
+            <span class="nt">--with-arch</span><span class="o">=</span>rv32imc <span class="se">\</span>
+            <span class="nt">--with-abi</span><span class="o">=</span>ilp32
+
+<span class="c"># Build the bare-metal toolchain (newlib-based)</span>
+<span class="c"># This builds: gcc, binutils, newlib, gdb</span>
+<span class="c"># Takes roughly one hour </span>
+<span class="nb">sudo </span>make <span class="nt">-j</span><span class="si">$(</span><span class="nb">nproc</span><span class="si">)</span>
+
+<span class="c"># Add the installation directory to the PATH environment variable</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/riscv/bin:<span class="nv">$PATH</span>
+
+<span class="c"># Check version</span>
+riscv32-unknown-elf-gcc <span class="nt">--version</span>
+
+<span class="c"># Test compile</span>
+<span class="nb">cat</span> <span class="o">&gt;</span> test.c <span class="o">&lt;&lt;</span> <span class="sh">'</span><span class="no">EOF</span><span class="sh">'
+int main(void) {
+    volatile int x = 42;
+    return x;
+}
+</span><span class="no">EOF
+
+</span>riscv32-unknown-elf-gcc <span class="nt">-march</span><span class="o">=</span>rv32imc <span class="nt">-mabi</span><span class="o">=</span>ilp32 <span class="nt">-nostdlib</span> <span class="nt">-o</span> test.elf test.c
+file test.elf
+<span class="c"># Should show: ELF 32-bit LSB executable, UCB RISC-V</span>
+</code></pre></div></div>
+
+<p>Typical bare-metal compile flags that I use when building the code:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CFLAGS <span class="o">=</span> <span class="nt">-march</span><span class="o">=</span>rv32imc <span class="se">\</span>
+         <span class="nt">-mabi</span><span class="o">=</span>ilp32 <span class="se">\</span>
+         <span class="nt">-nostdlib</span> <span class="se">\</span>
+         <span class="nt">-nostartfiles</span> <span class="se">\</span>
+         <span class="nt">-ffreestanding</span> <span class="se">\</span>
+         <span class="nt">-O2</span> <span class="se">\</span>
+         <span class="nt">-Wall</span>
+</code></pre></div></div>
+
+<p>If required, the detailed instructions can be found <a href="https://github.com/riscv-collab/riscv-gnu-toolchain" target="_blank" rel="noopener noreferrer">here</a>.</p>
+
+<div class="premonition note">
+  <i class="premonition pn-note"></i>
+  <div class="content">
+    <p class="header">On the GNU Toolchain build steps</p>
+<p>I’m aware the instructions on how to build GNU Toolchain for the RV32IMC target are available
+online, or in the 21st century you can ask LLM for the steps. The problem with the LLM/Stack
+Overflow/Something else instructions is I’ve not been able to successfully reproduce them without
+issues every time. The main reason why I’ve written down these instructions is so I don’t have to
+repeat the entire research/debugging process again, I just want to be able to execute and
+easily get the known results. To summarize, I’m mostly doing this for my own sake :-)</p>
+
+
+
+
+  </div>
+</div>
+
+<h3 id="generating-compilation-artefacts">Generating compilation artefacts</h3>
+
+<p>As mentioned previously, we want to produce three targets as a result of compilation.</p>
+<ol>
+  <li>A compiled and linked binary stripped of all unnecessary debug symbols and sections</li>
+  <li>A .lst file that will contain the RISC-V assembly.</li>
+  <li>A file containing hexadecimal representation of a stripped binary file.</li>
+</ol>
+
+<p>To create a binary file with sections and relocation information discarded, an <code class="language-plaintext highlighter-rouge">objcopy</code> GNU utility
+can be used:</p>
+
+<p><code class="language-plaintext highlighter-rouge">objcopy -O binary firmware.elf firmware.bin</code></p>
+
+<p>To view executable in an assembly form, an <code class="language-plaintext highlighter-rouge">objdump</code> utility can be used:</p>
+
+<p><code class="language-plaintext highlighter-rouge">objdump -d -S firmware.elf &gt; firmware.lst</code></p>
+
+<p>The last thing remaining is to generate a hexadecimal representation of the binary file created with
+the <code class="language-plaintext highlighter-rouge">objcopy</code> command. For this purpose I’ve written a small Python script:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+</span><span class="kn">import</span> <span class="n">sys</span>
+
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sh">"</span><span class="s">rb</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">bindata</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
+
+<span class="c1"># Pad to 4-byte boundary
+</span><span class="k">while</span> <span class="nf">len</span><span class="p">(</span><span class="n">bindata</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">bindata</span> <span class="o">+=</span> <span class="sa">b</span><span class="sh">'</span><span class="se">\x00</span><span class="sh">'</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nf">len</span><span class="p">(</span><span class="n">bindata</span><span class="p">),</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">bindata</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">%02x%02x%02x%02x</span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">w</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+</code></pre></div></div>
+
+<p>This script writes 32 bits of data in hexadecimal format into each line of the file. The output is in
+the little-endian format. If a binary file is not 4-byte aligned, it’s first padded with zeros to a
+4-byte boundary.</p>
+
+<h3 id="bootloader-startups-and-hello_world-program-for-the-top-level-simulation">Bootloader, startup.S and <code class="language-plaintext highlighter-rouge">hello_world</code> program for the top-level simulation</h3>
+
+<p>The bootloader for the simulation is very simple. It contains only one instruction - jump to the first address in the
+SRAM.</p>
+
+<p>As for the startup files and the <code class="language-plaintext highlighter-rouge">hello_world</code> program itself, I won’t go into much detail. Code is
+worth more than a million words, and the code is available in the <a href="https://github.com/hrvatch/rv32-shock/sw" target="_blank" rel="noopener noreferrer">rv32-shock Github repository</a>.</p>
+
+<div class="premonition info">
+  <i class="premonition pn-info"></i>
+  <div class="content">
+    <p class="header">Project name</p>
+<p>I figured I have to give this project a name and I’ve settled on calling it rv32-shock. 
+The etymology of the name is from Croatian word “Šok” (a play on the acronym SoC), which directly
+translates into ‘shock’ in English. Since it’s RV32 based SoC, I figured ‘rv32-shock’ is a good
+enough name.</p>
+
+
+
+
+  </div>
+</div>
+
+<p><code class="language-plaintext highlighter-rouge">startup.S</code> is a program written in RISC-V assembly. This file is usually known as <code class="language-plaintext highlighter-rouge">crt0.S</code> in the
+embedded world. I didn’t write this file from scratch, but instead I reused the file from <a href="https://github.com/YosysHQ/picorv32/tree/main/firmware" target="_blank" rel="noopener noreferrer">PicoRV32
+firmware</a> and modified it for my own
+purpose.</p>
+
+<p>The file contains initialization of the registers, initialization of the stack pointer, interrupt
+handling routine and subfunctions that can be used to enable/disable interrupts. The interrupt
+handling routine performs the following:</p>
+<ol>
+  <li>Saves the context,</li>
+  <li>Executes the interrupt function,</li>
+  <li>Restores the context,</li>
+  <li>Continues main program execution.</li>
+</ol>
+
+<p>The <code class="language-plaintext highlighter-rouge">main.c</code> does the following:</p>
+<ul>
+  <li>Initializes UART</li>
+  <li>Programs the timer to interrupt every 1 second</li>
+  <li>Enables interrupt for the timer</li>
+</ul>
+
+<p>Every time interrupt is triggered, a CPU will start running an interrupt routine. The interrupt
+program will check if the cause of interrupt was indeed a timer. If it was, it will turn off
+the currently lit LED, and it will turn on the LED next to it. After 50 seconds, CPU will execute
+an <code class="language-plaintext highlighter-rouge">ebreak</code> instruction thus asserting a <code class="language-plaintext highlighter-rouge">trap</code> signal of the PicoRV32 CPU.</p>
+
+<div class="premonition note">
+  <i class="premonition pn-note"></i>
+  <div class="content">
+    <p class="header">Handling simulation time</p>
+<p>Waiting for 1 second in the simulation can take an eternity. On a complex, multi-million gate SoC,
+an actual second could take a couple of days of simulation time. Although this is not the case for
+this design, it’s still prudent to reduce the simulation time to be as low as possible. In the
+simulation, timer is not programmed to count every 1 second, but instead to ~500 clock
+cycles. This is good enough to validate the design and it reduces simulation time.</p>
+
+
+
+
+  </div>
+</div>
+
+<p>The <code class="language-plaintext highlighter-rouge">startup.S</code> and <code class="language-plaintext highlighter-rouge">main.c</code> form the basis for the <code class="language-plaintext highlighter-rouge">hello_world</code>.</p>
+
+<p>Drivers for handling timer/counter and UART are copied from their own respective repositories.</p>
+
+<p>The final thing needed is the linker script. At first I tried writing linker script myself. The
+problem with this approach is I write linker script once-a-year, and every time I have to remember
+how this is done all over again. There are numerous tutorials and documents online on how to do it.
+For example, previously I would refresh my memory by watching <a href="https://www.youtube.com/watch?v=qWqlkCLmZoE" target="_blank" rel="noopener noreferrer">this YouTube series from the Fastbit
+Embedded Brain Academy</a>. Since I needed a simple linker
+script and I wanted something done fast, this time I’ve asked the LLM for help. I’m amazed I got the
+linker script that worked fully on the first go, without the need for any additional debugging.</p>
+
+<p>To make my life easier, I’ve created a Makefile that automates artefact generation. This Makefile
+can be found in the <code class="language-plaintext highlighter-rouge">sw/hello_world</code> subdirectory in the <a href="https://github.com/hrvatch/rv32-shock/" target="_blank" rel="noopener noreferrer">rv32-shock Github repository</a>.</p>
+
+<h3 id="loading-program-into-the-ram-in-the-simulation">Loading program into the RAM in the simulation</h3>
+
+<p>After building the <code class="language-plaintext highlighter-rouge">hello_world</code> program a .hex file is produced. This file is used to initialize
+RAM in the simulation. My simulation Makefile has the possibility to take bootloader and SRAM
+initialization files as parameters. If a file is provided, there is an argument in the Makefile that
+is passed to the simulator, to create a <code class="language-plaintext highlighter-rouge">define</code>.</p>
+
+<p>There are multiple ways to achieve this depending on the language used and preferences; I’ve settled
+on using the <code class="language-plaintext highlighter-rouge">$readmemh</code> Verilog system task. The following code is a direct copy-paste from the top
+level testbench.</p>
+
+<div class="language-verilog highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">`ifdef</span> <span class="n">BOOTLOADER_INIT_FILE</span>
+<span class="k">initial</span> <span class="k">begin</span>
+  <span class="kt">static</span> <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="p">$</span><span class="nb">fopen</span><span class="p">(</span><span class="cp">`BOOTLOADER_INIT_FILE</span><span class="p">,</span> <span class="s">"r"</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">fd</span><span class="p">)</span> <span class="k">begin</span>
+    <span class="p">$</span><span class="nb">display</span><span class="p">(</span><span class="s">"Memory file %0s not found!"</span><span class="p">,</span> <span class="cp">`BOOTLOADER_INIT_FILE</span><span class="p">);</span>
+    <span class="p">$</span><span class="n">fatal</span><span class="p">;</span>
+  <span class="k">end</span>
+  <span class="p">$</span><span class="nb">fclose</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+  <span class="p">$</span><span class="nb">readmemh</span><span class="p">(</span><span class="cp">`BOOTLOADER_INIT_FILE</span><span class="p">,</span> 
+    <span class="n">picorv32_soc_dut</span><span class="p">.</span><span class="n">axi_lite_bootloader_inst</span><span class="p">.</span><span class="n">ram_block</span><span class="p">);</span>
+<span class="k">end</span>
+<span class="cp">`endif</span>
+
+<span class="cp">`ifdef</span> <span class="n">RAM_INIT_FILE</span>
+<span class="k">initial</span> <span class="k">begin</span>
+  <span class="kt">static</span> <span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+  <span class="n">fd</span> <span class="o">=</span> <span class="p">$</span><span class="nb">fopen</span><span class="p">(</span><span class="cp">`RAM_INIT_FILE</span><span class="p">,</span> <span class="s">"r"</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">fd</span><span class="p">)</span> <span class="k">begin</span>
+    <span class="p">$</span><span class="nb">display</span><span class="p">(</span><span class="s">"Memory file %0s not found!"</span><span class="p">,</span> <span class="cp">`RAM_INIT_FILE</span><span class="p">);</span>
+    <span class="p">$</span><span class="n">fatal</span><span class="p">;</span>
+  <span class="k">end</span>
+  <span class="p">$</span><span class="nb">fclose</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+  <span class="p">$</span><span class="nb">readmemh</span><span class="p">(</span><span class="cp">`RAM_INIT_FILE</span><span class="p">,</span> 
+    <span class="n">picorv32_soc_dut</span><span class="p">.</span><span class="n">axi_lite_scratchpad_inst</span><span class="p">.</span><span class="n">ram_block</span><span class="p">);</span>
+<span class="k">end</span>
+<span class="cp">`endif</span> <span class="c1">// RAM_INIT_FILE</span>
+
+</code></pre></div></div>
+
+<h3 id="top-level-testbench">Top level testbench</h3>
+
+<p>The top level testbench contains the DUT instantiation, blocks used for generating clock and reset,
+block of code that prints bytes received from UART and another block of code used to print the LED
+status. After running simulation I’m getting the following output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LED status: 00000000
+LED status: 00000001
+@             86232000: RX = 0x55 ('U')
+LED status: 00000010
+@             97152000: RX = 0x41 ('A')
+LED status: 00000100
+@            108052000: RX = 0x52 ('R')
+LED status: 00001000
+@            118952000: RX = 0x54 ('T')
+
+...
+
+LED status: 00010000
+LED status: 00000100
+LED status: 00001000
+LED status: 00010000
+LED status: 00100000
+LED status: 01000000
+LED status: 10000000
+</code></pre></div></div>
+
+<p>And the waveforms display the following…</p>
+
+<figure class="post-figure">
+  
+    <a class="glightbox" href="/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/waveforms.png">
+  <picture>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/waveforms-600-eb11af191.webp 600w, /generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/waveforms-796-eb11af191.webp 796w" type="image/webp"></source>
+    <source sizes="(max-width: 600px) 100vw, 800px" srcset="/generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/waveforms-600-4eeb70d9f.png 600w, /generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/waveforms-796-4eeb70d9f.png 796w" type="image/png"></source>
+    <img loading="lazy" src="/generated/assets/images/2026-01-31-development-of-a-picorv32-based-soc_part1/waveforms-796-4eeb70d9f.png" alt="rv32-shock waveforms showing UART and LED activity">
+  </picture>
+</a>
+
+  
+  <figcaption>rv32-shock waveforms showing UART and LED activity</figcaption>
+</figure>
+
+<p>I will consider this a “good enough” design and proceed with backend work: writing constraints,
+synthesis, timing closure, place and route, bitstream generation, aaaand I still have to write a
+bootloader!</p>
+
+<p>All of that (and more) will be written up in the next Part 2 of the project.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this first part of this series I’ve covered the architectural choices, design and verification of
+the individual components, and integration of the PicoRV32 based SoC. The SoC includes a PicoRV32
+RISC-V core connected via the PULP AXI4-Lite interconnect to an SRAM, a timer/counter, a UART, a
+simple LED controller, and a bootloader ROM. All components were designed with back-to-back
+throughput in mind, using skid buffers to break long combinatorial paths. The AXI4-Lite protocol and
+data integrity were verified formally in JasperGold, and the integrated design was validated in
+simulation using firmware-assisted verification.</p>
+
+<p>In Part 2 I’ll cover the backend work: writing Vivado constraints and TCL scripts, synthesis, timing
+analysis and closure, place and route, and bitstream generation. I’ll also go through the
+development of the UART bootloader, reuse of the hello_world program, and validation on the Nexys
+Video FPGA board — including resource utilization numbers, achieved maximum frequency, and a video
+showing the whole thing in action.</p>
+
+  </div>
+
+  <a class="u-url" href="/picorv32_soc/development-of-a-picorv32-based-soc-part1/" hidden></a>
+
+  
+  
+  
+</article>
+
+      </div>
+    </main><link id="fa-stylesheet" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css">
+
+<footer class="site-footer h-card">
+  <data class="u-url" value="/"></data>
+
+  <div class="wrapper">
+    <div class="social-links">
+<ul class="social-media-list">
+<li>
+    <a rel="me noopener noreferrer" href="https://github.com/hrvatch" target="_blank" title="Hrvoje's Github">
+      <span class="grey fa-brands fa-github fa-lg"></span>
+    </a>
+  </li>
+<li>
+    <a rel="me noopener noreferrer" href="https://www.linkedin.com/in/hrvoje-butina/" target="_blank" title="Hrvoje's Linkedin profile">
+      <span class="grey fa-brands fa-linkedin fa-lg"></span>
+    </a>
+  </li>
+<li>
+    <a rel="me" href="mailto:criticalpathmailto.squabble546@passmail.net" target="_blank" title="Hrvoje's E-mail">
+      <span class="grey fa-regular fa-envelope fa-lg"></span>
+    </a>
+  </li>
+  <li>
+    <a href="https://criticalpath.dev/feed.xml" target="_blank" title="Subscribe to syndication feed">
+      <svg class="svg-icon grey" viewbox="0 0 16 16">
+        <path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194
+          11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0
+          13.806c0-1.21.983-2.195 2.194-2.195zM10.606
+          16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"></path>
+      </svg>
+    </a>
+  </li>
+
+</ul>
+</div>
+
+  </div>
+
+</footer>
+
+
+<script src="/assets/js/copy-code.js"></script>
+<script src="/assets/js/search-toggle.js" defer></script>
+<script src="/assets/js/theme-toggle.js" defer></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
+<script defer>
+  document.addEventListener('DOMContentLoaded', function() {
+    const lightbox = GLightbox({
+      selector: 'a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"], a[href$=".webp"], a[href$=".svg"]'
+    });
+  });
+</script>
+
+</body>
+
+</html>
